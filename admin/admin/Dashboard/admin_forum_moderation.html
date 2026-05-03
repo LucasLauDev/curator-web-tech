@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forum Moderation | CuratorEdu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "primary": "#6a1cf6", "secondary": "#00647b", "tertiary": "#aa008e",
+                    "surface": "#f5f6f7", "on-surface": "#2c2f30", "outline": "#757778",
+                    "surface-container-lowest": "#ffffff", "surface-container-low": "#eff1f2",
+                    "error": "#b41340"
+                },
+                "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Manrope"] }
+            }
+        }
+    }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .label-text { font-family: 'Manrope', sans-serif; }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<div class="flex min-h-screen pt-20">
+    <main class="flex-1 p-4 sm:p-6 lg:p-10 pb-24 overflow-x-hidden min-w-0">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+            <div>
+                <h2 class="text-4xl font-black tracking-tight text-on-surface">Forum Moderation</h2>
+                <p class="text-slate-500 mt-2 font-body">Enforce community guidelines and manage thread visibility.</p>
+            </div>
+            <div class="flex bg-white p-1 rounded-2xl border border-surface-container shadow-sm">
+                <button id="tab-reports" class="px-6 py-2 rounded-xl text-xs font-bold label-text transition-all bg-primary/10 text-slate-900">Reported Posts</button>
+                <button id="tab-all-threads" class="px-6 py-2 rounded-xl text-xs font-bold label-text transition-all text-slate-900 hover:bg-surface-container">All Threads</button>
+            </div>
+        </div>
+
+        <!-- Reported Posts View -->
+        <div id="view-reports" class="space-y-6">
+            <!-- Report Item 1 -->
+            <div data-report-id="r1" data-banned="false" class="bg-white rounded-3xl p-8 border border-surface-container shadow-sm flex flex-col md:flex-row gap-8 items-start relative group">
+                <div class="flex flex-col items-center gap-2">
+                    <img class="w-14 h-14 rounded-full object-cover ring-4 ring-error/5" src="https://ui-avatars.com/api/?name=Julian+Rivers&background=6a1cf6&color=fff" alt="User"/>
+                    <span class="px-3 py-0.5 bg-error/10 text-error rounded-full text-[10px] font-bold uppercase">Student</span>
+                </div>
+                <div class="flex-1 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-xl font-black">Julian Rivers <span class="text-slate-400 font-medium text-sm ml-2">@j_rivers • 2h ago</span></h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="bg-error text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">Hate Speech</span>
+                                <span class="text-slate-400 text-xs font-medium">Flagged by 4 users</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button data-action="delete" data-report="r1" class="w-11 h-11 inline-flex items-center justify-center bg-error/5 text-error rounded-full border border-error/10 shadow-sm hover:bg-error hover:text-white hover:shadow-md hover:shadow-error/20 transition-all mod-btn" title="Delete Post">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                            <button data-action="dismiss" data-report="r1" class="w-11 h-11 inline-flex items-center justify-center bg-slate-100 text-slate-400 rounded-full border border-slate-200 shadow-sm hover:bg-slate-200 hover:text-slate-600 hover:shadow-md transition-all mod-btn" title="Dismiss Report">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                            <button data-action="ban" data-report="r1" class="w-11 h-11 inline-flex items-center justify-center bg-error/20 text-error rounded-full border border-error/10 shadow-sm hover:bg-error/30 hover:shadow-md hover:shadow-error/20 transition-all mod-btn" title="Ban User from Forum">
+                                <span class="material-symbols-outlined">block</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-low rounded-2xl p-6 border-l-4 border-error italic text-slate-700">
+                        "...these people shouldn't be allowed in Advanced Logic courses. They don't have the capacity to understand the variables we use here..."
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">forum</span> Intro to Symbolic Logic</span>
+                        <a href="#" class="text-primary hover:underline">View Full Context</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Item 2 -->
+            <div data-report-id="r2" data-banned="false" class="bg-white rounded-3xl p-8 border border-surface-container shadow-sm flex flex-col md:flex-row gap-8 items-start relative group">
+                <div class="flex flex-col items-center gap-2">
+                    <img class="w-14 h-14 rounded-full object-cover ring-4 ring-secondary/5" src="https://ui-avatars.com/api/?name=Elena+Vance&background=00647b&color=fff" alt="User"/>
+                    <span class="px-3 py-0.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase">Lecturer</span>
+                </div>
+                <div class="flex-1 space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-xl font-black">Elena Vance <span class="text-slate-400 font-medium text-sm ml-2">@elena_v • 5h ago</span></h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="bg-secondary text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">Self-Promotion</span>
+                                <span class="text-slate-400 text-xs font-medium">Flagged by System Bot</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button data-action="delete" data-report="r2" class="w-11 h-11 inline-flex items-center justify-center bg-error/5 text-error rounded-full border border-error/10 shadow-sm hover:bg-error hover:text-white hover:shadow-md hover:shadow-error/20 transition-all mod-btn" title="Delete Post">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                            <button data-action="dismiss" data-report="r2" class="w-11 h-11 inline-flex items-center justify-center bg-slate-100 text-slate-400 rounded-full border border-slate-200 shadow-sm hover:bg-slate-200 hover:text-slate-600 hover:shadow-md transition-all mod-btn" title="Dismiss Report">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                            <button data-action="ban" data-report="r2" class="w-11 h-11 inline-flex items-center justify-center bg-error/20 text-error rounded-full border border-error/10 shadow-sm hover:bg-error/30 hover:shadow-md hover:shadow-error/20 transition-all mod-btn" title="Ban User from Forum">
+                                <span class="material-symbols-outlined">block</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-low rounded-2xl p-6 border-l-4 border-secondary text-slate-700">
+                        "If you're struggling with Python homework, I just uploaded a walkthrough on my personal site. Only RM 5 for CuratorEdu students! 🚀 logic-mastery.io"
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-bold text-slate-400">
+                        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">school</span> Python Foundations</span>
+                        <a href="#" class="text-primary hover:underline">View Full Context</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Threads View (Hidden by Default) -->
+        <div id="view-all-threads" class="hidden space-y-4">
+            <div class="bg-white rounded-2xl overflow-hidden border border-surface-container shadow-sm">
+                <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-surface-container-low text-[10px] font-black uppercase tracking-widest text-slate-500">
+                            <th class="p-5">Thread Topic</th>
+                            <th class="p-5">Category</th>
+                            <th class="p-5">Author</th>
+                            <th class="p-5">Stats</th>
+                            <th class="p-5 text-right">Controls</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container">
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-5">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">push_pin</span>
+                                    <span class="font-bold text-sm">Welcome to CuratorEdu Forum!</span>
+                                </div>
+                            </td>
+                            <td class="p-5 text-xs font-bold">General</td>
+                            <td class="p-5 text-xs">Admin</td>
+                            <td class="p-5 text-xs text-slate-500">1.2k Replies • 48k Views</td>
+                            <td class="p-5 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" title="Pin/Unpin"><span class="material-symbols-outlined text-sm">push_pin</span></button>
+                                    <button class="p-2 hover:bg-amber-100 hover:text-amber-600 rounded-lg transition-colors" title="Lock Thread"><span class="material-symbols-outlined text-sm">lock</span></button>
+                                    <button class="p-2 hover:bg-error/10 hover:text-error rounded-lg transition-colors" title="Delete Thread"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-5">
+                                <div class="flex items-center gap-3 pl-7">
+                                    <span class="font-bold text-sm">Study Group: Machine Learning</span>
+                                </div>
+                            </td>
+                            <td class="p-5 text-xs font-bold">Academics</td>
+                            <td class="p-5 text-xs">Sarah J.</td>
+                            <td class="p-5 text-xs text-slate-500">242 Replies • 3.1k Views</td>
+                            <td class="p-5 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" title="Pin/Unpin"><span class="material-symbols-outlined text-sm">push_pin</span></button>
+                                    <button class="p-2 hover:bg-amber-100 hover:text-amber-600 rounded-lg transition-colors" title="Lock Thread"><span class="material-symbols-outlined text-sm">lock</span></button>
+                                    <button class="p-2 hover:bg-error/10 hover:text-error rounded-lg transition-colors" title="Delete Thread"><span class="material-symbols-outlined text-sm">delete</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    const tabReports = document.getElementById('tab-reports');
+    const tabAll = document.getElementById('tab-all-threads');
+    const viewReports = document.getElementById('view-reports');
+    const viewAll = document.getElementById('view-all-threads');
+
+    tabReports.addEventListener('click', () => {
+        tabReports.classList.add('bg-primary/10', 'text-slate-900');
+        tabReports.classList.remove('bg-primary', 'text-on-primary', 'text-slate-500', 'hover:bg-surface-container');
+        tabAll.classList.add('text-slate-900', 'hover:bg-surface-container');
+        tabAll.classList.remove('bg-primary/10', 'text-on-primary', 'text-slate-500');
+        viewReports.classList.remove('hidden');
+        viewAll.classList.add('hidden');
+    });
+
+    tabAll.addEventListener('click', () => {
+        tabAll.classList.add('bg-primary/10', 'text-slate-900');
+        tabAll.classList.remove('bg-primary', 'text-on-primary', 'text-slate-500', 'hover:bg-surface-container');
+        tabReports.classList.add('text-slate-900', 'hover:bg-surface-container');
+        tabReports.classList.remove('bg-primary/10', 'text-on-primary', 'text-slate-500');
+        viewAll.classList.remove('hidden');
+        viewReports.classList.add('hidden');
+    });
+
+    // Moderation button bindings
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.className = 'fixed right-6 bottom-6 bg-white border border-surface-container px-4 py-2 rounded-xl shadow-lg text-sm';
+        if (type === 'error') toast.classList.add('text-red-600');
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function findReportEl(id) {
+        return document.querySelector(`[data-report-id="${id}"]`);
+    }
+
+    function deleteReport(id) {
+        if (!confirm('Delete this post permanently?')) return;
+        const el = findReportEl(id);
+        if (el) {
+            el.remove();
+            showToast('Post deleted', 'error');
+        }
+    }
+
+    function dismissReport(id) {
+        const el = findReportEl(id);
+        if (!el) return;
+        // visually mark dismissed then remove after delay
+        el.style.opacity = '0.5';
+        el.style.transform = 'scale(0.995)';
+        setTimeout(() => {
+            el.remove();
+            showToast('Report dismissed');
+        }, 300);
+    }
+
+    function banUser(id) {
+        const el = findReportEl(id);
+        if (!el) return;
+        
+        const isBanned = el.dataset.banned === 'true';
+        const banBtn = el.querySelector('[data-action="ban"]');
+        
+        if (isBanned) {
+            // Unban user
+            if (!confirm('Unban this user from the forum?')) return;
+            el.dataset.banned = 'false';
+            
+            // Remove banned badge
+            const badge = el.querySelector('.banned-badge');
+            if (badge) badge.remove();
+            
+            // Update button styling
+            banBtn.classList.remove('bg-emerald-100', 'text-emerald-600', 'border-emerald-200');
+            banBtn.classList.add('bg-error/20', 'text-error', 'border-error/10');
+            banBtn.title = 'Ban User from Forum';
+            
+            showToast('User unbanned from forum');
+        } else {
+            // Ban user
+            if (!confirm('Ban this user from the forum?')) return;
+            el.dataset.banned = 'true';
+            
+            // Add banned badge
+            const badge = document.createElement('span');
+            badge.className = 'px-2 py-0.5 bg-error text-white rounded text-xs font-bold ml-2 banned-badge';
+            badge.textContent = 'BANNED';
+            const infoCol = el.querySelector('.flex-1');
+            const header = infoCol ? infoCol.querySelector('h4') : null;
+            if (header && !header.querySelector('.banned-badge')) {
+                header.insertAdjacentElement('beforeend', badge);
+            }
+            
+            // Update button styling to show "unbanned" state (green)
+            banBtn.classList.remove('bg-error/20', 'text-error', 'border-error/10');
+            banBtn.classList.add('bg-emerald-100', 'text-emerald-600', 'border-emerald-200');
+            banBtn.title = 'Unban User from Forum';
+            
+            showToast('User banned from forum', 'error');
+        }
+    }
+
+    // Attach listeners to moderation buttons
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.mod-btn');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const id = btn.dataset.report;
+        if (!action || !id) return;
+        if (action === 'delete') deleteReport(id);
+        if (action === 'dismiss') dismissReport(id);
+        if (action === 'ban') banUser(id);
+    });
+</script>
+</body>
+</html>

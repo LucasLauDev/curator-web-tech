@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e0e3e4",
+                        "error-dim": "#a70138",
+                        "tertiary-container": "#ff87db",
+                        "on-background": "#2c2f30",
+                        "on-secondary-container": "#004e61",
+                        "tertiary-dim": "#96007d",
+                        "inverse-surface": "#0c0f10",
+                        "on-secondary": "#e2f6ff",
+                        "error": "#b41340",
+                        "tertiary": "#aa008e",
+                        "on-surface-variant": "#595c5d",
+                        "on-primary": "#f7f0ff",
+                        "secondary-container": "#80deff",
+                        "primary-fixed-dim": "#a07dff",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "on-tertiary-container": "#5f004f",
+                        "on-error-container": "#510017",
+                        "surface-variant": "#dadddf",
+                        "tertiary-fixed": "#ff87db",
+                        "inverse-primary": "#9d79ff",
+                        "on-primary-fixed-variant": "#350088",
+                        "secondary-fixed": "#80deff",
+                        "surface-container-highest": "#dadddf",
+                        "primary-dim": "#5d00e3",
+                        "outline": "#757778",
+                        "surface-container": "#e6e8ea",
+                        "inverse-on-surface": "#9b9d9e",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "surface-bright": "#f5f6f7",
+                        "surface": "#f5f6f7",
+                        "error-container": "#f74b6d",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "on-primary-container": "#2a0070",
+                        "on-tertiary": "#ffeef5",
+                        "on-secondary-fixed": "#003a48",
+                        "on-primary-fixed": "#000000",
+                        "on-error": "#ffefef",
+                        "primary-fixed": "#ac8eff",
+                        "primary": "#6a1cf6",
+                        "background": "#f5f6f7",
+                        "on-surface": "#2c2f30",
+                        "primary-container": "#ac8eff",
+                        "surface-tint": "#6a1cf6",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "surface-container-low": "#eff1f2",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#00647b",
+                        "outline-variant": "#abadae",
+                        "on-tertiary-fixed": "#34002a",
+                        "surface-dim": "#d1d5d7",
+                        "secondary-dim": "#00576c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6f7;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<link rel="stylesheet" href="../../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-background min-h-screen">
+
+<div id="nav-mount"></div>
+<script src="../../assets/js/instructor-nav.js"></script>
+<script src="../../assets/js/instructor-interactions.js"></script>
+
+<div class="flex min-h-screen">
+<!-- Main Canvas -->
+<main class="flex-1 p-4 sm:p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
+<header class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-10">
+    <h1 class="text-3xl font-headline font-black text-on-surface tracking-tighter">Instructor Profile</h1>
+    <a href="/api/auth/logout"
+       class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-error/25 bg-white px-4 py-2.5 text-sm font-bold text-error transition-colors hover:bg-red-50">
+        <span class="material-symbols-outlined text-base">logout</span>
+        Log out
+    </a>
+</header>
+
+<!-- Bento Layout Profile -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Identity Card -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-8">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<div class="flex flex-col items-center text-center">
+<div class="relative mb-6">
+<div class="w-32 h-32 rounded-xl overflow-hidden shadow-2xl rotate-3">
+<img alt="Mr. UTS" class="w-full h-full object-cover" src="https://ui-avatars.com/api/?name=Mr+UTS&background=6a1cf6&color=fff&size=128"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary p-2 rounded-lg text-on-primary shadow-lg">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h3 class="text-2xl font-bold font-headline mb-1">Mr. UTS</h3>
+<p class="text-primary font-bold font-label text-sm uppercase tracking-widest mb-4">Lecturer, Faculty of Computing</p>
+<p class="text-on-surface-variant font-body text-sm leading-relaxed mb-8 px-4">
+                            Specialising in Web Technology, Algorithm Design, and Human Computer Interaction. Dedicated to building strong computing foundations and practical digital skills in undergraduate students.
+                        </p>
+<!-- Social Links -->
+<div class="flex gap-3 mb-4">
+<a class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-container-low text-primary hover:bg-primary hover:text-on-primary transition-all" href="https://example.com">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-container-low text-primary hover:bg-primary hover:text-on-primary transition-all" href="https://example.com">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-container-low text-primary hover:bg-primary hover:text-on-primary transition-all" href="mailto:uts@uts.edu.my">
+<span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Teaching Impact Stats -->
+<div class="bg-primary p-8 rounded-xl text-on-primary shadow-xl shadow-primary/20">
+<h4 class="font-headline font-bold text-lg mb-6">Teaching Impact</h4>
+<div class="grid grid-cols-2 gap-6">
+<div class="flex flex-col">
+<span class="text-3xl font-black font-headline tracking-tighter">312</span>
+<span class="text-xs font-label uppercase opacity-80 mt-1">Total Students</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-black font-headline tracking-tighter">4.7/5</span>
+<span class="text-xs font-label uppercase opacity-80 mt-1">Avg Rating</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-black font-headline tracking-tighter">3</span>
+<span class="text-xs font-label uppercase opacity-80 mt-1">Courses Live</span>
+</div>
+<div class="flex flex-col">
+<span class="text-3xl font-black font-headline tracking-tighter">78%</span>
+<span class="text-xs font-label uppercase opacity-80 mt-1">Completion Rate</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Courses & Publications -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-8">
+<!-- Section Header -->
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-bold font-headline text-on-background">Current Courses</h3>
+<button class="text-primary font-bold font-label text-sm flex items-center gap-2">
+                        View All <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Course Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 overflow-hidden relative bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-size:80px">language</span>
+<div class="absolute top-4 left-4 bg-surface-bright/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">Core</div>
+</div>
+<div class="p-6">
+<h4 class="text-lg font-bold font-headline mb-2 leading-tight">Web Technology</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-xs font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="group">group</span> 128</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.8</span>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 overflow-hidden relative bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container" style="font-size:80px">functions</span>
+<div class="absolute top-4 left-4 bg-surface-bright/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">Core</div>
+</div>
+<div class="p-6">
+<h4 class="text-lg font-bold font-headline mb-2 leading-tight">Algorithm and Design Complexity</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-xs font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="group">group</span> 98</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.6</span>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
+<div class="h-48 overflow-hidden relative bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-size:80px">mouse</span>
+<div class="absolute top-4 left-4 bg-surface-bright/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">Core</div>
+</div>
+<div class="p-6">
+<h4 class="text-lg font-bold font-headline mb-2 leading-tight">Human Computer Interaction</h4>
+<div class="flex items-center gap-4 text-on-surface-variant text-xs font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="group">group</span> 86</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.7</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Publications Section -->
+<div class="mt-8">
+<h3 class="text-2xl font-bold font-headline text-on-background mb-6">Latest Publications</h3>
+<div class="flex flex-col gap-4">
+<!-- Publication 1 -->
+<a href="#" class="publication-link bg-surface-container-low p-6 rounded-xl flex items-center justify-between group hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="article">article</span>
+</div>
+<div>
+<h5 class="font-bold font-headline text-on-background group-hover:text-primary transition-colors">Teaching Big-O: Bridging Theory and Practice</h5>
+<p class="text-xs text-on-surface-variant font-label mt-1">Computing Education Journal • March 2024</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" data-icon="open_in_new">open_in_new</span>
+</a>
+<!-- Publication 2 -->
+<a href="#" class="publication-link bg-surface-container-low p-6 rounded-xl flex items-center justify-between group hover:bg-white hover:shadow-lg hover:shadow-primary/5 transition-all border border-transparent hover:border-primary/10">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="menu_book">menu_book</span>
+</div>
+<div>
+<h5 class="font-bold font-headline text-on-background group-hover:text-primary transition-colors">Usability Heuristics in Modern Web Interfaces</h5>
+<p class="text-xs text-on-surface-variant font-label mt-1">HCI Research Quarterly • Jan 2024</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for quick action -->
+<button class="fixed bottom-8 right-8 w-16 h-16 rounded-xl glass-card text-primary shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 border border-white/20 z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="edit">edit</span>
+</button>
+</body></html>

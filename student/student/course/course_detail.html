@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>CuratorEdu | Student Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed-variant": "#6f005c",
+            "surface-variant": "#dadddf",
+            "on-primary-fixed-variant": "#350088",
+            "tertiary": "#aa008e",
+            "tertiary-container": "#ff87db",
+            "surface-container-low": "#eff1f2",
+            "primary-container": "#ac8eff",
+            "primary-fixed": "#ac8eff",
+            "inverse-primary": "#9d79ff",
+            "on-primary": "#f7f0ff",
+            "on-surface": "#2c2f30",
+            "on-tertiary-container": "#5f004f",
+            "outline": "#757778",
+            "error-dim": "#a70138",
+            "inverse-surface": "#0c0f10",
+            "primary-dim": "#5d00e3",
+            "surface-dim": "#d1d5d7",
+            "on-background": "#2c2f30",
+            "secondary-container": "#80deff",
+            "secondary": "#00647b",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffeef5",
+            "tertiary-fixed": "#ff87db",
+            "surface-container": "#e6e8ea",
+            "surface-tint": "#6a1cf6",
+            "tertiary-dim": "#96007d",
+            "outline-variant": "#abadae",
+            "primary": "#6a1cf6",
+            "on-primary-container": "#2a0070",
+            "primary-fixed-dim": "#a07dff",
+            "on-error-container": "#510017",
+            "background": "#f5f6f7",
+            "on-error": "#ffefef",
+            "surface-bright": "#f5f6f7",
+            "secondary-fixed-dim": "#37d4ff",
+            "on-tertiary-fixed": "#34002a",
+            "error-container": "#f74b6d",
+            "surface-container-highest": "#dadddf",
+            "on-secondary-fixed": "#003a48",
+            "inverse-on-surface": "#9b9d9e",
+            "on-surface-variant": "#595c5d",
+            "on-secondary-fixed-variant": "#00586d",
+            "secondary-dim": "#00576c",
+            "on-primary-fixed": "#000000",
+            "tertiary-fixed-dim": "#ff6ad8",
+            "on-secondary-container": "#004e61",
+            "surface": "#f5f6f7",
+            "error": "#b41340",
+            "secondary-fixed": "#80deff",
+            "surface-container-high": "#e0e3e4",
+            "on-secondary": "#e2f6ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Plus Jakarta Sans"],
+            "body": ["Inter"],
+            "label": ["Manrope"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .font-headline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .font-label {
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass-surface {
+      background: rgba(245, 246, 247, 0.8);
+      backdrop-filter: blur(24px);
+    }
+
+    .course-selector {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: none;
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden">
+
+  <div id="nav-mount"></div>
+
+  <main class="px-4 pt-24 pb-8 sm:p-8 sm:pt-28 min-h-screen">
+    <!-- Current Course Card (inserted) -->
+    <section class="mb-8">
+      <div class="bg-white/95 rounded-[2rem] p-7 shadow-[0_20px_60px_rgba(93,0,227,0.08)] ring-1 ring-slate-100 backdrop-blur flex flex-col md:flex-row items-center gap-6">
+        <img id="current-course-thumb" class="w-32 h-32 rounded-lg object-cover flex-shrink-0"
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=000"
+          alt="Course cover" />
+        <div class="flex-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.18em] mb-3">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Current Course
+          </div>
+          <h3 id="current-course-title" class="text-2xl md:text-3xl font-headline font-extrabold text-on-surface">…</h3>
+          <p id="current-course-desc" class="text-sm text-slate-500 mt-2 max-w-2xl">Loading course…</p>
+          <div class="mt-5 max-w-xl">
+            <label for="other-course-selector" class="block text-[10px] font-label uppercase text-slate-400 mb-2 tracking-[0.16em]">Choose another course</label>
+            <div class="relative rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 overflow-hidden">
+              <select id="other-course-selector"
+                class="course-selector w-full rounded-2xl border-0 bg-white px-4 py-4 pr-12 text-sm font-semibold text-on-surface focus:outline-none"> 
+                <option value="">Courses</option>
+              </select>
+              <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">keyboard_arrow_down</span>
+            </div>
+            <p class="mt-2 text-[11px] text-slate-400">Pick a course to preview its progress and date.</p>
+          </div>
+          <div id="cd-teaching-team" class="hidden mt-5 max-w-2xl rounded-2xl border border-slate-100 bg-slate-50/80 p-4">
+            <p class="text-[10px] font-label font-black uppercase tracking-widest text-slate-400 mb-2">Teaching team</p>
+            <ul id="cd-teaching-team-list" class="space-y-2 text-sm text-on-surface"></ul>
+          </div>
+        </div>
+        <div class="w-full md:w-40">
+          <div class="bg-surface-container-lowest rounded-xl p-4 flex items-center justify-center">
+            <div class="relative w-28 h-28">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                <circle class="text-slate-100" cx="64" cy="64" r="56" fill="none" stroke="currentColor" stroke-width="12"></circle>
+                <circle id="current-course-ring" class="text-primary" cx="64" cy="64" r="56" fill="none" stroke="currentColor" stroke-dasharray="351.85" stroke-dashoffset="351.85" stroke-width="12"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="current-course-percent" class="text-2xl font-headline font-extrabold text-on-surface">0%</span>
+                <span class="text-[10px] font-label text-slate-400 uppercase">Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Congratulations (100% completion) -->
+    <section id="cd-congrats" class="hidden mb-8" aria-live="polite">
+      <div class="rounded-[2rem] border-2 border-primary/25 bg-gradient-to-br from-primary/10 via-white to-secondary/10 p-8 md:p-10 shadow-[0_20px_60px_rgba(93,0,227,0.12)] text-center ring-1 ring-primary/15">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary text-white mx-auto mb-4 shadow-lg shadow-primary/25">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+        </div>
+        <p class="text-[10px] font-label font-black uppercase tracking-[0.2em] text-primary mb-2">Congratulations</p>
+        <h2 class="text-2xl md:text-3xl font-headline font-extrabold text-on-surface">You&apos;ve finished this course</h2>
+        <p id="cd-congrats-sub" class="mt-3 text-sm text-slate-600 max-w-lg mx-auto">Great work completing every module. You can revisit any lesson below.</p>
+      </div>
+    </section>
+    <!-- Course Features -->
+    <section class="mb-12">
+      <div class="mb-6">
+        <p class="text-[10px] font-label font-black uppercase tracking-[0.18em] text-slate-400 mb-2">Course Resources</p>
+        <h2 class="text-2xl md:text-3xl font-headline font-extrabold text-on-surface">Features for this course</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <a href="#cd-lesson-panel"
+          class="group rounded-[1.75rem] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] ring-1 ring-slate-100 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(93,0,227,0.10)] transition-all">
+          <div class="flex gap-3 mb-5">
+            <div class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+            </div>
+            <div class="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center">
+              <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+            </div>
+          </div>
+          <p class="text-[10px] font-black tracking-[0.16em] text-primary uppercase mb-2">Lesson Material</p>
+          <h3 class="font-headline font-extrabold text-on-surface text-lg mb-2">Video & Lecture Note</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Watch the recorded video lesson and read the written summary.</p>
+          <div class="mt-5 text-sm font-bold text-primary flex items-center gap-2">
+            Start learning <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </div>
+        </a>
+
+        <a id="cd-quiz-link" href="#cd-quiz-nav"
+          class="group rounded-[1.75rem] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] ring-1 ring-slate-100 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(93,0,227,0.10)] transition-all">
+          <div class="w-14 h-14 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+          </div>
+          <p class="text-[10px] font-black tracking-[0.16em] text-tertiary uppercase mb-2">Quiz</p>
+          <h3 class="font-headline font-extrabold text-on-surface text-lg mb-2">Test your knowledge</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Take the quick quiz to check understanding after finishing the lesson.</p>
+          <div class="mt-5 text-sm font-bold text-tertiary flex items-center gap-2">
+            Start quiz <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </div>
+        </a>
+
+        <a href="../community/community_forum.html"
+          class="group rounded-[1.75rem] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] ring-1 ring-slate-100 hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(93,0,227,0.10)] transition-all">
+          <div class="w-14 h-14 rounded-2xl bg-primary-container/20 text-primary flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">forum</span>
+          </div>
+          <p class="text-[10px] font-black tracking-[0.16em] text-primary uppercase mb-2">Forum</p>
+          <h3 class="font-headline font-extrabold text-on-surface text-lg mb-2">Join the class discussion</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Ask questions, share ideas, and join the ongoing discussion thread.</p>
+          <div class="mt-5 text-sm font-bold text-primary flex items-center gap-2">
+            Open forum <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </div>
+        </a>
+      </div>
+    </section>
+    <section id="cd-lesson-panel" class="mb-12 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <h2 id="cd-module-title" class="text-xl font-headline font-extrabold text-on-surface">Module</h2>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+          <label for="cd-module-select" class="text-xs font-label text-slate-500">Select module</label>
+          <select id="cd-module-select" class="rounded-xl border border-slate-200 px-4 py-2 text-sm min-w-0 w-full max-w-xs sm:min-w-[14rem]"></select>
+        </div>
+      </div>
+
+      <!-- Video: only rendered when module has an embeddable YouTube URL -->
+      <div id="cd-video-wrap" class="hidden">
+        <p class="text-[10px] font-label font-black uppercase tracking-widest text-slate-400 mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-base text-primary">smart_display</span> Video lesson
+        </p>
+        <div id="cd-video-frame" class="aspect-video rounded-2xl overflow-hidden bg-black shadow-lg ring-1 ring-slate-200/80"></div>
+      </div>
+
+      <!-- Overview: module scope (distinct from lecture notes summary below) -->
+      <div id="cd-about-module-wrap" class="hidden">
+        <p class="text-[10px] font-label font-black uppercase tracking-widest text-slate-400 mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-base text-primary">description</span> About this module
+        </p>
+        <p id="cd-about-module-lead" class="sr-only">What this unit covers and why it matters.</p>
+        <div id="cd-lesson-notes" class="text-sm text-slate-600 whitespace-pre-wrap rounded-2xl bg-white border border-slate-100 p-5 shadow-sm" aria-describedby="cd-about-module-lead"></div>
+      </div>
+
+      <!-- Key points from materials / readings (distinct from overview) -->
+      <div id="cd-notes-summary-wrap" class="hidden">
+        <p class="text-[10px] font-label font-black uppercase tracking-widest text-slate-400 mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined text-base text-secondary">sticky_note_2</span> Lecture highlights
+        </p>
+        <p id="cd-notes-summary-lead" class="sr-only">Ideas emphasized in the notes and attached readings.</p>
+        <div id="cd-notes-summary" class="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap rounded-2xl bg-secondary/5 border border-secondary/15 p-5" aria-describedby="cd-notes-summary-lead"></div>
+      </div>
+
+      <div id="cd-materials-card" class="rounded-2xl bg-white border border-slate-100 shadow-sm overflow-hidden">
+        <div class="px-5 py-4 border-b border-slate-100 bg-slate-50/80 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">folder_zip</span>
+          <div>
+            <p class="text-[10px] font-label font-black uppercase tracking-widest text-slate-400">Study materials</p>
+            <p class="text-sm font-headline font-bold text-on-surface">Downloads &amp; readings</p>
+          </div>
+        </div>
+        <div id="cd-sample-files-empty" class="hidden px-5 py-8 text-center text-sm text-slate-500">No files attached for this module.</div>
+        <ul id="cd-sample-files" class="divide-y divide-slate-100"></ul>
+      </div>
+
+      <!-- Quiz: directs students to the full interactive quiz screen -->
+      <div id="cd-quiz-nav" class="rounded-2xl bg-white border border-tertiary/20 shadow-sm overflow-hidden scroll-mt-24">
+        <div id="cd-quiz-nav-has" class="hidden p-5 md:p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+          <div class="flex gap-4 min-w-0">
+            <div class="w-12 h-12 shrink-0 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+              <span class="material-symbols-outlined text-2xl">quiz</span>
+            </div>
+            <div class="min-w-0 space-y-1">
+              <p class="text-[10px] font-label font-black uppercase tracking-widest text-tertiary">Module quiz</p>
+              <p id="cd-quiz-nav-title" class="text-base font-headline font-bold text-on-surface">Quiz for this module</p>
+              <p id="cd-quiz-nav-lead" class="text-sm text-slate-600 leading-relaxed">
+                Continue on the quiz page—it uses the same course and module automatically.
+              </p>
+            </div>
+          </div>
+          <a id="cd-quiz-page-link" href="../quiz/interactive_quiz_ui.html"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-tertiary text-white font-headline font-bold text-sm whitespace-nowrap hover:opacity-90 shrink-0 shadow-md shadow-tertiary/20 transition-opacity">
+            Open quiz page
+            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+          </a>
+        </div>
+        <div id="cd-quiz-nav-none" class="hidden px-5 py-5 md:px-6 text-sm text-slate-500 bg-slate-50/80">
+          No quiz is published for this module.
+        </div>
+      </div>
+
+      <!-- Progress tracking: above module navigation -->
+      <div id="cd-module-complete-wrap" class="hidden rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-white p-5 shadow-sm mb-4">
+        <p class="text-[10px] font-label font-black uppercase tracking-widest text-primary mb-3">Progress tracking</p>
+        <div class="flex items-start gap-3">
+          <input type="checkbox" id="cd-module-done-cb" class="mt-1 h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary accent-primary shrink-0" />
+          <label for="cd-module-done-cb" class="text-sm font-bold text-on-surface cursor-pointer select-none leading-snug">
+            Mark this module as done
+            <span class="block font-normal font-body text-xs text-slate-500 mt-1">Checked items count toward your course completion ring.</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2 border-t border-slate-200">
+        <button type="button" id="cd-module-prev"
+          class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border-2 border-slate-200 bg-white font-headline font-bold text-sm text-on-surface hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors disabled:opacity-40 disabled:pointer-events-none">
+          <span class="material-symbols-outlined text-lg">arrow_back</span>
+          Previous module
+        </button>
+        <button type="button" id="cd-module-next"
+          class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-white font-headline font-bold text-sm shadow-lg shadow-primary/20 hover:bg-primary-dim transition-colors disabled:opacity-40 disabled:pointer-events-none">
+          Next module
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </button>
+      </div>
+    </section>
+    <!-- Your Lesson Table -->
+    <section>
+      <div class="flex items-center justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-headline font-extrabold text-on-surface">Your Lesson</h2>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl p-4 sm:p-6 overflow-hidden">
+        <div class="overflow-x-auto -mx-1">
+        <table class="w-full text-left min-w-[600px]">
+          <thead>
+            <tr class="text-slate-400 font-label text-xs uppercase tracking-wider">
+              <th class="pb-6">Mentor</th>
+              <th class="pb-6">Type</th>
+              <th class="pb-6">Description</th>
+              <th class="pb-6 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="lesson-tbody" class="divide-y divide-surface-container-low"></tbody>
+        </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="lesson-info-modal" class="fixed inset-0 z-[120] hidden" role="dialog" aria-modal="true"
+    aria-labelledby="lesson-info-title">
+    <div id="lesson-info-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-primary">Lecture Info</p>
+            <h3 id="lesson-info-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">Lesson Details
+            </h3>
+          </div>
+          <button id="lesson-info-close" type="button"
+            class="material-symbols-outlined text-slate-400 hover:text-slate-700 p-1 rounded-lg">close</button>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">person</span>
+            <p id="lesson-info-mentor" class="text-sm text-slate-700 font-semibold"></p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">menu_book</span>
+            <p id="lesson-info-topic" class="text-sm text-slate-700"></p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">category</span>
+            <p id="lesson-info-type" class="text-sm text-slate-700"></p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary mt-0.5">description</span>
+            <p id="lesson-info-bio" class="text-sm text-slate-600 leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="email-compose-modal" class="fixed inset-0 z-[130] hidden" role="dialog" aria-modal="true"
+    aria-labelledby="email-compose-title">
+    <div id="email-compose-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-primary">Private Email</p>
+            <h3 id="email-compose-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">Send a private message</h3>
+          </div>
+          <button id="email-compose-close" type="button"
+            class="material-symbols-outlined text-slate-400 hover:text-slate-700 p-1 rounded-lg">close</button>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">To</label>
+            <input id="email-compose-to" type="text" readonly
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">Subject</label>
+            <input id="email-compose-subject" type="text"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700 focus:border-primary focus:outline-none" placeholder="Write a subject" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">Message</label>
+            <textarea id="email-compose-message" rows="6"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700 focus:border-primary focus:outline-none resize-none"
+              placeholder="Write your message"></textarea>
+          </div>
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button id="email-compose-cancel" type="button"
+              class="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+            <button id="email-compose-send" type="button"
+              class="px-5 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dim transition-colors">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="email-success-modal" class="fixed inset-0 z-[140] hidden" role="alertdialog" aria-modal="true"
+    aria-labelledby="email-success-title">
+    <div id="email-success-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 text-center">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+          <span class="material-symbols-outlined text-3xl">check_circle</span>
+        </div>
+        <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-emerald-600">Success</p>
+        <h3 id="email-success-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">Message sent</h3>
+        <p id="email-success-message" class="mt-3 text-sm text-slate-600 leading-relaxed">Your private email was sent successfully.</p>
+        <button id="email-success-close" type="button"
+          class="mt-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dim transition-colors">OK</button>
+      </div>
+    </div>
+  </div>
+  <div id="email-compose-modal" class="fixed inset-0 z-[130] hidden" role="dialog" aria-modal="true"
+    aria-labelledby="email-compose-title">
+    <div id="email-compose-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="flex items-start justify-between gap-4 mb-5">
+          <div>
+            <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-primary">Private Email</p>
+            <h3 id="email-compose-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">Send a private message</h3>
+          </div>
+          <button id="email-compose-close" type="button"
+            class="material-symbols-outlined text-slate-400 hover:text-slate-700 p-1 rounded-lg">close</button>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">To</label>
+            <input id="email-compose-to" type="text" readonly
+              class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">Subject</label>
+            <input id="email-compose-subject" type="text"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700 focus:border-primary focus:outline-none" placeholder="Write a subject" />
+          </div>
+          <div>
+            <label class="block text-xs font-black uppercase tracking-[0.16em] text-slate-400 mb-2">Message</label>
+            <textarea id="email-compose-message" rows="6"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-700 focus:border-primary focus:outline-none resize-none"
+              placeholder="Write your message"></textarea>
+          </div>
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button id="email-compose-cancel" type="button"
+              class="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition-colors">Cancel</button>
+            <button id="email-compose-send" type="button"
+              class="px-5 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dim transition-colors">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="email-success-modal" class="fixed inset-0 z-[140] hidden" role="alertdialog" aria-modal="true"
+    aria-labelledby="email-success-title">
+    <div id="email-success-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 text-center">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+          <span class="material-symbols-outlined text-3xl">check_circle</span>
+        </div>
+        <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-emerald-600">Success</p>
+        <h3 id="email-success-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">Message sent</h3>
+        <p id="email-success-message" class="mt-3 text-sm text-slate-600 leading-relaxed">Your private email was sent successfully.</p>
+        <button id="email-success-close" type="button"
+          class="mt-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dim transition-colors">OK</button>
+      </div>
+    </div>
+  </div>
+  <div id="progress-overview-modal" class="fixed inset-0 z-[125] hidden" role="dialog" aria-modal="true"
+    aria-labelledby="progress-overview-title">
+    <div id="progress-overview-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div>
+            <p class="text-[10px] font-label font-bold uppercase tracking-[0.18em] text-primary">Progress Overview</p>
+            <h3 id="progress-overview-title" class="text-2xl font-headline font-extrabold text-on-surface mt-1">All
+              Course Progress</h3>
+          </div>
+          <button id="progress-overview-close" type="button"
+            class="material-symbols-outlined text-slate-400 hover:text-slate-700 p-1 rounded-lg">close</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="unified_course_details.html"
+            class="bg-surface-container-lowest p-6 rounded-lg group border border-surface-container hover:border-primary/30 hover:shadow-md transition-all">
+            <div
+              class="w-12 h-12 bg-secondary-container/30 rounded-xl flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">draw</span>
+            </div>
+            <h4 class="font-headline font-bold text-on-surface mb-2">UI/UX Design</h4>
+            <div class="flex items-center justify-between text-xs font-label text-slate-500 mb-2">
+              <span>Progress</span><span class="font-bold text-primary">75%</span>
+            </div>
+            <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-3/4 rounded-full"></div>
+            </div>
+          </a>
+          <a href="unified_course_details.html"
+            class="bg-surface-container-lowest p-6 rounded-lg group border border-surface-container hover:border-primary/30 hover:shadow-md transition-all">
+            <div
+              class="w-12 h-12 bg-tertiary-container/30 rounded-xl flex items-center justify-center text-tertiary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            </div>
+            <h4 class="font-headline font-bold text-on-surface mb-2">Branding</h4>
+            <div class="flex items-center justify-between text-xs font-label text-slate-500 mb-2">
+              <span>Progress</span><span class="font-bold text-primary">40%</span>
+            </div>
+            <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-2/5 rounded-full"></div>
+            </div>
+          </a>
+          <a href="unified_course_details.html"
+            class="bg-surface-container-lowest p-6 rounded-lg group border border-surface-container hover:border-primary/30 hover:shadow-md transition-all">
+            <div
+              class="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">code</span>
+            </div>
+            <h4 class="font-headline font-bold text-on-surface mb-2">Front End</h4>
+            <div class="flex items-center justify-between text-xs font-label text-slate-500 mb-2"><span>2/8
+                watched</span><span class="font-bold text-primary">25%</span></div>
+            <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-1/4 rounded-full"></div>
+            </div>
+          </a>
+          <a href="../quiz/interactive_quiz_ui.html"
+            class="bg-surface-container-lowest p-6 rounded-lg group border border-surface-container hover:border-primary/30 hover:shadow-md transition-all">
+            <div
+              class="w-12 h-12 bg-primary-container/30 rounded-xl flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+            </div>
+            <h4 class="font-headline font-bold text-on-surface mb-2">Quiz Progress</h4>
+            <div class="flex items-center justify-between text-xs font-label text-slate-500 mb-2">
+              <span>Completed</span><span class="font-bold text-primary">3/10</span>
+            </div>
+            <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-[30%] rounded-full"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const joinNowBtn = document.getElementById('join-now-btn');
+      const viewAllProgressBtn = document.getElementById('view-all-progress-btn');
+      const mentorNotificationBtn = document.getElementById('mentor-notification-btn');
+      const seeAllMentorsBtn = document.getElementById('see-all-mentors-btn');
+      const emailComposeModal = document.getElementById('email-compose-modal');
+      const emailComposeBackdrop = document.getElementById('email-compose-backdrop');
+      const emailComposeClose = document.getElementById('email-compose-close');
+      const emailComposeCancel = document.getElementById('email-compose-cancel');
+      const emailComposeSend = document.getElementById('email-compose-send');
+      const emailComposeTo = document.getElementById('email-compose-to');
+      const emailComposeSubject = document.getElementById('email-compose-subject');
+      const emailComposeMessage = document.getElementById('email-compose-message');
+      const emailSuccessModal = document.getElementById('email-success-modal');
+      const emailSuccessBackdrop = document.getElementById('email-success-backdrop');
+      const emailSuccessClose = document.getElementById('email-success-close');
+      const emailSuccessMessage = document.getElementById('email-success-message');
+      const progressOverviewModal = document.getElementById('progress-overview-modal');
+      const progressOverviewBackdrop = document.getElementById('progress-overview-backdrop');
+      const progressOverviewClose = document.getElementById('progress-overview-close');
+      const currentCourseTitle = document.getElementById('current-course-title');
+      const currentCoursePercent = document.getElementById('current-course-percent');
+      const currentCourseRing = document.getElementById('current-course-ring');
+      let activeEmailLesson = null;
+
+      const courseSummaryMap = {
+        'Motion Fundamentals': {
+          title: 'Motion Fundamentals',
+          percent: 75,
+          offset: 88
+        },
+        'UI/UX Design Mastery': {
+          title: 'UI/UX Design Mastery',
+          percent: 40,
+          offset: 211.11
+        },
+        'Front End Fundamentals': {
+          title: 'Front End Fundamentals',
+          percent: 25,
+          offset: 263.89
+        }
+      };
+
+      window.updateCurrentCourse = (courseName) => {
+        const details = courseSummaryMap[courseName];
+        if (!details) return;
+
+        if (currentCourseTitle) currentCourseTitle.textContent = details.title;
+        if (currentCoursePercent) currentCoursePercent.textContent = `${details.percent}%`;
+        if (currentCourseRing) currentCourseRing.setAttribute('stroke-dashoffset', String(details.offset));
+      };
+
+      window.updateCurrentCourse(document.getElementById('other-course-selector')?.value || 'Motion Fundamentals');
+
+      const lessonEmailMap = {
+        'ui-psychology': {
+          mentor: 'Padhang Satrio',
+          email: 'padhang.satrio@curatoredu.com',
+          topic: 'The Psychology of Color in Brand Identity'
+        },
+        'design-systems': {
+          mentor: 'Zakir Horizontal',
+          email: 'zakir.horizontal@curatoredu.com',
+          topic: 'Building Scalable Design Systems for Startups'
+        }
+      };
+
+      joinNowBtn?.addEventListener('click', () => {
+        window.location.href = 'my_courses.html';
+      });
+
+      viewAllProgressBtn?.addEventListener('click', () => {
+        progressOverviewModal?.classList.remove('hidden');
+      });
+
+      mentorNotificationBtn?.addEventListener('click', () => {
+        alert('No new mentor notifications right now.');
+      });
+
+      seeAllMentorsBtn?.addEventListener('click', () => {
+        window.location.href = '../community/community_forum.html';
+      });
+
+      const closeEmailComposeModal = () => {
+        emailComposeModal?.classList.add('hidden');
+      };
+
+      const openEmailComposeModal = (lessonKey) => {
+        const details = lessonEmailMap[lessonKey];
+        if (!details || !emailComposeModal) return;
+
+        activeEmailLesson = lessonKey;
+        if (emailComposeTo) emailComposeTo.value = `${details.mentor} <${details.email}>`;
+        if (emailComposeSubject) emailComposeSubject.value = `Question about ${details.topic}`;
+        if (emailComposeMessage) emailComposeMessage.value = `Hello ${details.mentor},\n\nI have a question about ${details.topic}.`;
+
+        emailComposeModal.classList.remove('hidden');
+      };
+
+      const closeEmailSuccessModal = () => {
+        emailSuccessModal?.classList.add('hidden');
+      };
+
+      const openEmailSuccessModal = () => {
+        if (activeEmailLesson && emailSuccessMessage) {
+          const details = lessonEmailMap[activeEmailLesson];
+          emailSuccessMessage.textContent = `Your private email to ${details.mentor} was sent successfully.`;
+        }
+        emailSuccessModal?.classList.remove('hidden');
+      };
+
+      emailComposeClose?.addEventListener('click', closeEmailComposeModal);
+      emailComposeCancel?.addEventListener('click', closeEmailComposeModal);
+      emailComposeBackdrop?.addEventListener('click', closeEmailComposeModal);
+      emailComposeSend?.addEventListener('click', () => {
+        closeEmailComposeModal();
+        openEmailSuccessModal();
+      });
+
+      emailSuccessClose?.addEventListener('click', closeEmailSuccessModal);
+      emailSuccessBackdrop?.addEventListener('click', closeEmailSuccessModal);
+
+      const closeProgressOverviewModal = () => {
+        progressOverviewModal?.classList.add('hidden');
+      };
+
+      progressOverviewClose?.addEventListener('click', closeProgressOverviewModal);
+      progressOverviewBackdrop?.addEventListener('click', closeProgressOverviewModal);
+
+      const lessonInfoModal = document.getElementById('lesson-info-modal');
+      const lessonInfoBackdrop = document.getElementById('lesson-info-backdrop');
+      const lessonInfoClose = document.getElementById('lesson-info-close');
+      const lessonInfoMentor = document.getElementById('lesson-info-mentor');
+      const lessonInfoTopic = document.getElementById('lesson-info-topic');
+      const lessonInfoType = document.getElementById('lesson-info-type');
+      const lessonInfoBio = document.getElementById('lesson-info-bio');
+
+      const lessonDetailsMap = {
+        'ui-psychology': {
+          mentor: 'Padhang Satrio',
+          topic: 'The Psychology of Color in Brand Identity',
+          type: 'Interactive',
+          bio: 'Padhang is a Design Lead focused on visual psychology. This lecture explains how color choices shape brand perception, trust, and user emotion in modern interfaces.'
+        },
+        'design-systems': {
+          mentor: 'Zakir Horizontal',
+          topic: 'Building Scalable Design Systems for Startups',
+          type: 'Live Stream',
+          bio: 'Zakir is an Art Director specializing in scalable product visuals. This lecture covers component consistency, token strategy, and collaboration workflows for fast-growing teams.'
+        }
+      };
+
+      const openLessonInfoModal = (lessonKey) => {
+        const details = lessonDetailsMap[lessonKey];
+        if (!details || !lessonInfoModal) return;
+
+        if (lessonInfoMentor) lessonInfoMentor.textContent = details.mentor;
+        if (lessonInfoTopic) lessonInfoTopic.textContent = details.topic;
+        if (lessonInfoType) lessonInfoType.textContent = details.type;
+        if (lessonInfoBio) lessonInfoBio.textContent = details.bio;
+
+        lessonInfoModal.classList.remove('hidden');
+      };
+
+      const closeLessonInfoModal = () => {
+        lessonInfoModal?.classList.add('hidden');
+      };
+
+      lessonInfoClose?.addEventListener('click', closeLessonInfoModal);
+      lessonInfoBackdrop?.addEventListener('click', closeLessonInfoModal);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeLessonInfoModal();
+          closeProgressOverviewModal();
+          closeEmailComposeModal();
+          closeEmailSuccessModal();
+        }
+      });
+
+      document.querySelectorAll('button[data-lesson-details]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const lessonKey = button.getAttribute('data-lesson-details');
+          openLessonInfoModal(lessonKey);
+        });
+      });
+
+      document.querySelectorAll('button[data-lesson-email]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const lessonKey = button.getAttribute('data-lesson-email');
+          openEmailComposeModal(lessonKey);
+        });
+      });
+
+      document.querySelectorAll('button[data-mentor-action]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const mentorName = button.getAttribute('data-mentor-action') || 'Mentor';
+          const icon = button.querySelector('.material-symbols-outlined');
+          button.classList.remove('bg-primary-container/20', 'text-primary');
+          button.classList.add('bg-primary', 'text-white');
+          if (icon) {
+            icon.textContent = 'check';
+          }
+          button.disabled = true;
+          alert(`Request sent to ${mentorName}.`);
+        });
+      });
+    });
+  </script>
+  <script src="../assets/js/course-detail-learn.js"></script>
+  <script src="../assets/js/student-nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const switcherBtn = document.getElementById('dash-course-switcher-btn');
+      const switcherMenu = document.getElementById('dash-course-switcher-menu');
+
+      if (switcherBtn && switcherMenu) {
+        switcherBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isHidden = switcherMenu.classList.contains('hidden');
+          if (isHidden) {
+            switcherMenu.classList.remove('hidden');
+            setTimeout(() => {
+              switcherMenu.classList.remove('opacity-0', 'translate-y-2');
+              switcherMenu.classList.add('opacity-100', 'translate-y-0');
+            }, 10);
+          } else {
+            switcherMenu.classList.add('opacity-0', 'translate-y-2');
+            switcherMenu.classList.remove('opacity-100', 'translate-y-0');
+            setTimeout(() => switcherMenu.classList.add('hidden'), 300);
+          }
+        });
+
+        document.addEventListener('click', () => {
+          if (!switcherMenu.classList.contains('hidden')) {
+            switcherMenu.classList.add('opacity-0', 'translate-y-2');
+            switcherMenu.classList.remove('opacity-100', 'translate-y-0');
+            setTimeout(() => switcherMenu.classList.add('hidden'), 300);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

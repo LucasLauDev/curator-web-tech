@@ -1,0 +1,201 @@
+@import url("../../../../shared/responsive-base.css");
+
+/* Student Navigation Styles - Bento 2.0 Modern Sidebar */
+
+#student-sidebar {
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 20px 0 80px -20px rgba(0, 0, 0, 0.05);
+    overflow: hidden !important;
+}
+
+.sidebar-mini {
+    width: 80px !important;
+}
+
+.sidebar-expanded,
+#student-sidebar:hover {
+    width: 288px !important;
+}
+
+main,
+nav.fixed.top-0 {
+    transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 48px;
+}
+
+.nav-icon-wrapper {
+    width: 64px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.nav-label {
+    margin-left: -4px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+#student-sidebar .nav-label,
+#student-sidebar .sidebar-header-text,
+#student-sidebar .sidebar-footer-text,
+#student-sidebar .section-title {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+#student-sidebar.sidebar-expanded .nav-label,
+#student-sidebar.sidebar-expanded .sidebar-header-text,
+#student-sidebar.sidebar-expanded .sidebar-footer-text,
+#student-sidebar.sidebar-expanded .section-title,
+#student-sidebar:hover .nav-label,
+#student-sidebar:hover .sidebar-header-text,
+#student-sidebar:hover .sidebar-footer-text,
+#student-sidebar:hover .section-title {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    color: #a78bfa;
+    font-size: 24px;
+    transition: color 0.3s ease, font-variation-settings 0.3s ease;
+    transform: none !important;
+}
+
+.nav-item:hover .material-symbols-outlined {
+    color: #8b5cf6;
+}
+
+.nav-item.bg-primary .material-symbols-outlined {
+    color: #ffffff !important;
+}
+
+/* Ensure active nav background always renders even when Tailwind CDN
+   doesn’t generate `bg-primary` for dynamically-injected classes. */
+.nav-item.bg-primary {
+    background-color: #6a1cf6 !important;
+}
+
+/* Match admin: Sign Out uses text-red-500 on the anchor; icons must inherit (not global purple). */
+#student-sidebar .sidebar-footer-text .material-symbols-outlined,
+#student-sidebar .sidebar-footer-text .nav-icon-wrapper .material-symbols-outlined {
+    color: inherit !important;
+}
+
+#student-sidebar .sidebar-footer-text > a.nav-item {
+    color: #ef4444 !important;
+}
+
+#student-sidebar .sidebar-footer-text > a.nav-item:hover {
+    color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.app-logo-container {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    padding: 0;
+    transition: all 0.4s ease;
+}
+
+.app-logo-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: #1e293b;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.app-logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.app-logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 6px;
+    transform: rotate(45deg);
+}
+
+#sidebar-overlay {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#student-sidebar nav::-webkit-scrollbar {
+    width: 3px;
+}
+
+#student-sidebar nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#student-sidebar nav::-webkit-scrollbar-thumb {
+    background: rgba(106, 28, 246, 0.2);
+    border-radius: 10px;
+}
+
+@media (max-width: 1023px) {
+    #student-sidebar {
+        width: 288px !important;
+        transform: translateX(-100%);
+    }
+
+    #student-sidebar.translate-x-0 {
+        transform: translateX(0) !important;
+    }
+
+    #student-sidebar.translate-x-0 .nav-label,
+    #student-sidebar.translate-x-0 .sidebar-footer-text,
+    #student-sidebar.translate-x-0 .section-title {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
+
+    main {
+        margin-left: 0 !important;
+    }
+
+    #desktop-toggle-btn {
+        display: none !important;
+    }
+}

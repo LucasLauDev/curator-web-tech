@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Curator Studio | Publishing Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-dim": "#5d00e3",
+                      "outline": "#757778",
+                      "on-secondary-fixed": "#003a48",
+                      "on-primary-fixed": "#000000",
+                      "secondary-dim": "#00576c",
+                      "secondary-fixed": "#80deff",
+                      "primary": "#6a1cf6",
+                      "on-error-container": "#510017",
+                      "tertiary-dim": "#96007d",
+                      "background": "#f5f6f7",
+                      "on-tertiary": "#ffeef5",
+                      "on-error": "#ffefef",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#80deff",
+                      "on-surface-variant": "#595c5d",
+                      "inverse-primary": "#9d79ff",
+                      "inverse-on-surface": "#9b9d9e",
+                      "surface-dim": "#d1d5d7",
+                      "on-background": "#2c2f30",
+                      "error-dim": "#a70138",
+                      "surface-container-highest": "#dadddf",
+                      "on-primary": "#f7f0ff",
+                      "primary-fixed-dim": "#a07dff",
+                      "on-primary-container": "#2a0070",
+                      "tertiary-fixed": "#ff87db",
+                      "error-container": "#f74b6d",
+                      "on-tertiary-fixed": "#34002a",
+                      "on-tertiary-fixed-variant": "#6f005c",
+                      "tertiary-container": "#ff87db",
+                      "inverse-surface": "#0c0f10",
+                      "secondary-fixed-dim": "#37d4ff",
+                      "surface-tint": "#6a1cf6",
+                      "surface-container-low": "#eff1f2",
+                      "on-secondary": "#e2f6ff",
+                      "tertiary-fixed-dim": "#ff6ad8",
+                      "surface-container-high": "#e0e3e4",
+                      "surface": "#f5f6f7",
+                      "on-secondary-container": "#004e61",
+                      "outline-variant": "#abadae",
+                      "secondary": "#00647b",
+                      "on-tertiary-container": "#5f004f",
+                      "primary-fixed": "#ac8eff",
+                      "error": "#b41340",
+                      "tertiary": "#aa008e",
+                      "surface-variant": "#dadddf",
+                      "surface-container": "#e6e8ea",
+                      "surface-bright": "#f5f6f7",
+                      "on-surface": "#2c2f30",
+                      "primary-container": "#ac8eff",
+                      "on-secondary-fixed-variant": "#00586d",
+                      "on-primary-fixed-variant": "#350088"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-layering {
+            background: linear-gradient(180deg, rgba(245, 246, 247, 1) 0%, rgba(230, 232, 234, 1) 100%);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<div id="nav-mount"></div>
+<script src="../assets/js/instructor-nav.js"></script>
+<!-- Top Navigation Bar (Shared) -->
+<nav class="w-full flex items-center justify-between px-6 py-4 fixed top-0 left-0 z-50 bg-surface/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-outline/10">
+    <div class="flex items-center gap-8">
+        <a href="/" class="text-2xl font-black tracking-tight text-violet-600 dark:text-violet-400 font-headline hover:opacity-80 transition-opacity">CuratorEdu</a>
+        <div class="hidden md:flex gap-6 font-label text-[11px] font-black uppercase tracking-widest">
+<a href="shared-bookstore.html" class="text-on-surface-variant hover:text-primary transition-colors">Bookstore</a>
+<a href="shared-community-forum.html" class="text-on-surface-variant hover:text-primary transition-colors">Forum</a>
+<a href="student-course-discovery.html" class="text-on-surface-variant hover:text-primary transition-colors">Courses</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-4">
+        <button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden ring-2 ring-primary/20 cursor-pointer">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhqSgAJS77Vv5FHJ4pN3oNJulokl4aMVxVem3B4QQsWqY2_ujFZ_8tQ8-z6A85h9lOTG9a6t2vGX8JqbH387dSFh6JLwxasSzFNIiU4l7lBsuyXW3aeT8uAQs2WEYlfF1-tXryYuYucUvJyJxIUTKGErh9aB2oPX1KQs13cElXT1Ox4mCUg2iHOamaHfBOpOBG2etw3xILZPTNtYc_hiUrGXxR7yao6G9m0cEJnXgbT5ygjcGTAX8SeB-W2JoJoAQVhDKM8AMQwiA" alt="Profile" />
+        </div>
+    </div>
+</nav>
+<div class="flex min-h-screen">
+<!-- Main Content Area -->
+<main class="flex-1 p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
+<div class="max-w-6xl mx-auto space-y-8">
+<!-- Hero Header / Status Banner -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm shadow-indigo-500/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8">
+<span class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                        Draft Mode
+                    </span>
+</div>
+<div class="max-w-2xl">
+<p class="font-label text-primary font-bold tracking-widest uppercase text-xs mb-3">Publishing Center</p>
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-background mb-4 tracking-tight">Advanced UI Design: Micro-interactions</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed">Prepare your course for the global stage. Complete the final checks and submit for editorial review.</p>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Checklist & Summary -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Publishing Checklist -->
+<div class="bg-surface-container-low rounded-xl p-8">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+                            Publishing Checklist
+                        </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-lg group hover:scale-[1.01] transition-transform">
+<div class="flex items-center gap-4">
+<div class="bg-emerald-100 text-emerald-600 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Thumbnail Uploaded</p>
+<p class="text-sm text-on-surface-variant">4K Resolution, Aspect Ratio 16:9</p>
+</div>
+</div>
+<span class="text-xs font-bold text-emerald-600 font-label">COMPLETE</span>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-lg group hover:scale-[1.01] transition-transform">
+<div class="flex items-center gap-4">
+<div class="bg-emerald-100 text-emerald-600 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Lessons Completed</p>
+<p class="text-sm text-on-surface-variant">12 modules with video content</p>
+</div>
+</div>
+<span class="text-xs font-bold text-emerald-600 font-label">COMPLETE</span>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-lg border-2 border-dashed border-primary/20">
+<div class="flex items-center gap-4">
+<div class="bg-primary/10 text-primary p-2 rounded-full">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Quiz Added</p>
+<p class="text-sm text-on-surface-variant">Requires at least one final assessment</p>
+</div>
+</div>
+<a class="text-xs font-bold text-primary font-label hover:underline" href="course_module_editor.html#quiz">FIX NOW</a>
+</div>
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-lg group hover:scale-[1.01] transition-transform">
+<div class="flex items-center gap-4">
+<div class="bg-emerald-100 text-emerald-600 p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Course Tags</p>
+<p class="text-sm text-on-surface-variant">#UI, #Figma, #Motion</p>
+</div>
+</div>
+<span class="text-xs font-bold text-emerald-600 font-label">COMPLETE</span>
+</div>
+</div>
+</div>
+<!-- Content Summary (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
+<div class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 mb-4">
+<span class="material-symbols-outlined">view_module</span>
+</div>
+<p class="text-3xl font-black text-on-surface">12</p>
+<p class="text-xs font-label uppercase text-on-surface-variant tracking-wider mt-1">Modules</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
+<div class="w-12 h-12 bg-pink-50 rounded-full flex items-center justify-center text-pink-600 mb-4">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<p class="text-3xl font-black text-on-surface">48</p>
+<p class="text-xs font-label uppercase text-on-surface-variant tracking-wider mt-1">Lessons</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-sm flex flex-col items-center text-center">
+<div class="w-12 h-12 bg-cyan-50 rounded-full flex items-center justify-center text-cyan-600 mb-4">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<p class="text-3xl font-black text-on-surface">8.5h</p>
+<p class="text-xs font-label uppercase text-on-surface-variant tracking-wider mt-1">Duration</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Notes & Preview -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Review Notes -->
+<div class="bg-surface-container-low rounded-xl p-8">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">note_alt</span>
+                            Review Notes
+                        </h3>
+<textarea class="w-full h-40 bg-surface-container-lowest border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary/20 resize-none font-body text-sm" placeholder="Add instructions or context for the admin team..."></textarea>
+<p class="mt-3 text-xs text-on-surface-variant">Mention specific timestamps or resources if needed.</p>
+</div>
+<!-- Mini Preview Card -->
+<div class="bg-white rounded-xl overflow-hidden shadow-xl shadow-indigo-500/5 group">
+<div class="relative h-40">
+<img alt="Course Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Modern abstract design with fluid purple shapes and glowing interface elements on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDePm-w3i5PmApNWlieZzUsNGxexommuZ2oIg2sTL0pFqVY1pSpYZxHeSPAuDP9SxUbyOV4etNM3n61oUDjclYiNd3GE86TPk1mjBuyp7kc6bD1bVDK02VtaJb_taEdCkoqdzWplYiYysNiwgogZC1JsacMz0Y_RZe-d45054JccpuSjJLfABqftYJxs4JGgmPMPdzhHjgbCmZVvd8_fBGLXmbxt7Kqr7evhNmRw1b3_Ppj6oQCQda6mTIIDkJKzS0SmDzRAHXi4YM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Preview Mode</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-on-surface mb-2">Advanced UI Design...</h4>
+<div class="flex items-center gap-2 mb-4">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-[8px] font-bold text-indigo-600">JS</div>
+<div class="w-6 h-6 rounded-full bg-pink-100 border-2 border-white flex items-center justify-center text-[8px] font-bold text-pink-600">AB</div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">+1.2k pre-enrolled</span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2 font-medium">Ready: 75% complete</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script src="../assets/js/instructor-interactions.js"></script>
+<!-- Sticky Action Bar (Vibe Academy Style) -->
+<div class="fixed bottom-0 left-0 right-0 p-6 z-50">
+<div class="max-w-4xl mx-auto bg-white/70 backdrop-blur-2xl rounded-full p-3 shadow-2xl shadow-indigo-500/20 border border-white/50 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4 pl-4 hidden sm:flex">
+<div class="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface leading-none">Last saved</p>
+<p class="text-[10px] text-on-surface-variant font-medium">Today at 14:32 PM</p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-3 rounded-full font-bold text-sm text-on-surface hover:bg-surface-container-low transition-colors active:scale-95">
+                    Save as Draft
+                </button>
+<button class="flex-1 sm:flex-none px-6 py-3 rounded-full font-bold text-sm bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors active:scale-95">
+                    Submit Review
+                </button>
+<button class="flex-[2] sm:flex-none px-10 py-3 rounded-full font-bold text-sm bg-gradient-to-r from-primary to-primary-fixed text-white shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 active:scale-95 transition-all">
+                    Publish Course
+                </button>
+</div>
+</div>
+</div>
+</body></html>

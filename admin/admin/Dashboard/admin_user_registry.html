@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CuratorEdu | User Registry</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "surface-variant":"#dadddf","on-surface":"#2c2f30","surface-container-low":"#eff1f2","surface-container-high":"#e0e3e4","secondary-container":"#80deff","primary-container":"#ac8eff","surface-container-highest":"#dadddf","on-secondary-container":"#004e61","surface-container-lowest":"#ffffff","on-primary-container":"#2a0070","surface":"#f5f6f7","on-surface-variant":"#595c5d","primary":"#6a1cf6","on-primary":"#f7f0ff","surface-container":"#e6e8ea","outline":"#757778","outline-variant":"#abadae","error":"#b41340","secondary":"#00647b","tertiary":"#aa008e","tertiary-container":"#ff87db","on-tertiary-container":"#5f004f","background":"#f5f6f7","on-background":"#2c2f30"
+            },
+            borderRadius: { "DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px" },
+            fontFamily: { "headline":["Plus Jakarta Sans"],"body":["Inter"],"label":["Manrope"] }
+        }
+    }
+}
+</script>
+<style>
+body { font-family: 'Inter', sans-serif; }
+.action-dropdown { display: none; }
+.action-dropdown.open { display: block; }
+@media print {
+    #admin-sidebar, nav.fixed, .no-print { display: none !important; }
+    main { margin-left: 0 !important; padding: 20px !important; }
+    body { background: white; }
+}
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+
+<div class="flex min-h-screen pt-20">
+<main class="flex-1 p-4 sm:p-6 lg:p-10 pb-24 md:pb-8 overflow-x-hidden min-w-0">
+<div class="w-full space-y-8">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+            <h2 class="text-4xl font-headline font-extrabold tracking-tight">User Registry</h2>
+            <p class="text-on-surface-variant mt-2 font-body">Manage all active and inactive academy participants within CuratorEdu.</p>
+        </div>
+        <div class="flex gap-3 no-print">
+            <button id="btn-export-print" class="px-5 py-2.5 rounded-full bg-surface-container-highest text-on-surface font-label text-sm font-bold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-lg">print</span>
+                Export &amp; Print
+            </button>
+            <button id="btn-invite" class="px-5 py-2.5 rounded-full bg-primary text-on-primary font-label text-sm font-bold shadow-lg hover:opacity-90 transition-opacity flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">person_add</span>
+                Invite User
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 md:col-span-4 bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+            <p class="text-on-surface-variant font-label text-xs font-bold uppercase tracking-widest">Total Active Users</p>
+            <div class="flex items-center gap-4 mt-2">
+                <h3 class="text-4xl font-headline font-extrabold">2,481</h3>
+                <span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold">+12%</span>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-8 bg-primary rounded-xl p-8 text-on-primary flex justify-between items-center relative overflow-hidden">
+            <div class="relative z-10">
+                <p class="font-label text-xs font-bold uppercase tracking-widest opacity-80">Academy Growth</p>
+                <h3 class="text-2xl font-headline font-bold mt-1">Platform momentum is high.</h3>
+                <p class="opacity-90 mt-1">320 new students joined CuratorEdu this week.</p>
+            </div>
+            <div class="absolute right-[-20px] bottom-[-20px] opacity-20">
+                <span class="material-symbols-outlined text-[120px]">trending_up</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 no-print">
+        <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-label font-bold text-on-surface-variant mr-1">FILTER BY:</span>
+            <button data-filter="all"      class="filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors">All Users</button>
+            <button data-filter="lecturer" class="filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors">Lecturers</button>
+            <button data-filter="student"  class="filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors">Students</button>
+            <button data-filter="admin"    class="filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors">Admins</button>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="text-xs font-label font-bold text-on-surface-variant">BULK:</span>
+            <button id="btn-bulk-activate" class="p-2.5 rounded-full text-primary hover:bg-surface-container-low transition-colors" title="Activate Selected">
+                <span class="material-symbols-outlined">verified</span>
+            </button>
+            <button id="btn-bulk-block" class="p-2.5 rounded-full text-error hover:bg-surface-container-low transition-colors" title="Suspend Selected">
+                <span class="material-symbols-outlined">block</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-surface-container-low">
+                        <th class="p-5 w-12 no-print"><input id="check-all" type="checkbox" style="width:16px;height:16px;accent-color:#6a1cf6;cursor:pointer;"/></th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">Name</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">ID</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">Email</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">Faculty</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">Year</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500">Status</th>
+                        <th class="p-5 font-headline text-xs font-bold uppercase tracking-widest text-slate-500 text-right no-print">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+            </table>
+        </div>
+        <div class="p-5 bg-surface-container-low flex justify-between items-center no-print border-t border-surface-container">
+            <p class="text-xs font-label font-bold text-on-surface-variant" id="pagination-label"></p>
+            <div class="flex gap-2" id="pagination-btns"></div>
+        </div>
+    </div>
+
+</div>
+</main>
+</div>
+
+<!-- Invite Modal -->
+<div id="invite-modal" class="fixed inset-0 z-[200] flex items-center justify-center hidden">
+    <div id="invite-backdrop" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-8 z-10">
+        <div class="flex justify-between items-start mb-6">
+            <div>
+                <h3 class="text-xl font-headline font-extrabold">Invite New User</h3>
+                <p class="text-xs text-on-surface-variant mt-1">Send an invite with a registration code.</p>
+            </div>
+            <button id="invite-close" class="p-1 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <label class="text-xs font-label font-bold text-on-surface-variant uppercase tracking-wider block mb-1.5">Full Name</label>
+                <input id="invite-name" type="text" placeholder="e.g. Jane Doe" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"/>
+            </div>
+            <div>
+                <label class="text-xs font-label font-bold text-on-surface-variant uppercase tracking-wider block mb-1.5">Email Address</label>
+                <input id="invite-email" type="email" placeholder="e.g. jane@student.uts.edu.my" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary"/>
+            </div>
+            <div>
+                <label class="text-xs font-label font-bold text-on-surface-variant uppercase tracking-wider block mb-1.5">Role</label>
+                <select id="invite-role" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="student">Student</option>
+                    <option value="lecturer">Lecturer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-xs font-label font-bold text-on-surface-variant uppercase tracking-wider block mb-1.5">School</label>
+                <select id="invite-faculty" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="" disabled selected>Select School</option>
+                    <option value="School of Engineering and Technology">School of Engineering and Technology</option>
+                    <option value="School of Business and Management">School of Business and Management</option>
+                    <option value="School of Built Environment">School of Built Environment</option>
+                    <option value="School of Computing & Creative Media">School of Computing & Creative Media</option>
+                    <option value="Administration">Administration</option>
+                </select>
+            </div>
+            <div id="programme-field" class="hidden">
+                <label class="text-xs font-label font-bold text-on-surface-variant uppercase tracking-wider block mb-1.5">Programme</label>
+                <select id="invite-programme" class="w-full px-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="" disabled selected>Select Programme</option>
+                </select>
+            </div>
+            <p id="invite-error" class="text-xs text-error font-label hidden"></p>
+            <div class="flex gap-3 pt-2">
+                <button id="invite-cancel" type="button" class="flex-1 py-3 rounded-xl border border-outline-variant text-on-surface font-label font-bold text-sm hover:bg-surface-container-low transition-colors">Cancel</button>
+                <button id="btn-send-invite" type="button" class="flex-1 py-3 rounded-xl bg-primary text-on-primary font-label font-bold text-sm shadow-lg hover:opacity-90 transition-opacity">Send Invite</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[300] bg-slate-900 text-white px-6 py-3 rounded-full font-label font-bold text-sm shadow-xl opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2">
+    <span class="material-symbols-outlined text-sm">check_circle</span>
+    <span id="toast-msg"></span>
+</div>
+
+<script>
+var USERS = [
+    { id:"UTS20241001", name:"Sarah Jenkins", email:"sarah.j@uts.edu.my", role:"lecturer", status:"active", faculty:"School of Computing & Creative Media", year:"N/A" },
+    { id:"UTS20241002", name:"James Okonkwo", email:"j.okonkwo@uts.edu.my", role:"lecturer", status:"active", faculty:"School of Engineering and Technology", year:"N/A" },
+    { id:"UTS20241003", name:"Priya Sharma", email:"p.sharma@uts.edu.my", role:"lecturer", status:"active", faculty:"School of Built Environment", year:"N/A" },
+    { id:"UTS20230001", name:"Marcus Chen", email:"m.chen@student.uts.edu.my", role:"student", status:"active", faculty:"School of Computing & Creative Media", year:"Year 2" },
+    { id:"UTS20230002", name:"Emma Liu", email:"e.liu@student.uts.edu.my", role:"student", status:"active", faculty:"School of Engineering and Technology", year:"Year 1" },
+    { id:"UTS20230003", name:"Daniel Osei", email:"d.osei@student.uts.edu.my", role:"student", status:"active", faculty:"School of Computing & Creative Media", year:"Year 3" },
+    { id:"UTS20230004", name:"Sofia Alvarez", email:"s.alvarez@student.uts.edu.my", role:"student", status:"active", faculty:"School of Built Environment", year:"Year 2" },
+    { id:"UTS20230005", name:"Liam Park", email:"l.park@student.uts.edu.my", role:"student", status:"suspended", faculty:"School of Business and Management", year:"Year 4" },
+    { id:"UTS20230006", name:"Zara Ahmed", email:"z.ahmed@student.uts.edu.my", role:"student", status:"active", faculty:"School of Computing & Creative Media", year:"Year 1" },
+    { id:"UTS20230007", name:"Noah Williams", email:"n.williams@student.uts.edu.my", role:"student", status:"active", faculty:"School of Engineering and Technology", year:"Year 2" },
+    { id:"ADM20240001", name:"Elena Vance", email:"e.vance@uts.edu.my", role:"admin", status:"active", faculty:"Administration", year:"N/A" }
+];
+
+var PAGE_SIZE = 10;
+var currentFilter = "all";
+var currentPage = 1;
+
+function getFiltered() {
+    if (currentFilter === "all") return USERS;
+    return USERS.filter(function(u) { return u.role === currentFilter; });
+}
+
+function avatarUrl(name) {
+    var initials = name.split(" ").map(function(n) { return n[0]; }).join("").toUpperCase();
+    return "https://ui-avatars.com/api/?name=" + encodeURIComponent(initials) + "&background=6a1cf6&color=fff&size=96&bold=true";
+}
+
+function showToast(msg) {
+    var toast = document.getElementById("toast");
+    var toastMsg = document.getElementById("toast-msg");
+    if (!toast || !toastMsg) return;
+    toastMsg.textContent = msg;
+    toast.style.opacity = "1";
+    toast.style.transform = "translate(-50%, 0)";
+    setTimeout(function() {
+        toast.style.opacity = "0";
+        toast.style.transform = "translate(-50%, 8px)";
+    }, 2500);
+}
+
+function renderTable() {
+    var data = getFiltered();
+    var total = data.length;
+    var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    var start = (currentPage - 1) * PAGE_SIZE;
+    var page = data.slice(start, start + PAGE_SIZE);
+
+    var tbody = document.getElementById("user-table-body");
+    if (!tbody) return;
+
+    var html = "";
+    for (var i = 0; i < page.length; i++) {
+        var u = page[i];
+        var blocked = u.status === "suspended";
+        var statusColor = blocked ? "#b41340" : "#10b981";
+        var statusLabel = blocked ? "Suspended" : "Active";
+        var blockIcon = blocked ? "check_circle" : "block";
+        var blockLabel = blocked ? "Activate" : "Suspend";
+
+        html += "<tr class='hover:bg-surface-container-low transition-colors border-b border-surface-container' data-uid='" + u.id + "'>";
+        html += "<td class='p-5 no-print'><input class='row-check' type='checkbox' data-uid='" + u.id + "' style='width:16px;height:16px;cursor:pointer;accent-color:#6a1cf6;'/></td>";
+        html += "<td class='p-5'><div class='flex items-center gap-3'><img src='" + avatarUrl(u.name) + "' class='w-8 h-8 rounded-full'/><span class='font-bold text-sm'>" + u.name + "</span></div></td>";
+        html += "<td class='p-5 font-mono text-xs font-bold'>" + u.id + "</td>";
+        html += "<td class='p-5 text-sm text-slate-500'>" + u.email + "</td>";
+        html += "<td class='p-5 text-sm font-medium'>" + u.faculty + "</td>";
+        html += "<td class='p-5 text-sm'>" + u.year + "</td>";
+        html += "<td class='p-5'><div class='flex items-center gap-2'><div class='w-2 h-2 rounded-full' style='background:" + statusColor + "'></div><span class='text-xs font-bold uppercase tracking-tight' style='color:" + statusColor + "'>" + statusLabel + "</span></div></td>";
+        html += "<td class='p-5 text-right no-print relative'>";
+        html += "<button class='action-btn p-2 hover:bg-surface-container rounded-full transition-colors' data-uid='" + u.id + "'><span class='material-symbols-outlined text-slate-400'>more_vert</span></button>";
+        html += "<div class='action-dropdown absolute right-12 top-12 w-40 bg-white rounded-xl shadow-xl border border-surface-container z-50 overflow-hidden' data-menu='" + u.id + "'>";
+        html += "<button class='toggle-block w-full text-left px-4 py-2 text-xs font-bold flex items-center gap-2 hover:bg-surface-container-low' data-uid='" + u.id + "'><span class='material-symbols-outlined text-sm'>" + blockIcon + "</span>" + blockLabel + "</button>";
+        html += "<button class='remove-user w-full text-left px-4 py-2 text-xs font-bold text-error flex items-center gap-2 hover:bg-error/5' data-uid='" + u.id + "'><span class='material-symbols-outlined text-sm'>delete</span>Remove</button>";
+        html += "</div></td></tr>";
+    }
+    tbody.innerHTML = html;
+
+    var label = document.getElementById("pagination-label");
+    if (label) label.textContent = "SHOWING " + (total === 0 ? 0 : start + 1) + "-" + Math.min(start + PAGE_SIZE, total) + " OF " + total + " USERS";
+
+    renderPagination(totalPages);
+    bindRowEvents();
+}
+
+function renderPagination(totalPages) {
+    var container = document.getElementById("pagination-btns");
+    if (!container) return;
+    var html = "";
+    for (var i = 1; i <= totalPages; i++) {
+        var active = i === currentPage;
+        html += "<button class='pg-btn w-8 h-8 rounded-lg font-bold text-xs " + (active ? "bg-primary text-on-primary shadow-lg shadow-primary/20" : "hover:bg-surface-container text-on-surface") + "' data-pg='" + i + "'>" + i + "</button>";
+    }
+    container.innerHTML = html;
+    container.querySelectorAll(".pg-btn").forEach(btn => {
+        btn.onclick = function() { currentPage = parseInt(this.dataset.pg); renderTable(); };
+    });
+}
+
+function bindRowEvents() {
+    document.querySelectorAll(".action-btn").forEach(btn => {
+        btn.onclick = function(e) {
+            e.stopPropagation();
+            var uid = this.dataset.uid;
+            document.querySelectorAll(".action-dropdown").forEach(m => { if(m.dataset.menu !== uid) m.classList.remove("open"); });
+            document.querySelector(".action-dropdown[data-menu='" + uid + "']").classList.toggle("open");
+        };
+    });
+    document.querySelectorAll(".toggle-block").forEach(btn => {
+        btn.onclick = function() {
+            var uid = this.dataset.uid;
+            var u = USERS.find(x => x.id === uid);
+            if(u) {
+                u.status = u.status === "suspended" ? "active" : "suspended";
+                showToast(u.name + " " + (u.status === "suspended" ? "suspended" : "activated") + ".");
+                renderTable();
+            }
+        };
+    });
+}
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.onclick = function() {
+        currentFilter = this.dataset.filter;
+        currentPage = 1;
+        document.querySelectorAll(".filter-btn").forEach(b => b.className = "filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors bg-surface-container-high/50 text-slate-500 hover:bg-surface-container");
+        this.className = "filter-btn px-5 py-2 rounded-full font-label text-xs font-bold transition-colors bg-primary text-on-primary shadow-lg shadow-primary/20";
+        renderTable();
+    };
+});
+
+document.getElementById("btn-invite").onclick = () => document.getElementById("invite-modal").classList.remove("hidden");
+document.getElementById("invite-close").onclick = () => { document.getElementById("invite-modal").classList.add("hidden"); resetInviteForm(); };
+document.getElementById("invite-cancel").onclick = () => { document.getElementById("invite-modal").classList.add("hidden"); resetInviteForm(); };
+document.getElementById("invite-backdrop").onclick = () => { document.getElementById("invite-modal").classList.add("hidden"); resetInviteForm(); };
+
+function resetInviteForm() {
+    document.getElementById("invite-email").value = "";
+    document.getElementById("invite-name").value = "";
+    document.getElementById("invite-faculty").value = "";
+    document.getElementById("invite-programme").innerHTML = '<option value="" disabled selected>Select Programme</option>';
+    document.getElementById("programme-field").classList.add("hidden");
+    document.getElementById("invite-error").classList.add("hidden");
+    document.getElementById("invite-email").classList.remove("border-error");
+}
+
+const PROGRAMMES = {
+    "School of Engineering and Technology": [
+        "Bachelor of Mechanical Engineering (Hons)",
+        "Bachelor of Civil Engineering (Hons)",
+        "Bachelor of Electrical Engineering (Hons)",
+        "Bachelor of Food Technology (Hons)",
+        "Bachelor of Science in Occupational Safety and Health (Hons)",
+        "Bachelor of Marine Engineering Technology (Hons)"
+    ],
+    "School of Business and Management": [
+        "Bachelor of Business Administration (Hons)",
+        "Bachelor of Accountancy (Hons)",
+        "Bachelor of Business (Hons) in Marketing",
+        "Bachelor of Technology Management (Hons)"
+    ],
+    "School of Built Environment": [
+        "Bachelor of Science (Hons) Architecture",
+        "Bachelor of Quantity Surveying (Hons)",
+        "Bachelor of Arts (Hons) in Interior Design",
+        "Bachelor of Science (Hons) in Property and Construction Management"
+    ],
+    "School of Computing & Creative Media": [
+        "Bachelor of Computer Science (Hons)",
+        "Bachelor of Arts in Industrial Design (Hons)",
+        "Bachelor of Arts (Hons) in Creative Digital Media",
+        "Bachelor of Mobile Game Development (Hons)"
+    ]
+};
+
+document.getElementById("invite-faculty").onchange = function() {
+    var school = this.value;
+    var progSelect = document.getElementById("invite-programme");
+    var progField = document.getElementById("programme-field");
+    var role = document.getElementById("invite-role").value;
+
+    if (role === "student" && PROGRAMMES[school]) {
+        var html = '<option value="" disabled selected>Select Programme</option>';
+        PROGRAMMES[school].forEach(p => {
+            html += '<option value="' + p + '">' + p + '</option>';
+        });
+        progSelect.innerHTML = html;
+        progField.classList.remove("hidden");
+    } else {
+        progField.classList.add("hidden");
+    }
+};
+
+document.getElementById("invite-role").onchange = function() {
+    var role = this.value;
+    var school = document.getElementById("invite-faculty").value;
+    var progField = document.getElementById("programme-field");
+    
+    if (role === "student" && school && PROGRAMMES[school]) {
+        progField.classList.remove("hidden");
+    } else {
+        progField.classList.add("hidden");
+    }
+};
+
+document.getElementById("invite-email").oninput = function() {
+    var email = this.value.trim().toLowerCase();
+    var error = document.getElementById("invite-error");
+    if (email === "") {
+        error.classList.add("hidden");
+        this.classList.remove("border-error");
+        return;
+    }
+    var isValid = email.endsWith("@student.uts.edu.my") || email.endsWith("@uts.edu.my");
+    if (!isValid) {
+        error.textContent = "Please use @student.uts.edu.my or @uts.edu.my domain.";
+        error.classList.remove("hidden");
+        this.classList.add("border-error");
+    } else {
+        error.classList.add("hidden");
+        this.classList.remove("border-error");
+    }
+};
+
+document.getElementById("btn-send-invite").onclick = function() {
+    var email = document.getElementById("invite-email").value.trim().toLowerCase();
+    var isValid = email.endsWith("@student.uts.edu.my") || email.endsWith("@uts.edu.my");
+    if (!isValid) {
+        showToast("Invalid email domain.");
+        return;
+    }
+    showToast("Invite sent to " + email);
+    document.getElementById("invite-modal").classList.add("hidden");
+    resetInviteForm();
+};
+
+document.getElementById("btn-export-print").onclick = () => window.print();
+
+document.onclick = () => document.querySelectorAll(".action-dropdown.open").forEach(m => m.classList.remove("open"));
+
+renderTable();
+</script>
+</body>
+</html>

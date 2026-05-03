@@ -1,0 +1,252 @@
+@import url("../../../../shared/responsive-base.css");
+
+/* Instructor Navigation Styles - Bento 2.0 Modern Sidebar */
+
+#instructor-sidebar {
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 20px 0 80px -20px rgba(0, 0, 0, 0.05);
+    overflow: hidden !important;
+}
+
+/* Sidebar States */
+.sidebar-mini {
+    width: 80px !important;
+}
+
+.sidebar-expanded,
+#instructor-sidebar:hover {
+    width: 288px !important;
+}
+
+/* Content Transitions */
+main, nav.fixed.top-0 {
+    transition: padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Removed border to prevent layout shifts */
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 48px;
+    position: relative;
+    transform: none !important; /* Prevent any accidental upward movement */
+}
+
+/* Fixed icon container - this ensures icons NEVER move */
+.nav-icon-wrapper {
+    width: 64px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+    transform: none !important;
+}
+
+.nav-label {
+    margin-left: -4px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* Hide labels in mini mode unless hovered/expanded */
+#instructor-sidebar .nav-label,
+#instructor-sidebar .sidebar-header-text,
+#instructor-sidebar .sidebar-footer-text,
+#instructor-sidebar .section-title {
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+#instructor-sidebar.sidebar-expanded .nav-label,
+#instructor-sidebar.sidebar-expanded .sidebar-header-text,
+#instructor-sidebar.sidebar-expanded .sidebar-footer-text,
+#instructor-sidebar.sidebar-expanded .section-title,
+#instructor-sidebar:hover .nav-label,
+#instructor-sidebar:hover .sidebar-header-text,
+#instructor-sidebar:hover .sidebar-footer-text,
+#instructor-sidebar:hover .section-title {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Icon Styling */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+    color: #a78bfa;
+    font-size: 24px;
+    transition: color 0.3s ease, font-variation-settings 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: none !important; /* Explicitly block upward hover transforms */
+    margin: 0 !important;
+}
+
+.nav-item:hover .material-symbols-outlined {
+    color: #8b5cf6;
+    transform: none !important;
+}
+
+.nav-item.bg-primary .material-symbols-outlined {
+    color: #ffffff !important;
+}
+
+/* Tailwind CDN may not generate `bg-primary` for classes injected after page load.
+   Ensure active nav background always renders (prevents “active item turns white/invisible”). */
+.nav-item.bg-primary {
+    background-color: #6a1cf6 !important;
+}
+
+/* Match admin: Sign Out uses text-red-500 on the anchor; icons must inherit (not global purple). */
+#instructor-sidebar .sidebar-footer-text .material-symbols-outlined,
+#instructor-sidebar .sidebar-footer-text .nav-icon-wrapper .material-symbols-outlined {
+    color: inherit !important;
+}
+
+#instructor-sidebar .sidebar-footer-text > a.nav-item {
+    color: #ef4444 !important;
+}
+
+#instructor-sidebar .sidebar-footer-text > a.nav-item:hover {
+    color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+/* App Logo Design (CSS Only) */
+.app-logo-container {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    padding: 0;
+    transition: all 0.4s ease;
+}
+
+.app-logo-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: #1e293b;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.app-logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.app-logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 6px;
+    transform: rotate(45deg);
+}
+
+/* Mini Mode logo centering - synchronized with nav-item centering */
+.sidebar-mini .app-logo-container {
+    padding-left: 0;
+}
+
+.sidebar-mini #instructor-sidebar-footer {
+    display: none;
+}
+
+#instructor-sidebar.sidebar-mini:hover #instructor-sidebar-footer {
+    display: flex;
+}
+
+.sidebar-expanded .app-logo-container,
+#instructor-sidebar:hover .app-logo-container {
+    padding-left: 0;
+}
+
+/* SideBar Overlay */
+#sidebar-overlay {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Scrollbar styling */
+#instructor-sidebar nav::-webkit-scrollbar {
+    width: 3px;
+}
+#instructor-sidebar nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+#instructor-sidebar nav::-webkit-scrollbar-thumb {
+    background: rgba(106, 28, 246, 0.2);
+    border-radius: 10px;
+}
+
+#instructor-sidebar.sidebar-mini nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#instructor-sidebar.sidebar-mini nav::-webkit-scrollbar {
+    width: 0px;
+}
+
+#instructor-sidebar.sidebar-mini nav::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+@media (max-width: 1023px) {
+    #instructor-sidebar {
+        width: 288px !important;
+        transform: translateX(-100%);
+        top: 64px !important; /* Mobile header height */
+    }
+    #instructor-sidebar.translate-x-0 {
+        transform: translateX(0);
+    }
+    /* Show labels on mobile when sidebar is open */
+    #instructor-sidebar.translate-x-0 .nav-label,
+    #instructor-sidebar.translate-x-0 .sidebar-header-text,
+    #instructor-sidebar.translate-x-0 .sidebar-footer-text,
+    #instructor-sidebar.translate-x-0 .section-title {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
+
+    /* Mini mode hides footer until hover — no hover on phones; show Sign Out when drawer is open */
+    #instructor-sidebar.translate-x-0 #instructor-sidebar-footer {
+        display: flex !important;
+    }
+    main {
+        margin-left: 0 !important;
+    }
+    #desktop-toggle-btn {
+        display: none !important;
+    }
+}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Profile | CuratorEdu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "primary": "#6a1cf6", "secondary": "#00647b", "tertiary": "#aa008e",
+                    "surface": "#f5f6f7", "on-surface": "#2c2f30", "outline": "#757778",
+                    "surface-container-lowest": "#ffffff", "surface-container-low": "#eff1f2",
+                    "surface-container-high": "#e0e3e4", "primary-container": "#ac8eff"
+                },
+                "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Manrope"] }
+            }
+        }
+    }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .label-text { font-family: 'Manrope', sans-serif; }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<div class="flex min-h-screen pt-20">
+    <main class="flex-1 p-4 sm:p-6 lg:p-10 pb-24 overflow-x-hidden min-w-0">
+        
+        <!-- Header -->
+        <header class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+            <div>
+                <span class="text-primary font-label font-bold tracking-[0.2em] uppercase text-xs">Settings & Identity</span>
+                <h2 class="text-4xl font-black tracking-tight mt-2">Admin Control Center</h2>
+            </div>
+            <button id="save-all-btn" class="bg-primary text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                Save All Changes
+            </button>
+        </header>
+
+        <div class="grid grid-cols-12 gap-8">
+            
+            <!-- Left Column: Profile & System Config -->
+            <div class="col-span-12 lg:col-span-8 space-y-8">
+                
+                <!-- Admin Identity Card -->
+                <div class="bg-white rounded-3xl p-8 border border-surface-container shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                    <div class="relative">
+                        <img id="admin-avatar" class="w-32 h-32 rounded-3xl object-cover border-4 border-white shadow-xl" src="https://ui-avatars.com/api/?name=Admin&background=6a1cf6&color=fff&size=256" alt="Admin Avatar"/>
+                        <input id="avatar-input" type="file" accept="image/*" class="hidden" />
+                        <button id="avatar-edit-btn" class="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-lg border border-surface-container hover:bg-surface-container-low transition-colors" title="Change avatar">
+                            <span class="material-symbols-outlined text-sm text-primary">edit</span>
+                        </button>
+                    </div>
+                    <div class="flex-1 text-center md:text-left">
+                        <h3 class="text-2xl font-black mb-1">Elena Vance</h3>
+                        <p class="text-slate-500 text-sm mb-4">Senior Platform Administrator</p>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                            <div class="bg-surface-container-low px-4 py-2 rounded-xl flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">mail</span>
+                                <span class="text-xs font-bold font-body">e.vance@uts.edu.my</span>
+                            </div>
+                            <div class="bg-surface-container-low px-4 py-2 rounded-xl flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-lg">verified_user</span>
+                                <span class="text-xs font-bold font-body">Full Access</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Configuration Section -->
+                <div class="bg-white rounded-3xl p-8 border border-surface-container shadow-sm">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">settings_suggest</span>
+                        </div>
+                        <h3 class="text-xl font-black">System Configuration</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-black text-slate-400 uppercase tracking-widest label-text">Platform Name</label>
+                            <input type="text" value="CuratorEdu" class="w-full px-5 py-3 rounded-2xl border border-surface-container bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:outline-none font-bold text-sm transition-all"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-black text-slate-400 uppercase tracking-widest label-text">University Email Whitelist</label>
+                            <input type="text" value="@student.uts.edu.my, @uts.edu.my" class="w-full px-5 py-3 rounded-2xl border border-surface-container bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:outline-none font-bold text-sm transition-all"/>
+                        </div>
+                        <div class="col-span-1 md:col-span-2 space-y-4 pt-4 border-t border-surface-container">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-sm">Maintenance Mode</h4>
+                                    <p class="text-xs text-slate-400">Put the platform in read-only mode for updates</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-sm">Allow Self-Registration</h4>
+                                    <p class="text-xs text-slate-400">Users can create accounts without an invite code</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Security & Logs -->
+            <div class="col-span-12 lg:col-span-4 space-y-8">
+                
+                <!-- Security Card -->
+                <div class="bg-slate-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
+                    <div class="relative z-10 space-y-6">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary text-3xl">security</span>
+                            <h3 class="text-xl font-black">Security</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <button id="change-password-btn" class="w-full py-3 bg-white/10 hover:bg-white/20 rounded-2xl text-sm font-bold transition-colors text-left px-5 flex justify-between items-center">
+                                Change Admin Password
+                                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                            <a href="/api/auth/logout"
+                               class="w-full py-3 bg-red-500/15 hover:bg-red-500/25 rounded-2xl text-sm font-bold transition-colors px-5 flex justify-between items-center text-red-100 border border-red-400/30">
+                                Log out
+                                <span class="material-symbols-outlined text-sm">logout</span>
+                            </a>
+                            <!-- Two-Factor Auth removed per request -->
+                        </div>
+                    </div>
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary/20 blur-[60px] rounded-full"></div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-3xl p-8 border border-surface-container shadow-sm">
+                    <h3 class="text-xl font-black mb-6">Recent Activity</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-1 h-8 bg-primary rounded-full mt-1"></div>
+                            <div>
+                                <p class="text-sm font-bold">Maintenance toggle: OFF</p>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Today, 08:15 AM</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-1 h-8 bg-slate-200 rounded-full mt-1"></div>
+                            <div>
+                                <p class="text-sm font-bold">Updated Email Whitelist</p>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Yesterday, 14:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-8 py-3 text-primary text-xs font-black uppercase tracking-widest hover:bg-primary/5 rounded-2xl transition-colors">
+                        View All Audit Logs
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+</div>
+<!-- Modals -->
+<!-- Audit Logs Modal -->
+<div id="audit-modal" class="hidden fixed inset-0 z-[160] bg-slate-900/40 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-black">Audit Logs</h3>
+            <button id="close-audit" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="max-h-96 overflow-y-auto custom-scrollbar space-y-3">
+            <div class="p-3 bg-surface-container-low rounded">
+                <div class="text-xs text-slate-400">Today, 08:15 AM</div>
+                <div class="font-bold">Maintenance mode toggled OFF</div>
+            </div>
+            <div class="p-3 bg-surface-container-low rounded">
+                <div class="text-xs text-slate-400">Yesterday, 02:30 PM</div>
+                <div class="font-bold">Updated email whitelist</div>
+            </div>
+            <div class="p-3 bg-surface-container-low rounded">
+                <div class="text-xs text-slate-400">2026-04-28</div>
+                <div class="font-bold">User role elevated: marcus.s</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div id="pw-modal" class="hidden fixed inset-0 z-[160] bg-slate-900/40 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-black">Change Admin Password</h3>
+            <button id="close-pw" class="p-2 rounded-full hover:bg-surface-container"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="space-y-3">
+            <input id="current-pw" type="password" placeholder="Current password" class="w-full px-4 py-3 rounded-xl border border-surface-container" />
+            <input id="new-pw" type="password" placeholder="New password" class="w-full px-4 py-3 rounded-xl border border-surface-container" />
+            <input id="confirm-pw" type="password" placeholder="Confirm new password" class="w-full px-4 py-3 rounded-xl border border-surface-container" />
+            <div class="flex gap-3 pt-2">
+                <button id="cancel-pw" class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-bold">Cancel</button>
+                <button id="save-pw" class="flex-1 px-4 py-3 rounded-xl bg-primary text-white font-bold">Save password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast container (simple) -->
+<div id="toast-container" class="fixed right-6 bottom-6 z-[200]"></div>
+
+<script>
+// Avatar upload handling
+const avatarBtn = document.getElementById('avatar-edit-btn');
+const avatarInput = document.getElementById('avatar-input');
+const avatarImg = document.getElementById('admin-avatar');
+avatarBtn?.addEventListener('click', () => avatarInput.click());
+avatarInput?.addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        avatarImg.src = ev.target.result;
+        showToast('Avatar updated (local preview).');
+    };
+    reader.readAsDataURL(file);
+});
+
+// Audit logs modal
+const auditBtn = document.querySelector('button.w-full.mt-8');
+const auditModal = document.getElementById('audit-modal');
+const closeAudit = document.getElementById('close-audit');
+if (auditBtn) auditBtn.addEventListener('click', () => auditModal.classList.replace('hidden', 'flex'));
+closeAudit?.addEventListener('click', () => auditModal.classList.replace('flex', 'hidden'));
+
+// Change password modal
+const changePwBtn = document.getElementById('change-password-btn');
+const pwModal = document.getElementById('pw-modal');
+const closePw = document.getElementById('close-pw');
+const cancelPw = document.getElementById('cancel-pw');
+const savePw = document.getElementById('save-pw');
+changePwBtn?.addEventListener('click', () => pwModal.classList.replace('hidden', 'flex'));
+closePw?.addEventListener('click', () => pwModal.classList.replace('flex', 'hidden'));
+cancelPw?.addEventListener('click', () => pwModal.classList.replace('flex', 'hidden'));
+
+savePw?.addEventListener('click', () => {
+    const cur = document.getElementById('current-pw').value;
+    const nw = document.getElementById('new-pw').value;
+    const conf = document.getElementById('confirm-pw').value;
+    if (!cur || !nw || !conf) { showToast('Please fill all fields', 'error'); return; }
+    if (nw !== conf) { showToast('New passwords do not match', 'error'); return; }
+    // Placeholder: call API to change password here
+    pwModal.classList.replace('flex', 'hidden');
+    showToast('Password changed (simulated)');
+});
+
+// Simple toast
+function showToast(message, type) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const t = document.createElement('div');
+    t.className = 'mb-3 px-4 py-2 rounded-xl bg-white border border-surface-container shadow-md';
+    if (type === 'error') t.classList.add('text-red-600');
+    t.textContent = message;
+    container.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+}
+
+// Save all button - simple feedback
+document.getElementById('save-all-btn')?.addEventListener('click', () => {
+    showToast('All changes saved (simulated)');
+});
+
+// Close modals on Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (!auditModal.classList.contains('hidden')) auditModal.classList.replace('flex', 'hidden');
+        if (!pwModal.classList.contains('hidden')) pwModal.classList.replace('flex', 'hidden');
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports &amp; Exports - Instructor Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#0c0f10",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "on-surface-variant": "#595c5d",
+                        "surface-container-low": "#eff1f2",
+                        "inverse-primary": "#9d79ff",
+                        "surface-bright": "#f5f6f7",
+                        "on-primary-fixed-variant": "#350088",
+                        "surface-container-high": "#e0e3e4",
+                        "error-dim": "#a70138",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffeef5",
+                        "on-error-container": "#510017",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "secondary": "#00647b",
+                        "on-secondary-fixed": "#003a48",
+                        "primary-container": "#ac8eff",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "on-tertiary-fixed": "#34002a",
+                        "secondary-fixed": "#80deff",
+                        "on-primary-fixed": "#000000",
+                        "on-background": "#2c2f30",
+                        "on-surface": "#2c2f30",
+                        "error-container": "#f74b6d",
+                        "secondary-dim": "#00576c",
+                        "tertiary": "#aa008e",
+                        "on-primary-container": "#2a0070",
+                        "tertiary-dim": "#96007d",
+                        "on-secondary-container": "#004e61",
+                        "outline": "#757778",
+                        "on-tertiary-container": "#5f004f",
+                        "background": "#f5f6f7",
+                        "error": "#b41340",
+                        "surface-dim": "#d1d5d7",
+                        "on-secondary": "#e2f6ff",
+                        "primary-fixed": "#ac8eff",
+                        "surface-container": "#e6e8ea",
+                        "primary": "#6a1cf6",
+                        "primary-fixed-dim": "#a07dff",
+                        "inverse-on-surface": "#9b9d9e",
+                        "secondary-container": "#80deff",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "tertiary-fixed": "#ff87db",
+                        "surface": "#f5f6f7",
+                        "on-primary": "#f7f0ff",
+                        "tertiary-container": "#ff87db",
+                        "surface-tint": "#6a1cf6",
+                        "primary-dim": "#5d00e3",
+                        "surface-variant": "#dadddf",
+                        "surface-container-highest": "#dadddf",
+                        "on-error": "#ffefef",
+                        "outline-variant": "#abadae"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+    </style>
+<link rel="stylesheet" href="../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+
+<div id="nav-mount"></div>
+<script src="../assets/js/instructor-nav.js"></script>
+<script src="../assets/js/instructor-interactions.js"></script>
+
+<!-- Main Content Wrapper -->
+<div class="flex min-h-screen">
+<!-- Main Canvas -->
+<main class="flex-1 p-8 space-y-10">
+<!-- Bento Box Header Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Title Card -->
+<div class="lg:col-span-2 bg-gradient-to-br from-primary to-primary-container p-10 rounded-xl relative overflow-hidden flex flex-col justify-end min-h-[300px]">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-8xl text-white/20 select-none">data_exploration</span>
+</div>
+<div class="relative z-10">
+<h1 class="text-4xl md:text-5xl font-black text-white tracking-tighter mb-4 leading-tight">Reports &amp; Exports</h1>
+<p class="text-on-primary/80 max-w-lg text-lg font-medium">Analyze student performance, track revenue, and monitor platform engagement with granular data exports.</p>
+</div>
+</div>
+<!-- Summary Card: Recent Downloads -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col gap-6 shadow-xl shadow-surface-container-low/10">
+<div class="flex justify-between items-start">
+<h2 class="text-xl font-bold font-headline tracking-tight text-on-surface">Recent Downloads</h2>
+<span class="material-symbols-outlined text-primary">history</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-surface truncate">Q3_Student_Progress.pdf</p>
+<p class="text-xs text-on-surface-variant">2 hours ago • 4.2 MB</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">download</span>
+</div>
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">table_chart</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-surface truncate">Enrollment_Data_May.csv</p>
+<p class="text-xs text-on-surface-variant">Yesterday • 1.8 MB</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">download</span>
+</div>
+</div>
+<button class="mt-auto text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">
+                        View full history <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-low/50 backdrop-blur-md p-4 rounded-full flex flex-wrap items-center gap-4">
+                <div class="flex-1 min-w-[240px] relative flex items-center group">
+                    <input class="w-full bg-surface-container-lowest rounded-full py-3 pl-12 pr-6 border-none focus:ring-2 focus:ring-primary/20 text-sm font-medium transition-all" placeholder="Search by report name..." type="text"/>
+                    <div class="absolute left-0 inset-y-0 w-12 flex items-center justify-center pointer-events-none text-on-surface-variant group-focus-within:text-primary transition-colors">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                </div>
+<div class="flex flex-wrap gap-3">
+<select class="bg-surface-container-lowest rounded-full py-3 px-6 border-none text-sm font-semibold focus:ring-2 focus:ring-primary/20 cursor-pointer outline-none">
+<option>Report Type</option>
+<option>Progress</option>
+<option>Analytics</option>
+<option>Financial</option>
+</select>
+<select class="bg-surface-container-lowest rounded-full py-3 px-6 border-none text-sm font-semibold focus:ring-2 focus:ring-primary/20 cursor-pointer outline-none">
+<option>Date Range</option>
+<option>Last 7 Days</option>
+<option>This Month</option>
+<option>Custom Range</option>
+</select>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Apply
+                    </button>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-xl shadow-surface-container-low/10 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant uppercase text-[10px] font-bold tracking-[0.1em]">
+<th class="px-8 py-5">Report Name</th>
+<th class="px-8 py-5">Generated Date</th>
+<th class="px-8 py-5">Type</th>
+<th class="px-8 py-5 text-center">Format</th>
+<th class="px-8 py-5 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Course Engagement Analytics</span>
+<span class="text-xs text-on-surface-variant">Mastering Modern Architecture 101</span>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-medium">Oct 24, 2023</td>
+<td class="px-8 py-6">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Analytics</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-center">
+<span class="material-symbols-outlined text-error-container" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 bg-surface-container-low rounded-lg text-primary hover:bg-primary hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Weekly Revenue Statement</span>
+<span class="text-xs text-on-surface-variant">Financial Summary</span>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-medium">Oct 22, 2023</td>
+<td class="px-8 py-6">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Financial</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 bg-surface-container-low rounded-lg text-primary hover:bg-primary hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Student Grade Distribution</span>
+<span class="text-xs text-on-surface-variant">All Active Courses</span>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-medium">Oct 19, 2023</td>
+<td class="px-8 py-6">
+<span class="bg-primary-container/20 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Progress</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-center">
+<span class="material-symbols-outlined text-error-container" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 bg-surface-container-low rounded-lg text-primary hover:bg-primary hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Quiz Completion Rates</span>
+<span class="text-xs text-on-surface-variant">Module 5 Advanced Theory</span>
+</div>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-medium">Oct 15, 2023</td>
+<td class="px-8 py-6">
+<span class="bg-primary-container/20 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Progress</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 bg-surface-container-low rounded-lg text-primary hover:bg-primary hover:text-white transition-all duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-low/20 px-8 py-5 flex items-center justify-between border-t border-surface-container-low">
+<p class="text-xs font-label font-bold text-on-surface-variant">Showing 4 of 24 reports</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-surface-container-high text-on-surface-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white font-bold shadow-md shadow-primary/20">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-surface-container-high text-on-surface-variant hover:bg-white transition-colors font-bold">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-surface-container-high text-on-surface-variant hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Pro Tip / Contextual Card -->
+<div class="bg-white/40 p-8 rounded-xl border border-white/60 flex items-center gap-8 glass-panel">
+<div class="w-16 h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface">Smart Report Scheduling</h3>
+<p class="text-sm text-on-surface-variant">Tired of manual exports? Set up automated weekly or monthly reports to be delivered directly to your inbox or cloud storage.</p>
+</div>
+<button class="ml-auto bg-white text-on-surface px-6 py-3 rounded-full font-bold text-sm border border-surface-container-high hover:bg-surface-container-low transition-colors shadow-sm whitespace-nowrap">
+                    Configure Automation
+                </button>
+</div>
+</main>
+</div>
+<!-- Responsive Bottom Nav (Visible on mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-surface-container-low px-6 py-3 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-2xl">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-2xl">school</span>
+<span class="text-[10px] font-bold">Courses</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-[10px] font-bold">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+</nav>
+</body></html>

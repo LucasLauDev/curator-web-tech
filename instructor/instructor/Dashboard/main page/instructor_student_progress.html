@@ -1,0 +1,1354 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Student Roster | Instructor Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-dim": "#5d00e3",
+              "secondary-container": "#80deff",
+              "surface-container-highest": "#dadddf",
+              "primary-container": "#ac8eff",
+              "on-primary": "#f7f0ff",
+              "secondary-fixed-dim": "#37d4ff",
+              "on-tertiary-fixed": "#34002a",
+              "error-dim": "#a70138",
+              "on-surface-variant": "#595c5d",
+              "tertiary-fixed": "#ff87db",
+              "surface-container": "#e6e8ea",
+              "tertiary-dim": "#96007d",
+              "surface-variant": "#dadddf",
+              "on-background": "#2c2f30",
+              "primary-fixed": "#ac8eff",
+              "primary-fixed-dim": "#a07dff",
+              "on-secondary-fixed": "#003a48",
+              "surface-tint": "#6a1cf6",
+              "inverse-on-surface": "#9b9d9e",
+              "surface-container-low": "#eff1f2",
+              "inverse-surface": "#0c0f10",
+              "tertiary-container": "#ff87db",
+              background: "#f5f6f7",
+              "surface-bright": "#f5f6f7",
+              "on-primary-fixed-variant": "#350088",
+              surface: "#f5f6f7",
+              "on-tertiary": "#ffeef5",
+              "on-surface": "#2c2f30",
+              "on-tertiary-fixed-variant": "#6f005c",
+              error: "#b41340",
+              "on-tertiary-container": "#5f004f",
+              "on-error-container": "#510017",
+              "on-error": "#ffefef",
+              "surface-dim": "#d1d5d7",
+              "on-secondary-fixed-variant": "#00586d",
+              "on-primary-fixed": "#000000",
+              primary: "#6a1cf6",
+              "on-primary-container": "#2a0070",
+              "outline-variant": "#abadae",
+              "on-secondary-container": "#004e61",
+              tertiary: "#aa008e",
+              "on-secondary": "#e2f6ff",
+              "surface-container-high": "#e0e3e4",
+              "error-container": "#f74b6d",
+              outline: "#757778",
+              "tertiary-fixed-dim": "#ff6ad8",
+              secondary: "#00647b",
+              "secondary-dim": "#00576c",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#80deff",
+              "inverse-primary": "#9d79ff",
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "2rem",
+              xl: "3rem",
+              full: "9999px",
+            },
+            fontFamily: {
+              headline: ["Plus Jakarta Sans"],
+              body: ["Inter"],
+              label: ["Manrope"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+    </style>
+    <link rel="stylesheet" href="../../assets/css/instructor-nav.css" />
+  </head>
+  <body class="bg-background text-on-background min-h-screen">
+    <div id="nav-mount"></div>
+    <script src="../../assets/js/instructor-nav.js"></script>
+    <script src="../../assets/js/instructor-interactions.js"></script>
+
+    <div class="flex min-h-screen">
+      <!-- Main Content Area -->
+      <main class="flex-1 p-4 sm:p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+          <div>
+            <h1
+              class="text-4xl font-headline font-black text-on-surface tracking-tighter mb-2"
+            >
+              Student Roster
+            </h1>
+            <p class="text-on-surface-variant font-medium">
+              Manage and monitor the progress of your active learners.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button
+              class="flex-1 sm:flex-none bg-surface-container-lowest text-slate-700 px-6 py-3 rounded-lg font-label font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-200 hover:bg-slate-50 transition-all active:scale-95"
+            >
+              <span class="material-symbols-outlined text-xl"
+                >file_download</span
+              >
+              Export
+            </button>
+            <button
+              class="flex-1 sm:flex-none bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-lg font-label font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-95"
+            >
+              <span class="material-symbols-outlined text-xl">person_add</span>
+              Enroll
+            </button>
+          </div>
+        </header>
+        <!-- Filter Bar -->
+        <div
+          class="bg-surface-container-low p-2 rounded-xl mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 hide-scrollbar">
+            <button
+              class="whitespace-nowrap px-4 py-2 bg-white text-primary rounded-lg font-label font-bold shadow-sm text-sm"
+            >
+              All Students
+            </button>
+            <button
+              class="whitespace-nowrap px-4 py-2 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
+            >
+              Active
+            </button>
+            <button
+              class="whitespace-nowrap px-4 py-2 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
+            >
+              Completed
+            </button>
+          </div>
+          <div class="flex items-center justify-end gap-3 pr-2 border-t md:border-t-0 pt-2 md:pt-0">
+            <button
+              class="flex items-center gap-2 text-slate-500 font-label font-bold text-sm px-4 py-2 hover:bg-white/50 rounded-lg"
+            >
+              <span class="material-symbols-outlined text-lg">filter_list</span>
+              More Filters
+            </button>
+          </div>
+        </div>
+        <!-- Roster Table Card -->
+        <div
+          class="bg-surface-container-lowest rounded-xl shadow-xl shadow-slate-200/50 overflow-hidden"
+        >
+          <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[1000px]">
+            <thead>
+              <tr class="bg-slate-50/50">
+                <th
+                  class="px-8 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Student
+                </th>
+                <th
+                  class="px-6 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Contact
+                </th>
+                <th
+                  class="px-6 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Enrollment
+                </th>
+                <th
+                  class="px-6 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Course Path
+                </th>
+                <th
+                  class="px-6 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Progress
+                </th>
+                <th
+                  class="px-6 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-8 py-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 font-label text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100" id="studentTableBody">
+              <!-- Page 1: Students 1-5 -->
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-1"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop"
+                      alt="Alex Rivera"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Alex Rivera
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-8829
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  alex.rivera@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Sept 12, 2023
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full"
+                    >Web Technology</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >84%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[84%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-1"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+                      alt="Maya Chen"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Maya Chen
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-9012
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  m.chen@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Oct 05, 2023
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-tertiary-container/20 text-on-tertiary-container px-3 py-1 rounded-full"
+                    >Human Computer Interaction</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-emerald-600 font-label"
+                        >100%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-emerald-500 w-full rounded-full"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Completed</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-1"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                      alt="Marcus Thorne"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Marcus Thorne
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-7734
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  m.thorne@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Nov 12, 2023
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-secondary-container/20 text-on-secondary-container px-3 py-1 rounded-full"
+                    >Algorithm and Design Complexity</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >12%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[12%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-1"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+                      alt="Sofia Vasquez"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Sofia Vasquez
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-6621
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  sofia.v@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Jan 02, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-pink-100 text-pink-700 px-3 py-1 rounded-full"
+                    >Web Technology</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >45%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[45%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-1"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+                      alt="Jordan Smith"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Jordan Smith
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-4412
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  jordan.s@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Feb 15, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-amber-100 text-amber-700 px-3 py-1 rounded-full"
+                    >Human Computer Interaction</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >62%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[62%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Page 2: Students 6-10 -->
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-2 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
+                      alt="Li Wei"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Li Wei
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-3321
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  li.wei@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Jan 20, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full"
+                    >Algorithm and Design Complexity</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >30%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[30%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-2 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=100&h=100&fit=crop"
+                      alt="Elena Petrova"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Elena Petrova
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-2210
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  elena.p@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Mar 01, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full"
+                    >Web Technology</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-emerald-600 font-label"
+                        >100%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-emerald-500 w-full rounded-full"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Completed</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-2 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop"
+                      alt="David Okafor"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        David Okafor
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-1109
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  david.o@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Mar 15, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-purple-100 text-purple-700 px-3 py-1 rounded-full"
+                    >Human Computer Interaction</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >5%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[5%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <!-- <td class="px-6 py-5"><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase tracking-wider">On Break</span></td> -->
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-2 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1548142813-c348350df52b?w=100&h=100&fit=crop"
+                      alt="Chloe Lefebvre"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Chloe Lefebvre
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-9908
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  chloe.l@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Apr 01, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-rose-100 text-rose-700 px-3 py-1 rounded-full"
+                    >Algorithm and Design Complexity</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >22%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[22%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-2 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
+                      alt="Hiroshi Tanaka"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Hiroshi Tanaka
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-8807
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  h.tanaka@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  Apr 10, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-violet-100 text-violet-700 px-3 py-1 rounded-full"
+                    >Web Technology</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >15%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[15%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Page 3: Students 11-15 -->
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-3 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop"
+                      alt="Isabella Ross"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Isabella Ross
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-7706
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  i.ross@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  May 01, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-lime-100 text-lime-700 px-3 py-1 rounded-full"
+                    >Human Computer Interaction</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >55%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[55%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-3 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
+                      alt="Omar Kassab"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Omar Kassab
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-6605
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  omar.k@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  May 12, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-orange-100 text-orange-700 px-3 py-1 rounded-full"
+                    >Algorithm and Design Complexity</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >8%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[8%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-3 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop"
+                      alt="Clara Schmidt"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Clara Schmidt
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-5504
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  clara.s@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  May 20, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-blue-100 text-blue-700 px-3 py-1 rounded-full"
+                    >Web Technology</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-emerald-600 font-label"
+                        >100%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div
+                        class="h-full bg-emerald-500 w-full rounded-full"
+                      ></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Completed</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-3 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
+                      alt="Arjun Patel"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Arjun Patel
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-4403
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  arjun.p@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  June 01, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-slate-100 text-slate-700 px-3 py-1 rounded-full"
+                    >Human Computer Interaction</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >42%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[42%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                class="hover:bg-slate-50/80 transition-colors group roster-page-3 hidden"
+              >
+                <td class="px-8 py-5">
+                  <div class="flex items-center gap-4">
+                    <img
+                      class="w-11 h-11 rounded-full object-cover"
+                      src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop"
+                      alt="Zoe Williams"
+                    />
+                    <div>
+                      <p class="font-headline font-bold text-slate-900">
+                        Zoe Williams
+                      </p>
+                      <p class="text-[11px] font-label text-slate-400">
+                        ID: #ST-3302
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  zoe.w@student.uts.edu.my
+                </td>
+                <td class="px-6 py-5 text-sm font-body text-slate-600">
+                  June 05, 2024
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="text-xs font-bold font-label bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full"
+                    >Algorithm and Design Complexity</span
+                  >
+                </td>
+                <td class="px-6 py-5">
+                  <div class="w-full max-w-[100px]">
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span
+                        class="text-[10px] font-bold text-primary font-label"
+                        >75%</span
+                      >
+                    </div>
+                    <div
+                      class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden"
+                    >
+                      <div class="h-full bg-primary w-[75%] rounded-full"></div>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-5">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold uppercase tracking-wider"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-8 py-5 text-right">
+                  <button
+                    type="button"
+                    data-global-skip="1"
+                    class="sr-student-actions inline-flex p-2 rounded-lg text-slate-400 hover:text-primary hover:bg-white transition-colors"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Row actions"
+                  >
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          <!-- Pagination -->
+          <div
+            class="px-8 py-6 bg-slate-50/50 flex items-center justify-between"
+          >
+            <p class="text-xs font-label text-slate-500" id="paginationTally">
+              Showing <span class="font-bold text-slate-900">5</span> of
+              <span class="font-bold text-slate-900">15</span> students
+            </p>
+            <div class="flex items-center gap-1" id="paginationControls">
+              <button
+                class="p-2 text-slate-400 hover:bg-white rounded-lg transition-all"
+                data-page="prev"
+              >
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button
+                class="pageNum w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-xs font-bold font-label"
+                data-page="1"
+              >
+                1
+              </button>
+              <button
+                class="pageNum w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white text-slate-600 text-xs font-bold font-label"
+                data-page="2"
+              >
+                2
+              </button>
+              <button
+                class="pageNum w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white text-slate-600 text-xs font-bold font-label"
+                data-page="3"
+              >
+                3
+              </button>
+              <span class="px-2 text-slate-300">...</span>
+              <button
+                class="pageNum w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white text-slate-600 text-xs font-bold font-label"
+                data-page="12"
+              >
+                12
+              </button>
+              <button
+                class="p-2 text-slate-400 hover:bg-white rounded-lg transition-all"
+                data-page="next"
+              >
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Dashboard Widgets (Asymmetric Layout) -->
+        <div class="mt-12 grid grid-cols-12 gap-6">
+          <div
+            class="col-span-12 lg:col-span-8 bg-primary p-8 rounded-xl relative overflow-hidden"
+          >
+            <div class="relative z-10">
+              <h3 class="text-2xl font-headline font-black text-white mb-4">
+                Roster Analytics Insight
+              </h3>
+              <p class="text-white/80 max-w-md font-body text-sm mb-6">
+                Enrollment is up by 18% this month. Students in Web Technology
+                are showing the highest engagement rates across all 3 courses.
+              </p>
+              <button
+                class="bg-white text-primary px-6 py-2.5 rounded-lg font-label font-bold text-sm shadow-xl active:scale-95 transition-all"
+              >
+                View Trends
+              </button>
+            </div>
+            <div
+              class="absolute right-0 bottom-0 top-0 w-1/3 bg-white/10 -rotate-12 translate-x-1/4"
+            ></div>
+            <span
+              class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-white/10 rotate-12"
+              >trending_up</span
+            >
+          </div>
+          <div
+            class="col-span-12 lg:col-span-4 glass-panel p-8 rounded-xl border border-white/20"
+          >
+            <h3 class="text-lg font-headline font-bold text-slate-900 mb-6">
+              Quick Stats
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-xl">bolt</span>
+                  </div>
+                  <p class="text-sm font-label font-bold text-slate-700">
+                    Completion Rate
+                  </p>
+                </div>
+                <span class="text-lg font-headline font-black text-emerald-600"
+                  >92%</span
+                >
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-xl">group</span>
+                  </div>
+                  <p class="text-sm font-label font-bold text-slate-700">
+                    Total Enrollment
+                  </p>
+                </div>
+                <span class="text-lg font-headline font-black text-indigo-600"
+                  >15</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Contextual FAB -->
+    <button
+      class="fixed bottom-8 right-8 bg-white/70 backdrop-blur-md p-4 rounded-xl shadow-2xl border border-white/30 text-primary flex items-center gap-2 hover:bg-white transition-all active:scale-95 group z-50"
+    >
+      <span
+        class="material-symbols-outlined group-hover:rotate-90 transition-transform"
+        >add_circle</span
+      >
+      <span class="font-label font-bold">New Announcement</span>
+    </button>
+    <!-- Inline pagination script removed: handled by instructor-interactions.js -->
+  </body>
+</html>

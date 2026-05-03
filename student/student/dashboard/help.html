@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CuratorEdu | Help &amp; Support</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6a1cf6",
+                        "primary-container": "#ac8eff",
+                        background: "#f8fafc",
+                        surface: "#ffffff",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#64748b",
+                        outline: "#e2e8f0"
+                    },
+                    borderRadius: { DEFAULT: "1rem", lg: "1.5rem", xl: "2rem" },
+                    fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Manrope"] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+
+<body class="bg-background text-on-surface min-h-screen relative overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-300/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+    <main class="pb-16">
+        <div class="px-4 sm:px-8 pt-4 max-w-full">
+            <header class="mb-8">
+                <h1 class="text-4xl font-black font-headline tracking-tighter text-on-surface">Help &amp; Support</h1>
+                <p class="text-on-surface-variant text-lg font-medium mt-2">Find answers, learn how to use the platform, or contact our support curators.</p>
+            </header>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <!-- Left: Contact -->
+                <div class="space-y-6">
+                    <div class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-headline font-black text-on-surface">Send us a message</h2>
+                                <p class="text-sm text-on-surface-variant mt-1">We’ll reply as soon as possible.</p>
+                            </div>
+                        </div>
+
+                        <form class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label ml-1">Full Name</label>
+                                    <input type="text" value="" class="w-full bg-slate-50/50 border border-outline rounded-xl p-3.5 text-sm font-medium text-on-surface focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all outline-none" placeholder="Your name"/>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label ml-1">Email Address</label>
+                                    <input type="email" value="" class="w-full bg-slate-50/50 border border-outline rounded-xl p-3.5 text-sm font-medium text-on-surface focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all outline-none" placeholder="your@email.com"/>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label ml-1">Subject</label>
+                                <select class="w-full bg-slate-50/50 border border-outline rounded-xl p-3.5 text-sm font-medium text-on-surface focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all outline-none">
+                                    <option>Technical Issue</option>
+                                    <option>Course Access</option>
+                                    <option>Billing / Refund</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label ml-1">Your Message</label>
+                                <textarea rows="4" class="w-full bg-slate-50/50 border border-outline rounded-xl p-3.5 text-sm font-medium text-on-surface focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all outline-none resize-none" placeholder="How can we assist you today?"></textarea>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="group flex items-center justify-center gap-3 w-full px-8 py-4 bg-gradient-to-r from-[#6a1cf6] to-[#ac8eff] text-white font-bold rounded-full shadow-lg hover:shadow-primary/30 transition-all duration-300 active:scale-95">
+                                    <span>Send Message</span>
+                                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8">
+                        <h3 class="text-xl font-black font-headline text-on-surface mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">mail</span>
+                            Direct Support Details
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 bg-white/10 rounded-xl text-primary">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label">Support Hours</p>
+                                    <p class="text-sm font-semibold text-on-surface mt-1">9 AM - 6 PM EST</p>
+                                    <p class="text-[11px] text-on-surface-variant mt-1">Mon - Fri</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 bg-white/10 rounded-xl text-primary">
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant font-label">Direct Email</p>
+                                    <p class="text-sm font-semibold text-on-surface break-all mt-1">support@uts.edu.my</p>
+                                    <p class="text-[11px] text-on-surface-variant mt-1">Response: about 2 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: FAQs -->
+                <div class="space-y-6">
+                    <div class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm">
+                        <h2 class="text-2xl font-black font-headline text-on-surface mb-6">Common Questions</h2>
+                        <div class="space-y-5">
+                            <div class="faq-item group border border-slate-100 rounded-2xl overflow-hidden">
+                                <button type="button" class="faq-q w-full px-4 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors" data-faq-toggle="0">
+                                    <p class="font-bold text-base text-on-surface group-hover:text-primary transition-colors">How do I start learning?</p>
+                                    <span class="material-symbols-outlined text-slate-400">expand_more</span>
+                                </button>
+                                <div class="faq-a hidden px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">
+                                    Go to <span class="font-bold text-on-surface">My Courses</span>, pick your course, then click <span class="font-bold text-on-surface">Start Learning</span>.
+                                </div>
+                            </div>
+
+                            <div class="faq-item group border border-slate-100 rounded-2xl overflow-hidden">
+                                <button type="button" class="faq-q w-full px-4 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors" data-faq-toggle="1">
+                                    <p class="font-bold text-base text-on-surface group-hover:text-primary transition-colors">Where can I download PDFs?</p>
+                                    <span class="material-symbols-outlined text-slate-400">expand_more</span>
+                                </button>
+                                <div class="faq-a hidden px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">
+                                    Open <span class="font-bold text-on-surface">My eBooks</span>, then use <span class="font-bold text-on-surface">Download PDF</span> on your digital books.
+                                </div>
+                            </div>
+
+                            <div class="faq-item group border border-slate-100 rounded-2xl overflow-hidden">
+                                <button type="button" class="faq-q w-full px-4 py-4 text-left flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors" data-faq-toggle="2">
+                                    <p class="font-bold text-base text-on-surface group-hover:text-primary transition-colors">I can’t access a course. What should I do?</p>
+                                    <span class="material-symbols-outlined text-slate-400">expand_more</span>
+                                </button>
+                                <div class="faq-a hidden px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">
+                                    Refresh the page and make sure the course is in <span class="font-bold text-on-surface">My Courses</span>.
+                                    If it still doesn’t work, contact support using the form on the left.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-100 rounded-3xl p-6 md:p-8">
+                        <h3 class="text-xl font-black font-headline text-on-surface mb-3 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">help</span>
+                            Tips
+                        </h3>
+                        <ul class="list-disc pl-5 text-sm text-on-surface-variant space-y-2">
+                            <li>Keep your browser up to date for best performance.</li>
+                            <li>Clear cache if content doesn’t load after enrollment.</li>
+                            <li>For access issues, include your Student ID in the message.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../assets/js/student-nav.js"></script>
+    <div id="ce-help-live-chat"></div>
+    <script src="../assets/js/help-live-chat-widget.js"></script>
+    <script>
+        // Simple FAQ accordion for the help page.
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-faq-toggle]').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const wrapper = btn.closest('.faq-item');
+                    const answer = wrapper?.querySelector('.faq-a');
+                    answer?.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

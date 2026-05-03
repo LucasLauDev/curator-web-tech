@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart | Instructor Bookstore</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css" />
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+      .headline { font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif; }
+      .label { font-family: Manrope, Inter, system-ui, sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24; }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen">
+    <div id="nav-mount"></div>
+    <script src="../assets/js/instructor-nav.js"></script>
+    <script src="../assets/js/instructor-interactions.js"></script>
+
+    <div class="flex min-h-screen">
+      <main class="flex-1 p-8 lg:p-12 pb-28 min-w-0">
+        <header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <p class="label text-[10px] uppercase tracking-[0.2em] font-extrabold text-violet-600 mb-3">Bookstore</p>
+            <h1 class="headline text-4xl font-black tracking-tight">Your Cart</h1>
+            <p class="mt-3 text-sm text-slate-600">Review items, update quantities, then proceed to checkout.</p>
+          </div>
+          <div class="flex gap-3">
+            <a href="main page/instructor_bookstore.html" class="px-5 py-3 rounded-xl bg-white border border-slate-200 font-bold hover:bg-slate-50 transition-colors">Continue Shopping</a>
+            <a href="cart_secure_checkout.html" class="px-5 py-3 rounded-xl bg-violet-600 text-white font-black hover:bg-violet-700 transition-colors">Checkout</a>
+          </div>
+        </header>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+              <p class="font-black">Items</p>
+              <button id="clear-cart" class="text-sm font-bold text-red-600 hover:bg-red-50 px-4 py-2 rounded-xl">Clear</button>
+            </div>
+            <div id="cart-items" class="divide-y divide-slate-100">
+              <div class="p-6 flex items-center justify-between gap-4 cart-item" data-price="29">
+                <div class="min-w-0">
+                  <p class="font-black truncate">Design Systems Playbook</p>
+                  <p class="text-xs text-slate-500 mt-1">Digital download</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button class="qty-btn w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 font-black" data-delta="-1">-</button>
+                  <span class="w-6 text-center font-black cart-qty">1</span>
+                  <button class="qty-btn w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 font-black" data-delta="1">+</button>
+                </div>
+                <div class="w-20 text-right font-black">$29</div>
+                <button class="remove-btn p-2 rounded-xl hover:bg-slate-100 text-slate-500" title="Remove">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </div>
+              <div class="p-6 flex items-center justify-between gap-4 cart-item" data-price="49">
+                <div class="min-w-0">
+                  <p class="font-black truncate">Advanced UI Animations</p>
+                  <p class="text-xs text-slate-500 mt-1">Video bundle</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <button class="qty-btn w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 font-black" data-delta="-1">-</button>
+                  <span class="w-6 text-center font-black cart-qty">1</span>
+                  <button class="qty-btn w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 font-black" data-delta="1">+</button>
+                </div>
+                <div class="w-20 text-right font-black">$49</div>
+                <button class="remove-btn p-2 rounded-xl hover:bg-slate-100 text-slate-500" title="Remove">
+                  <span class="material-symbols-outlined">delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-200 p-6">
+              <p class="font-black">Summary</p>
+              <div class="mt-4 space-y-2 text-sm">
+                <div class="flex justify-between"><span class="text-slate-600">Subtotal</span><span id="subtotal" class="font-black">$0</span></div>
+                <div class="flex justify-between"><span class="text-slate-600">Tax</span><span id="tax" class="font-black">$0</span></div>
+                <div class="h-px bg-slate-200 my-3"></div>
+                <div class="flex justify-between text-base"><span class="font-black">Total</span><span id="total" class="font-black">$0</span></div>
+              </div>
+              <a href="cart_secure_checkout.html" class="mt-6 w-full px-5 py-3 rounded-xl bg-violet-600 text-white font-black hover:bg-violet-700 transition-colors inline-flex items-center justify-center">Proceed to Checkout</a>
+              <p class="mt-3 text-xs text-slate-500">Checkout progress is saved in this browser.</p>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

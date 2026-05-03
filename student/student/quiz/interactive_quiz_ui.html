@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu - Focused Learning Quiz</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#0c0f10",
+                    "surface": "#f5f6f7",
+                    "secondary-fixed": "#80deff",
+                    "primary-dim": "#5d00e3",
+                    "primary": "#6a1cf6",
+                    "primary-fixed-dim": "#a07dff",
+                    "error": "#b41340",
+                    "surface-variant": "#dadddf",
+                    "primary-fixed": "#ac8eff",
+                    "inverse-primary": "#9d79ff",
+                    "primary-container": "#ac8eff",
+                    "on-primary-fixed-variant": "#350088",
+                    "on-error-container": "#510017",
+                    "error-dim": "#a70138",
+                    "outline-variant": "#abadae",
+                    "tertiary-fixed": "#ff87db",
+                    "on-tertiary": "#ffeef5",
+                    "on-background": "#2c2f30",
+                    "surface-bright": "#f5f6f7",
+                    "surface-container-highest": "#dadddf",
+                    "on-tertiary-fixed": "#34002a",
+                    "on-surface": "#2c2f30",
+                    "inverse-on-surface": "#9b9d9e",
+                    "tertiary-container": "#ff87db",
+                    "on-secondary-container": "#004e61",
+                    "secondary-container": "#80deff",
+                    "on-surface-variant": "#595c5d",
+                    "on-primary-container": "#2a0070",
+                    "error-container": "#f74b6d",
+                    "on-tertiary-fixed-variant": "#6f005c",
+                    "secondary": "#00647b",
+                    "tertiary-dim": "#96007d",
+                    "tertiary": "#aa008e",
+                    "on-tertiary-container": "#5f004f",
+                    "on-secondary": "#e2f6ff",
+                    "secondary-fixed-dim": "#37d4ff",
+                    "on-error": "#ffefef",
+                    "outline": "#757778",
+                    "surface-container": "#e6e8ea",
+                    "on-primary-fixed": "#000000",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f5f6f7",
+                    "surface-dim": "#d1d5d7",
+                    "on-primary": "#f7f0ff",
+                    "on-secondary-fixed": "#003a48",
+                    "tertiary-fixed-dim": "#ff6ad8",
+                    "surface-tint": "#6a1cf6",
+                    "surface-container-high": "#e0e3e4",
+                    "secondary-dim": "#00576c",
+                    "on-secondary-fixed-variant": "#00586d",
+                    "surface-container-low": "#eff1f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      main {
+        margin: 0 !important;
+        padding-left: clamp(12px, 4vw, 28px) !important;
+        padding-right: clamp(12px, 4vw, 28px) !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+      }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+
+    <div id="nav-mount"></div>
+
+<main class="relative overflow-hidden bg-surface">
+<!-- Ambient Background Gradients -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full z-0"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary/10 blur-[120px] rounded-full z-0"></div>
+<!-- Distraction-Free Focus Container -->
+<div id="quiz-active-flow" class="w-full max-w-7xl z-10 flex flex-col gap-8">
+<!-- Progress & Timer Header -->
+<div class="flex flex-col gap-6 w-full">
+<div class="flex justify-between items-end px-2">
+<div class="flex flex-col">
+<span id="question-counter" class="font-label text-sm font-bold text-primary tracking-widest uppercase">Question 01 of 10</span>
+<h2 id="quiz-topic" class="font-headline text-2xl font-bold tracking-tight text-on-surface">Information Technology</h2>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span id="timer-display" class="font-label font-bold text-on-surface">10:00</span>
+</div>
+</div>
+<!-- Linear Progress Bar -->
+<div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div id="progress-bar" class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full transition-all duration-500 ease-out" style="width:10%"></div>
+</div>
+</div>
+<!-- Central Question Card (Glassmorphic) -->
+<section class="glass-card rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] border border-white/20">
+<div class="flex flex-col gap-10">
+<!-- Question Prompt -->
+<div class="space-y-4">
+<p id="question-text" class="font-headline text-xl md:text-3xl font-semibold leading-snug text-on-surface"></p>
+</div>
+<!-- Multiple Choice Grid -->
+<div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+<!-- Feedback Banner -->
+<div id="feedback-banner" class="hidden rounded-lg px-6 py-4 font-label font-bold text-base"></div>
+<!-- Actions Area -->
+<div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 pt-6 border-t border-surface-container-highest">
+<div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto flex-1">
+<button id="prev-btn" type="button" class="px-6 py-4 rounded-lg font-headline font-bold text-on-surface bg-surface-container-high hover:bg-surface-container transition-all border border-outline-variant/20 disabled:opacity-40">
+  ← Previous question
+</button>
+</div>
+<div class="flex items-center gap-4 w-full md:w-auto md:justify-end">
+<button id="check-btn" type="button" class="flex-1 md:flex-none px-12 py-4 rounded-lg bg-gradient-to-br from-primary to-primary-dim shadow-[0_12px_24px_-8px_rgba(106,28,246,0.5)] font-headline font-bold text-white hover:scale-[1.02] active:scale-95 transition-all">
+  Check Answer
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Results Card (hidden until quiz ends) -->
+<div id="results-card" class="hidden glass-card rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] border border-white/20 space-y-8">
+  <div class="text-center space-y-5">
+    <span id="result-icon" class="material-symbols-outlined text-6xl text-primary" style="font-variation-settings:'FILL' 1;">emoji_events</span>
+    <h2 class="font-headline text-3xl font-bold text-on-surface">Quiz Complete!</h2>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <div class="bg-surface-container-lowest rounded-2xl px-6 py-4 min-w-[120px]">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1">Score</p>
+        <p id="score-text" class="font-headline text-2xl font-black text-on-surface"></p>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl px-6 py-4 min-w-[120px]">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1">Time Taken</p>
+        <p id="time-taken-text" class="font-headline text-2xl font-black text-on-surface"></p>
+      </div>
+      <div id="pass-fail-badge" class="rounded-2xl px-6 py-4 min-w-[120px]">
+        <p class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1">Result</p>
+        <p id="pass-fail-text" class="font-headline text-2xl font-black"></p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3 class="font-headline font-bold text-lg text-on-surface mb-4">Question Review</h3>
+    <div id="question-review" class="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar"></div>
+  </div>
+  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <button onclick="restartQuiz()" class="px-8 py-4 rounded-lg bg-gradient-to-br from-primary to-primary-dim font-headline font-bold text-white hover:scale-105 transition-all">
+      Try Again
+    </button>
+    <a id="quiz-back-course" href="../course/course_detail.html" class="px-8 py-4 rounded-lg bg-surface-container font-headline font-bold text-on-surface hover:bg-surface-container-high transition-all text-center">
+      Back to Course
+    </a>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('sidebar-collapse-btn');
+        const sidebar = document.getElementById('course-sidebar');
+        if (!toggleBtn || !sidebar) return;
+        const icon = toggleBtn.querySelector('.material-symbols-outlined');
+        let isCollapsed = true;
+
+        const toggleSidebar = () => {
+            isCollapsed = !isCollapsed;
+            if (isCollapsed) {
+                sidebar.style.marginLeft = `-${sidebar.offsetWidth}px`;
+                sidebar.style.opacity = '0';
+                if (icon) icon.textContent = 'menu';
+                toggleBtn.style.left = '84px';
+            } else {
+                sidebar.style.marginLeft = '0';
+                sidebar.style.opacity = '1';
+                if (icon) icon.textContent = 'close';
+                toggleBtn.style.left = '332px';
+            }
+        };
+
+        toggleBtn.addEventListener('click', toggleSidebar);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '[' && !e.ctrlKey && !e.metaKey) toggleSidebar();
+        });
+    });
+</script>
+<script src="interactive-quiz-run.js"></script>
+
+</main>
+<!-- Sidebar Hint (Asymmetric Element) -->
+<aside class="hidden xl:flex fixed right-12 top-1/2 -translate-y-1/2 w-64 flex-col gap-6 z-10">
+<div class="glass-card p-6 rounded-lg border border-white/40 shadow-xl space-y-4">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-label font-bold text-xs tracking-widest uppercase">Quick Hint</span>
+</div>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed italic">
+                "Think about how the first piece of information you see 'sets the stage' for your entire decision-making process."
+            </p>
+<div class="h-[200px] w-full rounded-lg overflow-hidden grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+<img class="w-full h-full object-cover" data-alt="minimalist sculptural head sculpture representing cognitive thinking in a modern gallery setting with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfKzksOU8VrOYcDZ-pyXaq6cPg165LEPP_V-nKBNwx26fTw3yGT1RlfwDYCmIu39J9Q9nRxk-imkFVnl2batlyabQIh8bKBCB4wNWvhIEXpWTdy6eRm_3dGBqPZfcoQ1SuvZEPAHgslFLLdg_bDDBIJQBDZyF0LAVae16-08xphR3Vp4kEAXIgvTsUQmgmf11s8RnrtZWvMWXAvGqYLAk-zbkBckVz34BiMvNqr7LJOYs9Owm8jwhpYDc1kR79waF9ObZnbbxDswE"/>
+</div>
+</div>
+</aside>
+    <script src="../assets/js/student-nav.js"></script>
+</body></html>
