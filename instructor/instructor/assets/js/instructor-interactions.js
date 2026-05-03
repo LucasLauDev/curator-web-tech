@@ -92,8 +92,6 @@
     if (p.includes("/community/community_group.html")) return "community_group";
     if (p.includes("/dashboard/minimal_bookstore.html")) return "bookstore";
     if (p.includes("/dashboard/bookstore.html")) return "bookstore";
-    if (p.includes("bookstore.html") && (p.includes("main%20page") || p.includes("main page")))
-      return "bookstore";
     if (p.includes("/bookstore/cart_checkout_flow.html"))
       return "cart_checkout_flow";
     if (p.includes("/bookstore/cart_list.html")) return "cart_list";
@@ -5004,9 +5002,6 @@
           return;
         }
         if (icon === "shopping_cart" || label === "shopping_cart") {
-          // Instructor nav cart uses capture-phase document listener + bubble onclick;
-          // calling toggleCart here would double-fire (open then close). Let inline onclick handle it.
-          if (btn.getAttribute("aria-label") === "Open cart") return;
           if (typeof window.toggleCart === "function") {
             window.toggleCart();
           } else {
@@ -6343,6 +6338,10 @@
     }
 
     renderCreatedCoursesRows();
+
+    document
+      .getElementById("ce-my-courses-create-fab")
+      ?.addEventListener("click", () => navigateToCourseEditor());
 
     const closeButtons = Array.from(
       document.querySelectorAll('button[data-close-course="1"]'),

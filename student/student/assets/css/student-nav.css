@@ -180,15 +180,7 @@ nav.fixed.top-0 {
     }
 
     #student-sidebar.translate-x-0 {
-        transform: translateX(0) !important;
-    }
-
-    #student-sidebar.translate-x-0 .nav-label,
-    #student-sidebar.translate-x-0 .sidebar-footer-text,
-    #student-sidebar.translate-x-0 .section-title {
-        opacity: 1 !important;
-        transform: translateX(0) !important;
-        pointer-events: auto !important;
+        transform: translateX(0);
     }
 
     main {

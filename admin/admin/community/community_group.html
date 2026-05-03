@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lumina Edu | UI/UX Design Enthusiasts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/admin-nav.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#6f005c",
+                    "surface-variant": "#dadddf",
+                    "on-primary-fixed-variant": "#350088",
+                    "tertiary": "#aa008e",
+                    "tertiary-container": "#ff87db",
+                    "surface-container-low": "#eff1f2",
+                    "primary-container": "#ac8eff",
+                    "primary-fixed": "#ac8eff",
+                    "inverse-primary": "#9d79ff",
+                    "on-primary": "#f7f0ff",
+                    "on-surface": "#2c2f30",
+                    "on-tertiary-container": "#5f004f",
+                    "outline": "#757778",
+                    "error-dim": "#a70138",
+                    "inverse-surface": "#0c0f10",
+                    "primary-dim": "#5d00e3",
+                    "surface-dim": "#d1d5d7",
+                    "on-background": "#2c2f30",
+                    "secondary-container": "#80deff",
+                    "secondary": "#00647b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffeef5",
+                    "tertiary-fixed": "#ff87db",
+                    "surface-container": "#e6e8ea",
+                    "surface-tint": "#6a1cf6",
+                    "tertiary-dim": "#96007d",
+                    "outline-variant": "#abadae",
+                    "primary": "#6a1cf6",
+                    "on-primary-container": "#2a0070",
+                    "primary-fixed-dim": "#a07dff",
+                    "on-error-container": "#510017",
+                    "background": "#f5f6f7",
+                    "on-error": "#ffefef",
+                    "surface-bright": "#f5f6f7",
+                    "secondary-fixed-dim": "#37d4ff",
+                    "on-tertiary-fixed": "#34002a",
+                    "error-container": "#f74b6d",
+                    "surface-container-highest": "#dadddf",
+                    "on-secondary-fixed": "#003a48",
+                    "inverse-on-surface": "#9b9d9e",
+                    "on-surface-variant": "#595c5d",
+                    "on-secondary-fixed-variant": "#00586d",
+                    "secondary-dim": "#00576c",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-fixed-dim": "#ff6ad8",
+                    "on-secondary-container": "#004e61",
+                    "surface": "#f5f6f7",
+                    "error": "#b41340",
+                    "secondary-fixed": "#80deff",
+                    "surface-container-high": "#e0e3e4",
+                    "on-secondary": "#e2f6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<main class="md:ml-72 pt-20 p-4 sm:p-8 min-h-screen">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Feed Column (Left/Center) -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Group Banner Header -->
+<section class="relative h-64 rounded-xl overflow-hidden shadow-sm">
+<img alt="Group Banner" class="absolute inset-0 w-full h-full object-cover" data-alt="Abstract colorful fluid gradients in purple and pink with soft lighting and professional design aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMBBpqCP92AIFRDOa6WPeqj-Kaza62HXJ76F831QxJe7TWMo779Gv6n-Z3-ekCQN1T4KXO-sstPSl2FdoJ0a3vFgfQI98DIzXAKNDXbNTup-r8rk34waHX-rhTWCRYZHkP4KkdwZScA-qoXCF4Mk-R6JqlKJ_s_qOk4zrfJkyJNvFLMbvArJAEgB-7lBJ_wh-Ew_SPSqoqbBQ8uyOYuslmpLIZSSxOo1EGCChdBOuAtVEWX0nlzwEPh2onpS7p-9Ww5og95iKtYAE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full flex items-end justify-between">
+<div>
+<h1 class="text-4xl font-headline font-black text-white tracking-tight mb-2">UI/UX Design Enthusiasts</h1>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Portrait of a young designer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC69LR4N9YfMH1Lh2IPTuZ_IoQ5Qvab825wzqe15xkMWhLvBcrPXZJ7k0sNHMUirmO7OEeQ-RPME5-VgxByft8ntug18wWpgdl8MsezFf9g8QMS7MNWPjPQsViF1KU3gAgpnD4cOSK1NrUZ5n5d6zKHP9HO_6kPanJMq1PXvDSuZlpLPxddEU9CYQWz7zt3G6TxJuYeJoccnyH2xdFqzqAu8SsbX2jROrBmvmginu7iJb1un2HGmyDxFY5vJeDVV-Cd0Bec8avglOQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Smiling student headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2KjMANs_yGY8fjqOEqmIoQRlsZYSZ4mvBhvYvnRcw46ZZo9bUWAt2d_QGAVW8UXgMpb3NBLZF2lW-UGmpWnV9aJjZmKfjyjix6hihtNVthItrA5ZGkAAH6dzLqFw5Pu5wZqyGxK-eLnCi4D5Sr6tGQaFqqCaFQT0w_gi9N_tkfCh2C3syhaTitKAAjdI_3q73SuGjVLZVpoX_gextQXJKNC9_0cb1pJ-J5WcBRqHicDY5fkO8gd67SAhqUUWB3KBuPzo15QuffAA"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Creative professional face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZyB6pwxgny-K2kjmUwqtbiqpp8elFqcTxe5dZVKsTiusidAQTlNLfg9r4XEJYrsz10I6qcDQR4wodWmK2BXCeYbnzZTofUjl9FjFGpuFpjkUVX_CnJ-cnpIiMTHj8Bnboba6kCundeMsfL9YhpM-RiysfY7CYYKCNR5amWV5DKDvRMZQKXaSmLTwWsZNjb8q-tQDx5-PuadJDQhh9av418z6bWxpxxJVKFG3IJSIAOekj5czyxrIhTx8EvF_n4VVApgnmWCwa71I"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold">+12k</div>
+</div>
+<span class="text-white/80 font-label text-sm">12,408 members • 42 online</span>
+</div>
+</div>
+<button class="bg-white text-primary px-8 py-3 rounded-full font-label font-bold shadow-lg hover:scale-105 transition-transform">
+                            Joined
+                        </button>
+</div>
+</section>
+<!-- Post Composer -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex items-start gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Alex Rivers profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOV9aHqz_FVKQGGp9Uh6ZMe3jKPvFC__5qr6fSjNfJvyjtngmsWO3BySv14Hq_R8eZJQfnRErYm1HxvYUcshN8bhqFTpTgZRMRTKAwNWReImHp_978BVyYWoDfZ5sg6u0KLsoVQvS32IeZdnOHr6AGzFoiOhGj9ZS-6uyExLoY6w7JeHEEafbT8iRlzTGgJGH9ydpM-_jRKm6UgWJhxyA4o8cqSBs6SA8t3pIXAV47Woz1XNXQoQ-0ZgrMxv-4coWKGK8UL0kmuYE"/>
+<div class="flex-1">
+<textarea class="w-full bg-surface-container-low border-none rounded-2xl p-4 focus:ring-1 focus:ring-primary/20 text-sm resize-none h-24 mb-4" placeholder="Share an insight or ask a question..."></textarea>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="poll">poll</span>
+</button>
+</div>
+<button class="bg-primary text-white px-6 py-2 rounded-full font-label font-bold text-sm">Post</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Feed Threads -->
+<div class="flex flex-col gap-6">
+<!-- Post 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a female designer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPd3Yos-XJ2BpVSyZfx3RbejLmUM4eKMS_6OhihWYNBb-Ca4RaSxVgrAYrFxW7yw_h3IUpolmRGo4qCsHMWm3TW4XI8Alo55_ip6xavR8Ipb9ZhzhESy55AEJOMfMOFUxfQ0WU5DTeGOS3bVovTm_Xfh9b1oUhSSBy5lrHKACoUO8sx5ZoCg_dGpMi9borDkHPqyqPwvsSxGrCLL0VyEb4oSqFSj_5sHgYWnlmvdHau_oPzl_NGPB_QAftqKU-pgBKJ-E1fMeHjPI"/>
+<div>
+<h3 class="font-headline font-bold text-sm">Sarah Jenkins</h3>
+<p class="text-xs text-slate-500">2 hours ago • <span class="text-primary font-bold">Featured</span></p>
+</div>
+</div>
+<button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+                            Just finished a deep dive into the new Figma prototyping features. The multi-state transitions are a game changer for mobile app flows. Has anyone found a good way to organize complex variables yet? 🎨
+                        </p>
+<div class="rounded-lg overflow-hidden mb-4">
+<img class="w-full h-64 object-cover" data-alt="Modern mobile app interface design with vibrant colors and sleek typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO6ShDbnbZ0SgLc_Skz5HbezSD-r003D6bHfYgKxbEeGFzV5tpptYZs3HEte4FBiL_WvXfAKgRRnGGZEEvxsaYnhDTEEJCO-CBnQqY2bOlacDvFuS3Y6U1a70Vb1QeuRwFrzehqwPn_7rL3T_UIDQ4pU9WSXS7jHfbmLVipGbMskbszvqExYKN1mrMtbu8-qIiUy67NpeuoDKvhV98q821PzKrGKEhcrSZWey0eZfGk2IXy0upNkF0HauSiKRia-NL0RifSZ4I-70"/>
+</div>
+<div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+<button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 142
+                            </button>
+<button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 28
+                            </button>
+<button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</button>
+</div>
+</article>
+<!-- Post 2 -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a young male creative" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHjMIdMmmLWAEhDge29eIWS3nqMSMJQbDz3HxazV3vu12zGzVGRnz4UOcOcLR8k_Tiv9nArow9gIi0C63j7T9zF6j8mSkiCDRgTQ6CEp9lhsiki6rMcxTGMVHrZCLQaCr5I21U8AVx-U_g1YdoZ27LX05a0-vViP6cc8Zj2CV30EwZ8f-2LY-kuamwyCHrTCKPMtHp0WNPcovHhSjhZF3UJW9-KYxdKke3UClmroMGaaBg9UAH67SJmMxKZsH-WkGY8muJvfuDl4M"/>
+<div>
+<h3 class="font-headline font-bold text-sm">Marcus Chen</h3>
+<p class="text-xs text-slate-500">5 hours ago</p>
+</div>
+</div>
+<button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+                            What are your favorite typography pairings for a high-end fintech brand? Thinking of Inter for body, but looking for something with more "authority" for headings. Maybe a serif? 🧐
+                        </p>
+<div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+<button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="favorite">favorite</span> 56
+                            </button>
+<button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 15
+                            </button>
+</div>
+</article>
+</div>
+<!-- Top Contributors Section (Within main content for better visibility) -->
+<section>
+<h2 class="font-headline font-black text-xl mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="stars">stars</span>
+                        Top Contributors
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover border-4 border-primary/10" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCI94CHEq8Uru_6YV_djzpSWPu8FZLN156quTFlKo2DwDepQOU0jKrDtnILXvfs4rhIPLQnTXzeIUhlc_8kLqtATMDbFQFg6UfpSvmRxwUpNozcHAtuSEpergch9U8r1FBsat9siWyKu50xPGh_x51owBAmfJz2S_zZV_OYf8DPZCUCJxngwCHLIN7yPSoSMWiRoXQXwbK000T-YUeiUEGU_G5dAoB5sRR10MHvZ8pDulR9gGKWZ8OZvb9AwkiSy6sNX803o2eq9w"/>
+<p class="font-bold text-sm">Elena Vance</p>
+<p class="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Lead Mentor</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] font-bold">1.2k Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFaIafVZB_-NdEFCKqooLkdxwQo9xPan_Mh7AklJ8byPX0NPEIdY0FzTfoSOEZ0armN-EKirZ-H7hphL-ZHH5dudw6NH3Ga9cUKpjuVKJf8ugdNtFzomaGoI83Z-T-tFmGcZcno3xqKBM6vHSooflbsb1kzVT7oRXaFx4jp1tp8IOZZyP3eFMW1bnVdJVAUXn0woCtJDBBe9u6Q2Z8mCzGRj0paQcDe7dD0EKKO-bd2XxqKVjiZdY-NhogYB0lQskyOIpligggsHo"/>
+<p class="font-bold text-sm">David Oh</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Active Member</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">980 Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF9JtyDSxPSYdlaqozkZ-SMDn9K5qJ5D_FJN6wz1zqyLL53zxmpnyDuzaY4L1zEG9p-x8eRXbjtJ7R8QRM6rUIgVeVlVfpfUEaAhKVr19XXMd7TpT5u60t5C90DMeC9HU-YQnEWHosQEtwwaplDZjEQ5oV0CwjqHZXhGIck7SCR31LEtkgRlx_whLk8YlgmwlOBVxJvP6pPXU8ZoFelNEoQG9RQp0fR3S8Wd6KC23pLnZFdE6Lz3IhGRd4HcrTVSWvUIoyquIgW2o"/>
+<p class="font-bold text-sm">Sofia Russo</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Curator</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">845 Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXcrRT8_VNHEgbp4J84wYBpcFdwc9VxyoetTBa0Aohsh70hH9Gb99fiJM9KKUmvBLmXbNnneJZwa4w58qnnsx7TkJO3WnhZzyKqXGXVATZD6JxWrBHrWbmgi6rRgZrKj7TwusH2b20Igcagk1YTYRP8IFcBilTPGeiXT5y8J9RvlCUb8wIZDlD8VTOsTg4gdRFoTM5-vFgddE1surZCgbWFjL1CfMNpxnvA5gRwMVRVtzw5W2wZnI5N-awu4LBHgn_KFFortLXw_0"/>
+<p class="font-bold text-sm">Liam Grey</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Prototyper</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">720 Karma</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar Widgets (Right) -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<!-- Upcoming Events Widget -->
+<div class="bg-surface-container-high rounded-xl p-6">
+<h3 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+                        Upcoming Events
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4">
+<div class="flex flex-col items-center bg-primary-container/20 px-3 py-2 rounded-lg h-fit">
+<span class="text-xs font-bold text-primary">OCT</span>
+<span class="text-xl font-headline font-black text-primary">24</span>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Live Q&amp;A with Senior Designer</h4>
+<p class="text-xs text-slate-500 mt-1">10:00 AM • Google Meet</p>
+<button class="text-xs font-bold text-primary mt-3 hover:underline">Set Reminder</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4">
+<div class="flex flex-col items-center bg-primary-container/20 px-3 py-2 rounded-lg h-fit">
+<span class="text-xs font-bold text-primary">OCT</span>
+<span class="text-xl font-headline font-black text-primary">28</span>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Portfolio Review Workshop</h4>
+<p class="text-xs text-slate-500 mt-1">02:30 PM • Group Voice</p>
+<button class="text-xs font-bold text-primary mt-3 hover:underline">Join Waiting List</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-white text-on-surface-variant font-label font-bold text-xs rounded-full hover:bg-white/50 transition-colors">
+                        View All Events
+                    </button>
+</div>
+<!-- Shared Resources Widget -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<h3 class="font-headline font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="folder_open">folder_open</span>
+                        Shared Resources
+                    </h3>
+<ul class="flex flex-col gap-4">
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-error/10 text-error flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-bold text-xs">UX Research Guide.pdf</p>
+<p class="text-[10px] text-slate-400">2.4 MB • Updated yesterday</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-secondary/10 text-secondary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+<div>
+<p class="font-bold text-xs">Design System Kit</p>
+<p class="text-[10px] text-slate-400">Figma Community Link</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+</div>
+<div>
+<p class="font-bold text-xs">Color Theory Basics</p>
+<p class="text-[10px] text-slate-400">Group Wiki Page</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</li>
+</ul>
+<button class="w-full mt-6 text-primary font-label font-bold text-xs flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Upload Resource
+                    </button>
+</div>
+<!-- Group Stats Mini-Widget -->
+<div class="relative rounded-xl p-8 overflow-hidden bg-on-surface text-white">
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-sm mb-4">Your Engagement</h4>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-3xl font-black text-secondary-container">82%</span>
+<span class="text-[10px] font-bold text-slate-400 mb-1">Top 5% of group</span>
+</div>
+<div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 82%;"></div>
+</div>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-8 right-8 bg-surface-bright/70 backdrop-blur-xl p-4 rounded-xl shadow-2xl flex items-center justify-center text-primary group hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="add_comment">add_comment</span>
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 font-label font-bold whitespace-nowrap">New Thread</span>
+</button>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+
+    const toastHost = document.createElement('div');
+    toastHost.className = 'fixed top-24 right-6 z-[80] flex w-[min(92vw,360px)] flex-col gap-3';
+    body.appendChild(toastHost);
+
+    const showToast = (message) => {
+      const toast = document.createElement('div');
+      toast.className = 'rounded-xl bg-on-surface text-white px-4 py-3 text-sm shadow-xl';
+      toast.textContent = message;
+      toastHost.appendChild(toast);
+      window.setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-x-2', 'transition-all', 'duration-300');
+        window.setTimeout(() => toast.remove(), 320);
+      }, 1700);
+    };
+
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-[90] hidden items-center justify-center bg-black/45 p-4';
+    modal.innerHTML = `
+      <div class="w-full max-w-lg rounded-2xl bg-surface-container-lowest shadow-2xl">
+        <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+          <h3 id="group-modal-title" class="font-headline text-lg font-bold text-on-surface">Details</h3>
+          <button id="group-modal-close" class="rounded-lg p-1 text-slate-500 hover:bg-slate-100" aria-label="Close modal">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div id="group-modal-body" class="px-5 py-4 text-sm text-on-surface-variant"></div>
+      </div>
+    `;
+    body.appendChild(modal);
+
+    const modalTitle = modal.querySelector('#group-modal-title');
+    const modalBody = modal.querySelector('#group-modal-body');
+    const modalClose = modal.querySelector('#group-modal-close');
+    const feedThreads = document.querySelector('.lg\\:col-span-8 .flex.flex-col.gap-6');
+    const resourcesList = document.querySelector('.lg\\:col-span-4 ul.flex.flex-col.gap-4');
+
+    const openModal = (title, html) => {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = html;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    const timeNow = () => {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+
+    const createCommentSection = () => {
+      const wrap = document.createElement('div');
+      wrap.className = 'comment-section hidden mt-4 border-t border-slate-100 pt-4';
+      wrap.innerHTML = `
+        <div class="space-y-3 mb-3">
+          <div class="rounded-lg bg-surface-container-low px-3 py-2">
+            <p class="text-xs font-bold text-on-surface">Ari Kim</p>
+            <p class="text-xs text-on-surface-variant">Great point. I also use variable naming by flow stage.</p>
+          </div>
+          <div class="rounded-lg bg-surface-container-low px-3 py-2">
+            <p class="text-xs font-bold text-on-surface">Noah Li</p>
+            <p class="text-xs text-on-surface-variant">Can you share your file structure template?</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" class="comment-input flex-1 rounded-full border border-slate-200 px-3 py-2 text-xs" placeholder="Write a comment..."/>
+          <button class="comment-send rounded-full bg-primary px-3 py-2 text-xs font-bold text-white">Send</button>
+        </div>
+      `;
+      return wrap;
+    };
+
+    const createPostElement = (text) => {
+      const article = document.createElement('article');
+      article.className = 'bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary';
+      article.innerHTML = `
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">YO</div>
+            <div>
+              <h3 class="font-headline font-bold text-sm">You</h3>
+              <p class="text-xs text-slate-500">${timeNow()} • <span class="text-primary font-bold">New</span></p>
+            </div>
+          </div>
+          <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+        </div>
+        <p class="text-on-surface-variant text-sm mb-4 leading-relaxed"></p>
+        <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+          <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite">favorite</span> 0
+          </button>
+          <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 0
+          </button>
+          <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+          </button>
+        </div>
+      `;
+
+      const content = article.querySelector('p.text-on-surface-variant');
+      if (content) content.textContent = text;
+
+      const commentsWrap = createCommentSection();
+      article.appendChild(commentsWrap);
+
+      return article;
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    const buttons = Array.from(document.querySelectorAll('button'));
+
+    const joinBtn = buttons.find((btn) => btn.textContent.trim() === 'Joined');
+    if (joinBtn) {
+      let joined = true;
+      joinBtn.addEventListener('click', () => {
+        joined = !joined;
+        joinBtn.textContent = joined ? 'Joined' : 'Join Group';
+        joinBtn.classList.toggle('bg-white', joined);
+        joinBtn.classList.toggle('text-primary', joined);
+        joinBtn.classList.toggle('bg-primary', !joined);
+        joinBtn.classList.toggle('text-white', !joined);
+        showToast(joined ? 'You are still in this group.' : 'You left this group.');
+      });
+    }
+
+    const postBtn = buttons.find((btn) => btn.textContent.trim() === 'Post');
+    const composer = document.querySelector('textarea');
+    if (postBtn && composer) {
+      postBtn.addEventListener('click', () => {
+        const value = composer.value.trim();
+        if (!value) {
+          showToast('Write something first before posting.');
+          composer.focus();
+          return;
+        }
+        if (feedThreads) {
+          const postCard = createPostElement(value);
+          feedThreads.appendChild(postCard);
+          bindPostInteractions(postCard);
+        }
+        composer.value = '';
+        showToast('Post published and added at the bottom.');
+      });
+    }
+
+    const bindPostInteractions = (scope) => {
+      const likeBtns = scope.querySelectorAll('button .material-symbols-outlined');
+      likeBtns.forEach((icon) => {
+        const parent = icon.closest('button');
+        if (!parent) return;
+        const action = icon.textContent.trim();
+
+        if (action === 'favorite') {
+          parent.addEventListener('click', () => {
+            const isActive = parent.dataset.active === '1';
+            parent.dataset.active = isActive ? '0' : '1';
+            icon.style.fontVariationSettings = isActive ? "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" : "'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24";
+            parent.classList.toggle('text-primary', !isActive);
+            showToast(isActive ? 'Like removed.' : 'You liked this post.');
+          });
+        }
+
+        if (action === 'chat_bubble') {
+          parent.addEventListener('click', () => {
+            const article = parent.closest('article');
+            if (!article) return;
+            let section = article.querySelector('.comment-section');
+            if (!section) {
+              section = createCommentSection();
+              article.appendChild(section);
+            }
+            section.classList.toggle('hidden');
+            if (!section.classList.contains('hidden')) {
+              const input = section.querySelector('.comment-input');
+              input?.focus();
+              showToast('Comments opened.');
+            }
+          });
+        }
+
+        if (action === 'share') {
+          parent.addEventListener('click', async () => {
+            const shareText = 'UI/UX Design Enthusiasts - check this thread.';
+            try {
+              if (navigator.share) {
+                await navigator.share({ title: 'Community Thread', text: shareText });
+              } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(shareText);
+              }
+              showToast('Thread shared successfully.');
+            } catch (_error) {
+              showToast('Share canceled.');
+            }
+          });
+        }
+
+        if (action === 'more_horiz') {
+          parent.addEventListener('click', () => {
+            openModal('Post Options', '<ul class="space-y-2"><li>Save post</li><li>Mute author</li><li>Report content</li></ul>');
+          });
+        }
+      });
+    };
+
+    body.addEventListener('click', (event) => {
+      const sendBtn = event.target.closest('.comment-send');
+      if (!sendBtn) return;
+
+      const section = sendBtn.closest('.comment-section');
+      const input = section?.querySelector('.comment-input');
+      const list = section?.querySelector('.space-y-3');
+      const value = input?.value.trim();
+
+      if (!section || !input || !list) return;
+      if (!value) {
+        input.focus();
+        showToast('Type a comment first.');
+        return;
+      }
+
+      const comment = document.createElement('div');
+      comment.className = 'rounded-lg bg-surface-container-low px-3 py-2';
+      comment.innerHTML = '<p class="text-xs font-bold text-on-surface">You</p>' +
+        `<p class="text-xs text-on-surface-variant"></p>`;
+      const textNode = comment.querySelector('p.text-on-surface-variant');
+      if (textNode) textNode.textContent = value;
+      list.appendChild(comment);
+      input.value = '';
+      showToast('Comment added.');
+    });
+
+    bindPostInteractions(document);
+
+    const iconButtons = document.querySelectorAll('button .material-symbols-outlined');
+    iconButtons.forEach((icon) => {
+      const parent = icon.closest('button');
+      if (!parent) return;
+
+      const action = icon.textContent.trim();
+      if (action === 'image' || action === 'link' || action === 'poll') {
+        parent.addEventListener('click', () => {
+          const map = {
+            image: 'Attach image panel opened.',
+            link: 'Attach link panel opened.',
+            poll: 'Create poll panel opened.'
+          };
+          showToast(map[action]);
+        });
+      }
+
+      if (action === 'download') {
+        parent.addEventListener('click', () => showToast('Download started.'));
+      }
+
+      if (action === 'open_in_new' || action === 'arrow_forward') {
+        parent.addEventListener('click', () => showToast('Resource opened in a new tab.'));
+      }
+    });
+
+    buttons.forEach((btn) => {
+      const label = btn.textContent.replace(/\s+/g, ' ').trim();
+      if (!label) return;
+
+      if (label === 'Set Reminder' || label === 'Join Waiting List') {
+        btn.addEventListener('click', () => {
+          btn.dataset.active = btn.dataset.active === '1' ? '0' : '1';
+          const enabled = btn.dataset.active === '1';
+          btn.textContent = enabled ? 'Reminder Set' : label;
+          showToast(enabled ? 'Event reminder enabled.' : 'Event reminder removed.');
+        });
+      }
+
+      if (label === 'View All Events') {
+        btn.addEventListener('click', () => {
+          openModal('All Events', '<p class="mb-2">1. Live Q&A with Senior Designer - Oct 24</p><p>2. Portfolio Review Workshop - Oct 28</p>');
+        });
+      }
+
+      if (label.includes('Upload Resource')) {
+        btn.addEventListener('click', () => {
+          openModal(
+            'Upload Resource',
+            '<div class="space-y-3">' +
+            '<input id="resource-name" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" placeholder="Resource title" />' +
+            '<input id="resource-meta" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" placeholder="Type or size (e.g. PDF • 1.2 MB)" />' +
+            '<button id="resource-save" class="rounded-full bg-primary px-4 py-2 text-xs font-bold text-white">Add Resource</button>' +
+            '</div>'
+          );
+
+          const save = modalBody.querySelector('#resource-save');
+          save?.addEventListener('click', () => {
+            const nameInput = modalBody.querySelector('#resource-name');
+            const metaInput = modalBody.querySelector('#resource-meta');
+            const name = nameInput?.value.trim();
+            const meta = metaInput?.value.trim() || 'Uploaded just now';
+
+            if (!name) {
+              showToast('Please enter a resource title.');
+              nameInput?.focus();
+              return;
+            }
+
+            if (resourcesList) {
+              const item = document.createElement('li');
+              item.className = 'flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors';
+              item.innerHTML =
+                '<div class="flex items-center gap-3">' +
+                '<div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center rounded-lg">' +
+                '<span class="material-symbols-outlined" data-icon="article">article</span>' +
+                '</div>' +
+                '<div><p class="font-bold text-xs"></p><p class="text-[10px] text-slate-400"></p></div>' +
+                '</div>' +
+                '<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm" data-icon="download">download</span></button>';
+              const title = item.querySelector('p.font-bold');
+              const details = item.querySelector('p.text-\\[10px\\]');
+              if (title) title.textContent = name;
+              if (details) details.textContent = meta;
+              resourcesList.appendChild(item);
+
+              const downloadBtn = item.querySelector('button');
+              downloadBtn?.addEventListener('click', () => showToast('Download started.'));
+            }
+
+            closeModal();
+            showToast('Resource uploaded to the list.');
+          });
+        });
+      }
+
+      if (label === 'New Thread') {
+        btn.addEventListener('click', () => {
+          window.scrollTo({ top: 260, behavior: 'smooth' });
+          composer?.focus();
+          showToast('Thread composer ready.');
+        });
+      }
+    });
+  });
+</script>
+</body></html>

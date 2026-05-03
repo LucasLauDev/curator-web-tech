@@ -97,25 +97,20 @@ const instructorNav = {
         let html = `
             <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300"></div>
 
-            <nav class="w-full h-16 lg:h-20 flex items-center justify-between pr-4 lg:pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
-                <div class="flex items-center gap-2.5 pl-4">
-                    <!-- Mobile Menu Toggle -->
-                    <button id="sidebar-toggle-btn" class="lg:hidden p-2 -ml-2 text-slate-500 hover:bg-violet-50 hover:text-primary rounded-xl transition-all" aria-label="Toggle navigation menu">
-                        <span class="material-symbols-outlined">menu</span>
-                    </button>
-
-                    <a href="${base}../../landing/landing/index.html" class="flex items-center gap-2.5 hover:opacity-90 transition-opacity" aria-label="Go to landing home">
-                        <div class="flex items-center justify-center flex-shrink-0 w-8 md:w-10">
-                            <div class="app-logo-icon !w-8 !h-8 md:!w-10 md:!h-10"></div>
+            <nav class="w-full h-20 flex items-center justify-between pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
+                <div class="flex items-center" style="gap: 10px; padding-left: 16px;">
+                    <a href="${base}../../landing/landing/index.html" class="flex items-center hover:opacity-90 transition-opacity" style="gap: 10px;" aria-label="Go to landing home">
+                        <div class="flex items-center justify-center flex-shrink-0" style="width: 40px;">
+                            <div class="app-logo-icon !w-10 !h-10"></div>
                         </div>
-                        <div class="hidden sm:block">
-                            <h1 class="app-logo-text text-xl md:text-2xl !text-violet-600">CuratorEdu</h1>
+                        <div>
+                            <h1 class="app-logo-text text-2xl" style="color: #7c3aed;">CuratorEdu</h1>
                             <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.15em] leading-none">Instructor Portal</p>
                         </div>
                     </a>
                 </div>
 
-                <div class="flex items-center gap-2 md:gap-4">
+                <div class="flex items-center gap-4">
                     <button class="p-2 text-slate-500 hover:bg-violet-50 hover:text-primary rounded-full transition-all duration-200 relative" onclick="if(window.toggleCart) window.toggleCart();" aria-label="Open cart" type="button">
                         <span class="material-symbols-outlined">shopping_cart</span>
                         <span class="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-white transition-transform duration-300 cart-badge">0</span>
@@ -130,7 +125,7 @@ const instructorNav = {
                         <span class="material-symbols-outlined">notifications</span>
                         <span data-notif-badge="1" class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                     </button>
-                    <a href="${base}Dashboard/main page/instructor_profile.html" class="h-8 w-8 md:h-10 md:w-10 rounded-full bg-slate-100 overflow-hidden border-2 border-violet-100 hover:border-violet-500 transition-colors">
+                    <a href="${base}Dashboard/main page/instructor_profile.html" class="h-10 w-10 rounded-full bg-slate-100 overflow-hidden border-2 border-violet-100 hover:border-violet-500 transition-colors">
                         <img class="h-full w-full object-cover" src="https://ui-avatars.com/api/?name=Mr+UTS&background=6a1cf6&color=fff" alt="Mr. UTS Profile" />
                     </a>
                 </div>
@@ -139,7 +134,7 @@ const instructorNav = {
 
         if (!hideSidebar) {
             html += `
-            <aside id="instructor-sidebar" class="fixed top-16 lg:top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
+            <aside id="instructor-sidebar" class="fixed top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
                 <nav class="flex-1 overflow-y-auto custom-scrollbar space-y-1 pt-4">
                     <a href="${base}Dashboard/main page/instructor_dashboard.html" class="nav-item group">
                         <div class="nav-icon-wrapper">
@@ -530,14 +525,13 @@ const instructorNav = {
             mainContent.style.paddingRight = '40px';
             mainContent.style.paddingBottom = '32px';
             mainContent.style.paddingLeft = '40px';
-        } else if (window.innerWidth >= 1024) {
+        } else if (window.innerWidth >= 768) {
             mainContent.style.paddingTop = '104px';
             mainContent.style.paddingRight = '32px';
             mainContent.style.paddingBottom = '24px';
             mainContent.style.paddingLeft = '32px';
         } else {
-            // Mobile compact view
-            mainContent.style.paddingTop = '80px';
+            mainContent.style.paddingTop = '96px';
             mainContent.style.paddingRight = '16px';
             mainContent.style.paddingBottom = '20px';
             mainContent.style.paddingLeft = '16px';
@@ -571,51 +565,5 @@ const instructorNav = {
         });
     }
 };
-
-/** Sign out links use href="/api/auth/logout"; ensure cookie clear + navigation to landing (302 alone can fail on some setups). */
-(function wireCuratorPortalLogoutNavigationOnce() {
-    if (typeof window === 'undefined' || window.__curatorPortalLogoutNavWired) return;
-    window.__curatorPortalLogoutNavWired = true;
-    /** Resolved while this script runs; `document.currentScript` is null during later clicks. */
-    let fileLandingHref = '';
-    if (typeof document !== 'undefined' && document.currentScript && document.currentScript.src) {
-        try {
-            const scriptDir = new URL('.', new URL(document.currentScript.src));
-            fileLandingHref = new URL('../../../../landing/landing/index.html', scriptDir).href;
-        } catch (_) {}
-    }
-    function curatorPortalLandingAfterLogoutHref() {
-        if (window.location.protocol !== 'file:') {
-            return new URL('/landing/landing/index.html', window.location.origin).href;
-        }
-        if (fileLandingHref) return fileLandingHref;
-        try {
-            return new URL('../../../../landing/landing/index.html', window.location.href).href;
-        } catch (_) {
-            return '';
-        }
-    }
-    document.addEventListener(
-        'click',
-        (event) => {
-            const t = event.target;
-            if (!(t instanceof Element)) return;
-            const link = t.closest('a[href="/api/auth/logout"]');
-            if (!link) return;
-            event.preventDefault();
-            event.stopPropagation();
-            const nextUrl = curatorPortalLandingAfterLogoutHref();
-            const doNavigate = () => window.location.assign(nextUrl);
-            if (window.location.protocol === 'file:') {
-                doNavigate();
-                return;
-            }
-            fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
-                .catch(() => {})
-                .finally(doNavigate);
-        },
-        true
-    );
-})();
 
 document.addEventListener('DOMContentLoaded', () => instructorNav.init());

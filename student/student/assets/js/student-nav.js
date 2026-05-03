@@ -91,21 +91,16 @@ const studentNav = {
         let html = `
             <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300"></div>
 
-            <nav class="w-full h-16 lg:h-20 flex items-center justify-between pr-4 lg:pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
-                <div class="flex items-center">
-                    <button id="mobile-menu-btn" class="lg:hidden ml-2 sm:ml-4 p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors" aria-label="Toggle Menu">
-                        <span class="material-symbols-outlined">menu</span>
-                    </button>
-                    <a href="${base}../../landing/landing/index.html" class="flex items-center gap-2 lg:gap-3.5 hover:opacity-90 transition-opacity" aria-label="Go to landing home">
-                        <div class="flex items-center justify-center flex-shrink-0 w-12 lg:w-16 ml-1 lg:ml-2">
-                            <div class="app-logo-icon !w-8 !h-8 lg:!w-10 lg:!h-10"></div>
-                        </div>
-                        <div>
-                            <h1 class="app-logo-text text-xl lg:text-2xl !text-violet-600">CuratorEdu</h1>
-                            <p class="hidden sm:block text-[10px] text-slate-600 font-bold uppercase tracking-[0.15em] leading-none">Student Portal</p>
-                        </div>
-                    </a>
-                </div>
+            <nav class="w-full h-20 flex items-center justify-between pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
+                <a href="${base}../../landing/landing/index.html" class="flex items-center hover:opacity-90 transition-opacity" style="gap: 14px;" aria-label="Go to landing home">
+                    <div class="flex items-center justify-center flex-shrink-0" style="width: 64px; margin-left: 8px;">
+                        <div class="app-logo-icon !w-10 !h-10"></div>
+                    </div>
+                    <div>
+                        <h1 class="app-logo-text text-2xl" style="color: #7c3aed;">CuratorEdu</h1>
+                        <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.15em] leading-none">Student Portal</p>
+                    </div>
+                </a>
 
                 <div class="flex items-center gap-4">
                     <button class="p-2 text-slate-500 hover:bg-violet-50 hover:text-primary rounded-full transition-all duration-200 relative" onclick="if(window.toggleCart) window.toggleCart();">
@@ -137,7 +132,7 @@ const studentNav = {
 
         if (!hideSidebar) {
             html += `
-            <aside id="student-sidebar" class="fixed top-16 lg:top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
+            <aside id="student-sidebar" class="fixed top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
                 <nav class="flex-1 overflow-y-auto custom-scrollbar space-y-1 pt-6 px-0">
                     <a href="${base}dashboard/student_dashboard_new.html" class="nav-item group">
                         <div class="nav-icon-wrapper">
@@ -463,7 +458,6 @@ const studentNav = {
         const notificationSeeMore = document.getElementById('nav-notification-see-more');
         const desktopSidebarMiniWidth = '80px';
         const desktopSidebarExpandedWidth = '288px';
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 
         if (hideSidebar && mainContent) {
             mainContent.style.marginLeft = 'auto';
@@ -498,12 +492,6 @@ const studentNav = {
 
         notificationSeeMore?.addEventListener('click', () => {
             window.location.href = `${base}community/community_forum.html`;
-        });
-
-        mobileMenuBtn?.addEventListener('click', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            toggleSidebar();
         });
 
         document.addEventListener('click', (event) => {
@@ -584,19 +572,19 @@ const studentNav = {
         const sidebar = document.getElementById('student-sidebar');
         if (!mainContent) return;
 
-        // Match instructor shell: use Tailwind lg breakpoint (1024px) so padding matches h-16 vs h-20.
+        // Align student shell spacing with admin/instructor rhythm.
         if (window.innerWidth >= 1280) {
             mainContent.style.paddingTop = '112px';
             mainContent.style.paddingRight = '40px';
             mainContent.style.paddingBottom = '32px';
             mainContent.style.paddingLeft = '40px';
-        } else if (window.innerWidth >= 1024) {
+        } else if (window.innerWidth >= 768) {
             mainContent.style.paddingTop = '104px';
             mainContent.style.paddingRight = '32px';
             mainContent.style.paddingBottom = '24px';
             mainContent.style.paddingLeft = '32px';
         } else {
-            mainContent.style.paddingTop = '80px';
+            mainContent.style.paddingTop = '96px';
             mainContent.style.paddingRight = '16px';
             mainContent.style.paddingBottom = '20px';
             mainContent.style.paddingLeft = '16px';
@@ -639,51 +627,5 @@ const studentNav = {
         });
     }
 };
-
-/** Sign out links use href="/api/auth/logout"; ensure cookie clear + navigation to landing (302 alone can fail on some setups). */
-(function wireCuratorPortalLogoutNavigationOnce() {
-    if (typeof window === 'undefined' || window.__curatorPortalLogoutNavWired) return;
-    window.__curatorPortalLogoutNavWired = true;
-    /** Resolved while this script runs; `document.currentScript` is null during later clicks. */
-    let fileLandingHref = '';
-    if (typeof document !== 'undefined' && document.currentScript && document.currentScript.src) {
-        try {
-            const scriptDir = new URL('.', new URL(document.currentScript.src));
-            fileLandingHref = new URL('../../../../landing/landing/index.html', scriptDir).href;
-        } catch (_) {}
-    }
-    function curatorPortalLandingAfterLogoutHref() {
-        if (window.location.protocol !== 'file:') {
-            return new URL('/landing/landing/index.html', window.location.origin).href;
-        }
-        if (fileLandingHref) return fileLandingHref;
-        try {
-            return new URL('../../../../landing/landing/index.html', window.location.href).href;
-        } catch (_) {
-            return '';
-        }
-    }
-    document.addEventListener(
-        'click',
-        (event) => {
-            const t = event.target;
-            if (!(t instanceof Element)) return;
-            const link = t.closest('a[href="/api/auth/logout"]');
-            if (!link) return;
-            event.preventDefault();
-            event.stopPropagation();
-            const nextUrl = curatorPortalLandingAfterLogoutHref();
-            const doNavigate = () => window.location.assign(nextUrl);
-            if (window.location.protocol === 'file:') {
-                doNavigate();
-                return;
-            }
-            fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
-                .catch(() => {})
-                .finally(doNavigate);
-        },
-        true
-    );
-})();
 
 document.addEventListener('DOMContentLoaded', () => studentNav.init());

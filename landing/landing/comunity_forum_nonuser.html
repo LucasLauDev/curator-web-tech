@@ -142,8 +142,8 @@
     </div>
 
   <nav
-    class="fixed top-0 w-full z-50 flex h-16 lg:h-20 justify-between items-center px-4 sm:px-6 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
-    <div class="flex items-center gap-4 md:gap-8 min-w-0">
+    class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
+    <div class="flex items-center gap-8">
       <a href="index.html" class="text-2xl font-black tracking-tight text-violet-600 font-headline hover:opacity-90 transition-opacity">CuratorEdu</a>
       <div class="hidden md:flex gap-6 items-center">
         <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
@@ -165,9 +165,9 @@
   </nav>
 
 
-    <div class="flex min-h-screen pt-16 lg:pt-20">
+    <div class="flex min-h-screen pt-24 md:pt-28">
         <!-- Main Content Area -->
-        <main class="flex-1 p-4 sm:p-6 lg:p-8 pb-12 lg:pb-8 overflow-x-hidden min-w-0 flex gap-8 items-start">
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 pb-32 overflow-x-hidden min-w-0 flex gap-8 items-start">
             <!-- Contextual Sidebar logic can be added here if needed, but for now using standard layout -->
             <!-- Forum Feed -->
             <section class="flex-1 min-w-0 space-y-8">
@@ -908,7 +908,7 @@
     </div>
     </section>
     <!-- Right Sidebar (Trends/Tags) -->
-    <aside class="hidden lg:block w-72 flex-shrink-0 space-y-6 sticky top-20 lg:top-24">
+    <aside class="hidden lg:block w-72 flex-shrink-0 space-y-6 sticky top-24">
         <div class="bg-surface-container-low p-6 rounded-xl">
             <h3 class="font-headline font-bold mb-4 text-sm uppercase tracking-wider text-on-surface-variant">
                 Trending Tags</h3>
@@ -952,6 +952,30 @@
         </div>
     </aside>
     </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-end px-6 pb-6 pt-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl rounded-t-[32px] shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+        <a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2"
+            href="../landing/index.html">
+            <span class="material-symbols-outlined">home</span>
+            <span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Home</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2"
+            href="../placeholders/student-course-discovery.html">
+            <span class="material-symbols-outlined">search</span>
+            <span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-violet-600 text-white rounded-full p-3 mb-2 transform -translate-y-2 shadow-lg shadow-violet-500/40 active:scale-90 transition-transform"
+            href="community_forum.html">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+            <span class="hidden">Social</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2"
+            href="../bookstore/minimal_bookstore.html">
+            <span class="material-symbols-outlined">book</span>
+            <span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Books</span>
+        </a>
+    </nav>
     <!-- Modal Overlay (Hidden by Default/Pure CSS simulation) -->
     <div class="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300 target:opacity-100 target:pointer-events-auto"
         id="create-post">
