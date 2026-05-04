@@ -121,8 +121,8 @@
 
 <body class="bg-background text-on-background font-body selection:bg-primary-container/30">
   <nav
-    class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
-    <div class="flex items-center gap-8">
+    class="fixed top-0 w-full z-50 flex h-16 lg:h-20 justify-between items-center px-4 sm:px-6 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
+    <div class="flex items-center gap-4 md:gap-8 min-w-0">
       <a href="index.html" class="text-2xl font-black tracking-tight text-violet-600 font-headline hover:opacity-90 transition-opacity">CuratorEdu</a>
       <div class="hidden md:flex gap-6 items-center">
         <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
@@ -143,7 +143,7 @@
     </div>
   </nav>
 
-  <main class="pt-20 pb-32">
+  <main class="pt-16 lg:pt-20 pb-16 md:pb-24">
     <section class="relative min-h-screen flex items-center overflow-hidden px-6">
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-tertiary/5"></div>
@@ -159,7 +159,7 @@
               Curator for Gen Z</span>
           </div>
           <h1
-            class="font-headline text-5xl md:text-7xl font-extrabold text-on-surface tracking-tight leading-[1.05] mb-6">
+            class="font-headline text-4xl sm:text-5xl md:text-7xl font-extrabold text-on-surface tracking-tight leading-[1.05] mb-6">
             Level Up Your Life.<br />
             <span class="text-gradient">Study smarter. Learn faster.</span>
           </h1>
@@ -319,7 +319,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-sm space-y-8">
+          <div class="md:col-span-8 bg-surface-container-lowest p-6 sm:p-8 rounded-xl shadow-sm space-y-8">
             <div class="flex items-center gap-4">
               <img alt="Avatar" class="w-12 h-12 rounded-full border-2 border-surface"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnmyAblCePfEPEnBZtfVTaiPOhYprSz18iVHjgSe-y2LYPEpeh19uISarBk2T4JN5f20rz-77L5Flj0oNzXvEPX_udUDbWsbq5QLyPqsD3yxOoW4bS0vYhwPIZmqqILRDMi91UUVFXHyweZjmZeBdRRrGAyhObXHoPBE74eK_0K1n6y2PbJAyMgkR6RNPhrtrrJoh-CSKawZymwwpflsV_y1HLcrw7o4SCSWRzUXrsZwqkKeBuILbziLWq6TXQsA5zJvs5KMsJiXc" />
@@ -432,7 +432,7 @@
           self-mastery.</p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div class="space-y-6 group">
           <div
             class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container shadow-lg transition-transform duration-300 group-hover:-translate-y-4">
@@ -546,23 +546,7 @@
     </div>
   </footer>
 
-  <nav
-    class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-end px-6 pb-6 pt-2 bg-white/70 backdrop-blur-2xl shadow-[0_-8px_30px_rgb(0,0,0,0.04)] rounded-t-[32px]">
-    <a class="flex flex-col items-center justify-center bg-violet-600 text-white rounded-full p-3 mb-2 transform -translate-y-2 shadow-lg shadow-violet-500/40"
-      href="index.html"><span class="material-symbols-outlined">home</span><span
-        class="font-manrope text-[10px] uppercase tracking-wider mt-1">Home</span></a>
-    <a class="flex flex-col items-center justify-center text-slate-400 p-2"
-      href="course_discovery.html"><span class="material-symbols-outlined">search</span><span
-        class="font-manrope text-[10px] uppercase tracking-wider mt-1">Explore</span></a>
-    <a class="flex flex-col items-center justify-center text-slate-400 p-2"
-      href="comunity_forum_nonuser.html"><span class="material-symbols-outlined">group</span><span
-        class="font-manrope text-[10px] uppercase tracking-wider mt-1">Social</span></a>
-    <a class="flex flex-col items-center justify-center text-slate-400 p-2"
-      href="../bookstore/minimal_bookstore.html"><span class="material-symbols-outlined">book</span><span
-        class="font-manrope text-[10px] uppercase tracking-wider mt-1">Books</span></a>
-  </nav>
-
-  <script src="/shared/auth-login-redirect.js"></script>
+  <script src="../../shared/auth-login-redirect.js"></script>
 </body>
 
 </html>

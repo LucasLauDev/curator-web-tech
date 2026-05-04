@@ -48,8 +48,52 @@ const adminNav = {
     init() {
         this.render();
         this.bindEvents();
+        this.applyShellSpacing();
         this.setActiveLink();
         this.hydrateSessionUi();
+    },
+
+    /**
+     * Shell row: first flex+min-h-screen sibling after #nav-mount (Dashboard pages), or body for course editor.
+     */
+    findLayoutRoot() {
+        const mount = document.getElementById('nav-mount');
+        if (!mount) return null;
+        let n = mount.nextElementSibling;
+        while (n && n.tagName === 'SCRIPT') {
+            n = n.nextElementSibling;
+        }
+        if (n && n.classList?.contains('flex') && n.classList.contains('min-h-screen')) {
+            return n;
+        }
+        if (document.documentElement.hasAttribute('data-admin-course-editor')) {
+            return document.body;
+        }
+        return null;
+    },
+
+    /** Match Tailwind lg (1024px) / xl rhythm with h-16 lg:h-20 top bar. */
+    applyShellSpacing() {
+        const layoutRoot = this.findLayoutRoot();
+        const mainContent = document.querySelector('main');
+        const sidebar = document.getElementById('admin-sidebar');
+
+        const topPad =
+            window.innerWidth >= 1280 ? '112px' : window.innerWidth >= 1024 ? '104px' : '80px';
+
+        if (layoutRoot) {
+            layoutRoot.style.paddingTop = topPad;
+        }
+
+        if (sidebar && mainContent) {
+            if (window.innerWidth >= 1024) {
+                mainContent.style.marginLeft = sidebar.classList.contains('sidebar-expanded')
+                    ? '288px'
+                    : '80px';
+            } else {
+                mainContent.style.marginLeft = '0';
+            }
+        }
     },
 
     hydrateSessionUi() {
@@ -99,23 +143,28 @@ const adminNav = {
             <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300"></div>
 
             <!-- Top Navigation Bar -->
-            <nav class="w-full h-20 flex items-center justify-between pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
-                <a href="${root}landing/landing/index.html" class="flex items-center hover:opacity-90 transition-opacity" style="gap: 14px;" aria-label="Go to landing home">
-                    <div class="flex items-center justify-center flex-shrink-0" style="width: 64px; margin-left: 8px;">
-                        <div class="app-logo-icon !w-10 !h-10"></div>
-                    </div>
-                    <div>
-                        <h1 class="app-logo-text text-2xl" style="color: #7c3aed;">CuratorEdu</h1>
-                        <p class="text-[10px] text-slate-600 font-bold uppercase tracking-[0.15em] leading-none">Admin Portal</p>
-                    </div>
-                </a>
+            <nav class="w-full h-16 lg:h-20 flex items-center justify-between pr-4 lg:pr-5 fixed top-0 left-0 z-[80] bg-white border-b border-slate-100 transition-all duration-400">
+                <div class="flex items-center">
+                    <button id="mobile-menu-btn" class="lg:hidden ml-2 sm:ml-4 p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors" aria-label="Toggle Menu">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <a href="${root}landing/landing/index.html" class="flex items-center gap-2 lg:gap-3.5 hover:opacity-90 transition-opacity" aria-label="Go to landing home">
+                        <div class="flex items-center justify-center flex-shrink-0 w-12 lg:w-16 ml-1 lg:ml-2">
+                            <div class="app-logo-icon !w-8 !h-8 lg:!w-10 lg:!h-10"></div>
+                        </div>
+                        <div>
+                            <h1 class="app-logo-text text-xl lg:text-2xl !text-violet-600">CuratorEdu</h1>
+                            <p class="hidden sm:block text-[10px] text-slate-600 font-bold uppercase tracking-[0.15em] leading-none">Admin Portal</p>
+                        </div>
+                    </a>
+                </div>
 
                 <div class="flex items-center gap-4">
                     <button id="admin-notification-btn" aria-label="Open notifications" class="p-2 text-slate-500 hover:bg-violet-50 hover:text-primary rounded-full transition-all duration-200 relative">
                         <span class="material-symbols-outlined">notifications</span>
                         <span id="admin-notification-dot" class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                     </button>
-                    <div id="admin-notification-panel" class="hidden absolute right-20 top-16 w-80 bg-white border border-slate-200 rounded-2xl shadow-2xl p-3 z-[90]">
+                    <div id="admin-notification-panel" class="hidden fixed z-[90] right-3 top-16 w-[min(20rem,calc(100vw-1.5rem))] max-h-[min(24rem,calc(100dvh-5rem))] overflow-y-auto bg-white border border-slate-200 rounded-2xl shadow-2xl p-3 lg:right-6 lg:top-20 lg:w-80">
                         <div class="flex items-center justify-between px-2 pb-2 border-b border-slate-100">
                             <h3 class="text-sm font-extrabold text-slate-800">Notifications</h3>
                             <button id="admin-mark-read" class="text-[11px] font-bold text-violet-600 hover:text-violet-700">Mark all as read</button>
@@ -129,7 +178,7 @@ const adminNav = {
             </nav>
 
             <!-- Sidebar Drawer -->
-            <aside id="admin-sidebar" class="fixed top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
+            <aside id="admin-sidebar" class="fixed top-16 lg:top-20 left-0 bottom-0 w-72 bg-white z-[70] shadow-2xl transition-all duration-300 border-r border-slate-100 flex flex-col sidebar-mini">
                 <nav class="flex-1 overflow-y-auto custom-scrollbar space-y-1 pt-4 px-0">
                     <a href="${base}admin_dashboard.html" class="nav-item group">
                         <div class="nav-icon-wrapper">
@@ -238,6 +287,7 @@ const adminNav = {
         renderNotifications();
 
         const toggleSidebar = (forceClose = false) => {
+            if (!sidebar || !overlay) return;
             if (window.innerWidth < 1024) {
                 const isOpened = sidebar.classList.contains('translate-x-0');
                 if (isOpened || forceClose) {
@@ -263,6 +313,7 @@ const adminNav = {
                     syncDesktopMainOffset(false);
                 }
             }
+            adminNav.applyShellSpacing();
         };
 
         sidebar?.addEventListener('mouseenter', () => {
@@ -284,6 +335,12 @@ const adminNav = {
             notificationPanel?.classList.toggle('hidden');
         });
 
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        mobileMenuBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+
         markReadBtn?.addEventListener('click', () => {
             unreadCount = 0;
             renderNotifications();
@@ -299,7 +356,7 @@ const adminNav = {
             }
         });
 
-        // Initial setup
+        // Initial layout
         if (window.innerWidth >= 1024) {
             sidebar?.classList.add('sidebar-mini');
             sidebar?.classList.remove('-translate-x-full');
@@ -307,12 +364,24 @@ const adminNav = {
         } else {
             sidebar?.classList.add('-translate-x-full');
             if (mainContent) mainContent.style.marginLeft = '0';
-                closeNotifications();
+            closeNotifications();
         }
+
+        window.addEventListener('resize', () => {
+            adminNav.applyShellSpacing();
+            if (!sidebar) return;
+            if (window.innerWidth >= 1024) {
+                syncDesktopMainOffset(sidebar.classList.contains('sidebar-expanded'));
+            } else if (mainContent) {
+                mainContent.style.marginLeft = '0';
+            }
+        });
     },
 
     setActiveLink() {
-        const currentPath = window.location.pathname;
+        let currentPath = window.location.pathname || '';
+        if (currentPath.includes('?')) currentPath = currentPath.split('?')[0];
+        if (currentPath.includes('#')) currentPath = currentPath.split('#')[0];
         const navItems = document.querySelectorAll('.nav-item');
 
         navItems.forEach(item => {
@@ -327,5 +396,51 @@ const adminNav = {
         });
     }
 };
+
+/** Sign out links use href="/api/auth/logout"; ensure cookie clear + navigation to landing (302 alone can fail on some setups). */
+(function wireCuratorPortalLogoutNavigationOnce() {
+    if (typeof window === 'undefined' || window.__curatorPortalLogoutNavWired) return;
+    window.__curatorPortalLogoutNavWired = true;
+    /** Resolved while this script runs; `document.currentScript` is null during later clicks. */
+    let fileLandingHref = '';
+    if (typeof document !== 'undefined' && document.currentScript && document.currentScript.src) {
+        try {
+            const scriptDir = new URL('.', new URL(document.currentScript.src));
+            fileLandingHref = new URL('../../../../landing/landing/index.html', scriptDir).href;
+        } catch (_) {}
+    }
+    function curatorPortalLandingAfterLogoutHref() {
+        if (window.location.protocol !== 'file:') {
+            return new URL('/landing/landing/index.html', window.location.origin).href;
+        }
+        if (fileLandingHref) return fileLandingHref;
+        try {
+            return new URL('../../../../landing/landing/index.html', window.location.href).href;
+        } catch (_) {
+            return '';
+        }
+    }
+    document.addEventListener(
+        'click',
+        (event) => {
+            const t = event.target;
+            if (!(t instanceof Element)) return;
+            const link = t.closest('a[href="/api/auth/logout"]');
+            if (!link) return;
+            event.preventDefault();
+            event.stopPropagation();
+            const nextUrl = curatorPortalLandingAfterLogoutHref();
+            const doNavigate = () => window.location.assign(nextUrl);
+            if (window.location.protocol === 'file:') {
+                doNavigate();
+                return;
+            }
+            fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
+                .catch(() => {})
+                .finally(doNavigate);
+        },
+        true
+    );
+})();
 
 document.addEventListener('DOMContentLoaded', () => adminNav.init());

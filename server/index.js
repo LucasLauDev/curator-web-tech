@@ -72,6 +72,7 @@ const STUDENT_DASHBOARD = '/student/student/dashboard/student_dashboard_new.html
 const INSTRUCTOR_DASHBOARD = '/instructor/instructor/Dashboard/main%20page/instructor_dashboard.html';
 const ADMIN_DASHBOARD = '/admin/admin/Dashboard/admin_dashboard.html';
 const LOGIN_HTML = '/landing/landing/login.html';
+const LANDING_INDEX_HTML = '/landing/landing/index.html';
 
 function dashboardForRole (role) {
   if (role === 'instructor') return INSTRUCTOR_DASHBOARD;
@@ -387,7 +388,7 @@ app.post('/api/auth/register', async (req, res) => {
 
 app.get('/api/auth/logout', (_req, res) => {
   clearSessionCookie(res);
-  return res.redirect(302, LOGIN_HTML);
+  return res.redirect(302, LANDING_INDEX_HTML);
 });
 
 app.post('/api/auth/logout', (_req, res) => {

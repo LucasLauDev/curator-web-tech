@@ -224,9 +224,24 @@ main, nav.fixed.top-0 {
     #instructor-sidebar {
         width: 288px !important;
         transform: translateX(-100%);
+        top: 64px !important; /* Mobile header height */
     }
     #instructor-sidebar.translate-x-0 {
         transform: translateX(0);
+    }
+    /* Show labels on mobile when sidebar is open */
+    #instructor-sidebar.translate-x-0 .nav-label,
+    #instructor-sidebar.translate-x-0 .sidebar-header-text,
+    #instructor-sidebar.translate-x-0 .sidebar-footer-text,
+    #instructor-sidebar.translate-x-0 .section-title {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
+
+    /* Mini mode hides footer until hover — no hover on phones; show Sign Out when drawer is open */
+    #instructor-sidebar.translate-x-0 #instructor-sidebar-footer {
+        display: flex !important;
     }
     main {
         margin-left: 0 !important;

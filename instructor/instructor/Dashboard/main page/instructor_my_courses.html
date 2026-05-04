@@ -105,7 +105,7 @@
 
 <div class="flex min-h-screen">
 <!-- Main Content Area -->
-<main class="flex-1 p-4 sm:p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
+<main class="flex-1 p-4 sm:p-8 lg:p-12 pb-12 overflow-x-hidden min-w-0">
 <header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
     <div>
         <h1 class="text-4xl font-headline font-black text-on-surface tracking-tighter">My Courses</h1>
@@ -143,7 +143,7 @@
     <!-- Course List -->
     <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/5 overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
+            <table class="w-full text-left border-collapse min-w-[800px]">
                 <thead>
                     <tr class="bg-surface-container-low/50 border-b border-outline-variant/10">
                         <th class="px-8 py-5 text-xs font-black text-on-surface-variant uppercase tracking-widest">Course Detail</th>
@@ -200,9 +200,4 @@
 </div>
 </section>
 </main>
-<!-- FAB for Create (Mobile Only or Global contextual) -->
-<button type="button" id="ce-my-courses-create-fab" class="md:hidden fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-2xl shadow-2xl flex items-center justify-center active:scale-90 transition-transform" aria-label="Create new course">
-<span class="material-symbols-outlined text-3xl">add</span>
-</button>
-<!-- Inline click router removed: handled by instructor-interactions.js -->
 </body></html>

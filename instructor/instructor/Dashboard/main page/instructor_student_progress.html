@@ -118,7 +118,7 @@
     <div class="flex min-h-screen">
       <!-- Main Content Area -->
       <main class="flex-1 p-4 sm:p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
-        <header class="flex justify-between items-end mb-10">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
           <div>
             <h1
               class="text-4xl font-headline font-black text-on-surface tracking-tighter mb-2"
@@ -129,45 +129,45 @@
               Manage and monitor the progress of your active learners.
             </p>
           </div>
-          <div class="flex gap-3">
+          <div class="flex flex-wrap gap-3">
             <button
-              class="bg-surface-container-lowest text-slate-700 px-6 py-3 rounded-lg font-label font-bold flex items-center gap-2 shadow-sm border border-slate-200 hover:bg-slate-50 transition-all active:scale-95"
+              class="flex-1 sm:flex-none bg-surface-container-lowest text-slate-700 px-6 py-3 rounded-lg font-label font-bold flex items-center justify-center gap-2 shadow-sm border border-slate-200 hover:bg-slate-50 transition-all active:scale-95"
             >
               <span class="material-symbols-outlined text-xl"
                 >file_download</span
               >
-              Export CSV
+              Export
             </button>
             <button
-              class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-lg font-label font-bold flex items-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-95"
+              class="flex-1 sm:flex-none bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-lg font-label font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-95"
             >
               <span class="material-symbols-outlined text-xl">person_add</span>
-              Enroll Student
+              Enroll
             </button>
           </div>
         </header>
         <!-- Filter Bar -->
         <div
-          class="bg-surface-container-low p-2 rounded-xl mb-6 flex items-center justify-between"
+          class="bg-surface-container-low p-2 rounded-xl mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4"
         >
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 hide-scrollbar">
             <button
-              class="px-6 py-2.5 bg-white text-primary rounded-lg font-label font-bold shadow-sm text-sm"
+              class="whitespace-nowrap px-4 py-2 bg-white text-primary rounded-lg font-label font-bold shadow-sm text-sm"
             >
               All Students
             </button>
             <button
-              class="px-6 py-2.5 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
+              class="whitespace-nowrap px-4 py-2 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
             >
               Active
             </button>
             <button
-              class="px-6 py-2.5 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
+              class="whitespace-nowrap px-4 py-2 text-slate-600 hover:bg-white/50 rounded-lg font-label font-bold text-sm transition-all"
             >
               Completed
             </button>
           </div>
-          <div class="flex items-center gap-3 pr-2">
+          <div class="flex items-center justify-end gap-3 pr-2 border-t md:border-t-0 pt-2 md:pt-0">
             <button
               class="flex items-center gap-2 text-slate-500 font-label font-bold text-sm px-4 py-2 hover:bg-white/50 rounded-lg"
             >
@@ -180,7 +180,8 @@
         <div
           class="bg-surface-container-lowest rounded-xl shadow-xl shadow-slate-200/50 overflow-hidden"
         >
-          <table class="w-full text-left border-collapse">
+          <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse min-w-[1000px]">
             <thead>
               <tr class="bg-slate-50/50">
                 <th
@@ -1219,6 +1220,7 @@
               </tr>
             </tbody>
           </table>
+          </div>
           <!-- Pagination -->
           <div
             class="px-8 py-6 bg-slate-50/50 flex items-center justify-between"

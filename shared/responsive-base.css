@@ -7,6 +7,15 @@
 
 html {
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 img,
@@ -15,10 +24,50 @@ canvas,
 svg {
     max-width: 100%;
     height: auto;
+    display: block;
 }
 
 pre,
 code {
     max-width: 100%;
     overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Common Responsive Helpers */
+.responsive-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+@media (min-width: 640px) { .responsive-container { max-width: 640px; } }
+@media (min-width: 768px) { .responsive-container { max-width: 768px; } }
+@media (min-width: 1024px) { .responsive-container { max-width: 1024px; } }
+@media (min-width: 1280px) { .responsive-container { max-width: 1280px; } }
+
+/* Ensure interactive elements are big enough for touch */
+button, 
+a, 
+input[type="button"], 
+input[type="submit"] {
+    min-height: 44px;
+}
+
+/* Fix for overlapping background blur elements on mobile */
+.blur-layer {
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Utility to hide horizontal scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

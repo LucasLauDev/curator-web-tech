@@ -206,7 +206,16 @@ main, nav.fixed.top-0 {
         transform: translateX(-100%);
     }
     #admin-sidebar.translate-x-0 {
-        transform: translateX(0);
+        transform: translateX(0) !important;
+    }
+
+    #admin-sidebar.translate-x-0 .nav-label,
+    #admin-sidebar.translate-x-0 .sidebar-header-text,
+    #admin-sidebar.translate-x-0 .sidebar-footer-text,
+    #admin-sidebar.translate-x-0 .section-title {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
     }
     main {
         margin-left: 0 !important;
