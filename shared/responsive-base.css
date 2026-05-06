@@ -61,6 +61,12 @@ a:not(.nav-header-avatar) {
     min-height: 44px;
 }
 
+/* Fixed top nav: min-height alone leaves small link text riding low vs. the logo; center labels in the row */
+nav.fixed.top-0 a:not(.nav-header-avatar) {
+    display: inline-flex;
+    align-items: center;
+}
+
 /* Portal navbars: injected by JS — keep a circle even if Tailwind Play CDN skips dynamic classes */
 a.nav-header-avatar {
     display: inline-flex;
