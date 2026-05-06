@@ -3254,20 +3254,20 @@
       ),
     );
     if (!triggers.length) return;
+    const dotBadgeClass =
+      "absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 border-2 border-white pointer-events-none";
     triggers.forEach((btn) => {
       let badge = btn.querySelector("[data-notif-badge]");
       if (!badge) {
         badge = document.createElement("span");
         badge.setAttribute("data-notif-badge", "1");
-        badge.className =
-          "absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-red-500 text-white text-[10px] font-black flex items-center justify-center border-2 border-white";
         btn.appendChild(badge);
       }
+      badge.className = dotBadgeClass;
+      badge.textContent = "";
+      badge.setAttribute("aria-hidden", "true");
       if (unread <= 0) badge.classList.add("hidden");
-      else {
-        badge.classList.remove("hidden");
-        badge.textContent = unread > 9 ? "9+" : String(unread);
-      }
+      else badge.classList.remove("hidden");
     });
   }
 
