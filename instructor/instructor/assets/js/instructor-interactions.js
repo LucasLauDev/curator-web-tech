@@ -3464,7 +3464,7 @@
         : `<div class="w-full h-full bg-gradient-to-br from-slate-200 to-slate-100 flex items-center justify-center text-slate-500 font-black text-xs">Book</div>`;
 
       const row = `
-        <div class="group relative flex gap-6 p-4 rounded-2xl bg-white hover:shadow-xl hover:shadow-slate-200/40 transition-all border border-slate-100" data-cart-item="true" data-store-id="${escHtmlNav(it.id)}" data-title="${encTitle}" data-unit-price="${unit}" data-qty="${qty}">
+        <div class="group relative flex gap-6 p-4 rounded-2xl bg-white hover:shadow-xl hover:shadow-slate-200/40 transition-all border border-slate-100" data-cart-item="true" data-book-id="${escHtmlNav(it.id)}" data-title="${encTitle}" data-unit-price="${unit}" data-qty="${qty}">
           <div class="w-24 h-32 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0 shadow-inner">${imgBlock}</div>
           <div class="flex flex-col justify-between py-1 flex-grow">
             <div>
@@ -3507,7 +3507,9 @@
       if (!actionBtn) return;
       const cartItem = actionBtn.closest('[data-cart-item="true"]');
       if (!cartItem) return;
-      const id = cartItem.getAttribute("data-store-id");
+      const id =
+        cartItem.getAttribute("data-book-id") ||
+        cartItem.getAttribute("data-store-id");
       if (!id) return;
       const action = actionBtn.getAttribute("data-cart-action");
       const currentQty =

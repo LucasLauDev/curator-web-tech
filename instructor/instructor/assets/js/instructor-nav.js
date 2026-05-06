@@ -332,7 +332,8 @@ const instructorNav = {
             if (!cartContainer) return [];
             const out = [];
             cartContainer.querySelectorAll('[data-cart-item="true"]').forEach((el) => {
-                const bookId = el.getAttribute('data-book-id') || '';
+                const bookId =
+                    el.getAttribute('data-book-id') || el.getAttribute('data-store-id') || '';
                 if (!bookId) return;
                 const qty = Number.parseInt(el.dataset.qty || '1', 10) || 1;
                 out.push({ bookId, qty });
