@@ -78,6 +78,13 @@ main, nav.fixed.top-0 {
     pointer-events: auto;
 }
 
+/* Mini rail: keep Sign Out row visible (icon); label still follows hover / pinned-expand like other links */
+#admin-sidebar.sidebar-mini .sidebar-footer-text {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+}
+
 /* Icon Styling */
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';

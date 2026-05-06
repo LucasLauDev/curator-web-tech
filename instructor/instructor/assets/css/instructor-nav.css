@@ -177,12 +177,11 @@ main, nav.fixed.top-0 {
     padding-left: 0;
 }
 
-.sidebar-mini #instructor-sidebar-footer {
-    display: none;
-}
-
-#instructor-sidebar.sidebar-mini:hover #instructor-sidebar-footer {
-    display: flex;
+/* Mini rail: keep Sign Out row visible (icon); label still follows hover / pinned-expand like other links */
+#instructor-sidebar.sidebar-mini .sidebar-footer-text {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
 }
 
 .sidebar-expanded .app-logo-container,
@@ -239,7 +238,7 @@ main, nav.fixed.top-0 {
         pointer-events: auto !important;
     }
 
-    /* Mini mode hides footer until hover — no hover on phones; show Sign Out when drawer is open */
+    /* Ensure footer stacks correctly when the drawer is open on small screens */
     #instructor-sidebar.translate-x-0 #instructor-sidebar-footer {
         display: flex !important;
     }

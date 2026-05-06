@@ -75,6 +75,13 @@ nav.fixed.top-0 {
     pointer-events: auto;
 }
 
+/* Mini rail: keep Sign Out row visible (icon); label still follows hover / pinned-expand like other links */
+#student-sidebar.sidebar-mini .sidebar-footer-text {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+}
+
 .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;

@@ -185,7 +185,7 @@ const studentNav = {
                     </a>
                 </nav>
 
-                <div class="p-4 pt-0 border-t border-slate-100 sidebar-footer-text">
+                <div class="px-0 pb-4 pt-2 border-t border-slate-100 sidebar-footer-text">
                     <a href="/api/auth/logout" class="nav-item text-red-500 hover:bg-red-50 font-bold">
                         <div class="nav-icon-wrapper">
                             <span class="material-symbols-outlined" style="color: inherit;">logout</span>
