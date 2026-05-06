@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CuratorEdu | My Learning</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: {
+                  primary: "#6a1cf6",
+                  "primary-container": "#ac8eff",
+                  background: "#f8fafc",
+                  surface: "#ffffff",
+                  "on-surface": "#0f172a",
+                  "on-surface-variant": "#64748b",
+                  outline: "#e2e8f0"
+                },
+                borderRadius: { DEFAULT: "1rem", lg: "1.5rem", xl: "2rem" },
+                fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Manrope"] }
+              },
+            },
+          }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .profile-dropdown { display: none; }
+        .profile-dropdown.active { display: block; }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-background text-on-surface min-h-screen relative overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+<main class="pt-28 p-4 sm:p-8 pb-32">
+        <div class="max-w-full mx-auto">
+            <header class="mb-12">
+                <h1 class="text-4xl font-headline font-black tracking-tighter text-on-surface mb-2">My Learning</h1>
+                <p class="text-on-surface-variant font-medium">Keep moving forward in your learning path.</p>
+            </header>
+
+            <!-- Learning Snapshot -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white border border-outline rounded-2xl p-5">
+                    <p class="text-[11px] font-label font-black uppercase tracking-widest text-on-surface-variant mb-2">Weekly Progress</p>
+                    <p class="text-3xl font-headline font-black text-on-surface">14.5h</p>
+                    <p class="text-xs text-on-surface-variant mt-1">+3.2h from last week</p>
+                </div>
+                <div class="bg-white border border-outline rounded-2xl p-5">
+                    <p class="text-[11px] font-label font-black uppercase tracking-widest text-on-surface-variant mb-2">Courses Active</p>
+                    <p class="text-3xl font-headline font-black text-on-surface">5</p>
+                    <p class="text-xs text-on-surface-variant mt-1">2 near completion</p>
+                </div>
+                <div class="bg-white border border-outline rounded-2xl p-5">
+                    <p class="text-[11px] font-label font-black uppercase tracking-widest text-on-surface-variant mb-2">Certificates</p>
+                    <p class="text-3xl font-headline font-black text-on-surface">8</p>
+                    <p class="text-xs text-on-surface-variant mt-1">1 earned this month</p>
+                </div>
+            </section>
+
+            <!-- Course Status Tabs -->
+            <div class="flex gap-4 mb-8 border-b border-outline pb-1">
+                <button id="tab-all" type="button" class="px-6 py-3 border-b-2 border-primary text-primary font-bold text-sm transition-all">All Courses</button>
+                <button id="tab-progress" type="button" class="px-6 py-3 text-on-surface-variant font-bold text-sm hover:text-primary transition-all">In Progress</button>
+                <button id="tab-completed" type="button" class="px-6 py-3 text-on-surface-variant font-bold text-sm hover:text-primary transition-all">Completed</button>
+            </div>
+
+            <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div class="course-card bg-white border border-outline rounded-3xl overflow-hidden group hover:shadow-2xl transition-all">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRhptRNn69N2bVuW7-8tAs_qmqGjOCgvxCEETZeXRWRvLtfofqilnvUGYDX5wBtimowOqzmgiagMn5i1C1rOEgMjeNlZ202rmhkXKQOXlUm1CKqbsrb03NZ-ZhU44lKoayA52SIsC-cAeb3SiLbPTikLMr-BlqBF5AUjrY4P-LArRGvqsVbF9IsGBWz-eQDhb3SD4nS8TKsl8khpSi74ubGvJt-7VwJQbK9Uov_byp9a1DdemO6xuzNsZxvb1fPnUsAN_p4YKnGqo" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+                        <div class="course-progress absolute top-4 right-4 bg-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">85% Done</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-headline font-bold text-on-surface mb-2 leading-tight">Modern Typography & Layout Engineering</h3>
+                        <p class="text-xs text-on-surface-variant mb-6 line-clamp-2">Mastering the hierarchy of digital fonts across mobile systems...</p>
+                        <a href="../course/course_detail.html" class="block w-full py-3 bg-primary/5 text-primary text-center font-bold font-label rounded-xl hover:bg-primary hover:text-white transition-all">Resume Learning</a>
+                    </div>
+                </div>
+
+                <div class="course-card bg-white border border-outline rounded-3xl overflow-hidden group hover:shadow-2xl transition-all">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform" alt="Learning dashboard">
+                        <div class="course-progress absolute top-4 right-4 bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">62% Done</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-headline font-bold text-on-surface mb-2 leading-tight">Data Storytelling for Product Teams</h3>
+                        <p class="text-xs text-on-surface-variant mb-6 line-clamp-2">Use metrics, narrative framing, and dashboard strategy to communicate decisions clearly.</p>
+                        <a href="../course/course_detail.html" class="block w-full py-3 bg-primary/5 text-primary text-center font-bold font-label rounded-xl hover:bg-primary hover:text-white transition-all">Continue Module 4</a>
+                    </div>
+                </div>
+
+                <div class="course-card bg-white border border-outline rounded-3xl overflow-hidden group hover:shadow-2xl transition-all">
+                    <div class="h-48 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform" alt="Design systems notes">
+                        <div class="course-progress absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">31% Done</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-headline font-bold text-on-surface mb-2 leading-tight">Design Systems in Practice</h3>
+                        <p class="text-xs text-on-surface-variant mb-6 line-clamp-2">Build reusable components, token architecture, and accessibility-first UI standards.</p>
+                        <a href="../course/course_detail.html" class="block w-full py-3 bg-primary/5 text-primary text-center font-bold font-label rounded-xl hover:bg-primary hover:text-white transition-all">Start Next Lesson</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="courses-empty"
+                 class="hidden mt-10 bg-white border border-outline rounded-3xl p-8 text-center text-on-surface-variant">
+                <p class="font-headline font-black text-xl text-on-surface mb-2">No courses in this view</p>
+                <p class="text-sm font-medium">Try switching tabs to see other courses.</p>
+            </div>
+
+            <section class="mt-10 bg-white border border-outline rounded-3xl p-6 md:p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-headline font-black tracking-tight text-on-surface">Upcoming Deadlines</h2>
+                    <span class="text-xs font-label font-bold uppercase tracking-widest text-on-surface-variant">Next 7 Days</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="rounded-2xl border border-outline p-4 bg-surface">
+                        <p class="text-[11px] font-label font-black uppercase tracking-widest text-red-500 mb-2">Due Tomorrow</p>
+                        <h3 class="font-headline font-bold text-on-surface mb-1">Typography Critique Submission</h3>
+                        <p class="text-xs text-on-surface-variant mb-3">Modern Typography & Layout Engineering</p>
+                        <p class="text-xs font-bold text-on-surface">11:59 PM</p>
+                    </div>
+
+                    <div class="rounded-2xl border border-outline p-4 bg-surface">
+                        <p class="text-[11px] font-label font-black uppercase tracking-widest text-amber-500 mb-2">Due in 3 Days</p>
+                        <h3 class="font-headline font-bold text-on-surface mb-1">Data Story Narrative Draft</h3>
+                        <p class="text-xs text-on-surface-variant mb-3">Data Storytelling for Product Teams</p>
+                        <p class="text-xs font-bold text-on-surface">5:00 PM</p>
+                    </div>
+
+                    <div class="rounded-2xl border border-outline p-4 bg-surface">
+                        <p class="text-[11px] font-label font-black uppercase tracking-widest text-primary mb-2">Due Friday</p>
+                        <h3 class="font-headline font-bold text-on-surface mb-1">Component Library Exercise</h3>
+                        <p class="text-xs text-on-surface-variant mb-3">Design Systems in Practice</p>
+                        <p class="text-xs font-bold text-on-surface">9:00 PM</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+<script src="../assets/js/student-nav.js"></script>
+<script>
+(() => {
+  const grid = document.getElementById('course-grid');
+  const empty = document.getElementById('courses-empty');
+  const btnAll = document.getElementById('tab-all');
+  const btnProgress = document.getElementById('tab-progress');
+  const btnCompleted = document.getElementById('tab-completed');
+  if (!grid || !empty || !btnAll || !btnProgress || !btnCompleted) return;
+
+  const cards = Array.from(grid.querySelectorAll('.course-card'));
+
+  const getProgress = (card) => {
+    const badge = card.querySelector('.course-progress');
+    const txt = (badge?.textContent || '').trim();
+    const m = txt.match(/(\d+)\s*%/);
+    const pct = m ? Number.parseInt(m[1], 10) : 0;
+    return Number.isFinite(pct) ? pct : 0;
+  };
+
+  const setActive = (activeBtn) => {
+    [btnAll, btnProgress, btnCompleted].forEach((b) => {
+      const is = b === activeBtn;
+      b.classList.toggle('border-b-2', is);
+      b.classList.toggle('border-primary', is);
+      b.classList.toggle('text-primary', is);
+      b.classList.toggle('font-bold', true);
+      b.classList.toggle('text-on-surface-variant', !is);
+    });
+  };
+
+  const apply = (mode) => {
+    let shown = 0;
+    cards.forEach((card) => {
+      const pct = getProgress(card);
+      const isCompleted = pct >= 100;
+      const isInProgress = pct > 0 && pct < 100;
+
+      const visible =
+        mode === 'all' ? true :
+        mode === 'progress' ? isInProgress :
+        mode === 'completed' ? isCompleted :
+        true;
+
+      card.classList.toggle('hidden', !visible);
+      if (visible) shown += 1;
+    });
+
+    empty.classList.toggle('hidden', shown !== 0);
+    try { localStorage.setItem('my_learning_tab', mode); } catch {}
+  };
+
+  btnAll.addEventListener('click', () => { setActive(btnAll); apply('all'); });
+  btnProgress.addEventListener('click', () => { setActive(btnProgress); apply('progress'); });
+  btnCompleted.addEventListener('click', () => { setActive(btnCompleted); apply('completed'); });
+
+  let initial = 'all';
+  try { initial = localStorage.getItem('my_learning_tab') || 'all'; } catch {}
+  if (initial === 'progress') { setActive(btnProgress); apply('progress'); }
+  else if (initial === 'completed') { setActive(btnCompleted); apply('completed'); }
+  else { setActive(btnAll); apply('all'); }
+})();
+</script>
+</body>
+</html>

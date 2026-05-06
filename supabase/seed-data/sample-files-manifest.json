@@ -1,0 +1,18 @@
+[
+  {
+    "file": "COMPUTER ORGANIZATION AND ARCHITECTURE.pdf",
+    "publicUrlPattern": "/assets/sample-files/{{uriEncoded}}"
+  },
+  {
+    "file": "understand-creativity.pdf",
+    "publicUrlPattern": "/assets/sample-files/{{uriEncoded}}"
+  },
+  {
+    "file": "Web Technologies.pdf",
+    "publicUrlPattern": "/assets/sample-files/{{uriEncoded}}"
+  },
+  {
+    "file": "Web Technology Old Question 2069.pdf",
+    "publicUrlPattern": "/assets/sample-files/{{uriEncoded}}"
+  }
+]

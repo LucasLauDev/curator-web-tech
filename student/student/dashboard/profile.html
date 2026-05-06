@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CuratorEdu | Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: { primary: "#6a1cf6", background: "#f8fafc", on_surface: "#0f172a", outline: "#e2e8f0" },
+                borderRadius: { DEFAULT: "1rem" },
+                fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"] }
+              }
+            }
+          }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .profile-dropdown { display: none; }
+        .profile-dropdown.active { display: block; }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        /* Equal two-column rows; capped width; tighter vertical rhythm */
+        .profile-field-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem 0.875rem;
+        }
+        @media (min-width: 640px) {
+            .profile-field-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem 0.75rem;
+            }
+        }
+        .profile-field-span-2 {
+            grid-column: 1 / -1;
+        }
+        /* @tailwindcss/forms can reset input padding; slot matches icon rail width */
+        #profile-email {
+            padding-left: 3rem !important;
+        }
+        @media (min-width: 640px) {
+            #profile-email {
+                padding-left: 3.25rem !important;
+            }
+        }
+        /* student-nav.css sets global icon font-size; keep mail glyph visually centered in the field */
+        .profile-email-icon-slot .material-symbols-outlined {
+            font-size: 20px !important;
+            line-height: 1 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-background text-slate-900 min-h-screen relative overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+<main class="student-main-profile w-full min-w-0 pb-16 transition-all duration-300">
+        <div class="mx-auto w-full min-w-0 max-w-4xl space-y-6 md:max-w-5xl md:space-y-7 xl:max-w-6xl">
+            <header class="border-b border-slate-200/80 pb-6 md:pb-7">
+                <div class="min-w-0">
+                    <h1 class="text-4xl md:text-5xl font-black font-headline tracking-tighter text-slate-900 mb-2">Profile</h1>
+                    <p class="text-slate-500 font-medium max-w-3xl">Manage your personal information, saved resources, and account settings.</p>
+                </div>
+            </header>
+
+            <div class="space-y-6 md:space-y-7">
+                    <!-- Profile Section -->
+                    <section class="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6 md:p-8">
+                        <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-violet-500/5 blur-3xl transition-transform duration-700 group-hover:scale-150"></div>
+
+                        <div class="relative z-10 w-full min-w-0">
+                        <div class="mb-4 flex w-full min-w-0 flex-col gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-x-4 sm:gap-y-2">
+                            <h2 class="flex min-w-0 flex-1 items-center gap-2 text-xl font-black font-headline text-slate-900 sm:flex-none">
+                                <span class="material-symbols-outlined shrink-0 text-primary">badge</span>
+                                <span>Personal Information</span>
+                            </h2>
+                            <button type="button" id="profile-save-all" class="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-[#5d00e3] hover:shadow-xl sm:ml-4 sm:w-auto sm:py-3 sm:pl-6 sm:pr-6">
+                                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">save</span>
+                                Save All Changes
+                            </button>
+                        </div>
+
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-6">
+                            <!-- Avatar -->
+                            <div class="mx-auto flex shrink-0 flex-col items-center gap-3 lg:mx-0 lg:w-40">
+                                <div class="group/avatar relative h-32 w-32 cursor-pointer overflow-hidden rounded-full border-4 border-white bg-slate-100 shadow-lg">
+                                    <img id="profile-avatar" src="https://ui-avatars.com/api/?name=Alex+Rivers&background=6a1cf6&color=fff&size=256" alt="Profile" class="h-full w-full object-cover">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity group-hover/avatar:opacity-100">
+                                        <span class="material-symbols-outlined mb-1 text-white">photo_camera</span>
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-white">Change</span>
+                                    </div>
+                                </div>
+                                <button type="button" class="text-xs font-bold uppercase tracking-wider text-slate-500 transition-colors hover:text-red-500">Remove Photo</button>
+                            </div>
+
+                            <!-- Form (narrower field cells than full card width) -->
+                            <div class="min-w-0 flex-1">
+                                <div class="mx-auto w-full max-w-sm sm:max-w-md md:max-w-lg lg:mx-0 lg:max-w-xl xl:max-w-2xl">
+                                <div class="profile-field-grid">
+                                <div class="min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-first">First Name</label>
+                                    <input id="profile-first" type="text" value="Alex" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                </div>
+                                <div class="min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-last">Last Name</label>
+                                    <input id="profile-last" type="text" value="Rivers" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                </div>
+                                <div class="profile-field-span-2 min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-email">Email Address</label>
+                                    <div class="relative">
+                                        <div class="profile-email-icon-slot pointer-events-none absolute inset-y-0 left-0 z-10 flex w-12 items-center justify-center sm:w-[3.25rem]" aria-hidden="true">
+                                            <span class="material-symbols-outlined text-slate-400">mail</span>
+                                        </div>
+                                        <input id="profile-email" type="email" value="alex.rivers@vibe.academy" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 py-3.5 pr-4 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                    </div>
+                                </div>
+                                <div class="min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-sid">Student ID</label>
+                                    <input id="profile-sid" type="text" value="S20241234" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                </div>
+                                <div class="min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-year">Year of Study</label>
+                                    <select id="profile-year" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                        <option value="1">Year 1</option><option value="2" selected>Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option>
+                                    </select>
+                                </div>
+                                <div class="profile-field-span-2 min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-faculty">Faculty / Department</label>
+                                    <select id="profile-faculty" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                        <option value="computing">School of Computing & Creative Media</option>
+                                        <option value="engineering">School of Engineering and Technology</option>
+                                        <option value="business">School of Business and Management</option>
+                                        <option value="built">School of Built Environment</option>
+                                    </select>
+                                </div>
+                                <div class="profile-field-span-2 min-w-0 space-y-1.5">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="profile-bio">Bio / Headline</label>
+                                    <input id="profile-bio" type="text" placeholder="e.g. UX Designer @ TechCorp" value="Digital Architect & Creator" class="w-full min-w-0 max-w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+
+                    <!-- Password -->
+                    <section class="min-w-0 max-w-xl rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5">
+                        <h3 class="mb-3 flex items-center gap-2 text-xl font-black font-headline text-slate-900">
+                            <span class="material-symbols-outlined text-primary">security</span>
+                            Security
+                        </h3>
+                        <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-3">
+                            <div class="min-w-0">
+                                <p class="font-bold text-sm text-slate-800">Password</p>
+                                <p id="password-last-changed" class="mt-0.5 text-xs text-slate-500">Update regularly for account safety</p>
+                            </div>
+                            <button id="btn-open-password-modal" type="button" class="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold transition-colors hover:border-primary hover:text-primary">Update</button>
+                        </div>
+                    </section>
+
+                    <!-- Sign out -->
+                    <section class="min-w-0 max-w-xl rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5" aria-label="Sign out">
+                        <h3 class="mb-3 flex items-center gap-2 text-xl font-black font-headline text-slate-900">
+                            <span class="material-symbols-outlined text-slate-500">logout</span>
+                            Session
+                        </h3>
+                        <p class="mb-4 text-xs text-slate-500 font-medium">You will need to sign in again to access your dashboard.</p>
+                        <a href="/api/auth/logout"
+                           class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-bold text-red-700 transition-colors hover:bg-red-100">
+                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">logout</span>
+                            Log out
+                        </a>
+                    </section>
+
+
+                    <!-- eBook Purchase History -->
+                    <section class="rounded-3xl border border-slate-100 bg-white p-4 shadow-sm sm:p-5 md:p-6">
+                        <h3 class="mb-3 flex items-center gap-2 text-xl font-black font-headline text-slate-900">
+                            <span class="material-symbols-outlined text-primary">receipt_long</span>
+                            eBook Purchase History
+                        </h3>
+                        <div class="overflow-x-auto rounded-xl border border-slate-100">
+                            <table class="w-full border-collapse text-sm md:table-auto md:min-w-full">
+                                <thead>
+                                    <tr class="border-b border-slate-100 bg-slate-50/80">
+                                        <th class="whitespace-nowrap px-2 py-2 text-left text-[10px] font-bold uppercase tracking-widest text-slate-400 md:w-[7.5rem]">Date</th>
+                                        <th class="px-1 py-2 text-left text-[10px] font-bold uppercase tracking-widest text-slate-400">Book</th>
+                                        <th class="whitespace-nowrap px-2 py-2 text-right text-[10px] font-bold uppercase tracking-widest text-slate-400 md:w-[6.25rem]">Amount</th>
+                                        <th class="whitespace-nowrap px-2 py-2 text-right text-[10px] font-bold uppercase tracking-widest text-slate-400 md:w-[4.5rem]">Receipt</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="profile-bookstore-history-tbody" class="divide-y divide-slate-100 bg-white">
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Change password modal (rules aligned with landing registration + login demo) -->
+    <div id="password-change-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4" aria-hidden="true">
+        <div id="password-modal-backdrop" class="absolute inset-0 bg-slate-900/45 backdrop-blur-[2px]"></div>
+        <div role="dialog" aria-modal="true" aria-labelledby="password-modal-title" class="relative z-10 w-full max-w-md rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl">
+            <div class="mb-4 flex items-start justify-between gap-3">
+                <div>
+                    <h2 id="password-modal-title" class="text-lg font-black font-headline text-slate-900">Update password</h2>
+                    <p class="mt-1 text-xs text-slate-500">New password: at least 8 characters; confirmation must match (same as registration). Current password must match your login password.</p>
+                </div>
+                <button id="password-modal-close" type="button" class="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700" aria-label="Close">
+                    <span class="material-symbols-outlined text-[22px] leading-none">close</span>
+                </button>
+            </div>
+            <p id="password-modal-global-msg" class="mb-3 hidden rounded-xl px-3 py-2 text-sm font-medium" role="alert"></p>
+            <form id="password-change-form" class="space-y-4" novalidate>
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="pw-current">Current password</label>
+                    <input id="pw-current" name="current" type="password" autocomplete="current-password" class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                    <p id="pw-current-error" class="hidden text-xs font-medium text-red-600"></p>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="pw-new">New password</label>
+                    <input id="pw-new" name="new" type="password" autocomplete="new-password" placeholder="Min. 8 characters" class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                    <p id="pw-new-error" class="hidden text-xs font-medium text-red-600"></p>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold uppercase tracking-widest text-slate-400" for="pw-confirm">Confirm new password</label>
+                    <input id="pw-confirm" name="confirm" type="password" autocomplete="new-password" class="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-3.5 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10">
+                    <p id="pw-confirm-error" class="hidden text-xs font-medium text-red-600"></p>
+                </div>
+                <div class="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+                    <button id="password-modal-cancel" type="button" class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50">Cancel</button>
+                    <button id="password-modal-save" type="submit" class="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/25 transition-colors hover:bg-[#5d00e3]">Save password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function qs(id) {
+            return document.getElementById(id);
+        }
+
+        async function loadProfile() {
+            if (typeof window.fetch === 'undefined' || window.location.protocol === 'file:') return;
+            try {
+                var r = await fetch('/api/auth/session', { credentials: 'same-origin' });
+                if (!r.ok) return;
+                var data = await r.json();
+                var p = data.profile;
+                var u = data.user;
+                if (!p) return;
+                if (qs('profile-first')) qs('profile-first').value = p.first_name || '';
+                if (qs('profile-last')) qs('profile-last').value = p.last_name || '';
+                if (qs('profile-email') && u && u.email) qs('profile-email').value = u.email;
+                if (qs('profile-sid')) qs('profile-sid').value = p.student_id || '';
+                var y = qs('profile-year');
+                if (y && p.year_of_study) y.value = String(p.year_of_study);
+                var fac = qs('profile-faculty');
+                if (fac && p.faculty) fac.value = p.faculty;
+                if (qs('profile-bio')) qs('profile-bio').value = p.bio || '';
+            } catch (e) {}
+        }
+
+        function escBookstoreCell(s) {
+            return String(s || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        async function loadBookstorePurchaseHistory() {
+            var tb = qs('profile-bookstore-history-tbody');
+            if (!tb || typeof window.fetch === 'undefined' || window.location.protocol === 'file:') return;
+            try {
+                var r = await fetch('/api/bookstore/purchase-history', { credentials: 'same-origin' });
+                if (!r.ok) return;
+                var data = await r.json();
+                var list = data.purchases;
+                if (!Array.isArray(list) || !list.length) {
+                    tb.innerHTML =
+                        '<tr><td colspan="4" class="px-2 py-4 text-center text-sm text-slate-500">No eBook purchases yet.</td></tr>';
+                    return;
+                }
+                tb.innerHTML = list
+                    .map(function (p) {
+                        var d = p.purchased_at ? new Date(p.purchased_at) : null;
+                        var dateStr =
+                            d && !isNaN(d.getTime())
+                                ? d.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' })
+                                : '';
+                        var amt = Number(p.amount_rm);
+                        var price = Number.isFinite(amt) ? 'RM ' + amt.toFixed(2) : '';
+                        var title = p.title || '';
+                        var href =
+                            '../bookstore/payment_successful.html' +
+                            (p.id ? '?ref=' + encodeURIComponent(p.id) : '');
+                        return (
+                            '<tr>' +
+                            '<td class="whitespace-nowrap px-2 py-2 text-slate-500">' +
+                            escBookstoreCell(dateStr) +
+                            '</td>' +
+                            '<td class="max-w-[10rem] px-1 py-2 font-medium text-slate-800 sm:max-w-[14rem] md:max-w-[18rem]"><span class="block truncate" title="' +
+                            escBookstoreCell(title) +
+                            '">' +
+                            escBookstoreCell(title) +
+                            '</span></td>' +
+                            '<td class="whitespace-nowrap px-2 py-2 text-right font-bold tabular-nums text-slate-800">' +
+                            escBookstoreCell(price) +
+                            '</td>' +
+                            '<td class="whitespace-nowrap px-2 py-2 text-right">' +
+                            '<a href="' +
+                            escBookstoreCell(href) +
+                            '" class="text-xs font-bold text-primary hover:underline">View</a>' +
+                            '</td>' +
+                            '</tr>'
+                        );
+                    })
+                    .join('');
+            } catch (e) {}
+        }
+
+        loadProfile();
+        loadBookstorePurchaseHistory();
+
+        var saveBtn = qs('profile-save-all');
+        saveBtn &&
+            saveBtn.addEventListener('click', async function () {
+                if (window.location.protocol === 'file:') {
+                    alert('Open this site via npm run start (localhost) for profile sync.');
+                    return;
+                }
+                var body = {
+                    first_name: (qs('profile-first') || {}).value,
+                    last_name: (qs('profile-last') || {}).value,
+                    student_id: (qs('profile-sid') || {}).value,
+                    year_of_study: Number((qs('profile-year') || {}).value || 0),
+                    faculty: (qs('profile-faculty') || {}).value,
+                    bio: (qs('profile-bio') || {}).value
+                };
+                try {
+                    var res = await fetch('/api/profile', {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify(body)
+                    });
+                    var payload = await res.json().catch(function () {
+                        return {};
+                    });
+                    if (!res.ok) {
+                        alert(payload.error || 'Could not save profile.');
+                        return;
+                    }
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Saved!';
+                    setTimeout(function () {
+                        saveBtn.innerHTML =
+                            '<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: &apos;FILL&apos; 1;">save</span> Save All Changes';
+                    }, 1600);
+                } catch (_) {
+                    alert('Cannot reach profile API.');
+                }
+            });
+
+        function validateNewPassword(v) {
+            return v.length >= 8 ? '' : 'Password must be at least 8 characters.';
+        }
+        function validateConfirm(newVal, confirmVal) {
+            return confirmVal === newVal ? '' : 'Passwords do not match.';
+        }
+
+        var modal = document.getElementById('password-change-modal');
+        var backdrop = document.getElementById('password-modal-backdrop');
+        var openBtn = document.getElementById('btn-open-password-modal');
+        var closeBtn = document.getElementById('password-modal-close');
+        var cancelBtn = document.getElementById('password-modal-cancel');
+        var pwForm = document.getElementById('password-change-form');
+        var globalMsg = document.getElementById('password-modal-global-msg');
+        var lastChangedEl = document.getElementById('password-last-changed');
+
+        var elCurrent = document.getElementById('pw-current');
+        var elNew = document.getElementById('pw-new');
+        var elConfirm = document.getElementById('pw-confirm');
+        var errCurrent = document.getElementById('pw-current-error');
+        var errNew = document.getElementById('pw-new-error');
+        var errConfirm = document.getElementById('pw-confirm-error');
+
+        function showFieldError(el, errEl, msg) {
+            if (msg) {
+                errEl.textContent = msg;
+                errEl.classList.remove('hidden');
+                el.classList.add('ring-2', 'ring-red-500/20', 'border-red-300');
+            } else {
+                errEl.classList.add('hidden');
+                errEl.textContent = '';
+                el.classList.remove('ring-2', 'ring-red-500/20', 'border-red-300');
+            }
+        }
+
+        function clearAllErrors() {
+            showFieldError(elCurrent, errCurrent, '');
+            showFieldError(elNew, errNew, '');
+            showFieldError(elConfirm, errConfirm, '');
+            globalMsg.classList.add('hidden');
+            globalMsg.textContent = '';
+        }
+
+        function hideGlobalMsg() {
+            globalMsg.classList.add('hidden');
+            globalMsg.textContent = '';
+            globalMsg.classList.remove(
+                'bg-emerald-50',
+                'text-emerald-800',
+                'border',
+                'border-emerald-100',
+                'bg-red-50',
+                'text-red-700',
+                'border-red-100'
+            );
+        }
+
+        function showGlobalSuccess(text) {
+            hideGlobalMsg();
+            globalMsg.textContent = text;
+            globalMsg.className =
+                'mb-3 rounded-xl border border-emerald-100 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-800';
+            globalMsg.classList.remove('hidden');
+        }
+
+        function showGlobalError(text) {
+            hideGlobalMsg();
+            globalMsg.textContent = text;
+            globalMsg.className =
+                'mb-3 rounded-xl border border-red-100 bg-red-50 px-3 py-2 text-sm font-medium text-red-700';
+            globalMsg.classList.remove('hidden');
+        }
+
+        function openModal() {
+            clearAllErrors();
+            elCurrent.value = '';
+            elNew.value = '';
+            elConfirm.value = '';
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('overflow-hidden');
+            setTimeout(function () {
+                elCurrent.focus();
+            }, 50);
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('overflow-hidden');
+            clearAllErrors();
+        }
+
+        function validateAllClient() {
+            var c = elCurrent.value;
+            var n = elNew.value;
+            var cf = elConfirm.value;
+            var ok = true;
+
+            hideGlobalMsg();
+
+            var eCur = '';
+            if (!c.trim()) {
+                eCur = 'Please enter your current password.';
+                ok = false;
+            }
+            showFieldError(elCurrent, errCurrent, eCur);
+
+            var eNew = validateNewPassword(n);
+            if (eNew) ok = false;
+            showFieldError(elNew, errNew, eNew);
+
+            var eCf = validateConfirm(n, cf);
+            if (eCf) ok = false;
+            showFieldError(elConfirm, errConfirm, eCf);
+
+            if (ok && n === c) {
+                showFieldError(elNew, errNew, 'New password must be different from your current password.');
+                ok = false;
+            }
+
+            return ok;
+        }
+
+        openBtn && openBtn.addEventListener('click', openModal);
+        closeBtn && closeBtn.addEventListener('click', closeModal);
+        cancelBtn && cancelBtn.addEventListener('click', closeModal);
+        backdrop && backdrop.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        [elCurrent, elNew, elConfirm].forEach(function (el) {
+            el.addEventListener('input', function () {
+                var id = el.id;
+                if (id === 'pw-current') showFieldError(elCurrent, errCurrent, '');
+                if (id === 'pw-new') showFieldError(elNew, errNew, '');
+                if (id === 'pw-confirm') showFieldError(elConfirm, errConfirm, '');
+                hideGlobalMsg();
+            });
+        });
+
+        pwForm &&
+            pwForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                if (!validateAllClient()) return;
+                if (window.location.protocol === 'file:') {
+                    showGlobalError('Use npm run start (localhost) to change your password.');
+                    return;
+                }
+                try {
+                    var res = await fetch('/api/auth/password', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'same-origin',
+                        body: JSON.stringify({
+                            currentPassword: elCurrent.value,
+                            newPassword: elNew.value
+                        })
+                    });
+                    var payload = await res.json().catch(function () {
+                        return {};
+                    });
+                    if (!res.ok) {
+                        showGlobalError(payload.error || 'Could not update password.');
+                        return;
+                    }
+                    try {
+                        sessionStorage.setItem('studentProfilePasswordUpdatedAt', String(Date.now()));
+                    } catch (err) {}
+                    showGlobalSuccess('Password updated.');
+                    if (lastChangedEl) lastChangedEl.textContent = 'Last changed just now';
+                    setTimeout(function () {
+                        closeModal();
+                    }, 1200);
+                } catch (_) {
+                    showGlobalError('Network error.');
+                }
+            });
+    });
+    </script>
+<script src="../assets/js/student-nav.js"></script>
+</body>
+</html>

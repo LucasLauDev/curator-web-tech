@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu - Bookstore Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "surface-variant": "#dadddf", "on-tertiary-fixed-variant": "#6f005c",
+                    "secondary-dim": "#00576c", "on-surface": "#2c2f30",
+                    "on-secondary-fixed-variant": "#00586d", "secondary-fixed-dim": "#37d4ff",
+                    "on-tertiary-container": "#5f004f", "surface-container-low": "#eff1f2",
+                    "surface-container-high": "#e0e3e4", "secondary-container": "#80deff",
+                    "primary-fixed-dim": "#a07dff", "on-error": "#ffefef",
+                    "surface-container-highest": "#dadddf", "on-tertiary-fixed": "#34002a",
+                    "tertiary-fixed-dim": "#ff6ad8", "primary-container": "#ac8eff",
+                    "tertiary-container": "#ff87db", "on-tertiary": "#ffeef5",
+                    "surface-container": "#e6e8ea", "outline": "#757778",
+                    "error-dim": "#a70138", "on-secondary-fixed": "#003a48",
+                    "primary": "#6a1cf6", "tertiary-fixed": "#ff87db",
+                    "on-primary": "#f7f0ff", "inverse-surface": "#0c0f10",
+                    "surface-bright": "#f5f6f7", "on-primary-fixed-variant": "#350088",
+                    "error-container": "#f74b6d", "on-secondary-container": "#004e61",
+                    "surface-container-lowest": "#ffffff", "on-primary-container": "#2a0070",
+                    "surface": "#f5f6f7", "on-surface-variant": "#595c5d",
+                    "primary-dim": "#5d00e3", "on-background": "#2c2f30",
+                    "primary-fixed": "#ac8eff", "on-error-container": "#510017",
+                    "on-primary-fixed": "#000000", "tertiary-dim": "#96007d",
+                    "on-secondary": "#e2f6ff", "background": "#f5f6f7",
+                    "inverse-primary": "#9d79ff", "tertiary": "#aa008e",
+                    "secondary-fixed": "#80deff", "outline-variant": "#abadae",
+                    "error": "#b41340", "surface-dim": "#d1d5d7",
+                    "secondary": "#00647b", "surface-tint": "#6a1cf6",
+                    "inverse-on-surface": "#9b9d9e"
+                },
+                "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Manrope"] }
+            }
+        }
+    }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .label-text { font-family: 'Manrope', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e3e4; border-radius: 10px; }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<div class="flex min-h-screen pt-20">
+<main class="flex-1 px-4 sm:px-6 lg:px-10 pt-8 pb-24 md:pb-8 overflow-x-hidden min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+            <h2 class="text-4xl font-extrabold tracking-tighter text-on-surface">Bookstore Management</h2>
+            <p class="text-slate-500 mt-2 font-body">Review lecturer recommendations and manage the global eBook catalogue.</p>
+        </div>
+        <div class="flex gap-3">
+            <button id="export-csv-btn" type="button" class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 text-on-surface rounded-full font-label text-sm font-bold hover:bg-surface-container transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-sm">download</span>
+                Export CSV
+            </button>
+            <button id="add-title-btn" type="button" class="flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary rounded-full font-label text-sm font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+                <span class="material-symbols-outlined text-sm">add</span>
+                Add eBook
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Bento -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+            <div class="h-10 w-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-4">
+                <span class="material-symbols-outlined">menu_book</span>
+            </div>
+            <div id="stat-total-books" class="text-3xl font-black tracking-tight">–</div>
+            <div class="text-slate-400 text-xs label-text font-bold mt-1 uppercase tracking-widest">Total eBooks</div>
+        </div>
+        <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+            <div class="h-10 w-10 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-4">
+                <span class="material-symbols-outlined">pending_actions</span>
+            </div>
+            <div id="stat-draft-books" class="text-3xl font-black tracking-tight">–</div>
+            <div class="text-slate-400 text-xs label-text font-bold mt-1 uppercase tracking-widest">Unpublished</div>
+        </div>
+        <div class="bg-tertiary-container/10 p-6 rounded-xl shadow-sm md:col-span-1 col-span-2 md:col-auto">
+            <div class="h-10 w-10 bg-tertiary/10 rounded-xl flex items-center justify-center text-tertiary mb-4">
+                <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div id="stat-mtd-revenue" class="text-3xl font-black tracking-tight">–</div>
+            <div class="text-tertiary-dim text-xs label-text font-bold mt-1 uppercase tracking-widest">eBook sales (UTC month)</div>
+        </div>
+    </div>
+
+    <!-- Two Panel Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Approval Queue (Left) -->
+        <div class="lg:col-span-4 space-y-6">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-black font-headline text-on-surface">Approval Queue</h3>
+                <span id="approval-queue-badge" class="bg-surface-container text-on-surface-variant text-xs font-bold px-2.5 py-1 rounded-full label-text">—</span>
+            </div>
+            
+            <div class="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar text-on-surface-variant text-sm font-medium px-1" id="approval-queue-list">
+                <p>Loading…</p>
+            </div>
+        </div>
+
+        <!-- Book Catalogue (Right) -->
+        <div class="lg:col-span-8">
+            <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-surface-container overflow-hidden">
+                <!-- Filter Tabs + Controls -->
+                <div class="p-6 border-b border-surface-container flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-surface-container-low/30">
+                    <div class="flex gap-2 overflow-x-auto">
+                        <button type="button" class="filter-tab flex-none px-5 py-2 bg-primary text-on-primary rounded-full font-bold text-xs label-text shadow-md shadow-primary/20" data-filter="all">All eBooks</button>
+                        <button type="button" class="filter-tab flex-none px-5 py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant/20 rounded-full font-bold text-xs label-text hover:bg-surface-container transition-colors" data-filter="published">Published</button>
+                        <button type="button" class="filter-tab flex-none px-5 py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant/20 rounded-full font-bold text-xs label-text hover:bg-surface-container transition-colors" data-filter="unpublished">Unpublished</button>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full w-56">
+                            <span class="material-symbols-outlined text-slate-400 text-lg mr-2">search</span>
+                            <input id="inventory-search" type="text" placeholder="Search catalogue..."
+                                class="w-full bg-transparent border-none outline-none text-xs font-bold focus:ring-0 focus:outline-none focus:ring-0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-slate-400 label-text text-[10px] uppercase tracking-widest border-b border-surface-container bg-surface-container-low/10">
+                                <th class="px-8 py-5 font-bold">Book Details</th>
+                                <th class="px-6 py-5 font-bold">Status</th>
+                                <th class="px-6 py-5 font-bold">Price</th>
+                                <th class="px-6 py-5 font-bold">Sales</th>
+                                <th class="px-8 py-5 font-bold text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body" class="divide-y divide-surface-container">
+                            <!-- JS populated -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="p-6 border-t border-surface-container flex justify-between items-center">
+                    <div class="text-xs text-slate-400" id="inventory-count">
+                        Loading…
+                    </div>
+                    <div class="text-xs text-slate-400 font-bold">Use search and tabs to narrow the list</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</div>
+
+<!-- Add eBook Modal (Simplified) -->
+<div id="add-ebook-panel" class="hidden fixed inset-0 z-[150] bg-slate-900/30 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-xl font-black font-headline text-on-surface">Add New eBook</h3>
+            <button type="button" id="close-add-ebook" class="p-2 rounded-full hover:bg-surface-container-low"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+                <input id="new-title" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Book Title" />
+                <input id="new-author" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Author" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="new-sku" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="SKU (optional)" />
+                <input id="new-sort" type="number" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Sort order" value="0" />
+            </div>
+            <textarea id="new-desc" class="w-full px-4 py-3 rounded-xl border border-surface-container h-24" placeholder="Brief Description"></textarea>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="new-price" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Price (number, e.g. 29.99)" />
+                <select id="new-category" class="w-full px-4 py-3 rounded-xl border border-surface-container">
+                    <option value="business">Business</option>
+                    <option value="design" selected>Design</option>
+                    <option value="tech">Tech</option>
+                    <option value="self-help">Self-help</option>
+                    <option value="philosophy">Philosophy</option>
+                </select>
+            </div>
+            <input id="new-image-url" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Cover image URL" />
+            <input id="new-badge" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Badge (optional, e.g. Bestseller)" />
+        </div>
+        <div class="flex gap-3 pt-2">
+            <button type="button" id="cancel-add-ebook" class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-bold">Cancel</button>
+            <button type="button" id="create-add-ebook" class="flex-1 px-4 py-3 rounded-xl bg-primary text-white font-bold">Add to Catalogue</button>
+        </div>
+    </div>
+</div>
+
+<!-- Edit eBook Modal -->
+<div id="edit-ebook-panel" class="hidden fixed inset-0 z-[150] bg-slate-900/30 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-xl font-black font-headline text-on-surface">Edit eBook</h3>
+            <button type="button" id="close-edit-ebook" class="p-2 rounded-full hover:bg-surface-container-low"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+                <input id="edit-title" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Book Title" />
+                <input id="edit-author" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Author" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="edit-sku" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="SKU (optional)" />
+                <input id="edit-sort" type="number" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Sort order" />
+            </div>
+            <textarea id="edit-desc" class="w-full px-4 py-3 rounded-xl border border-surface-container h-24" placeholder="Brief Description"></textarea>
+            <div class="grid grid-cols-2 gap-3">
+                <input id="edit-price" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Price (number)" />
+                <select id="edit-category" class="w-full px-4 py-3 rounded-xl border border-surface-container">
+                    <option value="business">Business</option>
+                    <option value="design">Design</option>
+                    <option value="tech">Tech</option>
+                    <option value="self-help">Self-help</option>
+                    <option value="philosophy">Philosophy</option>
+                </select>
+            </div>
+            <input id="edit-image-url" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Cover image URL" />
+            <input id="edit-badge" class="w-full px-4 py-3 rounded-xl border border-surface-container" placeholder="Badge (optional)" />
+            <div class="pt-4 border-t border-surface-container">
+                <button id="unpublish-btn" class="w-full px-4 py-3 rounded-xl bg-amber-100 text-amber-700 font-bold text-sm hover:bg-amber-200 transition-colors">Unpublish eBook</button>
+            </div>
+        </div>
+        <div class="flex gap-3 pt-2">
+            <button type="button" id="cancel-edit-ebook" class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low text-on-surface font-bold">Cancel</button>
+            <button type="button" id="save-edit-ebook" class="flex-1 px-4 py-3 rounded-xl bg-primary text-white font-bold">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- View Details Modal -->
+<div id="view-details-modal" class="hidden fixed inset-0 z-[160] bg-slate-900/40 backdrop-blur-sm items-center justify-center p-4">
+    <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-8 space-y-6">
+        <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-black font-headline text-on-surface">Book Details</h3>
+            <button id="close-view-details" class="p-2 rounded-full hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        
+        <div class="space-y-5">
+            <div class="flex gap-6">
+                <div id="view-detail-cover" class="w-24 h-32 rounded-2xl bg-slate-200 overflow-hidden shadow-md flex-shrink-0">
+                    <img class="w-full h-full object-cover" src="" alt="Book cover" />
+                </div>
+                <div class="flex-1">
+                    <h4 id="view-detail-title" class="text-xl font-black text-on-surface mb-2"></h4>
+                    <p id="view-detail-sku" class="text-sm text-slate-400 font-bold uppercase tracking-widest mb-4"></p>
+                    <div class="flex flex-col gap-3">
+                        <div class="px-3 py-2 bg-surface-container-low rounded-xl">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider font-bold">Status</p>
+                            <p id="view-detail-status" class="text-sm font-bold text-on-surface mt-1"></p>
+                        </div>
+                        <div class="px-3 py-2 bg-surface-container-low rounded-xl">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider font-bold">Price</p>
+                            <p id="view-detail-price" class="text-lg font-black text-primary mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-surface-container">
+                <p class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-2">Sales Performance</p>
+                <div class="flex items-center gap-4">
+                    <div class="flex-1">
+                        <p id="view-detail-sales" class="text-2xl font-black text-on-surface"></p>
+                        <p class="text-xs text-primary font-bold">Trending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="close-view-details-btn" class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:scale-[1.02] transition-transform">Close</button>
+    </div>
+</div>
+
+<script src="../assets/js/admin-library-inventory.js"></script>
+</body>
+</html>

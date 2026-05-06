@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced UI/UX | CuratorEdu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#dadddf",
+                    "tertiary-fixed-dim": "#ff6ad8",
+                    "primary-dim": "#5d00e3",
+                    "on-tertiary-fixed-variant": "#6f005c",
+                    "surface-container": "#e6e8ea",
+                    "surface": "#f5f6f7",
+                    "secondary": "#00647b",
+                    "on-tertiary-fixed": "#34002a",
+                    "background": "#f5f6f7",
+                    "on-primary": "#f7f0ff",
+                    "primary-fixed": "#ac8eff",
+                    "on-secondary-fixed": "#003a48",
+                    "tertiary": "#aa008e",
+                    "tertiary-container": "#ff87db",
+                    "surface-container-high": "#e0e3e4",
+                    "outline": "#757778",
+                    "tertiary-dim": "#96007d",
+                    "surface-variant": "#dadddf",
+                    "on-surface": "#2c2f30",
+                    "primary-container": "#ac8eff",
+                    "primary": "#6a1cf6",
+                    "surface-container-low": "#eff1f2",
+                    "outline-variant": "#abadae",
+                    "secondary-dim": "#00576c",
+                    "on-secondary": "#e2f6ff",
+                    "error-container": "#f74b6d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#6a1cf6",
+                    "primary-fixed-dim": "#a07dff",
+                    "on-surface-variant": "#595c5d",
+                    "on-tertiary": "#ffeef5",
+                    "inverse-surface": "#0c0f10",
+                    "error": "#b41340",
+                    "on-tertiary-container": "#5f004f",
+                    "on-secondary-fixed-variant": "#00586d",
+                    "secondary-fixed-dim": "#37d4ff",
+                    "secondary-container": "#80deff",
+                    "on-primary-fixed-variant": "#350088",
+                    "error-dim": "#a70138",
+                    "on-error-container": "#510017",
+                    "on-error": "#ffefef",
+                    "tertiary-fixed": "#ff87db",
+                    "on-primary-fixed": "#000000",
+                    "inverse-on-surface": "#9b9d9e",
+                    "surface-dim": "#d1d5d7",
+                    "on-background": "#2c2f30",
+                    "inverse-primary": "#9d79ff",
+                    "on-primary-container": "#2a0070",
+                    "surface-bright": "#f5f6f7",
+                    "secondary-fixed": "#80deff",
+                    "on-secondary-container": "#004e61"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+        .left-drawer {
+            transform: translateX(-100%);
+            transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .left-drawer.open {
+            transform: translateX(0);
+        }
+        .drawer-backdrop {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease;
+        }
+        .drawer-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container relative min-h-screen overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+<main class="pt-20 lg:pt-24 pb-32 px-4 sm:px-6 max-w-full mx-auto">
+<!-- Hero Section -->
+<header class="relative mb-12 sm:mb-16 rounded-[2.5rem] overflow-hidden min-h-[350px] sm:min-h-[500px] flex items-end p-6 sm:p-10 md:p-16">
+<div class="absolute inset-0 z-0">
+<img id="uc-cover" alt="Course cover" class="w-full h-full object-cover" src="https://picsum.photos/seed/ucs/1200/800"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+</div>
+<div class="relative z-10 w-full md:w-2/3">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-violet-600 text-white rounded-full font-label text-[10px] uppercase tracking-wider mb-4">
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+                Premium Track
+            </div>
+<h1 id="uc-title" class="text-3xl sm:text-4xl md:text-6xl font-black font-headline text-white leading-none mb-6 tracking-tight">Course overview</h1>
+<div class="flex flex-wrap gap-4 items-center">
+<div class="flex items-center gap-2 text-white/90">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label text-sm">12 Weeks</span>
+</div>
+<div class="flex items-center gap-2 text-white/90">
+<span class="material-symbols-outlined">signal_cellular_alt</span>
+<span class="font-label text-sm">Advanced</span>
+</div>
+<div class="flex items-center gap-2 text-white/90">
+<span class="material-symbols-outlined">group</span>
+<span id="uc-enrollment-line" class="font-label text-sm"><span id="uc-enrollment-count">0</span> students enrolled</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Details -->
+<div class="lg:col-span-8 space-y-16">
+<!-- Course Description -->
+<section>
+<h2 class="text-3xl font-black font-headline text-on-surface mb-6">Course Description</h2>
+<p id="uc-desc" class="text-lg text-on-surface-variant leading-relaxed font-body">Loading overview…</p>
+</section>
+<section class="rounded-3xl bg-surface-container-low/40 border border-outline-variant/10 p-6 md:p-8">
+<h2 class="text-xl font-black font-headline text-on-surface mb-4">Teaching team</h2>
+<ul id="uc-staff-list" class="space-y-4 font-body text-on-surface">
+<li class="text-on-surface-variant text-sm">Loading…</li>
+</ul>
+</section>
+<section class="bg-surface-container-low rounded-3xl p-8 md:p-12">
+<h2 id="uc-syllabus-heading" class="text-3xl font-black font-headline text-on-surface mb-8">Modules</h2>
+<ul id="uc-module-list" class="space-y-4 font-body"></ul>
+</section>
+<!-- What You'll Learn legacy block removed -->
+
+<!-- Student Success / Ratings -->
+<section id="reviews">
+<h2 class="text-3xl font-black font-headline text-on-surface mb-8">Student Success</h2>
+<div class="bg-surface-container-lowest rounded-3xl p-8 md:p-12 shadow-sm border border-surface-container">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+<div class="md:col-span-4 text-center md:text-left">
+<div class="text-6xl font-black font-headline text-primary mb-2">4.9</div>
+<div class="flex justify-center md:justify-start gap-1 mb-2">
+<span class="material-symbols-outlined text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-primary fill-1">star</span>
+<span class="material-symbols-outlined text-primary fill-1">star</span>
+</div>
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-wider">Average Rating</p>
+<p class="text-xs text-outline-variant mt-1">Based on 1,420 reviews</p>
+</div>
+<div class="md:col-span-8 space-y-3">
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold font-headline w-4">5</span>
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[92%] rounded-full"></div>
+</div>
+<span class="text-xs font-label text-on-surface-variant w-8">92%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold font-headline w-4">4</span>
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[6%] rounded-full"></div>
+</div>
+<span class="text-xs font-label text-on-surface-variant w-8">6%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold font-headline w-4">3</span>
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[1%] rounded-full"></div>
+</div>
+<span class="text-xs font-label text-on-surface-variant w-8">1%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold font-headline w-4">2</span>
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0.5%] rounded-full"></div>
+</div>
+<span class="text-xs font-label text-on-surface-variant w-8">&lt;1%</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs font-bold font-headline w-4">1</span>
+<div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[0.5%] rounded-full"></div>
+</div>
+<span class="text-xs font-label text-on-surface-variant w-8">&lt;1%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Meet the Curator -->
+<section>
+<h2 class="text-3xl font-black font-headline text-on-surface mb-8">Meet the Curator</h2>
+<div class="bg-surface-container-lowest rounded-[32px] p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 shadow-sm border border-surface-container">
+<img alt="Instructor Avatar" class="w-40 h-40 md:w-56 md:h-56 rounded-3xl object-cover shadow-xl rotate-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnNc9wWhgT3OglWvm4Iyml-Rff8X1RWOJxkSg23B_btYPJ68IyTJezg5FSD6lZG5lyfxUiKVduPrRW9c7xlufjF5Mmzou8Hd1E74Ay6sZlXrf-jtmuEkZ3UNfvxF6EFMTfl6KbMQbJoG9vItBW_O6-nU2_U-ftJCoBvyV5DqhqAKxzHvyL39QGqSTloUXIDOKXgXLQcuiV4GYFMGn5LpKqL0iXagxHtbTIoK_gfjSO0vGlOcefKB6RYJrj8sNvLar4ufZ_cEEVrxk"/>
+<div class="flex-1 text-center md:text-left">
+<div class="inline-block px-3 py-1 bg-violet-100 text-violet-700 rounded-full font-label text-[10px] uppercase tracking-widest mb-4">Industry Expert</div>
+<h3 class="text-3xl font-black font-headline mb-3">Sloane Varkey</h3>
+<p class="text-on-surface-variant italic mb-4 font-body text-lg">Lead Designer at Future-Studio, former Senior Product at Meta.</p>
+<p class="text-on-surface-variant leading-relaxed mb-6">
+                            Sloane has spent a decade refining the aesthetic of modern digital platforms. Her work focuses on bridging the gap between artistic expression and functional clarity.
+                        </p>
+<div class="flex justify-center md:justify-start gap-6">
+<button id="curator-website-btn" type="button" aria-label="Open curator profile" class="material-symbols-outlined text-violet-600 cursor-pointer text-2xl hover:text-violet-800 transition-colors">language</button>
+<button id="curator-share-btn" type="button" aria-label="Share this course" class="material-symbols-outlined text-violet-600 cursor-pointer text-2xl hover:text-violet-800 transition-colors">share</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Pricing & CTA -->
+<div class="lg:col-span-4">
+<aside class="sticky top-24 space-y-6">
+<!-- Pricing Card (Free) -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] overflow-hidden relative border border-surface-container">
+  <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+  <div class="relative z-10">
+    <div class="flex items-end gap-2 mb-6">
+      <span class="text-5xl font-black font-headline text-on-surface">Free</span>
+    </div>
+        <a id="uc-start-learn" class="block w-full bg-primary text-white py-5 rounded-2xl font-headline font-extrabold text-lg shadow-lg shadow-primary/30 hover:scale-[1.02] transition-transform active:scale-95 mb-4 text-center"
+            href="course_detail.html">
+      Start Learning
+    </a>
+    <p class="text-center text-xs text-on-surface-variant font-label mb-8">Instant access</p>
+    <div class="space-y-4">
+      <h4 class="font-bold font-headline text-sm uppercase tracking-widest text-on-surface">This course includes:</h4>
+      <ul class="space-y-4">
+        <li class="flex items-center gap-3 text-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-primary text-xl">play_circle</span>
+          24 Hours on-demand video
+        </li>
+        <li class="flex items-center gap-3 text-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-primary text-xl">download</span>
+          12 Figma Project Files
+        </li>
+        <li class="flex items-center gap-3 text-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-primary text-xl">chat_bubble</span>
+          Direct Slack Access
+        </li>
+        <li class="flex items-center gap-3 text-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-primary text-xl">verified</span>
+          Certificate of Completion
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- Removed Team Plan Card -->
+</aside>
+</div>
+</div>
+</main>
+<script>
+    const openDrawerBtn = document.getElementById("openDrawerBtn");
+    const closeDrawerBtn = document.getElementById("closeDrawerBtn");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const leftDrawer = document.getElementById("leftDrawer");
+
+    function updateBodyScrollLock() {
+        if (!leftDrawer) return;
+        const drawerOpen = leftDrawer.classList.contains("open");
+        if (drawerOpen) {
+            document.body.classList.add("overflow-hidden");
+        } else {
+            document.body.classList.remove("overflow-hidden");
+        }
+    }
+
+    function openDrawer() {
+        if (!leftDrawer || !drawerBackdrop) return;
+        leftDrawer.classList.add("open");
+        drawerBackdrop.classList.add("open");
+        updateBodyScrollLock();
+    }
+
+    function closeDrawer() {
+        if (!leftDrawer || !drawerBackdrop) return;
+        leftDrawer.classList.remove("open");
+        drawerBackdrop.classList.remove("open");
+        updateBodyScrollLock();
+    }
+
+    if (openDrawerBtn) {
+        openDrawerBtn.addEventListener("click", openDrawer);
+    }
+    if (closeDrawerBtn) {
+        closeDrawerBtn.addEventListener("click", closeDrawer);
+    }
+    if (drawerBackdrop) {
+        drawerBackdrop.addEventListener("click", closeDrawer);
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            if (leftDrawer && leftDrawer.classList.contains("open")) {
+                closeDrawer();
+            }
+        }
+    });
+
+    const curatorWebsiteBtn = document.getElementById("curator-website-btn");
+    const curatorShareBtn = document.getElementById("curator-share-btn");
+
+    if (curatorWebsiteBtn) {
+        curatorWebsiteBtn.addEventListener("click", () => {
+            window.location.href = "../community/community_group.html";
+        });
+    }
+
+    if (curatorShareBtn) {
+        curatorShareBtn.addEventListener("click", async () => {
+            const shareData = {
+                title: document.title,
+                text: "Check out this CuratorEdu course page.",
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    return;
+                } catch (error) {
+                    // Ignore canceled share and fallback to clipboard.
+                }
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(window.location.href);
+                alert("Course link copied to clipboard.");
+            }
+        });
+    }
+
+    // Syllabus Accordion Logic
+    document.querySelectorAll('.syllabus-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const module = button.closest('.syllabus-module');
+        const content = module.querySelector('.syllabus-content');
+        const isActive = module.classList.contains('active');
+
+        // Close others
+        document.querySelectorAll('.syllabus-module').forEach(m => {
+          m.classList.remove('active');
+          const c = m.querySelector('.syllabus-content');
+          if (c) c.classList.add('hidden');
+        });
+
+        if (!isActive && content) {
+          module.classList.add('active');
+          content.classList.remove('hidden');
+        }
+      });
+    });
+</script>
+    <script src="../assets/js/unified-course-overview.js"></script>
+    <script src="../assets/js/student-nav.js"></script>
+</body></html>

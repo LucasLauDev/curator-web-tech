@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light" data-admin-course-editor>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CuratorEdu | Admin — Course Editor</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+    <link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6a1cf6",
+                        "primary-container": "#ac8eff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f5f6f7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eff1f2",
+                        "surface-container": "#e6e8ea",
+                        "surface-container-high": "#e0e3e4",
+                        "on-surface": "#2c2f30",
+                        "on-surface-variant": "#595c5d",
+                        "outline": "#757778",
+                        "outline-variant": "#abadae",
+                        "secondary": "#00647b",
+                        "tertiary": "#aa008e",
+                        "background": "#f5f6f7"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        #ce-course-editor-shell {
+            display: grid;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            gap: 1.25rem;
+            box-sizing: border-box;
+        }
+        @media (min-width: 1024px) {
+            #ce-course-editor-shell {
+                grid-template-columns: minmax(14rem, 17rem) minmax(0, 1fr);
+                gap: 1.5rem 2rem;
+                align-items: start;
+            }
+        }
+        #ce-editor-content { min-width: 0; }
+        #ce-course-editor-main aside nav [data-ce-scrollto].ce-outline-active {
+            color: #0a0a0a !important;
+            background-color: rgba(106, 28, 246, 0.1) !important;
+            font-weight: 800 !important;
+            box-shadow: inset 0 0 0 1px rgba(106, 28, 246, 0.22);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen overflow-x-hidden pt-20">
+
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<script>
+window.showToast = function (message, type) {
+  var k = String(type || 'info');
+  var el = document.getElementById('ce-editor-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'ce-editor-toast';
+    document.body.appendChild(el);
+  }
+  el.className =
+    'fixed bottom-8 right-8 z-[200] px-5 py-3 rounded-xl shadow-lg text-sm font-bold transition-opacity duration-200 pointer-events-none text-white ' +
+    (k === 'error' ? 'bg-red-700' : 'bg-slate-900');
+  el.textContent = message;
+  el.style.opacity = '1';
+  clearTimeout(window.showToast._t);
+  window.showToast._t = setTimeout(function () { el.style.opacity = '0'; }, 2200);
+};
+</script>
+<script src="../../../instructor/instructor/assets/js/instructor-course-editor-ui.js"></script>
+<script src="../../../instructor/instructor/assets/js/instructor-course-module-builder.js"></script>
+<script src="../../../instructor/instructor/assets/js/instructor-course-save.js"></script>
+
+<div class="flex min-h-0 min-h-[calc(100vh-5rem)] overflow-hidden">
+    <main id="ce-course-editor-main" class="flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-hidden custom-scrollbar bg-surface px-4 lg:px-8">
+        <div id="ce-course-editor-shell" class="w-full pb-24 pt-4">
+            <aside class="w-full space-y-2 rounded-3xl border border-outline-variant/15 bg-white/95 p-5 sm:p-6 shadow-md shadow-slate-900/5 backdrop-blur-sm lg:sticky lg:top-4 lg:z-20 lg:self-start">
+                <p class="text-base font-extrabold text-on-surface px-1 py-2.5 select-none leading-snug font-headline tracking-tight">Course (admin)</p>
+                <nav class="flex flex-col gap-2" aria-label="Section navigation">
+                    <button type="button" data-ce-scrollto="ce-section-course-info" class="ce-outline-btn w-full text-left px-4 py-3.5 rounded-2xl text-base font-bold text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface">Course details</button>
+                    <button type="button" data-ce-scrollto="ce-section-modules" class="ce-outline-btn w-full text-left px-4 py-3.5 rounded-2xl text-base font-bold text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface">Modules</button>
+                    <a href="./admin_course_catalog.html" class="mt-4 block text-center text-xs font-bold text-primary hover:underline">← Back to catalog</a>
+                </nav>
+            </aside>
+
+            <div id="ce-editor-content" class="w-full min-w-0 space-y-8 lg:space-y-10">
+
+                <section id="ce-admin-create-block" class="hidden rounded-2xl border border-secondary/25 bg-secondary/5 p-6 sm:p-8 space-y-4">
+                    <h2 class="text-lg font-black font-headline text-on-surface">Create a draft course</h2>
+                    <p class="text-sm text-on-surface-variant">Choose who owns this course, then continue to add modules.</p>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest font-label" for="ce-admin-instructor">Instructor</label>
+                        <select id="ce-admin-instructor" class="w-full px-5 py-3.5 bg-white border border-outline-variant/20 rounded-xl font-bold text-on-surface"></select>
+                    </div>
+                    <button type="button" id="ce-admin-create-blank-course" class="px-6 py-3 bg-primary text-on-primary font-black text-xs rounded-xl shadow-lg shadow-primary/20 hover:opacity-95">
+                        Create blank course
+                    </button>
+                </section>
+
+                <div id="ce-section-course-info" class="space-y-8 lg:space-y-10 scroll-mt-28">
+                    <section class="rounded-2xl border border-primary/15 bg-primary/5 p-6 sm:p-8 space-y-3">
+                        <label class="text-[10px] font-black text-primary uppercase tracking-[0.2em] font-label" for="ce-instructor-course-title">Course title</label>
+                        <input id="ce-instructor-course-title" type="text" class="w-full px-5 py-3.5 bg-white border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-bold text-lg text-on-surface" placeholder="e.g. Introduction to UX" autocomplete="off"/>
+                    </section>
+                    <section class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/5 p-6 sm:p-8 space-y-3">
+                        <label class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest font-label" for="ce-course-description">Course description</label>
+                        <textarea id="ce-course-description" class="w-full px-5 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none min-h-[110px]" placeholder="What students will learn in this course…"></textarea>
+                    </section>
+                </div>
+
+                <section id="ce-section-modules" class="space-y-6 scroll-mt-28">
+                    <div class="flex flex-wrap items-end justify-between gap-4">
+                        <div>
+                            <h2 class="text-lg font-black font-headline text-on-surface">Modules</h2>
+                            <p class="text-sm text-on-surface-variant mt-1">Add one or more modules. For each, choose notes, video, and/or quiz.</p>
+                        </div>
+                        <button type="button" id="ce-add-module-btn" class="px-6 py-3 bg-primary text-on-primary font-black text-xs rounded-xl shadow-lg shadow-primary/20 hover:opacity-95">
+                            + Add module
+                        </button>
+                    </div>
+                    <div id="ce-modules-host" class="space-y-8"></div>
+                </section>
+
+                <div class="pt-10 flex gap-4">
+                    <button type="button" id="ce-btn-save-draft" class="flex-1 py-4 bg-surface-container-high text-on-surface font-black rounded-xl hover:bg-surface-container-highest transition-all active:scale-95">Save as Draft</button>
+                    <button type="button" id="ce-btn-publish" class="flex-1 py-4 bg-primary text-on-primary font-black rounded-xl shadow-xl shadow-primary/25 hover:scale-[1.02] active:scale-95 transition-all">Publish Course</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

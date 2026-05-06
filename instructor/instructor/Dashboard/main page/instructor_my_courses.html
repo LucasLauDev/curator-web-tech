@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#ac8eff",
+                      "surface-variant": "#dadddf",
+                      "surface-container": "#e6e8ea",
+                      "surface-bright": "#f5f6f7",
+                      "primary-fixed": "#ac8eff",
+                      "outline": "#757778",
+                      "tertiary": "#aa008e",
+                      "on-primary": "#f7f0ff",
+                      "on-tertiary-fixed": "#34002a",
+                      "inverse-surface": "#0c0f10",
+                      "inverse-on-surface": "#9b9d9e",
+                      "tertiary-fixed": "#ff87db",
+                      "on-surface": "#2c2f30",
+                      "on-secondary": "#e2f6ff",
+                      "surface-tint": "#6a1cf6",
+                      "surface": "#f5f6f7",
+                      "surface-dim": "#d1d5d7",
+                      "on-secondary-container": "#004e61",
+                      "on-primary-container": "#2a0070",
+                      "on-error": "#ffefef",
+                      "surface-container-high": "#e0e3e4",
+                      "error-dim": "#a70138",
+                      "secondary-dim": "#00576c",
+                      "on-tertiary": "#ffeef5",
+                      "tertiary-fixed-dim": "#ff6ad8",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-dim": "#96007d",
+                      "secondary-fixed": "#80deff",
+                      "on-tertiary-fixed-variant": "#6f005c",
+                      "secondary-container": "#80deff",
+                      "outline-variant": "#abadae",
+                      "primary": "#6a1cf6",
+                      "error": "#b41340",
+                      "tertiary-container": "#ff87db",
+                      "on-primary-fixed": "#000000",
+                      "error-container": "#f74b6d",
+                      "surface-container-highest": "#dadddf",
+                      "on-secondary-fixed-variant": "#00586d",
+                      "on-secondary-fixed": "#003a48",
+                      "primary-fixed-dim": "#a07dff",
+                      "on-surface-variant": "#595c5d",
+                      "on-error-container": "#510017",
+                      "primary-dim": "#5d00e3",
+                      "inverse-primary": "#9d79ff",
+                      "secondary": "#00647b",
+                      "surface-container-low": "#eff1f2",
+                      "background": "#f5f6f7",
+                      "secondary-fixed-dim": "#37d4ff",
+                      "on-background": "#2c2f30",
+                      "on-primary-fixed-variant": "#350088",
+                      "on-tertiary-container": "#5f004f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<link rel="stylesheet" href="../../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+
+<div id="nav-mount"></div>
+<script src="../../assets/js/instructor-nav.js"></script>
+<script src="../../assets/js/instructor-interactions.js"></script>
+<script src="../../assets/js/instructor-dashboard-courses.js"></script>
+
+<div class="flex min-h-screen">
+<!-- Main Content Area -->
+<main class="flex-1 p-4 sm:p-8 lg:p-12 pb-12 overflow-x-hidden min-w-0">
+<header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+    <div>
+        <h1 class="text-4xl font-headline font-black text-on-surface tracking-tighter">My Courses</h1>
+        <p class="text-on-surface-variant font-medium">Manage all assigned courses and curriculum.</p>
+    </div>
+    <a href="instructor_course_editor.html?new=1" class="group flex items-center gap-3 px-8 py-4 bg-primary text-on-primary font-black rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span>Create New Course</span>
+    </a>
+</header>
+
+<div class="space-y-12">
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Summary Stats -->
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5">
+        <p class="text-on-surface-variant text-xs font-label uppercase tracking-wider mb-2">Total Courses</p>
+        <h3 class="text-3xl font-headline font-extrabold" data-inst-stat="total">–</h3>
+    </div>
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5">
+        <p class="text-on-surface-variant text-xs font-label uppercase tracking-wider mb-2">Enrolled Students</p>
+        <h3 class="text-3xl font-headline font-extrabold" data-inst-stat="enrolled">–</h3>
+    </div>
+    <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/5">
+        <p class="text-on-surface-variant text-xs font-label uppercase tracking-wider mb-2">Avg. Completion</p>
+        <h3 class="text-3xl font-headline font-extrabold" data-inst-stat="avg">–</h3>
+    </div>
+</section>
+
+<!-- All Courses Section -->
+<section class="space-y-6">
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-headline font-extrabold">Course Inventory</h2>
+    </div>
+
+    <!-- Course List -->
+    <div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/5 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                    <tr class="bg-surface-container-low/50 border-b border-outline-variant/10">
+                        <th class="px-8 py-5 text-xs font-black text-on-surface-variant uppercase tracking-widest">Course Detail</th>
+                        <th class="px-6 py-5 text-xs font-black text-on-surface-variant uppercase tracking-widest text-center">Stats</th>
+                        <th class="px-6 py-5 text-xs font-black text-on-surface-variant uppercase tracking-widest text-center">Status</th>
+                        <th class="px-8 py-5 text-xs font-black text-on-surface-variant uppercase tracking-widest text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="instructor-courses-tbody" class="divide-y divide-outline-variant/10"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- Asymmetric "Pro Tips" Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-10">
+<div class="lg:col-span-8 bg-surface-container-low rounded-xl p-8 relative overflow-hidden">
+<div class="relative z-10 space-y-4">
+<span class="px-4 py-1.5 bg-primary/20 text-primary rounded-full font-label text-[10px] font-bold uppercase tracking-widest">Growth Opportunity</span>
+<h3 class="text-2xl font-headline font-extrabold max-w-md">Your 'Web Technology' course is trending this week.</h3>
+<p class="text-on-surface-variant max-w-md">Students are actively posting in the forum. Consider adding a supplementary module on Progressive Web Apps to increase completion rate by up to 18%.</p>
+<button class="text-primary font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all">Explore localized marketing <span class="material-symbols-outlined">arrow_forward</span></button>
+</div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+<div class="lg:col-span-4 glass-card rounded-xl p-8 border border-white/40 shadow-xl">
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-tertiary/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+</div>
+<h4 class="font-headline font-bold">Launch Checklist</h4>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-medium">Add final lesson assets</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-sm font-medium">Verify quiz answers</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-6 h-6 border-2 border-surface-container rounded-full flex items-center justify-center">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+<span class="text-sm font-bold text-primary">Upload trailer video</span>
+</li>
+<li class="flex items-center gap-3 opacity-40">
+<div class="w-6 h-6 border-2 border-surface-container rounded-full"></div>
+<span class="text-sm font-medium">Set course price</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+</body></html>

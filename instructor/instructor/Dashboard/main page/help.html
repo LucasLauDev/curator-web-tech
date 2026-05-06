@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Instructor Portal - Help &amp; Support</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#595c5d",
+                        "primary-dim": "#5d00e3",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "tertiary-dim": "#96007d",
+                        "outline": "#757778",
+                        "primary-fixed-dim": "#a07dff",
+                        "inverse-surface": "#0c0f10",
+                        "inverse-on-surface": "#9b9d9e",
+                        "surface-bright": "#f5f6f7",
+                        "background": "#f5f6f7",
+                        "surface-tint": "#6a1cf6",
+                        "on-tertiary": "#ffeef5",
+                        "surface-dim": "#d1d5d7",
+                        "on-primary-fixed": "#000000",
+                        "on-error-container": "#510017",
+                        "on-background": "#2c2f30",
+                        "primary-container": "#ac8eff",
+                        "error-container": "#f74b6d",
+                        "on-secondary-container": "#004e61",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "secondary-container": "#80deff",
+                        "secondary-dim": "#00576c",
+                        "primary": "#6a1cf6",
+                        "on-primary-container": "#2a0070",
+                        "outline-variant": "#abadae",
+                        "on-primary": "#f7f0ff",
+                        "primary-fixed": "#ac8eff",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "on-tertiary-fixed": "#34002a",
+                        "error-dim": "#a70138",
+                        "error": "#b41340",
+                        "tertiary-fixed": "#ff87db",
+                        "secondary": "#00647b",
+                        "tertiary": "#aa008e",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#350088",
+                        "surface-container-high": "#e0e3e4",
+                        "secondary-fixed": "#80deff",
+                        "tertiary-container": "#ff87db",
+                        "on-tertiary-container": "#5f004f",
+                        "surface-variant": "#dadddf",
+                        "on-surface": "#2c2f30",
+                        "on-secondary": "#e2f6ff",
+                        "on-secondary-fixed": "#003a48",
+                        "surface-container-low": "#eff1f2",
+                        "surface-container": "#e6e8ea",
+                        "surface": "#f5f6f7",
+                        "inverse-primary": "#9d79ff",
+                        "surface-container-highest": "#dadddf",
+                        "on-error": "#ffefef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+    <link rel="stylesheet" href="../../assets/css/instructor-nav.css">
+</head>
+
+<body class="bg-background text-on-background min-h-screen">
+
+    <div id="nav-mount"></div>
+    <script src="../../assets/js/instructor-nav.js"></script>
+    <script src="../../assets/js/instructor-interactions.js"></script>
+
+    <div class="flex min-h-screen">
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 sm:p-8 lg:p-12 pb-16 overflow-x-hidden min-w-0">
+            <header class="mb-10">
+                <h1 class="text-4xl font-headline font-black text-on-surface tracking-tighter">Help & Support</h1>
+                <p class="text-on-surface-variant text-lg">Find answers or get in touch with our support curators.</p>
+            </header>
+            <!-- Main Content Canvas -->
+            <section class="w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Left: Contact & Support Info -->
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/5">
+                            <div class="flex items-center gap-4 mb-8">
+                                <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+                                </div>
+                                <h2 class="text-2xl font-bold">Send us a message</h2>
+                            </div>
+                            <form class="space-y-6">
+                                <div class="grid grid-cols-1 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Full Name</label>
+                                        <input class="w-full px-6 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-medium" placeholder="Your name" type="text" value="Dr. Aris"/>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Email Address</label>
+                                        <input class="w-full px-6 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-medium" placeholder="your@email.com" type="email" value="aris.lead@uts.edu.my"/>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Subject</label>
+                                    <select class="w-full px-6 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-medium appearance-none">
+                                        <option>Technical Issue</option>
+                                        <option>Course Management</option>
+                                        <option>Feature Request</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant ml-1 font-label">Your Message</label>
+                                    <textarea class="w-full px-6 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none" placeholder="How can we assist you today?" rows="4"></textarea>
+                                </div>
+                                <div class="pt-4">
+                                    <button class="group flex items-center justify-center gap-3 w-full px-10 py-5 bg-gradient-to-r from-[#6a1cf6] to-[#ac8eff] text-white font-bold rounded-full shadow-lg hover:shadow-primary/30 transition-all duration-300 active:scale-95" type="submit">
+                                        <span>Send Message</span>
+                                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Direct Support Details moved here -->
+                        <section class="bg-on-surface p-8 rounded-xl text-surface relative overflow-hidden shadow-xl">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary opacity-20 blur-3xl -mr-16 -mt-16 rounded-full"></div>
+                            <h3 class="text-xl font-bold mb-6 relative z-10">Direct Support</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-2 bg-white/10 rounded-lg text-primary-fixed">
+                                        <span class="material-symbols-outlined">schedule</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold uppercase tracking-widest text-surface/50 mb-1 font-label">Support Hours</p>
+                                        <p class="font-semibold text-sm">9 AM - 6 PM EST</p>
+                                        <p class="text-[11px] text-surface/60">Mon - Fri</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="p-2 bg-white/10 rounded-lg text-primary-fixed">
+                                        <span class="material-symbols-outlined">mail</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold uppercase tracking-widest text-surface/50 mb-1 font-label">Direct Email</p>
+                                        <p class="font-semibold text-sm break-all">support@uts.edu.my</p>
+                                        <p class="text-[11px] text-surface/60">Response: 2 hrs</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Right: Common Questions -->
+                    <div class="space-y-8 lg:col-span-1">
+                        <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/5 h-full">
+                            <h3 class="text-2xl font-bold mb-6">Common Questions</h3>
+                            <div class="space-y-6">
+                                <div class="faq-item group">
+                                    <p class="font-bold text-base text-on-background group-hover:text-primary transition-colors">How do I upload a 4K video?</p>
+                                    <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">To maintain crystal-clear quality, upload MP4 files encoded with H.264 at 30–60 Mbps. Head to Course Builder, select 'Add Module', and drag your file into the uploader.</p>
+                                </div>
+                                <div class="faq-item group pt-6 border-t border-slate-100">
+                                    <p class="font-bold text-base text-on-background group-hover:text-primary transition-colors">How do I manage student flags?</p>
+                                    <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Flags appear in your Instructor Dashboard under the 'Students' tab. You can review flagged content, respond to the student, or escalate to our moderation team.</p>
+                                </div>
+                                <div class="faq-item group pt-6 border-t border-slate-100">
+                                    <p class="font-bold text-base text-on-background group-hover:text-primary transition-colors">How to export student analytics?</p>
+                                    <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Navigate to the 'Analytics' tab. Click 'Export Data' in the top-right corner and choose CSV, PDF, or XLSX format to download your student progress reports.</p>
+                                </div>
+                                <div class="faq-item group pt-6 border-t border-slate-100">
+                                    <p class="font-bold text-base text-on-background group-hover:text-primary transition-colors">When are student payouts processed?</p>
+                                    <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">Payouts are typically processed on the 15th of every month for the previous month's activities. Ensure your details are verified in Settings at least 48 hours before the cycle.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div id="ce-help-live-chat"></div>
+        <script src="../../assets/js/help-live-chat-widget.js"></script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order History &amp; Downloads | CuratorEdu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#6f005c",
+                      "error-container": "#f74b6d",
+                      "tertiary-fixed": "#ff87db",
+                      "on-primary-fixed": "#000000",
+                      "on-surface-variant": "#595c5d",
+                      "on-surface": "#2c2f30",
+                      "secondary-dim": "#00576c",
+                      "secondary-container": "#80deff",
+                      "on-background": "#2c2f30",
+                      "background": "#f5f6f7",
+                      "inverse-surface": "#0c0f10",
+                      "on-primary-fixed-variant": "#350088",
+                      "on-secondary-fixed-variant": "#00586d",
+                      "on-secondary-container": "#004e61",
+                      "on-secondary": "#e2f6ff",
+                      "outline": "#757778",
+                      "on-primary-container": "#2a0070",
+                      "tertiary-container": "#ff87db",
+                      "surface-bright": "#f5f6f7",
+                      "on-tertiary": "#ffeef5",
+                      "secondary": "#00647b",
+                      "tertiary": "#aa008e",
+                      "inverse-primary": "#9d79ff",
+                      "secondary-fixed": "#80deff",
+                      "on-primary": "#f7f0ff",
+                      "surface": "#f5f6f7",
+                      "surface-container-high": "#e0e3e4",
+                      "primary": "#6a1cf6",
+                      "error-dim": "#a70138",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#ac8eff",
+                      "surface-dim": "#d1d5d7",
+                      "on-secondary-fixed": "#003a48",
+                      "primary-dim": "#5d00e3",
+                      "surface-container-highest": "#dadddf",
+                      "tertiary-dim": "#96007d",
+                      "outline-variant": "#abadae",
+                      "inverse-on-surface": "#9b9d9e",
+                      "error": "#b41340",
+                      "on-tertiary-fixed": "#34002a",
+                      "on-tertiary-container": "#5f004f",
+                      "surface-tint": "#6a1cf6",
+                      "surface-container-low": "#eff1f2",
+                      "on-error-container": "#510017",
+                      "on-error": "#ffefef",
+                      "tertiary-fixed-dim": "#ff6ad8",
+                      "secondary-fixed-dim": "#37d4ff",
+                      "surface-container": "#e6e8ea",
+                      "primary-container": "#ac8eff",
+                      "surface-variant": "#dadddf",
+                      "primary-fixed-dim": "#a07dff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/20 relative min-h-screen overflow-x-hidden">
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+<div id="nav-mount"></div>
+<script src="../assets/js/instructor-nav.js"></script>
+<script src="../assets/js/instructor-interactions.js"></script>
+<main class="flex-1 p-4 md:p-12 overflow-x-hidden">
+<header class="mb-10">
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface tracking-tight mb-2">Order History</h1>
+<p class="text-on-surface-variant font-body">Manage your physical library and digital assets in one place.</p>
+</header>
+<!-- Search & Filter Bar -->
+<section class="bg-surface-container-low p-4 rounded-xl mb-10 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[240px]">
+                        <div class="relative">
+                            <input class="w-full bg-surface-container-lowest border-none rounded-2xl py-4 pl-14 pr-4 shadow-sm focus:ring-2 focus:ring-primary/20 font-label text-slate-800 placeholder:text-slate-400" placeholder="Search orders, books, or ISBN..." type="text"/>
+                            <div class="absolute left-0 inset-y-0 w-14 flex items-center justify-center pointer-events-none">
+                                <span class="material-symbols-outlined text-primary">search</span>
+                            </div>
+                        </div>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+<button class="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-sm font-bold whitespace-nowrap shadow-md">Last 30 Days</button>
+<button class="px-6 py-3 bg-surface-container-lowest text-on-surface-variant hover:bg-white transition-colors rounded-full font-label text-sm font-medium whitespace-nowrap shadow-sm">This Year</button>
+<button class="px-6 py-3 bg-surface-container-lowest text-on-surface-variant hover:bg-white transition-colors rounded-full font-label text-sm font-medium whitespace-nowrap shadow-sm">Physical</button>
+<button class="px-6 py-3 bg-surface-container-lowest text-on-surface-variant hover:bg-white transition-colors rounded-full font-label text-sm font-medium whitespace-nowrap shadow-sm">Digital</button>
+</div>
+</section>
+<!-- Order List -->
+<div class="space-y-8">
+<!-- Order Card 1: Digital -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-surface-container p-6 flex flex-wrap justify-between items-center gap-4">
+<div class="flex flex-wrap gap-8">
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Order #</p>
+<p class="font-headline font-bold text-primary">#EDU-10045</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Placed On</p>
+<p class="font-headline font-bold">Oct 24, 2023</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Total Amount</p>
+<p class="font-headline font-bold">$124.50</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold font-label flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                Ready for Download
+                            </span>
+<button class="p-2 bg-surface-container-lowest rounded-full hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">description</span>
+</button>
+</div>
+</div>
+<div class="p-8 flex flex-col md:flex-row gap-8 items-start">
+<div class="w-24 h-32 md:w-32 md:h-44 bg-surface-variant rounded-lg flex-shrink-0 overflow-hidden shadow-lg">
+<img alt="Book Thumbnail" class="w-full h-full object-cover" data-alt="front cover of a modern graphic design book with bold typography and abstract purple shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWgqnq8LB2HvhBIFcRZ2SpBmU0ftgzapbCIWOKYBnivlOXZZeAVHfENONcsJhmU6hdDv3OeD7FwbHIu2_jp7Tuhmmr4G77eqahbY0h6ZpqlAEmRDa89BvpdYnrFJAdb52y1jZw5I__zYfRO2n_hnt8iCpdMxm45W9kTicyHsKrI734VNMV8-gdFm7py3j0b9RY7Tv8Kl-SBsiii0XTqa773fCMYhGDHYMO_u9Caq4z-3NB0_AgNa5J72z3vXWUQda3H5ReosSymYo"/>
+</div>
+<div class="flex-1 space-y-4">
+<div>
+<h3 class="text-2xl font-headline font-bold text-on-surface leading-tight">Advanced Typography in Digital Editorial Systems</h3>
+<p class="text-on-surface-variant text-sm font-label mt-1">ISBN: 978-3-16-148410-0 • Digital Edition (PDF/ePub)</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-fixed text-white rounded-2xl font-headline font-bold shadow-lg shadow-primary/20 hover:scale-105 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cloud_download</span>
+                                    Download Now
+                                </button>
+<button class="px-8 py-4 bg-surface-container-lowest text-on-surface-variant rounded-2xl font-headline font-bold hover:bg-white transition-colors">
+                                    Product Details
+                                </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Card 2: Physical -->
+<article class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-surface-container p-6 flex flex-wrap justify-between items-center gap-4">
+<div class="flex flex-wrap gap-8">
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Order #</p>
+<p class="font-headline font-bold text-primary">#EDU-09912</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Placed On</p>
+<p class="font-headline font-bold">Sep 15, 2023</p>
+</div>
+<div class="space-y-1">
+<p class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Total Amount</p>
+<p class="font-headline font-bold">$89.00</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-4 py-1.5 bg-tertiary-container text-on-tertiary-container rounded-full text-xs font-bold font-label flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                Shipped
+                            </span>
+<button class="p-2 bg-surface-container-lowest rounded-full hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-sm">description</span>
+</button>
+</div>
+</div>
+<div class="p-8 flex flex-col md:flex-row gap-8 items-start">
+<div class="w-24 h-32 md:w-32 md:h-44 bg-surface-variant rounded-lg flex-shrink-0 overflow-hidden shadow-lg">
+<img alt="Book Thumbnail" class="w-full h-full object-cover" data-alt="vibrant book cover with an illustration of a brain and circuits, glowing with neon colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBwQt4bxcCHPmMqLeMirIUcdfdKJV9SqAMP3DQIA0OtDTqatAGw-9hnUBnXmD2UhEAjbuO2qnbcjuVbwIVm6QP1MCMFlk0etVwezsycnKTPxr12AwmIA-A8-D4pIlhlLPa4hwFfnoYKSTh20GXvpRHxnfXxlQEtV19GG59csg_lVlKouFDIFXheMAWVpwVYFcrh3udQB7xwhhScJmGQLPlrgOpCCMZhb2XvuZslyIw0E8sgeLZklRpCxBsWr6O7QcAI2UXCSRUBo0"/>
+</div>
+<div class="flex-1 space-y-4">
+<div>
+<h3 class="text-2xl font-headline font-bold text-on-surface leading-tight">Neural Architectures: A Guide to Cognitive Design</h3>
+<p class="text-on-surface-variant text-sm font-label mt-1">ISBN: 978-0-12-345678-9 • Hardcover</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-8 py-4 bg-on-surface text-surface rounded-2xl font-headline font-bold hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">local_shipping</span>
+                                    Track Package
+                                </button>
+<button class="px-8 py-4 bg-surface-container-lowest text-on-surface-variant rounded-2xl font-headline font-bold hover:bg-white transition-colors">
+                                    Return Item
+                                </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Empty State (Hidden by default, shown here for design purposes if needed) -->
+<section class="hidden flex flex-col items-center justify-center py-20 text-center">
+<div class="w-64 h-64 mb-8">
+<div class="w-full h-full bg-gradient-to-br from-primary-container to-secondary-container rounded-full flex items-center justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-8xl text-white opacity-40">library_books</span>
+<div class="absolute inset-0 backdrop-blur-xl"></div>
+<span class="material-symbols-outlined text-8xl text-white relative z-10">auto_stories</span>
+</div>
+</div>
+<h2 class="text-3xl font-headline font-extrabold mb-4">You haven't purchased any resources yet</h2>
+<p class="text-on-surface-variant max-w-md mx-auto mb-10 font-body">Explore our massive collection of curated design books, technical manuals, and creative assets to start your journey.</p>
+<button class="px-12 py-5 bg-primary text-on-primary rounded-full font-headline font-bold text-lg shadow-xl shadow-primary/30 hover:scale-105 transition-transform">
+                        Browse Bookstore
+                    </button>
+</section>
+</div>
+<!-- Footer Action -->
+<footer class="mt-20 pt-10 border-t border-surface-container-high flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-on-surface-variant text-sm font-label">Showing 2 of 24 total orders</p>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.showToast('Navigating to previous page...')" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined">chevron_left</span>
+                    </button>
+                    <button onclick="window.showToast('You are on page 1')" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-primary text-white font-headline font-bold shadow-lg shadow-primary/20 active:scale-95">1</button>
+                    <button onclick="window.showToast('Navigating to page 2...')" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary-container transition-all active:scale-95">2</button>
+                    <button onclick="window.showToast('Navigating to page 3...')" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary-container transition-all active:scale-95">3</button>
+                    <button onclick="window.showToast('Navigating to next page...')" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </button>
+                </div>
+</footer>
+</main>
+</body></html>

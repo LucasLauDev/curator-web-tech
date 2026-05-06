@@ -1,0 +1,313 @@
+[
+  {
+    "id": "3a1c66f3-5176-43c3-819e-c9aa3e0f8279",
+    "title": "The Minimalist Way: Less is More",
+    "author": "Curator Edu Press",
+    "price_rm": "24.99",
+    "category": "design",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuAW-HaPO5-iJNascsJPKEA0tM8DUCN5WGGMaM2VHYVxA_2e1wArKdQrsrq6btTAoQUimK2c1BS9vVq9myA_jmWZEKxbM6tYHA1_iTHICvU0vNvS2MxqSCroKUHy_bxnRTnXhjDcSH_K6vucVfNPmNCn60WGnaKhgQt23NasDBPq6QPvy31E4_wxADI3wHnyxPak5JWxKDygCPiG4zvVOkwo_MTVFZHa0GaExhc9cjKbZweWINZ0twpXpiY43MQZixwMUMmPSgrd9Q4",
+    "badge": "Bestseller",
+    "description": "A practical guide to stripping noise from work and life so students can focus on what ships.",
+    "reader_json": null,
+    "sort_order": 1
+  },
+  {
+    "id": "97eb724a-372c-4e41-98c9-8d4e814505bc",
+    "title": "Creative Systems: Design for Scale",
+    "author": "Curator Edu Press",
+    "price_rm": "32.00",
+    "category": "design",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuBbublf-tOvK3iT7c_35WUZwMB-132M2jdGDT7ROa1Pt4Rit2pLMqW3EUwEpQCaANuMm-cyIIpx-V1cMiqJzEzqAAyCEa8RU656JFy6SLcWHVK7qgsysCGcTAzrnO6i4b_XodPKBhze4Sndq2FK-HFMG_o-fhKMuqC-lclgXCXWe_QA2UPcQO2Ph0CcR71_iHduY7krXfzjJVy1VoEFJXStbnW9WedDrf0tCWUD9PokstYhoxTXBPI1fVENSk0wTI21og6Rwah4qJI",
+    "badge": "New",
+    "description": "Design tokens, component libraries, and governance for teams.",
+    "reader_json": null,
+    "sort_order": 2
+  },
+  {
+    "id": "59e988ad-e771-4dcf-bcd7-d365c0873bcd",
+    "title": "Neural Paths: The Science of Focus",
+    "author": "Curator Edu Press",
+    "price_rm": "18.50",
+    "category": "self-help",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuDMuxgJn79wwyp5Tq26Mf80bVQDZ5KZZXUQkG7OKhkkJYmPClrMlH-VdaVtubKhZhQQYIBuYHXoLOEp8Ik8jLJfEns4hezx7Lh-n-lMKnKVjNfoQHc6XQ1x99DG8JLc5Ks1V81v4IQKKC5ilVAhN_tPIoyUg2NQmudVcL7BCyvsJTfFFIC74FAM-xChWbEkuNwdmsq8iwHFV24Wiaha38c53Py5NjSg6oh08dl5uVECy3_AeKgbzb2w3jl_gXwqqGn4anCJWlYyBeo",
+    "badge": null,
+    "description": "Evidence-backed habits for deep work and spaced repetition.",
+    "reader_json": null,
+    "sort_order": 3
+  },
+  {
+    "id": "3580468d-6c73-4053-901c-418f9d66edfb",
+    "title": "Post-Digital: Business in 2030",
+    "author": "Curator Edu Press",
+    "price_rm": "29.99",
+    "category": "business",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuBOBQ97dIl393L-fcu9zURR9gPnOz0w4kdlObseFihI5wPbsfLWAzHFT-BjniipRiXme5bTWjXY2wH_30Hs-9vlWOsShVGdTrMFZEIq_ULR8tbKjJe2rhh-IotWsDUNQODAoNX6J5BsXtkpzvxNWzQvpNz0Ka0L0-aW7BfpUsks7wOIaEet6ld4zvSr-MIsBPSnhy6TTTd-h6ozGZjAmi92UkgKYCxM3lXQ4GzINdHaO49CGDK2h03lUR2gjgT28SA1la509k8JxNE",
+    "badge": null,
+    "description": "Teaching strategy when digital transformation is baseline.",
+    "reader_json": null,
+    "sort_order": 4
+  },
+  {
+    "id": "102fba0f-8a32-4448-b49f-c10f258f1f15",
+    "title": "Algorithm & Flow: Generative Art",
+    "author": "Curator Edu Press",
+    "price_rm": "45.00",
+    "category": "tech",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuD30KHaOT-PU6tF_MLdvczRgKq6TOFc0KNQnMXN7pOMZvnqnD1do6lvFOCb6rISy9ojL7Q7qAAdxVaT_0LyjPaZxb5V8YL2xzQDvmLzeJDHMI0kqeGjiJHGhRGRJsWtbJPU_PIyZ93n8axw3JaQGnmVM8taS6EzFSAa4chyUbtIyWBmqGTRDkSKe0_PF_j1eHl8dxzWa51PymROd3e8eaHWWSQJdOH_aBKxylVSaKgGjkHJG8B-3g-MCpkmyXJC-rsoRd29uBTFv0E",
+    "badge": null,
+    "description": "Creative coding workflows for multimedia coursework.",
+    "reader_json": null,
+    "sort_order": 5
+  },
+  {
+    "id": "ecb5a246-1284-4e16-a5ea-a835a060fa07",
+    "title": "The Design of Everyday Things",
+    "author": "Don Norman",
+    "price_rm": "16.99",
+    "category": "design",
+    "image_url": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "Classic human-centered design introduction.",
+    "reader_json": null,
+    "sort_order": 6
+  },
+  {
+    "id": "3b5daf9b-0364-4d24-97d8-b6b76bd3f6b1",
+    "title": "Thinking Fast and Slow",
+    "author": "Daniel Kahneman",
+    "price_rm": "19.99",
+    "category": "philosophy",
+    "image_url": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "How we decide — intuition and deliberate thought.",
+    "reader_json": null,
+    "sort_order": 7
+  },
+  {
+    "id": "71577f21-3ce8-45a2-9004-db89409b9db7",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "price_rm": "21.50",
+    "category": "self-help",
+    "image_url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop",
+    "badge": "Bestseller",
+    "description": "Tiny habits, remarkable results.",
+    "reader_json": null,
+    "sort_order": 8
+  },
+  {
+    "id": "5bbf2596-ae6a-408c-85f4-5518a6fa7e71",
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "price_rm": "18.99",
+    "category": "self-help",
+    "image_url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "Rules for focused success in a distracted world.",
+    "reader_json": null,
+    "sort_order": 9
+  },
+  {
+    "id": "7c3acd13-c0cc-441a-8b19-a55d8e3df351",
+    "title": "Steal Like An Artist",
+    "author": "Austin Kleon",
+    "price_rm": "14.50",
+    "category": "design",
+    "image_url": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "Creativity in the remix era.",
+    "reader_json": null,
+    "sort_order": 10
+  },
+  {
+    "id": "afcd86b9-1f38-42b5-8c32-f31e8c5808c5",
+    "title": "The Innovator's Dilemma",
+    "author": "Clayton Christensen",
+    "price_rm": "22.00",
+    "category": "business",
+    "image_url": "https://images.unsplash.com/photo-1588580000645-4562a6d2c839?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "Disruptive innovation and incumbency.",
+    "reader_json": null,
+    "sort_order": 11
+  },
+  {
+    "id": "13beea4c-6ba3-444f-a882-2c103154a583",
+    "title": "Sprint",
+    "author": "Jake Knapp",
+    "price_rm": "26.50",
+    "category": "business",
+    "image_url": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=600&auto=format&fit=crop",
+    "badge": "New",
+    "description": "Solve big problems and test ideas in five days.",
+    "reader_json": null,
+    "sort_order": 12
+  },
+  {
+    "id": "51622914-8604-43de-86b5-4f37de6862fa",
+    "title": "Summer Reading Bundle",
+    "author": "Curator Edu Press",
+    "price_rm": "75.00",
+    "category": "business",
+    "image_url": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=600&auto=format&fit=crop",
+    "badge": "Bundle",
+    "description": "Five top-rated business and design picks at a bundle price.",
+    "reader_json": null,
+    "sort_order": 13
+  },
+  {
+    "id": "76daf349-0013-4832-ac4e-623781b41e6f",
+    "title": "The Fluidity of Form",
+    "author": "Julianna V. Rossi",
+    "price_rm": "41.99",
+    "category": "design",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuDqeJhlPd8uuLWEyMpQRgeuNJLzZ9YONMU_C3NmNH4qPtwuUP5HQjXa9LARhPMs9YTTvhutgO5IfEgV4hwrbew1SrwCIBCp9BpG3M5qa_PNsSeqb9fct4i9TjRPsE4xAZqxtmqgbIgFIQwZAUFUVi3vEhV6x5_WoLJfeJioLNOqD08__AVKSogkUwmqyOQ7d3_IeKWzoI3L6RUhz6P8KBJNL0hWBIeNDghmRk0Ha5cV4KzsUBN91xWs-50B5mLOUcmlnsDUVdLl5LA",
+    "badge": null,
+    "description": "Form language and rhythm in digital spaces.",
+    "reader_json": {
+      "tag": "Digital Book",
+      "author": "Julianna V. Rossi",
+      "summary": "An exploration of how visual rhythm and form language shape modern digital spaces.",
+      "chapters": [
+        {
+          "label": "Chap 1",
+          "title": "Form and First Impressions",
+          "content": [
+            "The fluidity of form organizes attention so the reader feels a smooth transition from one idea to the next."
+          ]
+        },
+        {
+          "label": "Chap 2",
+          "title": "Spacing and Movement",
+          "content": [
+            "Spacing and predictable transitions create flow."
+          ]
+        },
+        {
+          "label": "Last Chap",
+          "title": "Closing Reflection",
+          "content": [
+            "Form is not an afterthought — it is part of the message."
+          ]
+        }
+      ],
+      "readTime": "12 min read",
+      "libraryType": "digital",
+      "libraryState": "progress",
+      "progressLabel": "In Progress • 64%",
+      "progressPercent": 64
+    },
+    "sort_order": 20
+  },
+  {
+    "id": "0816e78f-297a-43e5-8c16-6a439eeb061f",
+    "title": "Echoes of the Past",
+    "author": "Arthur Penhaligon",
+    "price_rm": "38.99",
+    "category": "philosophy",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuC2tFegvVkC9KA0WKwAaUycludemKTdIz_NeFIMOZ6tP8ROrjfY_vbRD1cbcLzG-YEGyKXuCF6le09d7ib90UhNYt8nfKG7RyyOFLJ8e6_2PRISAi-ecD6Dt2oFd1nkgOZISYzFde4RlSOhHUnxgukh5zL6xQovJ7R5tL01lst0LFCk0Th9bS8P7Pfnvv9lUuPMvvVwAQ2Ho48KwpOGze2HdWHxdNCFbs4HPnekGO0vadOKjVOOSApFdME0Y4c790RdIpxi7pI3loE",
+    "badge": null,
+    "description": "Memory, heritage, and contemporary reading.",
+    "reader_json": {
+      "tag": "Digital Book",
+      "author": "Arthur Penhaligon",
+      "summary": "Memory, heritage, and how historical context shapes how we read today.",
+      "chapters": [
+        {
+          "label": "Chap 1",
+          "title": "What the Archive Keeps",
+          "content": [
+            "History is a conversation between what was preserved and what was forgotten."
+          ]
+        },
+        {
+          "label": "Last Chap",
+          "title": "Closing the Circle",
+          "content": [
+            "The final reflection connects old questions with new contexts."
+          ]
+        }
+      ],
+      "readTime": "18 min read",
+      "libraryType": "digital",
+      "libraryState": "progress",
+      "progressLabel": "Almost Done • 92%",
+      "progressPercent": 92
+    },
+    "sort_order": 21
+  },
+  {
+    "id": "b8d100fc-22b7-4879-a745-1e521def86e7",
+    "title": "Algorithmic Zen",
+    "author": "Satoshi Nakamoto",
+    "price_rm": "36.50",
+    "category": "tech",
+    "image_url": "https://lh3.googleusercontent.com/aida-public/AB6AXuBkUnI-EEXDBeUGPeupXkAMz1clh6QjDLE7Eup6Ovwa3R1GBSFuXKd1p74qFaJaLXdGd5qqMQKi2KFgwg0hGYNcnuM4-1D2YFoOVbnsklxGLZUQiXWwc0sMW-M9ZYANzSLAcuyZ17WHa3Nfcgt_94VnFiq_1ytLW8qwZIqcilcWQHG_c1DAmT5kEhfnTA-_fA-wnOXfOtT_LtEOa8vb-YussSmPc8hkYIW_S3LOk8-gzCuxz3IYAeDtf5T9cCW0Nyom-RC7F2zkDtA",
+    "badge": null,
+    "description": "Structure and calm inside complex systems.",
+    "reader_json": {
+      "tag": "Digital Book",
+      "author": "Satoshi Nakamoto",
+      "summary": "Balance, repetition, and structure in systems built from simple rules.",
+      "chapters": [
+        {
+          "label": "Chap 1",
+          "title": "Removing Unnecessary Motion",
+          "content": [
+            "Algorithmic calm comes from removing unnecessary motion."
+          ]
+        },
+        {
+          "label": "Last Chap",
+          "title": "Closing the Loop",
+          "content": [
+            "Structure can be both functional and peaceful."
+          ]
+        }
+      ],
+      "readTime": "15 min read",
+      "libraryType": "digital",
+      "libraryState": "progress",
+      "progressLabel": "Partway • 45%",
+      "progressPercent": 45
+    },
+    "sort_order": 22
+  },
+  {
+    "id": "e03155df-3208-4613-b437-6dfabc770181",
+    "title": "The Impressionist's Eye",
+    "author": "Lydia Deetz",
+    "price_rm": "34.99",
+    "category": "design",
+    "image_url": "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=600&auto=format&fit=crop",
+    "badge": null,
+    "description": "Light, atmosphere, and interpretation.",
+    "reader_json": {
+      "tag": "Digital Book",
+      "author": "Lydia Deetz",
+      "summary": "Impression, atmosphere, and the role of light in interpretation.",
+      "chapters": [
+        {
+          "label": "Chap 1",
+          "title": "Seeing the Scene",
+          "content": [
+            "The impressionist eye notices what a scene feels like before deciding what it is."
+          ]
+        },
+        {
+          "label": "Last Chap",
+          "title": "The Final Brushstroke",
+          "content": [
+            "Atmosphere can be as important as structure."
+          ]
+        }
+      ],
+      "readTime": "14 min read",
+      "libraryType": "digital",
+      "libraryState": "progress",
+      "progressLabel": "Started • 30%",
+      "progressPercent": 30
+    },
+    "sort_order": 23
+  }
+]

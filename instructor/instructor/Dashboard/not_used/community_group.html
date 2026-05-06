@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu | UI/UX Design Enthusiasts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#6f005c",
+                    "surface-variant": "#dadddf",
+                    "on-primary-fixed-variant": "#350088",
+                    "tertiary": "#aa008e",
+                    "tertiary-container": "#ff87db",
+                    "surface-container-low": "#eff1f2",
+                    "primary-container": "#ac8eff",
+                    "primary-fixed": "#ac8eff",
+                    "inverse-primary": "#9d79ff",
+                    "on-primary": "#f7f0ff",
+                    "on-surface": "#2c2f30",
+                    "on-tertiary-container": "#5f004f",
+                    "outline": "#757778",
+                    "error-dim": "#a70138",
+                    "inverse-surface": "#0c0f10",
+                    "primary-dim": "#5d00e3",
+                    "surface-dim": "#d1d5d7",
+                    "on-background": "#2c2f30",
+                    "secondary-container": "#80deff",
+                    "secondary": "#00647b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffeef5",
+                    "tertiary-fixed": "#ff87db",
+                    "surface-container": "#e6e8ea",
+                    "surface-tint": "#6a1cf6",
+                    "tertiary-dim": "#96007d",
+                    "outline-variant": "#abadae",
+                    "primary": "#6a1cf6",
+                    "on-primary-container": "#2a0070",
+                    "primary-fixed-dim": "#a07dff",
+                    "on-error-container": "#510017",
+                    "background": "#f5f6f7",
+                    "on-error": "#ffefef",
+                    "surface-bright": "#f5f6f7",
+                    "secondary-fixed-dim": "#37d4ff",
+                    "on-tertiary-fixed": "#34002a",
+                    "error-container": "#f74b6d",
+                    "surface-container-highest": "#dadddf",
+                    "on-secondary-fixed": "#003a48",
+                    "inverse-on-surface": "#9b9d9e",
+                    "on-surface-variant": "#595c5d",
+                    "on-secondary-fixed-variant": "#00586d",
+                    "secondary-dim": "#00576c",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-fixed-dim": "#ff6ad8",
+                    "on-secondary-container": "#004e61",
+                    "surface": "#f5f6f7",
+                    "error": "#b41340",
+                    "secondary-fixed": "#80deff",
+                    "surface-container-high": "#e0e3e4",
+                    "on-secondary": "#e2f6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container relative min-h-screen overflow-x-hidden">
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+<div id="nav-mount"></div>
+<script src="../assets/js/instructor-nav.js"></script>
+<script src="../assets/js/instructor-interactions.js"></script>
+<main class="pt-20 p-8 min-h-screen">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Feed Column (Left/Center) -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Group Banner Header -->
+<section class="relative h-64 rounded-xl overflow-hidden shadow-sm">
+<img alt="Group Banner" class="absolute inset-0 w-full h-full object-cover" data-alt="Abstract colorful fluid gradients in purple and pink with soft lighting and professional design aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMBBpqCP92AIFRDOa6WPeqj-Kaza62HXJ76F831QxJe7TWMo779Gv6n-Z3-ekCQN1T4KXO-sstPSl2FdoJ0a3vFgfQI98DIzXAKNDXbNTup-r8rk34waHX-rhTWCRYZHkP4KkdwZScA-qoXCF4Mk-R6JqlKJ_s_qOk4zrfJkyJNvFLMbvArJAEgB-7lBJ_wh-Ew_SPSqoqbBQ8uyOYuslmpLIZSSxOo1EGCChdBOuAtVEWX0nlzwEPh2onpS7p-9Ww5og95iKtYAE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full flex items-end justify-between">
+<div>
+<h1 class="text-4xl font-headline font-black text-white tracking-tight mb-2">UI/UX Design Enthusiasts</h1>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Portrait of a young designer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC69LR4N9YfMH1Lh2IPTuZ_IoQ5Qvab825wzqe15xkMWhLvBcrPXZJ7k0sNHMUirmO7OEeQ-RPME5-VgxByft8ntug18wWpgdl8MsezFf9g8QMS7MNWPjPQsViF1KU3gAgpnD4cOSK1NrUZ5n5d6zKHP9HO_6kPanJMq1PXvDSuZlpLPxddEU9CYQWz7zt3G6TxJuYeJoccnyH2xdFqzqAu8SsbX2jROrBmvmginu7iJb1un2HGmyDxFY5vJeDVV-Cd0Bec8avglOQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Smiling student headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2KjMANs_yGY8fjqOEqmIoQRlsZYSZ4mvBhvYvnRcw46ZZo9bUWAt2d_QGAVW8UXgMpb3NBLZF2lW-UGmpWnV9aJjZmKfjyjix6hihtNVthItrA5ZGkAAH6dzLqFw5Pu5wZqyGxK-eLnCi4D5Sr6tGQaFqqCaFQT0w_gi9N_tkfCh2C3syhaTitKAAjdI_3q73SuGjVLZVpoX_gextQXJKNC9_0cb1pJ-J5WcBRqHicDY5fkO8gd67SAhqUUWB3KBuPzo15QuffAA"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="Creative professional face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZyB6pwxgny-K2kjmUwqtbiqpp8elFqcTxe5dZVKsTiusidAQTlNLfg9r4XEJYrsz10I6qcDQR4wodWmK2BXCeYbnzZTofUjl9FjFGpuFpjkUVX_CnJ-cnpIiMTHj8Bnboba6kCundeMsfL9YhpM-RiysfY7CYYKCNR5amWV5DKDvRMZQKXaSmLTwWsZNjb8q-tQDx5-PuadJDQhh9av418z6bWxpxxJVKFG3IJSIAOekj5czyxrIhTx8EvF_n4VVApgnmWCwa71I"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold">+12k</div>
+</div>
+<span class="text-white/80 font-label text-sm">12,408 members • 42 online</span>
+</div>
+</div>
+<button class="bg-white text-primary px-8 py-3 rounded-full font-label font-bold shadow-lg hover:scale-105 transition-transform">
+                            Joined
+                        </button>
+</div>
+</section>
+<!-- Post Composer -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex items-start gap-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Alex Rivers profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOV9aHqz_FVKQGGp9Uh6ZMe3jKPvFC__5qr6fSjNfJvyjtngmsWO3BySv14Hq_R8eZJQfnRErYm1HxvYUcshN8bhqFTpTgZRMRTKAwNWReImHp_978BVyYWoDfZ5sg6u0KLsoVQvS32IeZdnOHr6AGzFoiOhGj9ZS-6uyExLoY6w7JeHEEafbT8iRlzTGgJGH9ydpM-_jRKm6UgWJhxyA4o8cqSBs6SA8t3pIXAV47Woz1XNXQoQ-0ZgrMxv-4coWKGK8UL0kmuYE"/>
+<div class="flex-1">
+<input type="file" id="cg-composer-img" accept="image/*" class="hidden" aria-hidden="true"/>
+<textarea id="cg-composer-textarea" class="w-full bg-surface-container-low border-none rounded-2xl p-4 focus:ring-1 focus:ring-primary/20 text-sm resize-none h-24 mb-4" placeholder="Share an insight or ask a question..."></textarea>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<button type="button" id="cg-composer-pick-img" data-global-skip="1" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors" title="Attach image from device">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</button>
+<button type="button" id="cg-composer-add-link" data-global-skip="1" class="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors" title="Add a link">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</button>
+</div>
+<button type="button" id="cg-composer-post" data-global-skip="1" class="bg-primary text-white px-6 py-2 rounded-full font-label font-bold text-sm">Post</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Feed Threads -->
+<div id="cg-feed" class="flex flex-col gap-6">
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/CodeLearner99</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/learnprogramming</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">How are you adapting to using GitHub Copilot and ChatGPT for learning?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Are beginners relying too much on AI? I've been trying to build a React project and find myself just copying ChatGPT code without fully understanding it. How do you balance using these tools while still actually learning the fundamentals?
+    </p>
+    <!-- Nested Reply -->
+    <div class="flex gap-3 pt-4 border-t border-slate-50 mb-4">
+        <div class="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">u/</div>
+        <div class="flex-1 bg-surface-container-low p-3 rounded-xl">
+            <p class="text-xs font-bold mb-1">DevMentor_Senior</p>
+            <p class="text-xs text-on-surface-variant leading-relaxed">My rule of thumb: Ask AI to explain the concept, not to write the code. If it gives you code, type it out manually and comment every line to prove you understand it.</p>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 4.8k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 342
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Github Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#2dba4e]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#24292e] text-white flex items-center justify-center ring-2 ring-white">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">vercel/next.js</h3>
+                <p class="text-xs text-slate-500">via GitHub Discussions 1d ago <span class="px-2 py-0.5 ml-2 bg-[#2dba4e]/10 text-[#2dba4e] text-[10px] font-bold rounded-full border border-[#2dba4e]/20">Q&A</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Implementation of Server Actions with external API auth?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I am trying to use the new App Router and Server Actions to authenticate against an external backend API (Django). Where should the secure HTTPOnly cookie be set to handle user sessions seamlessly?
+    </p>
+    <div class="bg-surface-container-low p-4 rounded-xl mb-4 font-mono text-xs overflow-x-auto text-slate-700 dark:text-slate-300">
+        <code>export async function loginAction(formData: FormData) {<br>&nbsp;&nbsp;const API_URL = process.env.API_URL;<br>&nbsp;&nbsp;// How exactly to pass this back to the client?<br>}</code>
+    </div>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 156
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 24
+        </button>
+    </div>
+</article>
+
+<!-- Standard Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgKrNn0Od4vIx_aYUDlwY5Ilr0lQdp2jdD8FLqcOEHVuUzAuxa16127-9__hQ95EdCRUag83l0z2ddRuqVO9QijDXwpywxNxsZr08OYKUWLgUwXjVtfei9OOWNk7QfPTh-qwe5jVUkTAxec9K5-kDvK4GBRH1TUf-AsscrEayzZXu3bAOaxxzHaFs2uPzVrxPi0sr_W3qBdcxHGEo5I-lEeCrd5YC_MXZK7BfCTmiB5v9aq7I1e5sPWkilcNdOBIusvjiRTUgyydI"/>
+            <div>
+                <h3 class="font-headline font-bold text-sm">Dr. Elena Thorne</h3>
+                <p class="text-xs text-slate-500">2h ago • <span class="text-primary font-bold">University Hub</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Strategies for Effective Peer Review in Thesis Writing</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I've noticed a significant jump in quality when students use structured rubrics for their peer reviews. Here's a breakdown of the framework I use for my undergraduate track...
+    </p>
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 1.2k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 84
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Standard Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoGYVGf_w7dYRdewK5t6TTIVqwH7tM62ODVwyasSxEhnH3gGk3ehZ_9b95A1oEvN_JvIaUdhg3yD4HE_e_6h3Inh__Gsbb9DDxOXIQGBoWjv7-9H22Tdqdy9_TUgzsulzbBO0Cde89WW8dkYjxRl0-lwfpZrRpG3-c6SoTJB20j2rJrwTwliwY-Fbdt8viEJTfaMuOlJCW2qilOx50jHKewHTCYA9rDc43pVQHYhnB_Jjr3U_kA5vNm0iMojdhQT865HiW7ZT8P5M"/>
+            <div>
+                <h3 class="font-headline font-bold text-sm">Alex Rivera</h3>
+                <p class="text-xs text-slate-500">5h ago • <span class="text-primary font-bold">Discussion</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Best bookstores for vintage research papers in London?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Looking for some physical archives to browse this weekend. Any hidden gems near Bloomsbury?
+    </p>
+    <div class="rounded-lg overflow-hidden mb-4">
+        <img class="w-full h-64 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBatw5yUJ54ugwZXv_qN2_9Vsy56sTO-S5BEgyxpCA2HR8KzWve-Tyt4GEqaX6Q05Gcy8d9RA1Dq1SFoOBza1h2YyTHlCtI0jXNzDrnv0pYSaEBsAKLKX-O0xtvCq5VS4KB4LNeuqwuVSpGwxrL3kntVr42Df7KE7MjfIhyWx_DF1sRsNpXDTuRsLmcAC0f4c4rN4L9chb8jUwtVF_DlhjWFa9Zyy2fbEGP_ZhSPsuULVAIVpwQ2AnOLeh1pkKCWdXxc0JdB-TsOFc"/>
+    </div>
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 245
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 12
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/DataNerd24</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/datascience</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Is Pandas still the standard, or should I jump to Polars?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I'm working with 15GB+ datasets now and Pandas is choking my RAM. I've read a lot about Polars being written in Rust and being extremely fast. Has the broader data science industry adopted it, or is the learning curve and ecosystem friction not worth it?
+    </p>
+    <!-- Nested Reply -->
+    <div class="flex gap-3 pt-4 border-t border-slate-50 mb-4">
+        <div class="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">u/</div>
+        <div class="flex-1 bg-surface-container-low p-3 rounded-xl">
+            <p class="text-xs font-bold mb-1">DataEngineerPro</p>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Polars is mature enough. I switched our entire ETL pipeline to it and dropped execution time by 80%. Worth learning the lazy evaluation API.</p>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 2.1k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 158
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Github Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#2dba4e]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#24292e] text-white flex items-center justify-center ring-2 ring-white">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">facebook/react</h3>
+                <p class="text-xs text-slate-500">via GitHub Discussions 8h ago <span class="px-2 py-0.5 ml-2 bg-[#2dba4e]/10 text-[#2dba4e] text-[10px] font-bold rounded-full border border-[#2dba4e]/20">Issue</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">useEffect triggering twice in development mode?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I upgraded to React 18 and suddenly all my API calls in standard useEffects are firing twice. I understand Strict Mode intentionally mounts/unmounts/remounts components, but what is the official recommended pattern to avoid duplicate requests?
+    </p>
+    <div class="bg-surface-container-low p-4 rounded-xl mb-4 font-mono text-xs overflow-x-auto text-slate-700 dark:text-slate-300">
+        <code>useEffect(() => {<br>&nbsp;&nbsp;fetchData();<br>&nbsp;&nbsp;// Need a robust abort controller pattern here?<br>}, []);</code>
+    </div>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 984
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 210
+        </button>
+    </div>
+</article>
+
+<!-- Standard Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiZz0_dkmZ1W2uhDcXzvwWJ1NxxCnTznY0iK0BT4-uEFjoScajgGcSaEWPmpa6K5Sd-J4IUx4yY2LH7GM7oAiAMQWIH4YgyYrmmYbBnWZzAXpebFgUeGGrAvBV3VSBfNGDUusdrE345Pg8bfZdb7hAsz2cXUEkM7rHi5uKNjlgoI8pdEKNmBcrQWNXckTiyK3kvmlBdK11S_WdN8tuuf4po7sVbIjRZQ1RKPYuOq2s70A174BKEnep6BavsNVu-D9WsmIJ3zL6aoc"/>
+            <div>
+                <h3 class="font-headline font-bold text-sm">Prof. Lisa Vance</h3>
+                <p class="text-xs text-slate-500">10h ago • <span class="text-primary font-bold">Faculty Announcements</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Fall semester grading guidelines updated</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Please review the updated standard rubrics. We've introduced a secondary metric for peer collaboration to reward active contributions in study groups.
+    </p>
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 120
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 4
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/DevOpsRookie</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/devops</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Kubernetes feels like overkill for a standard monolith</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Everyone says 'just use Docker and K8s' but I spent 3 days fighting Helm charts just to deploy a basic Express app and a Postgres database. Am I crazy or is using a simple VPS + Docker Compose just infinitely better for 99% of solo projects?
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 6.5k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 512
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Github Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#2dba4e]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#24292e] text-white flex items-center justify-center ring-2 ring-white">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">twbs/bootstrap</h3>
+                <p class="text-xs text-slate-500">via GitHub Discussions 2d ago <span class="px-2 py-0.5 ml-2 bg-[#2dba4e]/10 text-[#2dba4e] text-[10px] font-bold rounded-full border border-[#2dba4e]/20">Release</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">v5.3.3 Release - Themed components and bug fixes</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        We are releasing a path update addressing multiple accessibility issues with dropdowns and modals, plus some enhancements to the color mode toggle script. Check the changelog for details.
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 240
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 16
+        </button>
+    </div>
+</article>
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/StudentLife9</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/college</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Best note-taking technique for highly dense theoretical classes?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I'm currently taking Advanced Operating Systems and the amount of theory per lecture is insane. I've tried Cornell Notes and Obsidian/Roam, but nothing seems to stick. Any advice?
+    </p>
+    <!-- Nested Reply -->
+    <div class="flex gap-3 pt-4 border-t border-slate-50 mb-4">
+        <div class="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-xs font-bold text-slate-600">u/</div>
+        <div class="flex-1 bg-surface-container-low p-3 rounded-xl">
+            <p class="text-xs font-bold mb-1">GradHacker</p>
+            <p class="text-xs text-on-surface-variant leading-relaxed">Stop transcribing. Write down questions during the lecture, not facts. Then use active recall after class to answer your own questions.</p>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 3.2k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 128
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Standard Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHjMIdMmmLWAEhDge29eIWS3nqMSMJQbDz3HxazV3vu12zGzVGRnz4UOcOcLR8k_Tiv9nArow9gIi0C63j7T9zF6j8mSkiCDRgTQ6CEp9lhsiki6rMcxTGMVHrZCLQaCr5I21U8AVx-U_g1YdoZ27LX05a0-vViP6cc8Zj2CV30EwZ8f-2LY-kuamwyCHrTCKPMtHp0WNPcovHhSjhZF3UJW9-KYxdKke3UClmroMGaaBg9UAH67SJmMxKZsH-WkGY8muJvfuDl4M"/>
+            <div>
+                <h3 class="font-headline font-bold text-sm">Marcus Chen</h3>
+                <p class="text-xs text-slate-500">2d ago • <span class="text-primary font-bold">UI/UX Club</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Figma design system review: Button variants</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        I've structured our core button components into primary, secondary, and tertiary contexts. Need some feedback on the hover states, especially for the high-contrast dark mode variations.
+    </p>
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 45
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 12
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Github Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#2dba4e]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#24292e] text-white flex items-center justify-center ring-2 ring-white">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">python/cpython</h3>
+                <p class="text-xs text-slate-500">via GitHub Discussions 3d ago <span class="px-2 py-0.5 ml-2 bg-[#2dba4e]/10 text-[#2dba4e] text-[10px] font-bold rounded-full border border-[#2dba4e]/20">Proposal</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">PEP 703: Making the Global Interpreter Lock Optional in CPython</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        A high-level discussion on the current experimental implementation of a GIL-free Python. What are the potential impacts on C extensions, memory usage, and single-threaded performance?
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 3.1k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 420
+        </button>
+    </div>
+</article>
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/FrontendWizard</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/reactjs</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Tailwind vs CSS Modules in 2026?</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        It feels like the debate never ends. Tailwind is super fast to write but my JSX looks like garbage. CSS Modules keep things clean but context switching is annoying. What does your team actually use in production?
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 1.5k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 285
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Standard Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-primary">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <img class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF9JtyDSxPSYdlaqozkZ-SMDn9K5qJ5D_FJN6wz1zqyLL53zxmpnyDuzaY4L1zEG9p-x8eRXbjtJ7R8QRM6rUIgVeVlVfpfUEaAhKVr19XXMd7TpT5u60t5C90DMeC9HU-YQnEWHosQEtwwaplDZjEQ5oV0CwjqHZXhGIck7SCR31LEtkgRlx_whLk8YlgmwlOBVxJvP6pPXU8ZoFelNEoQG9RQp0fR3S8Wd6KC23pLnZFdE6Lz3IhGRd4HcrTVSWvUIoyquIgW2o"/>
+            <div>
+                <h3 class="font-headline font-bold text-sm">Sofia Russo</h3>
+                <p class="text-xs text-slate-500">4d ago • <span class="text-primary font-bold">Career Counseling</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Upcoming Resume Workshop via Zoom</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Join us this Friday! We'll be doing live teardowns of software engineering and design resumes. Please submit yours in the thread below if you want it reviewed on screen.
+    </p>
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 310
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 48
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Reddit Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#ff4500]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff4500] text-white flex items-center justify-center font-bold text-xl ring-2 ring-white">r/</div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">u/SysAdminLife</h3>
+                <p class="text-xs text-slate-500">via Reddit <span class="px-2 py-0.5 ml-2 bg-[#ff4500]/10 text-[#ff4500] text-[10px] font-bold rounded-full border border-[#ff4500]/20">r/homelab</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">Finally finished my 10G network upgrade!</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        Ran Cat6a through the attic, set up an SFP+ switch, and migrated my NAS to TrueNAS Scale. Getting solid 9.5Gbps throughput between the workstation and the array. Best weekend project ever.
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-[#ff4500] text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="arrow_upward" style="font-variation-settings: 'FILL' 1;">arrow_upward</span> 8.3k
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="chat_bubble">chat_bubble</span> 490
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors ml-auto">
+            <span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+        </button>
+    </div>
+</article>
+
+<!-- Github Style Post -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border-l-4 border-[#2dba4e]">
+    <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#24292e] text-white flex items-center justify-center ring-2 ring-white">
+                <svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+            </div>
+            <div>
+                <h3 class="font-headline font-bold text-sm">microsoft/vscode</h3>
+                <p class="text-xs text-slate-500">via GitHub Discussions 1w ago <span class="px-2 py-0.5 ml-2 bg-[#2dba4e]/10 text-[#2dba4e] text-[10px] font-bold rounded-full border border-[#2dba4e]/20">Bug Tracker</span></p>
+            </div>
+        </div>
+        <button class="text-slate-400"><span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span></button>
+    </div>
+    
+    <h2 class="text-lg font-headline font-extrabold mb-2 leading-tight">High CPU utilization when dealing with large monorepo</h2>
+    <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">
+        When opening a typescript monorepo with 50+ packages, the built-in TS language server spins up to 100% CPU on 4 cores and stays there. Disabling auto-imports helps, but it is barely usable.
+    </p>
+
+    <div class="flex items-center gap-6 pt-4 border-t border-slate-50">
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="thumb_up">thumb_up</span> 422
+        </button>
+        <button class="flex items-center gap-2 text-slate-500 text-xs font-bold hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm" data-icon="forum">forum</span> 56
+        </button>
+    </div>
+</article>
+</div>
+<!-- Top Contributors Section (Within main content for better visibility) -->
+<section>
+<h2 class="font-headline font-black text-xl mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="stars">stars</span>
+                        Top Contributors
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover border-4 border-primary/10" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCI94CHEq8Uru_6YV_djzpSWPu8FZLN156quTFlKo2DwDepQOU0jKrDtnILXvfs4rhIPLQnTXzeIUhlc_8kLqtATMDbFQFg6UfpSvmRxwUpNozcHAtuSEpergch9U8r1FBsat9siWyKu50xPGh_x51owBAmfJz2S_zZV_OYf8DPZCUCJxngwCHLIN7yPSoSMWiRoXQXwbK000T-YUeiUEGU_G5dAoB5sRR10MHvZ8pDulR9gGKWZ8OZvb9AwkiSy6sNX803o2eq9w"/>
+<p class="font-bold text-sm">Elena Vance</p>
+<p class="text-[10px] text-primary font-bold uppercase tracking-wider mb-2">Lead Mentor</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] font-bold">1.2k Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFaIafVZB_-NdEFCKqooLkdxwQo9xPan_Mh7AklJ8byPX0NPEIdY0FzTfoSOEZ0armN-EKirZ-H7hphL-ZHH5dudw6NH3Ga9cUKpjuVKJf8ugdNtFzomaGoI83Z-T-tFmGcZcno3xqKBM6vHSooflbsb1kzVT7oRXaFx4jp1tp8IOZZyP3eFMW1bnVdJVAUXn0woCtJDBBe9u6Q2Z8mCzGRj0paQcDe7dD0EKKO-bd2XxqKVjiZdY-NhogYB0lQskyOIpligggsHo"/>
+<p class="font-bold text-sm">David Oh</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Active Member</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">980 Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF9JtyDSxPSYdlaqozkZ-SMDn9K5qJ5D_FJN6wz1zqyLL53zxmpnyDuzaY4L1zEG9p-x8eRXbjtJ7R8QRM6rUIgVeVlVfpfUEaAhKVr19XXMd7TpT5u60t5C90DMeC9HU-YQnEWHosQEtwwaplDZjEQ5oV0CwjqHZXhGIck7SCR31LEtkgRlx_whLk8YlgmwlOBVxJvP6pPXU8ZoFelNEoQG9RQp0fR3S8Wd6KC23pLnZFdE6Lz3IhGRd4HcrTVSWvUIoyquIgW2o"/>
+<p class="font-bold text-sm">Sofia Russo</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Curator</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">845 Karma</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm text-center">
+<img class="w-16 h-16 rounded-full mx-auto mb-3 object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXcrRT8_VNHEgbp4J84wYBpcFdwc9VxyoetTBa0Aohsh70hH9Gb99fiJM9KKUmvBLmXbNnneJZwa4w58qnnsx7TkJO3WnhZzyKqXGXVATZD6JxWrBHrWbmgi6rRgZrKj7TwusH2b20Igcagk1YTYRP8IFcBilTPGeiXT5y8J9RvlCUb8wIZDlD8VTOsTg4gdRFoTM5-vFgddE1surZCgbWFjL1CfMNpxnvA5gRwMVRVtzw5W2wZnI5N-awu4LBHgn_KFFortLXw_0"/>
+<p class="font-bold text-sm">Liam Grey</p>
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Prototyper</p>
+<div class="flex justify-center gap-1 text-tertiary">
+<span class="text-[10px] font-bold">720 Karma</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar Widgets (Right) -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<!-- Upcoming Events Widget -->
+<div class="bg-surface-container-high rounded-xl p-6">
+<h3 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+                        Upcoming Events
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4">
+<div class="flex flex-col items-center bg-primary-container/20 px-3 py-2 rounded-lg h-fit">
+<span class="text-xs font-bold text-primary">OCT</span>
+<span class="text-xl font-headline font-black text-primary">24</span>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Live Q&amp;A with Senior Designer</h4>
+<p class="text-xs text-slate-500 mt-1">10:00 AM • Google Meet</p>
+<button class="text-xs font-bold text-primary mt-3 hover:underline">Set Reminder</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg flex gap-4">
+<div class="flex flex-col items-center bg-primary-container/20 px-3 py-2 rounded-lg h-fit">
+<span class="text-xs font-bold text-primary">OCT</span>
+<span class="text-xl font-headline font-black text-primary">28</span>
+</div>
+<div>
+<h4 class="font-bold text-sm leading-tight">Portfolio Review Workshop</h4>
+<p class="text-xs text-slate-500 mt-1">02:30 PM • Group Voice</p>
+<button class="text-xs font-bold text-primary mt-3 hover:underline">Join Waiting List</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-white text-on-surface-variant font-label font-bold text-xs rounded-full hover:bg-white/50 transition-colors">
+                        View All Events
+                    </button>
+</div>
+<!-- Shared Resources Widget -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<h3 class="font-headline font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="folder_open">folder_open</span>
+                        Shared Resources
+                    </h3>
+<ul class="flex flex-col gap-4">
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-error/10 text-error flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<p class="font-bold text-xs">UX Research Guide.pdf</p>
+<p class="text-[10px] text-slate-400">2.4 MB • Updated yesterday</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-secondary/10 text-secondary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+<div>
+<p class="font-bold text-xs">Design System Kit</p>
+<p class="text-[10px] text-slate-400">Figma Community Link</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-slate-50 rounded-lg transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+</div>
+<div>
+<p class="font-bold text-xs">Color Theory Basics</p>
+<p class="text-[10px] text-slate-400">Group Wiki Page</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</li>
+</ul>
+<button class="w-full mt-6 text-primary font-label font-bold text-xs flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> Upload Resource
+                    </button>
+</div>
+<!-- Group Stats Mini-Widget -->
+<div class="relative rounded-xl p-8 overflow-hidden bg-on-surface text-white">
+<div class="relative z-10">
+<h4 class="font-headline font-bold text-sm mb-4">Your Engagement</h4>
+<div class="flex items-end gap-2 mb-2">
+<span class="text-3xl font-black text-secondary-container">82%</span>
+<span class="text-[10px] font-bold text-slate-400 mb-1">Top 5% of group</span>
+</div>
+<div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 82%;"></div>
+</div>
+</div>
+<div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-8 right-8 bg-surface-bright/70 backdrop-blur-xl p-4 rounded-xl shadow-2xl flex items-center justify-center text-primary group hover:scale-105 transition-all">
+<span class="material-symbols-outlined text-3xl" data-icon="add_comment">add_comment</span>
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-3 transition-all duration-300 font-label font-bold whitespace-nowrap">New Thread</span>
+</button>
+</body></html>

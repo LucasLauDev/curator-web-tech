@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course roster | Instructor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: "#6a1cf6",
+        surface: "#f5f6f7",
+        "on-surface": "#2c2f30",
+        "on-surface-variant": "#595c5d",
+        "surface-container-low": "#eff1f2",
+        "surface-container-lowest": "#ffffff",
+        outline: "#757778",
+        error: "#b41340",
+        secondary: "#00647b",
+      },
+      fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Manrope"] },
+    },
+  },
+};
+</script>
+<link rel="stylesheet" href="../../assets/css/instructor-nav.css"/>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body">
+<div id="nav-mount"></div>
+<script src="../../assets/js/instructor-nav.js"></script>
+
+<main class="p-4 sm:p-8 lg:p-12 pb-32 max-w-7xl mx-auto min-w-0">
+  <header class="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 mb-8">
+    <div>
+      <p class="text-xs font-bold text-primary uppercase tracking-widest mb-2"><a href="instructor_my_courses.html" class="hover:underline">&larr; My courses</a></p>
+      <h1 class="text-3xl lg:text-4xl font-black font-headline text-on-surface tracking-tight">Course roster</h1>
+      <p id="roster-course-title" class="text-on-surface-variant font-medium mt-2">Loading…</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <button type="button" id="roster-export-csv" class="bg-surface-container-lowest px-6 py-3 rounded-xl font-label font-bold text-on-surface border border-slate-200 shadow-sm hover:bg-slate-50 flex items-center gap-2">
+        <span class="material-symbols-outlined text-xl">file_download</span> Export CSV
+      </button>
+      <button type="button" id="roster-add-person" class="bg-gradient-to-br from-primary to-violet-500 text-white px-8 py-3 rounded-xl font-label font-bold shadow-lg shadow-primary/20 flex items-center gap-2">
+        <span class="material-symbols-outlined text-xl">person_add</span> Add people
+      </button>
+    </div>
+  </header>
+
+  <p id="roster-error" class="hidden mb-4 text-sm font-bold text-red-600"></p>
+
+  <div class="bg-surface-container-low p-2 rounded-xl mb-6 flex flex-wrap items-center gap-2">
+    <button type="button" data-roster-filter="all" class="roster-filter-btn px-6 py-2.5 rounded-lg font-label font-bold text-sm bg-white text-primary shadow-sm">All</button>
+    <button type="button" data-roster-filter="active" class="roster-filter-btn px-6 py-2.5 rounded-lg font-label font-bold text-sm text-slate-600 hover:bg-white/70">Active</button>
+    <button type="button" data-roster-filter="done" class="roster-filter-btn px-6 py-2.5 rounded-lg font-label font-bold text-sm text-slate-600 hover:bg-white/70">Completed</button>
+    <span id="roster-count-line" class="ml-auto text-sm text-slate-500 pr-2"></span>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-lg shadow-slate-200/40 overflow-hidden border border-slate-100">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse min-w-[720px]">
+        <thead>
+          <tr class="bg-slate-50/80">
+            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Person</th>
+            <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Contact</th>
+            <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Role</th>
+            <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Joined</th>
+            <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Modules</th>
+            <th class="px-4 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label">Progress</th>
+            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 font-label text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="roster-tbody" class="divide-y divide-slate-100">
+          <tr><td colspan="7" class="px-8 py-10 text-center text-slate-500">Loading roster…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Add person modal -->
+<div id="add-person-modal" class="fixed inset-0 z-[200] hidden" aria-hidden="true">
+  <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" id="add-person-backdrop"></div>
+  <div class="absolute inset-x-4 top-24 max-w-md mx-auto bg-white rounded-2xl shadow-2xl p-6 border border-slate-100">
+    <h2 class="text-xl font-black font-headline text-on-surface mb-1">Add to this course</h2>
+    <p class="text-sm text-slate-600 mb-4">Invite by email — students or instructors enrolled as course staff appear in the learner roster.</p>
+    <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1" for="add-person-email">Email</label>
+    <input id="add-person-email" type="email" autocomplete="email" class="w-full rounded-xl border border-slate-200 px-4 py-3 mb-4" placeholder="name@student.uts.edu.my"/>
+    <div class="flex gap-3">
+      <button type="button" id="add-person-cancel" class="flex-1 py-3 rounded-xl border border-slate-200 font-bold text-sm">Cancel</button>
+      <button type="button" id="add-person-submit" class="flex-1 py-3 rounded-xl bg-primary text-white font-black text-sm">Add</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../assets/js/instructor-course-roster-live.js"></script>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link rel="stylesheet" href="../../shared/responsive-base.css" />
+  <title>CuratorEdu | Landing Page V2</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "error": "#b41340",
+            "surface-variant": "#dadddf",
+            "tertiary": "#aa008e",
+            "on-primary-fixed": "#000000",
+            "on-tertiary-fixed-variant": "#6f005c",
+            "surface-container-lowest": "#ffffff",
+            "primary-dim": "#5d00e3",
+            "surface-dim": "#d1d5d7",
+            "on-secondary-container": "#004e61",
+            "outline": "#757778",
+            "primary-fixed": "#ac8eff",
+            "outline-variant": "#abadae",
+            "on-error": "#ffefef",
+            "surface": "#f5f6f7",
+            "surface-container": "#e6e8ea",
+            "primary-container": "#ac8eff",
+            "secondary-fixed": "#80deff",
+            "on-secondary": "#e2f6ff",
+            "on-background": "#2c2f30",
+            "tertiary-dim": "#96007d",
+            "on-primary": "#f7f0ff",
+            "on-surface-variant": "#595c5d",
+            "primary": "#6a1cf6",
+            "inverse-surface": "#0c0f10",
+            "background": "#f5f6f7",
+            "tertiary-container": "#ff87db",
+            "surface-bright": "#f5f6f7",
+            "inverse-on-surface": "#9b9d9e",
+            "inverse-primary": "#9d79ff",
+            "on-primary-container": "#2a0070",
+            "secondary-dim": "#00576c",
+            "error-container": "#f74b6d",
+            "tertiary-fixed-dim": "#ff6ad8",
+            "secondary-fixed-dim": "#37d4ff",
+            "secondary-container": "#80deff",
+            "on-tertiary-fixed": "#34002a",
+            "on-error-container": "#510017",
+            "primary-fixed-dim": "#a07dff",
+            "error-dim": "#a70138",
+            "on-tertiary": "#ffeef5",
+            "surface-tint": "#6a1cf6",
+            "on-tertiary-container": "#5f004f",
+            "secondary": "#00647b",
+            "on-surface": "#2c2f30",
+            "on-primary-fixed-variant": "#350088",
+            "surface-container-low": "#eff1f2",
+            "on-secondary-fixed": "#003a48",
+            "tertiary-fixed": "#ff87db",
+            "on-secondary-fixed-variant": "#00586d",
+            "surface-container-highest": "#dadddf",
+            "surface-container-high": "#e0e3e4"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["Plus Jakarta Sans"],
+            body: ["Inter"],
+            label: ["Manrope"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #6a1cf6 0%, #aa008e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .bg-primary-gradient {
+      background: linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%);
+    }
+
+    .no-scrollbar::-webkit-scrollbar,
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-primary-container/30">
+  <nav
+    class="fixed top-0 w-full z-50 flex h-16 lg:h-20 justify-between items-center px-4 sm:px-6 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
+    <div class="flex items-center gap-4 md:gap-8 min-w-0">
+      <a href="index.html" class="text-2xl font-black tracking-tight text-violet-600 font-headline hover:opacity-90 transition-opacity">CuratorEdu</a>
+      <div class="hidden md:flex gap-6 items-center">
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="course_discovery.html">Courses</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="comunity_forum_nonuser.html">Forum</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="minimal_book_store.html">Bookstore</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="help.html">Help</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <a id="landing-nav-login" class="hidden sm:block px-4 py-2 text-sm font-bold text-primary" href="login.html">Login</a>
+      <a id="landing-nav-cta" href="role_base_registration.html"
+        class="px-6 py-2.5 text-sm font-bold text-white bg-primary-gradient rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all font-label">Get
+        Started</a>
+    </div>
+  </nav>
+
+  <main class="pt-16 lg:pt-20 pb-16 md:pb-24">
+    <section class="relative min-h-screen flex items-center overflow-hidden px-6">
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-tertiary/5"></div>
+        <div class="absolute top-[-5%] -left-24 w-[34rem] h-[34rem] bg-primary/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-8%] -right-24 w-[28rem] h-[28rem] bg-tertiary/20 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high mb-8">
+            <span class="material-symbols-outlined text-tertiary text-sm">verified</span>
+            <span class="text-on-surface-variant font-label text-xs uppercase tracking-widest font-bold">The Digital
+              Curator for Gen Z</span>
+          </div>
+          <h1
+            class="font-headline text-4xl sm:text-5xl md:text-7xl font-extrabold text-on-surface tracking-tight leading-[1.05] mb-6">
+            Level Up Your Life.<br />
+            <span class="text-gradient">Study smarter. Learn faster.</span>
+          </h1>
+          <p class="text-xl text-on-surface-variant max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+            A curated educational ecosystem for creators, thinkers, and builders. Courses, community, and books in one
+            fluid platform.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a class="bg-primary-gradient text-white px-12 py-6 rounded-lg text-xl font-bold shadow-xl shadow-primary/30 active:scale-95 transition-all"
+              href="#courses">Explore Courses</a>
+            <a class="bg-surface-container-lowest text-on-surface border border-outline-variant/20 px-12 py-6 rounded-lg text-xl font-bold hover:bg-surface-container-low transition-all active:scale-95"
+              href="#live-discussions">Join Forum</a>
+            <a class="bg-primary-gradient text-white px-12 py-6 rounded-lg text-xl font-bold shadow-xl shadow-primary/30 active:scale-95 transition-all"
+              href="#bookstore">Bookstore</a>
+          </div>
+        </div>
+
+        <div class="relative min-h-[520px] hidden lg:block">
+          <div class="absolute top-0 right-0 w-72 p-6 glass-card rounded-xl shadow-2xl transform rotate-3 z-30">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-secondary-container">auto_stories</span>
+              </div>
+              <div>
+                <p class="text-xs font-label font-bold text-secondary">NEW ARRIVAL</p>
+                <p class="font-headline font-bold text-sm">Advanced UX Design</p>
+              </div>
+            </div>
+            <div class="h-2 w-full bg-surface-container-highest rounded-full mb-2">
+              <div class="h-2 w-3/4 bg-primary rounded-full"></div>
+            </div>
+            <p class="text-[10px] text-on-surface-variant font-medium">75% Complete • 2h left</p>
+          </div>
+
+          <div
+            class="absolute bottom-10 left-0 w-80 p-8 bg-surface-container-lowest rounded-xl shadow-2xl -rotate-2 z-20">
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-headline font-extrabold text-lg">Community</span>
+              <span class="material-symbols-outlined text-primary">groups</span>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-[10px] font-bold">
+                  JD</div>
+                <div class="bg-surface-container-low p-2 rounded-lg text-xs flex-1">Is anyone studying for the final
+                  exam?</div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-[10px] font-bold">AS
+                </div>
+                <div class="bg-surface-container-low p-2 rounded-lg text-xs flex-1">Check out these notes on Module 4!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-20 pointer-events-none">
+            <img alt="Students studying" class="w-full h-full object-cover rounded-xl"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOYO6viaQELJbvO83oiEXNlIc3sfZIXTHL4Ifr0H-asDgPvO32MQPqnVW862pcqa2AQD1lgJ0MdP0ug9JquXrWvLgbNtQ4fPFHMHwz_kG9gC5SQ4YEHijMX8EDAbDmZx-F2nOkVD2MakGjgwzWdsScrY0o0WG1iFIIbRE8XpN_TbBCer8F_hpiBLjNn0w2whQPluT-N0iPO7Twu_YpiflPIRxMtZJhlN8c0xTufzwne_j1lOnszZdjPfcbFvqSfPnJPWenx5Qsf_Q" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="community" class="py-12 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-12">
+        <div class="text-center md:text-left">
+          <p class="text-on-surface-variant font-label text-sm uppercase tracking-widest font-bold mb-2">The Community
+          </p>
+          <h2 class="font-headline text-3xl font-extrabold text-on-surface">10,000+ students learning</h2>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16">
+          <div class="text-center">
+            <p class="text-4xl font-headline font-black text-primary">500+</p>
+            <p class="text-on-surface-variant font-medium text-sm">Premium Courses</p>
+          </div>
+          <div class="text-center">
+            <p class="text-4xl font-headline font-black text-tertiary">25k</p>
+            <p class="text-on-surface-variant font-medium text-sm">Active Discussions</p>
+          </div>
+          <div class="text-center hidden lg:block">
+            <p class="text-4xl font-headline font-black text-secondary">98%</p>
+            <p class="text-on-surface-variant font-medium text-sm">Satisfaction Rate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="font-headline text-4xl md:text-5xl font-extrabold mb-4">Curated for Your <span
+            class="text-gradient">Success</span></h2>
+        <p class="text-on-surface-variant text-lg">Powerful features designed to make education feel effortless.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+        <div
+          class="md:col-span-3 bg-surface-container rounded-xl p-10 flex flex-col justify-between overflow-hidden relative group">
+          <div class="z-10">
+            <div class="w-14 h-14 bg-primary-container rounded-lg flex items-center justify-center mb-6"><span
+                class="material-symbols-outlined text-on-primary-container text-3xl">bolt</span></div>
+            <h3 class="font-headline text-2xl font-bold mb-4">Bite-sized Learning</h3>
+            <p class="text-on-surface-variant leading-relaxed">Micro-lessons for fast-paced lifestyles. Learn complex
+              topics in 10-minute bursts that actually stick.</p>
+          </div>
+          <div
+            class="absolute bottom-[-10%] right-[-5%] w-48 h-48 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all">
+          </div>
+        </div>
+        <div
+          class="md:col-span-3 bg-surface-container-lowest border border-outline-variant/10 rounded-xl p-10 shadow-sm">
+          <div class="w-14 h-14 bg-secondary-container rounded-lg flex items-center justify-center mb-6"><span
+              class="material-symbols-outlined text-on-secondary-container text-3xl">diversity_3</span></div>
+          <h3 class="font-headline text-2xl font-bold mb-4">Social Learning</h3>
+          <p class="text-on-surface-variant leading-relaxed">Connect with peers, join study groups, and crowdsource
+            solutions to your toughest questions.</p>
+        </div>
+        <div
+          class="md:col-span-2 bg-surface-container-lowest border border-outline-variant/10 rounded-xl p-10 shadow-sm">
+          <div class="w-14 h-14 bg-tertiary-container rounded-lg flex items-center justify-center mb-6"><span
+              class="material-symbols-outlined text-on-tertiary-container text-3xl">insights</span></div>
+          <h3 class="font-headline text-2xl font-bold mb-4">Smart Tracking</h3>
+          <p class="text-on-surface-variant leading-relaxed">AI-powered analytics that reveal strengths and gaps so your
+            next study session is intentional.</p>
+        </div>
+        <div class="md:col-span-4 bg-surface-dim rounded-xl p-10 relative overflow-hidden group">
+          <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+            <div class="flex-1">
+              <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 shadow-md"><span
+                  class="material-symbols-outlined text-on-surface text-3xl">menu_book</span></div>
+              <h3 class="font-headline text-2xl font-bold mb-4">Integrated Bookstore</h3>
+              <p class="text-on-surface-variant leading-relaxed">Get required reading in digital or physical format
+                without leaving the platform.</p>
+            </div>
+            <div
+              class="hidden sm:block w-48 h-64 bg-surface-container-lowest rounded-lg shadow-xl transform rotate-6 group-hover:rotate-0 transition-transform flex-shrink-0">
+              <img alt="Book cover" class="w-full h-full object-cover rounded-lg"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRoEOx7-3_PMh-LHw9a3EVFR1dodej2uw_TLpquoLT0kSz23H96KoQZspu819KWGGIVG-T2BFtrpDiPFyHJQKMQ54QJ2RjrJ7mYGub4cscrhrrt0K_66OTQOGA4sD_BIaYfTlnQaUTotQRxkmBUYVH2Wc0N11rM8l1pFiCRJ7Cw7FuwnT3w_wFcTMJmyXPgfUWmhQVPHH7xYg5C4Mcz2jFSxEA3RaSJNKfzs0kv4UnWWdGRHwAOKaVxk15RfgPG-wXKN0EFpicpfM" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="live-discussions" class="py-20 bg-surface-container-low px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-16">
+          <div>
+            <h2 class="text-4xl font-black font-headline tracking-tight">Live Discussions</h2>
+            <p class="text-on-surface-variant font-medium">Join the global conversation with fellow learners.</p>
+          </div>
+          <span
+            class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-bold"><span
+              class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>4.2K ACTIVE NOW</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div class="md:col-span-8 bg-surface-container-lowest p-6 sm:p-8 rounded-xl shadow-sm space-y-8">
+            <div class="flex items-center gap-4">
+              <img alt="Avatar" class="w-12 h-12 rounded-full border-2 border-surface"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnmyAblCePfEPEnBZtfVTaiPOhYprSz18iVHjgSe-y2LYPEpeh19uISarBk2T4JN5f20rz-77L5Flj0oNzXvEPX_udUDbWsbq5QLyPqsD3yxOoW4bS0vYhwPIZmqqILRDMi91UUVFXHyweZjmZeBdRRrGAyhObXHoPBE74eK_0K1n6y2PbJAyMgkR6RNPhrtrrJoh-CSKawZymwwpflsV_y1HLcrw7o4SCSWRzUXrsZwqkKeBuILbziLWq6TXQsA5zJvs5KMsJiXc" />
+              <div>
+                <h4 class="font-bold text-on-background">Alex Rivera</h4>
+                <p class="text-xs text-on-surface-variant">Posted in <span class="text-primary font-bold">Curator
+                    Community</span> • 2h ago</p>
+              </div>
+            </div>
+            <h3 class="text-3xl font-black font-headline leading-tight">Is the current EdTech model broken? A look into
+              decentralized learning.</h3>
+            <p class="text-on-surface-variant text-lg leading-relaxed">Traditional classrooms are struggling to keep up
+              with the pace of technological change. We need systems that reward curiosity over compliance.</p>
+            <div class="flex items-center gap-6 pt-4 border-t border-surface-container-high">
+              <a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
+                href="comunity_forum_nonuser.html" aria-label="Open discussion"><span
+                  class="material-symbols-outlined">thumb_up</span><span
+                  class="font-label font-bold text-sm">842</span></a>
+              <a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
+                href="comunity_forum_nonuser.html" aria-label="View comments"><span
+                  class="material-symbols-outlined">chat_bubble</span><span
+                  class="font-label font-bold text-sm">156</span></a>
+              <a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
+                href="comunity_forum_nonuser.html" aria-label="Share in community"><span
+                  class="material-symbols-outlined">share</span></a>
+            </div>
+          </div>
+
+          <div class="md:col-span-4 space-y-6">
+            <a class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:bg-primary/5 transition-all block"
+              href="comunity_forum_nonuser.html">
+              <p class="text-xs font-label font-bold text-tertiary mb-2 uppercase tracking-widest">Trending Discussion
+              </p>
+              <h4 class="font-headline font-bold text-lg leading-snug">The Psychology of Micro-Habits in Education</h4>
+            </a>
+            <a class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:bg-primary/5 transition-all block"
+              href="comunity_forum_nonuser.html">
+              <p class="text-xs font-label font-bold text-secondary mb-2 uppercase tracking-widest">Q&A Session</p>
+              <h4 class="font-headline font-bold text-lg leading-snug">Coding vs No-Code: Which should you learn first?
+              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" class="py-24 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 mb-12 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
+        <div>
+          <h2 class="font-headline text-4xl font-extrabold mb-2">Courses</h2>
+          <p class="text-on-surface-variant">Find your next obsession.</p>
+        </div>
+        <a class="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all"
+          href="course_discovery.html">See All <span
+            class="material-symbols-outlined">arrow_forward</span></a>
+      </div>
+
+      <div class="flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-8 pb-10 no-scrollbar lg:justify-center">
+        <a class="min-w-0 w-[85vw] max-w-[300px] shrink-0 bg-surface-container-lowest rounded-xl p-2 shadow-lg hover:-translate-y-2 transition-transform block"
+          href="course_discovery.html">
+          <div class="relative h-48 rounded-lg overflow-hidden mb-4"><img alt="Programming"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7vJhHcfBMzCd8EkfS_hVJ0zbnnITJKUuvkf0yhlu8oSuMQT56mwmREfbdLMXQV7leFeBBrj8JD3R1WNf1Q2o8tMpF1VVdbYygMhzKCGhbAyyofIAkFfuSoRwu8pVI2LoG02A1I4zFki5Mn1NwfCfORbzRQFCVsQKqC14sGNjOIpOKImJYuGz0bp0Rcgm5HboZfJn0GAmmFmRsjw0sCL6AlOcyfizFJwDd--fHDmhYWkfuW7iI3NqT_TY3SAXV8LWuXZnj2O9wOA4" />
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline text-xl font-bold">Programming</h3>
+            <p class="text-on-surface-variant text-sm">120+ Courses</p>
+          </div>
+        </a>
+        <a class="min-w-0 w-[85vw] max-w-[300px] shrink-0 bg-surface-container-lowest rounded-xl p-2 shadow-lg hover:-translate-y-2 transition-transform block"
+          href="course_discovery.html">
+          <div class="relative h-48 rounded-lg overflow-hidden mb-4"><img alt="Business"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUgPw7HAlBw8bNhkSF_--zUEvhW9qoZqKu2YGQqyUUcHFECUiRdUJth3-hgQap6LfaOdC8rfLWYJBxzNa8cYZeB2zCnGK8yQLoRE9aDfnHG0ngJ1yIZyit5CI243DhP7jB4KK0A8HSFTnxD08dvH7jxVblkYXSgJm9WQgOSnOOFhaTWfYRrToPaS7CsfJclBChW2U4riolKCvcnzXiisveQWPIsb2H5DbRsiMlzAtGRJiVMSkv605e9ax1rbhwryPsrDtafJlI_HY" />
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline text-xl font-bold">Business</h3>
+            <p class="text-on-surface-variant text-sm">85+ Courses</p>
+          </div>
+        </a>
+        <a class="min-w-0 w-[85vw] max-w-[300px] shrink-0 bg-surface-container-lowest rounded-xl p-2 shadow-lg hover:-translate-y-2 transition-transform block"
+          href="course_discovery.html">
+          <div class="relative h-48 rounded-lg overflow-hidden mb-4"><img alt="Design"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQqtVWRuR5EBPmGkWm_O6okvEac2KIBFmwvWt1EOfMs2_brtxDcNa2eUxaUoGDwT7JAqbXoLfYoya-DSjmACcG9LYaq3nQb5_EAUPms_dA8K23J08veBGMck5p_jwT79QfKH96MFu_fmfZw_CkkWOWGlYkGcdW7MPRNMbS4tj8Wsz-bGxo4npcpwlkM3Nu0fkTvaTFUXM2YwqxY_XGvTmhpEiWg8Ydfnw0eHQk9GgaXsT9UaLBEuzZg7HofzeXLsDonKZiBiiK8Ts" />
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline text-xl font-bold">Design</h3>
+            <p class="text-on-surface-variant text-sm">140+ Courses</p>
+          </div>
+        </a>
+        <a class="min-w-0 w-[85vw] max-w-[300px] shrink-0 bg-surface-container-lowest rounded-xl p-2 shadow-lg hover:-translate-y-2 transition-transform block"
+          href="../../student/course/course_discovery_feed.html">
+          <div class="relative h-48 rounded-lg overflow-hidden mb-4"><img alt="Data Science"
+              class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc67LMZeNWKLnIr-OKwApdz6yUGxTWdPt0UuO8ue4cpEZ_7BOBGibS8ucPr-8BDqobtnONvtkE0B908G5NUd1ri7k_us6QwaaJHju0a__nWDrOY4NRdBWBazNkFE-J2CP-j3e-_jaigxD65VXxR52LLY5nt2erxmE4xjD_C4vLHNZehfufQqA2qh0nCPXdE2H4MB1cKeFOaicX-gCJcd77rdD9BDwkGDphEUkYOanJ75und-BN03yGnSm4CoQFkU4sHRZVm-jaWIc" />
+          </div>
+          <div class="p-4">
+            <h3 class="font-headline text-xl font-bold">Data Science</h3>
+            <p class="text-on-surface-variant text-sm">95+ Courses</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="bookstore" class="py-16 sm:py-24 px-4 sm:px-6 max-w-7xl mx-auto space-y-16">
+      <div class="text-center space-y-4">
+        <h2 class="text-3xl sm:text-5xl font-black font-headline tracking-tighter">Bookstore Essentials</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto font-medium">Hand-picked volumes on design, strategy, and
+          self-mastery.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="space-y-6 group">
+          <div
+            class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container shadow-lg transition-transform duration-300 group-hover:-translate-y-4">
+            <img alt="Book Cover" class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbnm3YPook7iaS4_o4_MESbXaO-Ja8i98rlLFJwCvedPkVgadMyPoEewQ3u5PdJFVIhu-F9r68BH9hKjpfExiNtrfcjZYBrFD25vThQt50R5PUc2aj7BFwRKnEprm0y8V9nHX5Ru7Ok55Z--M2-98w8AVhgsFQg-j2PTrLp3sag47yjws4TAVYzTqtstM4WWw-T7Cdf_3iRWqBd5-9L1JzyfPxonnVxei_lNC2ZtNU1_-Hd3PRlny8PmXCRcvIOcI0GNbRsoXJu6g" />
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h4 class="font-headline font-bold text-xl">Atomic Design Principles</h4>
+            <p class="text-sm text-on-surface-variant">Brad Frost</p><a
+              class="w-full py-3 bg-on-background text-background font-headline font-bold rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2"
+              href="minimal_book_store.html"><span
+                class="material-symbols-outlined text-sm">shopping_bag</span>Explore More</a>
+          </div>
+        </div>
+
+        <div class="space-y-6 group">
+          <div
+            class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container shadow-lg transition-transform duration-300 group-hover:-translate-y-4">
+            <img alt="Book Cover" class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv3LXMeMtqifybxy7xp5JEy4hT0aITNooQ3jFX9n6TBWq394beICqrzaBRCmid_3vVOPjMU6uLc2aldUpKnswT1VTBjbK2T25hB63UmasvdK7OC2p7BdbXaObzdxp_tPsBcn-nzzKQeXYBxZ2qupHaYGnkjKKT5kiygyhWszeyPInMXh7RMIeuWuCjnHUfjJMl7JeUDI5dvY_MDtb2sCAbY51iTjIXu4YYe26W7LhO5CaxFU6AQSQpsIFzR05jy2nG5euiZ9EfG7A" />
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h4 class="font-headline font-bold text-xl">The Creative Act</h4>
+            <p class="text-sm text-on-surface-variant">Rick Rubin</p><a
+              class="w-full py-3 bg-on-background text-background font-headline font-bold rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2"
+              href="minimal_book_store.html"><span
+                class="material-symbols-outlined text-sm">shopping_bag</span>Explore More</a>
+          </div>
+        </div>
+
+        <div class="space-y-6 group">
+          <div
+            class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container shadow-lg transition-transform duration-300 group-hover:-translate-y-4">
+            <img alt="Book Cover" class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdBFo6BCfPG0XCAURwrAw2xRKDHIsrMTmHCwCBqKlpF2iJEkzh9Me1J5b-1dFVC0_66bhHYh0mdLaiAIRnYMn34i-5NjSZLc2Qa7-7gAYf4F_07xV7irZnQlXmcVSos3_RPsSdgooN9R3s4BVW5hMCFV7r2vJAj1XFn8QkgQ98bFFsAogLGKrH-0wxLEke0zpVwHjiGJdIZ4zXVoGdR8yMH0cUtPUA6TP7e5sTPIk57rghri9xjciQrooZ6bMpqIt_Qy9X64Yq2go" />
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h4 class="font-headline font-bold text-xl">Digital Alchemy</h4>
+            <p class="text-sm text-on-surface-variant">S. V. Richards</p><a
+              class="w-full py-3 bg-on-background text-background font-headline font-bold rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2"
+              href="minimal_book_store.html"><span
+                class="material-symbols-outlined text-sm">shopping_bag</span>Explore More</a>
+          </div>
+        </div>
+
+        <div class="space-y-6 group">
+          <div
+            class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container shadow-lg transition-transform duration-300 group-hover:-translate-y-4">
+            <img alt="Book Cover" class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAbRSwrx3-KoB7UDuU2rVoH2RAEJV9hOqW6hjKTXTtI9OSzNmYM7Jdr0nKo9JHCNj3lkoG4riauOm7n19oCBS227wGfR8DFggxOvsKsEF7cHD9E44PQsTcrdjM5vw4kAGk9-avHhmQjyIQguQW32Y-onwxCYGxuWzlK1tqFB-ilK4xivsrtxb1ey11FDEJMNR9gabjjfSvlR5r7JG7X5Pl5qJAXi79SZpZzikujO_W9_PyJlG_nFBu_gaH_VsgJHjzaFAH7wWm4q8" />
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h4 class="font-headline font-bold text-xl">Future Narratives</h4>
+            <p class="text-sm text-on-surface-variant">Elena Moss</p><a
+              class="w-full py-3 bg-on-background text-background font-headline font-bold rounded-lg hover:bg-primary transition-colors flex items-center justify-center gap-2"
+              href="minimal_book_store.html"><span
+                class="material-symbols-outlined text-sm">shopping_bag</span>Explore More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-surface-container-lowest border-t border-surface-container pt-20 pb-10 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+      <div class="space-y-6 max-w-sm">
+        <span class="text-2xl font-black font-headline text-primary">CuratorEdu</span>
+        <p class="text-on-surface-variant font-medium">The editorial campus for the modern intellectual. Design your
+          path, curate your mind.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+        <div class="space-y-4">
+          <h5 class="font-bold font-headline text-on-background">Learning</h5>
+          <ul class="space-y-2 text-sm text-on-surface-variant font-medium">
+            <li><a class="hover:text-primary transition-colors"
+                href="course_discovery.html">Courses</a></li>
+            <li><a class="hover:text-primary transition-colors"
+                href="course_discovery.html">Paths</a></li>
+            <li><a class="hover:text-primary transition-colors"
+                href="course_discovery.html">Certificates</a></li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h5 class="font-bold font-headline text-on-background">Community</h5>
+          <ul class="space-y-2 text-sm text-on-surface-variant font-medium">
+            <li><a class="hover:text-primary transition-colors" href="comunity_forum_nonuser.html">Forum</a></li>
+            <li><a class="hover:text-primary transition-colors" href="../community/community_group.html">Events</a></li>
+            <li><a class="hover:text-primary transition-colors" href="../community/community_group.html">Mentors</a>
+            </li>
+          </ul>
+        </div>
+        <div class="space-y-4">
+          <h5 class="font-bold font-headline text-on-background">Support</h5>
+          <ul class="space-y-2 text-sm text-on-surface-variant font-medium">
+            <li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Privacy</a></li>
+            <li><a class="hover:text-primary transition-colors" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      class="max-w-7xl mx-auto mt-20 pt-8 border-t border-surface-container flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-label text-outline uppercase tracking-widest font-bold">
+      <p>© 2026 CuratorEdu. All Rights Reserved.</p>
+      <div class="flex gap-6">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../shared/auth-login-redirect.js"></script>
+</body>
+
+</html>

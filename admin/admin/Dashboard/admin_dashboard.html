@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu | Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "primary": "#6a1cf6", "secondary": "#00647b", "tertiary": "#aa008e",
+                    "surface": "#f5f6f7", "on-surface": "#2c2f30", "outline": "#757778",
+                    "surface-container-lowest": "#ffffff", "surface-container-low": "#eff1f2"
+                },
+                "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem" },
+                "fontFamily": { "headline": ["Plus Jakarta Sans"], "body": ["Inter"], "label": ["Manrope"] }
+            }
+        }
+    }
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .label-text { font-family: 'Manrope', sans-serif; }
+    .stat-card-gradient { background: linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%); }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<div class="flex min-h-screen pt-20">
+    <main class="flex-1 p-4 sm:p-6 lg:p-10 pb-24 overflow-x-hidden min-w-0">
+        
+        <!-- Welcome Header -->
+        <header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+            <div>
+                <h1 class="text-4xl font-black tracking-tight text-on-surface mb-2">Admin Dashboard</h1>
+                <p class="text-slate-500 max-w-2xl font-body">Welcome back. Here is what's happening across CuratorEdu today.</p>
+            </div>
+            <div class="bg-white px-5 py-2 rounded-2xl border border-surface-container flex items-center gap-3 shadow-sm">
+                <span class="material-symbols-outlined text-primary">calendar_today</span>
+                <span class="text-sm font-bold label-text">October 24, 2023</span>
+            </div>
+        </header>
+
+        <!-- 4 Stat Cards Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <!-- Total Students -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">group</span>
+                    </div>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-bold">+12%</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight">12,482</div>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Total Students</p>
+            </div>
+            <!-- Active Courses -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+                        <span class="material-symbols-outlined">auto_stories</span>
+                    </div>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-bold">+5%</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight">842</div>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Active Courses</p>
+            </div>
+            <!-- eBooks in Catalogue -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary">
+                        <span class="material-symbols-outlined">library_books</span>
+                    </div>
+                    <span class="text-[10px] bg-slate-50 text-slate-400 px-2 py-0.5 rounded-full font-bold">Stable</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight">1,248</div>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">eBooks in Catalogue</p>
+            </div>
+            <!-- Orders this Month -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-600">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </div>
+                    <span class="text-[10px] bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-bold">+24%</span>
+                </div>
+                <div class="text-3xl font-black tracking-tight">412</div>
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Orders this Month</p>
+            </div>
+        </div>
+
+        <!-- 7-Bar Chart Row -->
+        <div class="bg-white p-8 rounded-[2rem] border border-surface-container shadow-sm mb-10">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-xl font-black font-headline">User Registrations</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Last 30 Days Activity</p>
+                </div>
+                <button class="text-primary text-xs font-bold label-text uppercase tracking-widest flex items-center gap-2">
+                       <a href="admin_user_registry.html" class="flex items-center gap-2">
+                            View Details <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                </button>
+            </div>
+            <div class="relative h-72 overflow-hidden rounded-[1.5rem] bg-gradient-to-b from-white to-surface-container-low/50 px-4 pt-6 pb-4">
+                <div class="absolute inset-x-4 top-6 bottom-10 grid grid-rows-4 pointer-events-none">
+                    <div class="border-b border-slate-100/80"></div>
+                    <div class="border-b border-slate-100/80"></div>
+                    <div class="border-b border-slate-100/80"></div>
+                    <div></div>
+                </div>
+                <svg class="absolute inset-x-6 top-8 h-[calc(100%-4.5rem)] w-[calc(100%-3rem)]" viewBox="0 0 700 260" fill="none" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="registrationsLine" x1="0" x2="0" y1="0" y2="1">
+                            <stop offset="0%" stop-color="#6a1cf6" stop-opacity="0.35" />
+                            <stop offset="100%" stop-color="#6a1cf6" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 206C88 180 120 164 178 160C240 156 285 176 350 128C415 80 470 74 528 96C585 118 624 90 680 58" stroke="#6a1cf6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M20 206C88 180 120 164 178 160C240 156 285 176 350 128C415 80 470 74 528 96C585 118 624 90 680 58V260H20Z" fill="url(#registrationsLine)" />
+                    <circle cx="350" cy="128" r="8" fill="#6a1cf6" />
+                    <circle cx="680" cy="58" r="8" fill="#6a1cf6" />
+                </svg>
+                <div class="absolute inset-x-4 bottom-12 flex items-end justify-between gap-4 px-1">
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl shadow-sm border border-primary/10" style="height: 92px; background: linear-gradient(180deg, rgba(106,28,246,0.20) 0%, rgba(106,28,246,0.08) 100%);"></div>
+                        <span class="text-[10px] font-bold text-slate-400">Sep 28</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl shadow-sm border border-primary/10" style="height: 138px; background: linear-gradient(180deg, rgba(106,28,246,0.25) 0%, rgba(106,28,246,0.10) 100%);"></div>
+                        <span class="text-[10px] font-bold text-slate-400">Oct 05</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl shadow-sm border border-primary/10" style="height: 116px; background: linear-gradient(180deg, rgba(106,28,246,0.22) 0%, rgba(106,28,246,0.09) 100%);"></div>
+                        <span class="text-[10px] font-bold text-slate-400">Oct 12</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl shadow-sm border border-primary/10" style="height: 194px; background: linear-gradient(180deg, rgba(106,28,246,0.38) 0%, rgba(106,28,246,0.16) 100%);"></div>
+                        <span class="text-[10px] font-bold text-slate-400">Oct 19</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl shadow-xl shadow-primary/20" style="height: 212px; background: linear-gradient(180deg, #7c3aed 0%, #6a1cf6 100%);"></div>
+                        <span class="text-[10px] font-black text-primary">Today</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl opacity-60" style="height: 74px; background: rgba(106,28,246,0.10);"></div>
+                        <span class="text-[10px] font-bold text-slate-300">Proj.</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-3">
+                        <div class="w-full rounded-t-2xl opacity-60" style="height: 62px; background: rgba(106,28,246,0.10);"></div>
+                        <span class="text-[10px] font-bold text-slate-300">Proj.</span>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Pending Actions Row -->
+        <h3 class="text-xl font-black font-headline mb-6">Pending Actions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Pending Verifications -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm flex flex-col min-h-[15rem]">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600">
+                        <span class="material-symbols-outlined">verified_user</span>
+                    </div>
+                    <span class="bg-amber-100 text-amber-700 text-[11px] font-bold px-2.5 py-1 rounded-full">0</span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="font-bold text-lg">Course Registrations</h4>
+                    <p class="text-xs text-slate-400 mt-1">Review new course applications</p>
+                </div>
+                <a href="admin_course_catalog.html" class="mt-auto w-full py-2 text-sm font-bold rounded-xl bg-amber-100 text-amber-800 hover:bg-amber-200 transition-colors flex items-center justify-center">Course Register</a>
+            </div>
+            <!-- eBook Approvals -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm flex flex-col min-h-[15rem]">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">book</span>
+                    </div>
+                    <span class="bg-primary/10 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full">2 Coming Soon</span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="font-bold text-lg">eBook Announcements</h4>
+                    <p class="text-xs text-slate-400 mt-1">Curate new books being published</p>
+                </div>
+                <a href="admin_library_inventory.html" class="mt-auto w-full py-2 text-sm font-bold rounded-xl bg-primary text-white shadow-lg shadow-primary/20 hover:scale-[1.01] transition-transform flex items-center justify-center">eBook Will Be Published</a>
+            </div>
+            <!-- Forum Reports -->
+            <div class="bg-white p-6 rounded-3xl border border-surface-container shadow-sm flex flex-col min-h-[15rem] border-l-4 border-l-error">
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 rounded-2xl bg-error/5 flex items-center justify-center text-error">
+                        <span class="material-symbols-outlined">gavel</span>
+                    </div>
+                    <span class="bg-error/10 text-error text-[11px] font-bold px-2.5 py-1 rounded-full">3 Reports</span>
+                </div>
+                <div class="mt-4">
+                    <h4 class="font-bold text-lg">Forum Moderation</h4>
+                    <p class="text-xs text-slate-400 mt-1">Take action on flagged content</p>
+                </div>
+                <a href="admin_forum_moderation.html" class="mt-auto w-full py-2 text-sm font-bold rounded-xl bg-rose-600 text-white hover:bg-rose-700 transition-colors flex items-center justify-center">Review</a>
+            </div>
+        </div>
+
+    </main>
+</div>
+<script src="../assets/js/admin-shared.js"></script>
+<script>
+    window.AdminUI.initShell({ active: 'dashboard', sectionLabel: 'ADMIN DASHBOARD' });
+</script>
+</body></html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu - Discover Courses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#b41340",
+                        "surface-variant": "#dadddf",
+                        "tertiary": "#aa008e",
+                        "on-primary-fixed": "#000000",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-dim": "#5d00e3",
+                        "surface-dim": "#d1d5d7",
+                        "on-secondary-container": "#004e61",
+                        "outline": "#757778",
+                        "primary-fixed": "#ac8eff",
+                        "outline-variant": "#abadae",
+                        "on-error": "#ffefef",
+                        "surface": "#f5f6f7",
+                        "surface-container": "#e6e8ea",
+                        "primary-container": "#ac8eff",
+                        "secondary-fixed": "#80deff",
+                        "on-secondary": "#e2f6ff",
+                        "on-background": "#2c2f30",
+                        "tertiary-dim": "#96007d",
+                        "on-primary": "#f7f0ff",
+                        "on-surface-variant": "#595c5d",
+                        "primary": "#6a1cf6",
+                        "inverse-surface": "#0c0f10",
+                        "background": "#f5f6f7",
+                        "tertiary-container": "#ff87db",
+                        "surface-bright": "#f5f6f7",
+                        "inverse-on-surface": "#9b9d9e",
+                        "inverse-primary": "#9d79ff",
+                        "on-primary-container": "#2a0070",
+                        "secondary-dim": "#00576c",
+                        "error-container": "#f74b6d",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "secondary-container": "#80deff",
+                        "on-tertiary-fixed": "#34002a",
+                        "on-error-container": "#510017",
+                        "primary-fixed-dim": "#a07dff",
+                        "error-dim": "#a70138",
+                        "on-tertiary": "#ffeef5",
+                        "surface-tint": "#6a1cf6",
+                        "on-tertiary-container": "#5f004f",
+                        "secondary": "#00647b",
+                        "on-surface": "#2c2f30",
+                        "on-primary-fixed-variant": "#350088",
+                        "surface-container-low": "#eff1f2",
+                        "on-secondary-fixed": "#003a48",
+                        "tertiary-fixed": "#ff87db",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "surface-container-highest": "#dadddf",
+                        "surface-container-high": "#e0e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(24px);
+        }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-background font-body text-on-background antialiased overflow-x-hidden relative min-h-screen">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+<main class="pt-20 pb-32 md:pb-12">
+<div class="px-6 md:px-10 max-w-full mx-auto">
+
+<!-- Featured Course Hero -->
+<div class="mb-12 relative group rounded-[2.5rem] overflow-hidden bg-slate-900 min-h-[350px] sm:min-h-[400px] flex items-center p-6 sm:p-10 md:p-16 border border-white/10 shadow-2xl">
+  <div class="absolute inset-0 z-0">
+    <img alt="Featured Course" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" src="https://picsum.photos/seed/featured-1/1200/600"/>
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+  </div>
+  <div class="relative z-10 max-w-2xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary text-white rounded-full font-label text-[10px] font-bold uppercase tracking-widest mb-6">
+      <span class="material-symbols-outlined text-xs" style="font-variation-settings:'FILL' 1">stars</span>
+      Featured Track
+    </div>
+    <h2 id="discovery-hero-title" class="font-headline text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 leading-none tracking-tight">Explore live courses.</h2>
+    <p class="font-body text-lg text-slate-300 mb-8 leading-relaxed">Open a syllabus, enroll once, then learn with video links and quizzes stored in Postgres.</p>
+    <div class="flex flex-wrap gap-4">
+      <a id="discovery-hero-cta" href="unified_course_details.html" class="px-6 py-3 sm:px-8 sm:py-4 bg-white text-slate-900 rounded-2xl font-headline font-bold text-base sm:text-lg hover:bg-primary-fixed hover:text-white transition-all shadow-xl shadow-black/20">Explore syllabus</a>
+      <div class="flex items-center gap-6 px-6 py-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
+        <div class="text-center">
+          <p class="text-[10px] font-label font-bold text-slate-400 uppercase tracking-tighter mb-1">Students</p>
+          <p class="text-white font-headline font-bold">4.2k+</p>
+        </div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center">
+          <p class="text-[10px] font-label font-bold text-slate-400 uppercase tracking-tighter mb-1">Modules</p>
+          <p class="text-white font-headline font-bold">12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="py-10">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+    <div>
+      <p id="discovery-count-label" class="font-label text-xs font-bold uppercase tracking-widest text-primary mb-2">Discover</p>
+      <h1 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-2">Explore What You Can Build Next.</h1>
+      <p class="font-body text-lg text-on-surface-variant">Curated tracks with real projects, mentors, and outcomes you can ship.</p>
+    </div>
+    <button id="open-filter-modal-btn" type="button" class="self-start md:self-auto flex items-center gap-2 bg-surface-container-high px-6 py-3 rounded-full hover:bg-surface-container-highest transition-all font-label text-sm font-bold">
+      <span class="material-symbols-outlined text-xl">tune</span> Filter
+    </button>
+  </div>
+  <!-- Search bar -->
+  <div class="relative mb-5">
+    <input id="course-search-input" type="text" placeholder="Search courses by name, topic or lecturer…" class="w-full bg-surface-container-lowest border border-surface-container rounded-2xl pl-12 pr-4 py-4 text-sm font-body text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all shadow-sm"/>
+    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+  </div>
+  <!-- Tabs -->
+  <div class="flex gap-1 mb-5 bg-surface-container rounded-full p-1 w-fit">
+    <button id="tab-all" type="button" class="course-tab px-6 py-2 rounded-full font-label text-sm font-bold bg-primary text-white shadow transition-all">All Courses</button>
+    <button id="tab-enrolled" type="button" class="course-tab px-6 py-2 rounded-full font-label text-sm font-bold text-on-surface-variant hover:text-on-surface transition-all">Enrolled</button>
+  </div>
+  <!-- Category pills -->
+  <div id="category-pills-row" class="flex gap-2 flex-wrap">
+    <button type="button" data-category="all" class="category-pill px-5 py-2 bg-primary text-white rounded-full font-label text-sm font-bold shadow shadow-primary/20">All</button>
+    <button type="button" data-category="design" class="category-pill px-5 py-2 bg-surface-container text-on-surface-variant rounded-full font-label text-sm font-medium hover:bg-primary hover:text-white transition-all">Design</button>
+    <button type="button" data-category="technology" class="category-pill px-5 py-2 bg-surface-container text-on-surface-variant rounded-full font-label text-sm font-medium hover:bg-primary hover:text-white transition-all">Technology</button>
+    <button type="button" data-category="business" class="category-pill px-5 py-2 bg-surface-container text-on-surface-variant rounded-full font-label text-sm font-medium hover:bg-primary hover:text-white transition-all">Business</button>
+    <button type="button" data-category="trending" class="category-pill px-5 py-2 bg-surface-container text-on-surface-variant rounded-full font-label text-sm font-medium hover:bg-primary hover:text-white transition-all">Trending</button>
+    <button type="button" data-category="new" class="category-pill px-5 py-2 bg-surface-container text-on-surface-variant rounded-full font-label text-sm font-medium hover:bg-primary hover:text-white transition-all">New</button>
+  </div>
+</div>
+
+<!-- Enrolled Courses (hidden by default) -->
+<div id="enrolled-section" class="hidden pb-8">
+  <div id="enrolled-courses-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+</div>
+
+<!-- Course Grid -->
+<div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 pb-8">
+
+<!-- Centered Filter Modal (Hidden by default, shown for structure representation) -->
+<div id="filter-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-6 bg-inverse-surface/40 backdrop-blur-sm">
+<div class="bg-surface-bright w-full max-w-lg rounded-xl shadow-2xl p-8 transform transition-all">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-2xl font-bold">Filter Courses</h3>
+<button id="close-filter-modal-btn" type="button" class="p-2 hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="space-y-8">
+<div>
+<label class="font-label text-xs font-bold uppercase text-on-surface-variant block mb-4">Topic</label>
+<div class="flex flex-wrap gap-2">
+<button type="button" data-modal-topic="all" class="modal-topic-btn px-4 py-2 rounded-full bg-primary text-white text-sm font-medium">All Topics</button>
+<button type="button" data-modal-topic="design" class="modal-topic-btn px-4 py-2 rounded-full bg-surface-container text-on-surface text-sm font-medium">Design</button>
+<button type="button" data-modal-topic="technology" class="modal-topic-btn px-4 py-2 rounded-full bg-surface-container text-on-surface text-sm font-medium">AI &amp; Tech</button>
+<button type="button" data-modal-topic="business" class="modal-topic-btn px-4 py-2 rounded-full bg-surface-container text-on-surface text-sm font-medium">Creator Economy</button>
+</div>
+</div>
+<div>
+<label class="font-label text-xs font-bold uppercase text-on-surface-variant block mb-4">Duration</label>
+<input id="duration-range" class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" type="range" min="0" max="50" value="50"/>
+<div class="flex justify-between mt-2 text-xs text-on-surface-variant font-medium">
+<span>0h</span>
+<span id="duration-value">50h+</span>
+</div>
+</div>
+</div>
+<button id="apply-filter-btn" type="button" class="w-full mt-10 bg-primary text-white py-4 rounded-lg font-headline font-bold text-lg">Apply Filters</button>
+</div>
+</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterModal = document.getElementById('filter-modal');
+      const modalTopicButtons = document.querySelectorAll('.modal-topic-btn');
+      const durationRange = document.getElementById('duration-range');
+      const durationValue = document.getElementById('duration-value');
+      const openFilterModalBtn = document.getElementById('open-filter-modal-btn');
+      const closeFilterModalBtn = document.getElementById('close-filter-modal-btn');
+      const applyFilterBtn = document.getElementById('apply-filter-btn');
+      let selectedCategory = 'all';
+
+      durationRange?.addEventListener('input', () => {
+        if (!durationValue) return;
+        durationValue.textContent = `${durationRange?.value || 50}h+`;
+      });
+
+      modalTopicButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          selectedCategory = btn.getAttribute('data-modal-topic') || 'all';
+          modalTopicButtons.forEach((b) =>
+            b.classList.toggle(
+              'bg-primary',
+              b.getAttribute('data-modal-topic') === selectedCategory
+            )
+          );
+          modalTopicButtons.forEach((b) =>
+            b.classList.toggle('text-white', b.getAttribute('data-modal-topic') === selectedCategory)
+          );
+          modalTopicButtons.forEach((b) =>
+            b.classList.toggle('bg-surface-container', b.getAttribute('data-modal-topic') !== selectedCategory)
+          );
+          modalTopicButtons.forEach((b) =>
+            b.classList.toggle('text-on-surface', b.getAttribute('data-modal-topic') !== selectedCategory)
+          );
+        });
+      });
+
+      openFilterModalBtn?.addEventListener('click', () => filterModal?.classList.remove('hidden'));
+      closeFilterModalBtn?.addEventListener('click', () => filterModal?.classList.add('hidden'));
+      applyFilterBtn?.addEventListener('click', () => {
+        const pill = [...document.querySelectorAll('.category-pill')].find(
+          (p) => (p.getAttribute('data-category') || '') === selectedCategory
+        );
+        if (pill) pill.click();
+        filterModal?.classList.add('hidden');
+      });
+
+      filterModal?.addEventListener('click', (ev) => {
+        if (ev.target === filterModal) filterModal.classList.add('hidden');
+      });
+
+      const tabAll = document.getElementById('tab-all');
+      const tabEnrolled = document.getElementById('tab-enrolled');
+      const courseGrid = document.getElementById('course-grid');
+      const enrolledSection = document.getElementById('enrolled-section');
+      const categoryPillsRow = document.getElementById('category-pills-row');
+
+      tabAll?.addEventListener('click', () => {
+        tabAll.classList.add('bg-primary', 'text-white', 'shadow');
+        tabAll.classList.remove('text-on-surface-variant');
+        tabEnrolled?.classList.remove('bg-primary', 'text-white', 'shadow');
+        tabEnrolled?.classList.add('text-on-surface-variant');
+        courseGrid?.classList.remove('hidden');
+        enrolledSection?.classList.add('hidden');
+        categoryPillsRow?.classList.remove('hidden');
+      });
+
+      tabEnrolled?.addEventListener('click', () => {
+        tabEnrolled.classList.add('bg-primary', 'text-white', 'shadow');
+        tabEnrolled.classList.remove('text-on-surface-variant');
+        tabAll?.classList.remove('bg-primary', 'text-white', 'shadow');
+        tabAll?.classList.add('text-on-surface-variant');
+        courseGrid?.classList.add('hidden');
+        enrolledSection?.classList.remove('hidden');
+        categoryPillsRow?.classList.add('hidden');
+      });
+    });
+  </script>
+    <script src="../assets/js/student-courses-page.js"></script>
+    <script src="../assets/js/student-nav.js"></script>
+</body></html>

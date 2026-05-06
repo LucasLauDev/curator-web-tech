@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu | Admin Course Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="../assets/css/admin-shared.css" rel="stylesheet"/>
+<link href="../assets/css/admin-nav.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#dadddf",
+                    "on-tertiary-fixed-variant": "#6f005c",
+                    "secondary-dim": "#00576c",
+                    "on-surface": "#2c2f30",
+                    "on-secondary-fixed-variant": "#00586d",
+                    "secondary-fixed-dim": "#37d4ff",
+                    "on-tertiary-container": "#5f004f",
+                    "surface-container-low": "#eff1f2",
+                    "surface-container-high": "#e0e3e4",
+                    "secondary-container": "#80deff",
+                    "primary-fixed-dim": "#a07dff",
+                    "on-error": "#ffefef",
+                    "surface-container-highest": "#dadddf",
+                    "on-tertiary-fixed": "#34002a",
+                    "tertiary-fixed-dim": "#ff6ad8",
+                    "primary-container": "#ac8eff",
+                    "tertiary-container": "#ff87db",
+                    "on-tertiary": "#ffeef5",
+                    "surface-container": "#e6e8ea",
+                    "outline": "#757778",
+                    "error-dim": "#a70138",
+                    "on-secondary-fixed": "#003a48",
+                    "primary": "#6a1cf6",
+                    "tertiary-fixed": "#ff87db",
+                    "on-primary": "#f7f0ff",
+                    "inverse-surface": "#0c0f10",
+                    "surface-bright": "#f5f6f7",
+                    "on-primary-fixed-variant": "#350088",
+                    "error-container": "#f74b6d",
+                    "on-secondary-container": "#004e61",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#2a0070",
+                    "surface": "#f5f6f7",
+                    "on-surface-variant": "#595c5d",
+                    "primary-dim": "#5d00e3",
+                    "on-background": "#2c2f30",
+                    "primary-fixed": "#ac8eff",
+                    "on-error-container": "#510017",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-dim": "#96007d",
+                    "on-secondary": "#e2f6ff",
+                    "background": "#f5f6f7",
+                    "inverse-primary": "#9d79ff",
+                    "tertiary": "#aa008e",
+                    "secondary-fixed": "#80deff",
+                    "outline-variant": "#abadae",
+                    "error": "#b41340",
+                    "surface-dim": "#d1d5d7",
+                    "secondary": "#00647b",
+                    "surface-tint": "#6a1cf6",
+                    "inverse-on-surface": "#9b9d9e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Manrope"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6f7;
+        }
+        h1, h2, h3, .headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .label-text {
+            font-family: 'Manrope', sans-serif;
+        }
+        /* Custom scrollbar for better editorial feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dadddf;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<div id="nav-mount"></div>
+<script src="../assets/js/admin-nav.js"></script>
+<div class="flex min-h-screen pt-20">
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 pb-32 overflow-x-hidden overflow-y-auto min-w-0">
+<!-- Page Content Canvas -->
+<section class="space-y-8 w-full">
+<!-- Header & Filters Area -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+    <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 text-on-surface-variant font-label text-sm mb-4">
+            <a class="hover:text-primary transition-colors" href="admin_dashboard.html">Admin</a>
+            <span class="material-symbols-outlined text-xs">chevron_right</span>
+            <span class="text-on-surface font-bold">Course Catalog</span>
+        </div>
+        <h1 class="text-3xl font-black font-headline tracking-tight text-on-surface mb-2">Global Course Catalog</h1>
+        <p class="text-on-surface-variant text-sm max-w-2xl font-body leading-relaxed">Manage the lifecycle, curation standards, and performance oversight for the entire CuratorEdu content library.</p>
+    </div>
+    <div class="flex items-center gap-3 flex-shrink-0">
+        <button id="advanced-filter-btn" class="flex items-center gap-2 px-6 py-3 bg-surface-container-lowest text-on-surface border border-outline/10 rounded-2xl font-bold shadow-sm hover:translate-y-[-2px] transition-all text-sm font-label">
+            <span class="material-symbols-outlined">filter_list</span>
+            <span>Advanced Filter</span>
+        </button>
+        <button id="direct-create-btn" class="flex items-center gap-2 px-8 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-2xl font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all text-sm font-headline">
+            <span class="material-symbols-outlined">add</span>
+            <span>Direct Create</span>
+        </button>
+    </div>
+</div>
+<!-- Stats Overview (Asymmetric Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-4 bg-primary text-on-primary p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between h-48 shadow-lg shadow-primary/10">
+<div class="relative z-10">
+<span class="text-xs font-bold opacity-80 label-text tracking-widest uppercase">Total Enrollments</span>
+<div class="text-4xl font-extrabold mt-1">128.4k</div>
+</div>
+<div class="relative z-10 flex items-center gap-2 text-sm font-bold text-primary-container">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                            +12% from last month
+                        </div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="groups">groups</span>
+</div>
+</div>
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline/5 flex flex-col md:flex-row items-center justify-around gap-8">
+<div class="text-center">
+<div class="text-slate-400 font-bold text-xs uppercase label-text tracking-widest mb-2">Active Courses</div>
+<div class="text-3xl font-black text-on-surface" id="admin-stat-total-courses">—</div>
+</div>
+<div class="w-[1px] h-12 bg-surface-container hidden md:block"></div>
+<div class="text-center">
+<div class="text-slate-400 font-bold text-xs uppercase label-text tracking-widest mb-2">Draft Mode</div>
+<div class="text-3xl font-black text-on-surface">56</div>
+</div>
+<div class="w-[1px] h-12 bg-surface-container hidden md:block"></div>
+<div class="text-center">
+<div class="text-slate-400 font-bold text-xs uppercase label-text tracking-widest mb-2">Avg. Rating</div>
+<div class="flex items-center justify-center gap-2 text-3xl font-black text-on-surface">
+                                4.9 <span class="material-symbols-outlined text-tertiary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Table / List -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline/5 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-none">
+<th class="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest label-text">Course Title</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest label-text">Lecturer</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest label-text">Enrollment</th>
+<th class="px-6 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest label-text">Status</th>
+<th class="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest label-text text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container" id="admin-catalog-tbody">
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-8 py-6 flex flex-wrap items-center justify-between gap-4 bg-white border-t border-surface-container">
+<div class="text-sm text-slate-400 font-medium label-text">
+                            Showing <span id="page-range" class="text-on-surface font-bold">…</span> of <span id="catalog-total" class="text-on-surface font-bold">0</span> courses
+                        </div>
+<div class="flex items-center gap-3">
+<button type="button" id="pagination-prev" class="p-2 rounded-lg border border-surface-container hover:bg-surface-container-low transition-all" aria-label="Previous page">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span id="catalog-page-indicator" class="text-sm font-bold text-on-surface min-w-[7rem] text-center">Page 1</span>
+<button type="button" id="pagination-next" class="p-2 rounded-lg border border-surface-container hover:bg-surface-container-low transition-all" aria-label="Next page">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer / Secondary Grid Asymmetry -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-tertiary/5 p-8 rounded-2xl border border-tertiary/10 flex flex-col gap-4">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="tips_and_updates">tips_and_updates</span>
+<h3 class="text-xl font-bold text-on-surface">Lecturer Tip</h3>
+<p class="text-sm text-slate-500 leading-relaxed font-body">Courses with video previews see a <span class="text-tertiary font-bold">45% higher</span> conversion rate. Review your top drafts to ensure trailers are uploaded.</p>
+<a class="text-tertiary text-sm font-bold flex items-center gap-1 hover:underline mt-auto" href="#">Learn more <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span></a>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline/5 md:col-span-2 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold text-on-surface mb-2 font-headline">Category Performance</h3>
+<p class="text-sm text-on-surface-variant font-body leading-relaxed">Top performing categories this quarter by overall enrollment and revenue growth.</p>
+</div>
+<div class="space-y-6 mt-8">
+<div class="space-y-3">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest label-text">
+<span>Creative Design</span>
+<span class="text-primary">72%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[72%] rounded-full shadow-[0_0_8px_rgba(106,28,246,0.3)]"></div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest label-text">
+<span>Development</span>
+<span class="text-primary-container">58%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[58%] rounded-full shadow-[0_0_8px_rgba(172,142,255,0.3)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation Shell (Suppressed based on logic but available for mobile viewports) -->
+<!-- Removed mobile-only nav -->
+<script src="../assets/js/admin-shared.js"></script>
+<script>
+window.AdminUI.initShell({ active: 'courses', sectionLabel: 'COURSE CATALOG' });
+</script>
+<script src="../assets/js/admin-course-catalog.js"></script>
+
+</body></html>

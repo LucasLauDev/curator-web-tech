@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>CuratorEdu - Motion Design Principles</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error": "#b41340",
+            "surface-variant": "#dadddf",
+            "tertiary": "#aa008e",
+            "on-primary-fixed": "#000000",
+            "on-tertiary-fixed-variant": "#6f005c",
+            "surface-container-lowest": "#ffffff",
+            "primary-dim": "#5d00e3",
+            "surface-dim": "#d1d5d7",
+            "on-secondary-container": "#004e61",
+            "outline": "#757778",
+            "primary-fixed": "#ac8eff",
+            "outline-variant": "#abadae",
+            "on-error": "#ffefef",
+            "surface": "#f5f6f7",
+            "surface-container": "#e6e8ea",
+            "primary-container": "#ac8eff",
+            "secondary-fixed": "#80deff",
+            "on-secondary": "#e2f6ff",
+            "on-background": "#2c2f30",
+            "tertiary-dim": "#96007d",
+            "on-primary": "#f7f0ff",
+            "on-surface-variant": "#595c5d",
+            "primary": "#6a1cf6",
+            "inverse-surface": "#0c0f10",
+            "background": "#f5f6f7",
+            "tertiary-container": "#ff87db",
+            "surface-bright": "#f5f6f7",
+            "inverse-on-surface": "#9b9d9e",
+            "inverse-primary": "#9d79ff",
+            "on-primary-container": "#2a0070",
+            "secondary-dim": "#00576c",
+            "error-container": "#f74b6d",
+            "tertiary-fixed-dim": "#ff6ad8",
+            "secondary-fixed-dim": "#37d4ff",
+            "secondary-container": "#80deff",
+            "on-tertiary-fixed": "#34002a",
+            "on-error-container": "#510017",
+            "primary-fixed-dim": "#a07dff",
+            "error-dim": "#a70138",
+            "on-tertiary": "#ffeef5",
+            "surface-tint": "#6a1cf6",
+            "on-tertiary-container": "#5f004f",
+            "secondary": "#00647b",
+            "on-surface": "#2c2f30",
+            "on-primary-fixed-variant": "#350088",
+            "surface-container-low": "#eff1f2",
+            "on-secondary-fixed": "#003a48",
+            "tertiary-fixed": "#ff87db",
+            "on-secondary-fixed-variant": "#00586d",
+            "surface-container-highest": "#dadddf",
+            "surface-container-high": "#e0e3e4"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Plus Jakarta Sans"],
+            "body": ["Inter"],
+            "label": ["Manrope"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-container">
+
+  <div id="nav-mount"></div>
+
+  <main class="pt-16 pb-44 flex h-screen overflow-hidden bg-surface relative">
+    <!-- Square Sidebar Toggle Button (Start at left edge) -->
+    <div id="sidebar-collapse-btn" class="fixed left-[84px] top-24 group cursor-pointer z-[200] transition-all duration-500 ease-in-out">
+      <div
+        class="w-10 h-10 bg-white shadow-md border border-surface-container rounded-xl flex items-center justify-center text-on-surface-variant hover:text-tertiary transition-all hover:scale-110">
+        <span id="toggle-icon" class="material-symbols-outlined text-xl">menu</span>
+      </div>
+    </div>
+
+    <!-- LEFT: Course Modules (Hidden by default) -->
+    <aside id="course-sidebar"
+      class="hidden md:flex flex-col w-[320px] bg-surface-container-low overflow-y-auto hide-scrollbar p-6 space-y-8 transition-all duration-500 ease-in-out relative border-r border-surface-container flex-shrink-0" style="margin-left: -320px; opacity: 0;">
+      <div>
+        <h2 class="text-tertiary font-label text-[10px] uppercase tracking-[0.2em] mb-4 font-black">Masterclass: Motion
+          Design</h2>
+        <div class="space-y-4">
+          <!-- Module 1 -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span class="font-headline font-bold text-sm">01. Fundamentals</span>
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors"
+                data-icon="expand_more">expand_more</span>
+            </div>
+            <div class="space-y-1">
+              <div
+                class="flex items-center gap-3 p-3 bg-violet-100 text-violet-700 rounded-2xl cursor-pointer hover:bg-violet-200 transition-colors">
+                <span class="material-symbols-outlined text-sm" data-icon="play_circle"
+                  style="font-variation-settings: 'FILL' 1;">play_circle</span>
+                <span class="text-sm font-medium">What is Motion?</span>
+                <span class="ml-auto text-[10px] font-bold text-violet-500/60">4 min</span>
+              </div>
+              <div
+                class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-2xl transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                <span class="text-sm font-medium">The History of Animation</span>
+                <span class="ml-auto text-[10px] font-bold text-on-surface-variant/40">12 min</span>
+              </div>
+            </div>
+          </div>
+          <!-- Module 2 -->
+          <div class="space-y-2 pt-4">
+            <div class="flex items-center justify-between group cursor-pointer">
+              <span class="font-headline font-bold text-sm">02. Timing &amp; Spacing</span>
+              <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors"
+                data-icon="expand_more">expand_more</span>
+            </div>
+            <div class="space-y-1">
+              <div
+                class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-2xl transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                <span class="text-sm font-medium">The 12 Principles</span>
+                <span class="ml-auto text-[10px] font-bold text-on-surface-variant/40">8 min</span>
+              </div>
+              <div
+                class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-2xl transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                <span class="text-sm font-medium">Easing Curves Deep Dive</span>
+                <span class="ml-auto text-[10px] font-bold text-on-surface-variant/40">15 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- RIGHT: Content Area (2/3) -->
+    <section class="flex-1 overflow-y-auto bg-surface-container-lowest md:rounded-tl-[3rem] p-6 md:p-12 pb-44 hide-scrollbar">
+      <div class="max-w-4xl mx-auto space-y-12">
+        <!-- Breadcrumbs & Course Switcher -->
+        <div class="flex items-center gap-2 text-on-surface-variant text-sm font-label uppercase tracking-widest relative">
+          <a class="hover:text-primary transition-colors" href="../course/my_courses.html">Courses</a>
+          <span class="material-symbols-outlined text-xs">chevron_right</span>
+          
+          <!-- Course Switcher Dropdown -->
+          <div class="relative group">
+            <button id="course-switcher-btn" class="flex items-center gap-1 hover:text-primary transition-colors font-bold text-on-surface">
+              <span>Motion Fundamentals</span>
+              <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+            </button>
+            
+            <div id="course-switcher-menu" class="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-surface-container py-2 hidden z-[150] opacity-0 translate-y-2 transition-all duration-300">
+                <a href="#" class="flex flex-col px-4 py-3 hover:bg-violet-50 transition-colors group/item">
+                    <span class="text-[10px] font-black text-slate-400">CURRENT COURSE</span>
+                    <span class="text-sm font-bold text-primary">Motion Fundamentals</span>
+                </a>
+                <div class="h-px bg-surface-container mx-4 my-1"></div>
+                <a href="#" class="flex flex-col px-4 py-3 hover:bg-slate-50 transition-colors">
+                    <span class="text-[10px] font-black text-slate-400">SWITCH TO</span>
+                    <span class="text-sm font-bold text-on-surface">UI/UX Design Mastery</span>
+                </a>
+                <a href="#" class="flex flex-col px-4 py-3 hover:bg-slate-50 transition-colors">
+                    <span class="text-[10px] font-black text-slate-400">SWITCH TO</span>
+                    <span class="text-sm font-bold text-on-surface">Front End Fundamentals</span>
+                </a>
+            </div>
+          </div>
+
+          <span class="material-symbols-outlined text-xs">chevron_right</span>
+          <span class="text-primary font-bold">What is Motion?</span>
+        </div>
+        <!-- Main Headline -->
+        <header class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <h2 class="text-4xl md:text-5xl font-black font-headline tracking-tighter text-on-background">Defining Motion Design in the Modern Era</h2>
+            <p class="mt-4 text-on-surface-variant text-lg">Lesson 01 • 4:12 Duration</p>
+          </div>
+        </header>
+        <!-- Video Player Container -->
+        <div class="aspect-video w-full bg-slate-950 rounded-xl overflow-hidden relative shadow-2xl group">
+          <img class="w-full h-full object-cover opacity-60"
+            data-alt="cinematic shot of high-tech digital workspace with abstract 3D motion graphics rendering on a widescreen monitor in a dimly lit studio"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAMBC9Efma0Jtsy6aDp2nkutzrEa9cYSrKN6Joeo8pEfgrEBp5BwavrGYqvrI12c6yZ4L7xw4w7IVxc6-wbh0HMfbYYvyWyz-IgeicbMDiSKl3mTA_L5OizajO5BC_4IN4HYic-mFNzmJNGaWGQX1wcDTsE6ZI-jgQYUJYVgP9zst2_9XsuuJE-bRv1LhuauLiaj7Ktl6wjXi-7aP0ULkFxctdqReuB8GB-5b4rs4KC4WC08NpxhOopBQuZDkzb0L54yM4LKLL2ok" />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <button
+              class="w-20 h-20 bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-xl">
+              <span class="material-symbols-outlined text-4xl" data-icon="play_arrow"
+                style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </button>
+          </div>
+          <!-- Custom Player UI -->
+          <div
+            class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/80 to-transparent flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="material-symbols-outlined text-white" data-icon="pause">pause</span>
+            <div class="flex-1 h-1.5 bg-white/20 rounded-full overflow-hidden">
+              <div class="h-full bg-primary w-1/3"></div>
+            </div>
+            <span class="text-white font-label text-xs">01:24 / 04:00</span>
+            <span class="material-symbols-outlined text-white cursor-pointer" data-icon="fullscreen">fullscreen</span>
+          </div>
+        </div>
+        <!-- Notes Section (Notion Style) -->
+        <div class="space-y-6">
+          <h3 class="text-2xl font-black font-headline border-b border-surface-container pb-4">Lecture Notes</h3>
+          <div class="space-y-4 text-on-surface-variant leading-relaxed">
+            <div class="flex gap-4">
+              <div class="w-1 bg-primary-container rounded-full"></div>
+              <p class="italic text-on-surface">"Motion design is the intersection of graphic design, animation, and
+                filmmaking."</p>
+            </div>
+            <p>Key takeaways from this session include the differentiation between <strong>traditional
+                animation</strong> (character-driven) and <strong>motion graphics</strong> (information-driven). </p>
+            <ul class="space-y-3 pl-4">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-sm mt-1"
+                  data-icon="arrow_forward">arrow_forward</span>
+                <span>Understanding spatial relationships in UI.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-primary text-sm mt-1"
+                  data-icon="arrow_forward">arrow_forward</span>
+                <span>The psychological impact of easing curves on user perception.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Sticky Bottom Bar -->
+  <footer
+    class="fixed bottom-0 left-0 w-full z-50 bg-white/70 backdrop-blur-2xl px-6 pb-6 pt-4 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-surface-container shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+    <div class="flex items-center gap-6 w-full md:w-auto">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-surface-container-high relative">
+          <svg class="absolute inset-0 w-full h-full -rotate-90">
+            <circle class="text-surface-container-highest" cx="24" cy="24" fill="none" r="20" stroke="currentColor"
+              stroke-width="4"></circle>
+            <circle class="text-primary" cx="24" cy="24" fill="none" r="20" stroke="currentColor" stroke-dasharray="125"
+              stroke-dashoffset="80" stroke-width="4"></circle>
+          </svg>
+          <span class="text-[10px] font-black font-label">35%</span>
+        </div>
+        <div>
+          <p class="text-[10px] font-label font-bold uppercase tracking-wider text-on-surface-variant">Course Progress
+          </p>
+          <p class="text-sm font-bold">12 of 34 lessons</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 w-full md:w-auto">
+      <button id="prev-lesson-btn"
+        class="flex-1 md:flex-none px-6 py-3 text-sm font-bold font-label text-on-surface hover:bg-surface-container-high rounded-full transition-colors">
+        Previous Lesson
+      </button>
+      <button id="mark-complete-btn"
+        class="flex-1 md:flex-none px-8 py-3 bg-gradient-to-r from-primary to-primary-container text-white text-sm font-bold font-label rounded-full shadow-lg shadow-primary/30 hover:scale-105 transition-transform active:scale-95 group relative overflow-hidden">
+        <span class="relative z-10 flex items-center gap-2 justify-center">
+          Mark Complete &amp; Next
+          <span
+            class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </span>
+        <div
+          class="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500">
+        </div>
+      </button>
+    </div>
+  </footer>
+
+  <!-- My Notes Side Drawer -->
+  <aside id="notes-drawer" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-[-20px_0_60px_-15px_rgba(0,0,0,0.1)] z-[150] translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+    <div class="p-6 border-b border-surface-container flex items-center justify-between bg-surface-container-lowest">
+      <div>
+        <h3 class="font-headline font-black text-xl">My Personal Notes</h3>
+        <p class="text-[10px] font-label font-bold text-slate-400 uppercase tracking-widest">Lesson 01: Defining Motion</p>
+      </div>
+      <button id="close-notes-btn" class="p-2 hover:bg-surface-container rounded-full transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="flex-1 p-6 overflow-y-auto">
+      <textarea id="personal-notes-area" class="w-full h-full bg-transparent border-none focus:ring-0 font-body text-on-surface leading-relaxed placeholder:text-slate-300 resize-none" placeholder="Start typing your thoughts here... your notes are automatically saved to your profile."></textarea>
+    </div>
+    <div class="p-6 border-t border-surface-container bg-surface-container-lowest flex items-center justify-between">
+      <span class="text-xs font-label text-slate-400">Last saved: Just now</span>
+      <button class="px-6 py-2 bg-primary text-white rounded-xl font-label text-xs font-bold shadow-md hover:brightness-110 transition-all">Export PDF</button>
+    </div>
+  </aside>
+
+  <div id="notes-backdrop" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[140] opacity-0 pointer-events-none transition-opacity duration-500"></div>
+
+  <!-- Celebration Toast Container -->
+  <div id="toast-container" class="fixed top-24 right-8 z-[200] pointer-events-none"></div>
+
+  <!-- Celebration Overlay -->
+  <div id="celebration-overlay" class="fixed inset-0 z-[300] pointer-events-none flex items-center justify-center">
+    <div id="celebration-content"
+      class="transform scale-50 opacity-0 transition-all duration-700 ease-out flex flex-col items-center">
+      <div class="w-32 h-32 bg-primary rounded-full flex items-center justify-center shadow-2xl mb-4">
+        <span class="material-symbols-outlined text-white text-6xl"
+          style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      </div>
+      <h2 class="text-3xl font-black text-on-background bg-white/80 backdrop-blur px-6 py-3 rounded-2xl shadow-xl">
+        Lesson Completed!</h2>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('sidebar-collapse-btn');
+        const sidebar = document.getElementById('course-sidebar');
+        const icon = toggleBtn.querySelector('.material-symbols-outlined');
+        let isCollapsed = true; // Start hidden
+
+        // Course Switcher Logic
+        const switcherBtn = document.getElementById('course-switcher-btn');
+        const switcherMenu = document.getElementById('course-switcher-menu');
+
+        switcherBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = switcherMenu.classList.contains('hidden');
+            if (isHidden) {
+                switcherMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    switcherMenu.classList.remove('opacity-0', 'translate-y-2');
+                    switcherMenu.classList.add('opacity-100', 'translate-y-0');
+                }, 10);
+            } else {
+                switcherMenu.classList.add('opacity-0', 'translate-y-2');
+                switcherMenu.classList.remove('opacity-100', 'translate-y-0');
+                setTimeout(() => switcherMenu.classList.add('hidden'), 300);
+            }
+        });
+
+        document.addEventListener('click', () => {
+            if (!switcherMenu.classList.contains('hidden')) {
+                switcherMenu.classList.add('opacity-0', 'translate-y-2');
+                switcherMenu.classList.remove('opacity-100', 'translate-y-0');
+                setTimeout(() => switcherMenu.classList.add('hidden'), 300);
+            }
+        });
+
+        const toggleSidebar = () => {
+            isCollapsed = !isCollapsed;
+            
+            if (isCollapsed) {
+                sidebar.style.marginLeft = `-${sidebar.offsetWidth}px`;
+                sidebar.style.opacity = '0';
+                icon.textContent = 'menu';
+                toggleBtn.style.left = '92px'; // Adjusted for better clickability
+            } else {
+                sidebar.style.marginLeft = '0';
+                sidebar.style.opacity = '1';
+                icon.textContent = 'close';
+                toggleBtn.style.left = '340px'; // Adjusted for better clickability
+            }
+        };
+
+        toggleBtn.addEventListener('click', toggleSidebar);
+
+      // Keyboard Shortcut: '[' key to toggle
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '[' && !e.ctrlKey && !e.metaKey) {
+          toggleSidebar();
+        }
+      });
+
+      // Initialize state based on screen size
+      if (window.innerWidth < 1024) {
+        isCollapsed = false; // Start open but ready
+        if (window.innerWidth < 768) {
+          toggleSidebar();
+        }
+      }
+      // Mark Complete Logic
+      const completeBtn = document.getElementById('mark-complete-btn');
+      const prevBtn = document.getElementById('prev-lesson-btn');
+      const overlay = document.getElementById('celebration-overlay');
+      const content = document.getElementById('celebration-content');
+      const toastContainer = document.getElementById('toast-container');
+
+      prevBtn.addEventListener('click', () => {
+        showToast('Heading back to previous lesson...', 'arrow_back');
+      });
+
+      completeBtn.addEventListener('click', () => {
+        // 1. Show Celebration
+        overlay.classList.remove('pointer-events-none');
+        content.classList.remove('scale-50', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+
+        // 2. Show Toast
+        showToast('Well done! You\'ve earned 50 XP', 'military_tech');
+
+        // 3. Update Progress Bar (Visual Mock)
+        const progressCircle = document.querySelector('circle.text-primary');
+        const progressText = document.querySelector('.font-black.font-label');
+        if (progressCircle) {
+          progressCircle.style.transition = 'stroke-dashoffset 1s ease-in-out';
+          progressCircle.style.strokeDashoffset = '75';
+          if (progressText) progressText.textContent = '40%';
+        }
+
+        // 4. Hide celebration after delay
+        setTimeout(() => {
+          content.classList.add('scale-125', 'opacity-0');
+          setTimeout(() => {
+            overlay.classList.add('pointer-events-none');
+            content.classList.remove('scale-125');
+            content.classList.add('scale-50');
+          }, 700);
+        }, 2000);
+      });
+      
+      // Notes Drawer Logic
+      const notesDrawer = document.getElementById('notes-drawer');
+      const openNotesBtn = document.getElementById('open-notes-btn');
+      const closeNotesBtn = document.getElementById('close-notes-btn');
+      const notesBackdrop = document.getElementById('notes-backdrop');
+      const saveResourceBtn = document.getElementById('save-resource-btn');
+
+      const toggleNotes = (open) => {
+        if (open) {
+          notesDrawer.classList.remove('translate-x-full');
+          notesBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+          notesBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+          notesDrawer.classList.add('translate-x-full');
+          notesBackdrop.classList.add('opacity-0', 'pointer-events-none');
+          notesBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        }
+      };
+
+      openNotesBtn?.addEventListener('click', () => toggleNotes(true));
+      closeNotesBtn?.addEventListener('click', () => toggleNotes(false));
+      notesBackdrop?.addEventListener('click', () => toggleNotes(false));
+
+      saveResourceBtn?.addEventListener('click', () => {
+        const icon = saveResourceBtn.querySelector('.material-symbols-outlined');
+        const isSaved = icon.textContent === 'bookmark_added';
+        
+        if (!isSaved) {
+          icon.textContent = 'bookmark_added';
+          icon.classList.add('fill-1');
+          saveResourceBtn.classList.add('bg-primary/20', 'text-primary');
+          saveResourceBtn.innerHTML = `<span class="material-symbols-outlined text-xl fill-1">bookmark_added</span> Saved to Library`;
+          showToast('Resource saved to your library', 'bookmark');
+        } else {
+          icon.textContent = 'bookmark';
+          icon.classList.remove('fill-1');
+          saveResourceBtn.classList.remove('bg-primary/20', 'text-primary');
+          saveResourceBtn.innerHTML = `<span class="material-symbols-outlined text-xl">bookmark</span> Save Resource`;
+        }
+      });
+
+      function showToast(message, icon) {
+        const toast = document.createElement('div');
+        toast.className = 'bg-white/90 backdrop-blur-xl border border-surface-container p-4 rounded-2xl shadow-2xl flex items-center gap-4 transform translate-x-full transition-all duration-500 mb-4 pointer-events-auto';
+        toast.innerHTML = `
+                <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">${icon}</span>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-on-background">${message}</p>
+                    <p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Progress Saved</p>
+                </div>
+            `;
+        toastContainer.appendChild(toast);
+
+        // Slide in
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-x-full');
+        });
+
+        // Slide out and remove
+        setTimeout(() => {
+          toast.classList.add('translate-x-[150%]', 'opacity-0');
+          setTimeout(() => toast.remove(), 500);
+        }, 4000);
+      }
+    });
+  </script>
+  <!-- Mobile Navigation Shell (Filtered for Focus) -->
+  <script src="../assets/js/student-nav.js"></script>
+</body>
+
+</html>

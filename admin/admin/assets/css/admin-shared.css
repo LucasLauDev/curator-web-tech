@@ -1,0 +1,26 @@
+/* Shared admin UI primitives: icon defaults, drawer transitions, and backdrop behavior. */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.admin-ui-lock-scroll {
+    overflow: hidden;
+}
+
+.left-drawer {
+    transform: translateX(0) !important;
+    transition: none !important;
+}
+
+.left-drawer.open {
+    transform: translateX(0);
+}
+
+.drawer-backdrop {
+    display: none !important;
+}
+
+.drawer-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}

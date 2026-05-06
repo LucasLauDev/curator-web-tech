@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorEdu - Cart &amp; Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#b41340",
+                        "surface-variant": "#dadddf",
+                        "tertiary": "#aa008e",
+                        "on-primary-fixed": "#000000",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-dim": "#5d00e3",
+                        "surface-dim": "#d1d5d7",
+                        "on-secondary-container": "#004e61",
+                        "outline": "#757778",
+                        "primary-fixed": "#ac8eff",
+                        "outline-variant": "#abadae",
+                        "on-error": "#ffefef",
+                        "surface": "#f5f6f7",
+                        "surface-container": "#e6e8ea",
+                        "primary-container": "#ac8eff",
+                        "secondary-fixed": "#80deff",
+                        "on-secondary": "#e2f6ff",
+                        "on-background": "#2c2f30",
+                        "tertiary-dim": "#96007d",
+                        "on-primary": "#f7f0ff",
+                        "on-surface-variant": "#595c5d",
+                        "primary": "#6a1cf6",
+                        "inverse-surface": "#0c0f10",
+                        "background": "#f5f6f7",
+                        "tertiary-container": "#ff87db",
+                        "surface-bright": "#f5f6f7",
+                        "inverse-on-surface": "#9b9d9e",
+                        "inverse-primary": "#9d79ff",
+                        "on-primary-container": "#2a0070",
+                        "secondary-dim": "#00576c",
+                        "error-container": "#f74b6d",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "secondary-container": "#80deff",
+                        "on-tertiary-fixed": "#34002a",
+                        "on-error-container": "#510017",
+                        "primary-fixed-dim": "#a07dff",
+                        "error-dim": "#a70138",
+                        "on-tertiary": "#ffeef5",
+                        "surface-tint": "#6a1cf6",
+                        "on-tertiary-container": "#5f004f",
+                        "secondary": "#00647b",
+                        "on-surface": "#2c2f30",
+                        "on-primary-fixed-variant": "#350088",
+                        "surface-container-low": "#eff1f2",
+                        "on-secondary-fixed": "#003a48",
+                        "tertiary-fixed": "#ff87db",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "surface-container-highest": "#dadddf",
+                        "surface-container-high": "#e0e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-plus-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(24px); }
+        .bg-primary-gradient { background: linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%); }
+    </style>
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container relative min-h-screen overflow-x-hidden">
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+<div id="nav-mount"></div>
+<script src="../assets/js/instructor-nav.js"></script>
+<script src="../assets/js/instructor-interactions.js"></script>
+<main class="pt-24 px-6 md:px-12 pb-20 max-w-7xl mx-auto w-full min-w-0">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Checkout Form Section (Page 8) -->
+<div class="lg:col-span-8">
+<div class="mb-12">
+<h1 class="text-5xl font-black font-headline tracking-tighter text-on-surface mb-2">Secure Checkout</h1>
+<p class="text-on-surface-variant font-body">Finalize your curation journey with premium resources.</p>
+</div>
+<div class="space-y-10">
+<!-- Shipping Section -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">1</span>
+<h2 class="text-2xl font-bold font-headline">Shipping Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-full">
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">FULL NAME</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="Alex Curator" type="text"/>
+</div>
+<div class="col-span-full">
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">SHIPPING ADDRESS</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="123 Editorial Lane, Design District" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">CITY</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="New York" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">PHONE NUMBER</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+</section>
+<!-- Payment Section -->
+<section>
+<div class="flex items-center gap-3 mb-6">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm">2</span>
+<h2 class="text-2xl font-bold font-headline">Payment Method</h2>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<div class="flex gap-2">
+<div class="w-12 h-8 bg-surface-container-high rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500 scale-75">credit_card</span>
+</div>
+<div class="w-12 h-8 bg-surface-container-high rounded-md"></div>
+</div>
+<span class="text-xs font-label text-outline uppercase tracking-widest font-bold">Encrypted &amp; Secure</span>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">CARD NUMBER</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 pr-12 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="**** **** **** 4242" type="text"/>
+<span class="material-symbols-outlined absolute right-4 bottom-4 text-on-surface-variant">lock</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">EXPIRY DATE</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="MM / YY" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-label font-bold text-on-surface-variant mb-2 ml-1">CVC</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl p-4 focus:ring-2 focus:ring-primary-container focus:bg-white transition-all font-body text-on-surface" placeholder="***" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<button class="w-full bg-primary-gradient text-on-primary py-6 rounded-lg font-headline font-extrabold text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
+                        Complete Purchase
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Order Summary Sidebar -->
+<div class="lg:col-span-4 lg:sticky lg:top-28 h-fit">
+<div class="bg-surface-container rounded-xl p-8">
+<h3 class="text-xl font-bold font-headline mb-6">Order Summary</h3>
+<div id="checkout-flow-summary-lines" class="space-y-4 mb-8 min-h-[4rem]"></div>
+<div class="border-t border-outline-variant/20 pt-6 space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Subtotal</span>
+<span class="font-bold" id="checkout-flow-subtotal">$0.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Shipping</span>
+<span class="text-secondary font-bold">FREE</span>
+</div>
+<div class="flex justify-between text-xl font-headline font-black pt-2">
+<span>Total</span>
+<span id="checkout-flow-total">$0.00</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-4 p-4 bg-tertiary-container/10 rounded-xl border border-tertiary-container/20">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+<p class="text-xs font-label font-bold text-on-tertiary-container uppercase tracking-wider">Course materials included free</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Slide-in Cart Panel (Page 7) -->
+<div class="fixed inset-0 z-[60] pointer-events-none overflow-hidden">
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm pointer-events-auto"></div>
+<aside class="absolute top-0 right-0 h-full w-full max-w-md glass-panel shadow-2xl pointer-events-auto transform translate-x-0 transition-transform duration-500 flex flex-col">
+<div class="p-8 flex justify-between items-center">
+<h2 class="text-3xl font-black font-headline tracking-tight">Your Cart</h2>
+<a class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container rounded-full p-2" href="main page/instructor_bookstore.html" aria-label="Close cart and return to bookstore">close</a>
+</div>
+<div class="flex-grow overflow-y-auto px-8 space-y-8">
+<!-- Cart Item -->
+<div class="group relative flex gap-6 p-4 rounded-xl bg-white hover:shadow-lg transition-all border border-transparent hover:border-primary-container/10">
+<div class="w-24 h-32 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img alt="Designing for Screens" class="w-full h-full object-cover" data-alt="book on a table titled 'Designing for Screens' with elegant typography and clean layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA75Wmtkue_W3j4k1THS_xzsMsE14WWA4RAp-KFAq1Yfc8cPLXTjr6TV_BqHG3sGBYcyj4vIHDHJItcelSyPSwk3gXQpHFvn6kTit98PWdp6GUZ9FoUDsbw_v63Vbj5rpcQXKLUWdpZC_83GeUZee1UTHjec_BzNhMQ7swyjKvqZeYXdu9jqvopfnBE3PW9jD7HNM4Vk7B31d-mAi-VPgOAKsUd6KjtRB2YFffAFH0gZpC9R9lpdSl-uPwKePWm6z7jkoews18yWY0"/>
+</div>
+<div class="flex flex-col justify-between py-1 flex-grow">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-lg leading-tight text-on-surface">Designing for Screens</h3>
+<button class="material-symbols-outlined text-error hover:scale-110 transition-transform">delete</button>
+</div>
+<p class="text-sm text-on-surface-variant font-body mt-1">Digital + Physical Bundle</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center bg-surface-container-low rounded-full px-3 py-1 gap-4">
+<button class="text-primary font-bold hover:scale-125 transition-transform">−</button>
+<span class="font-bold text-sm font-label">01</span>
+<button class="text-primary font-bold hover:scale-125 transition-transform">+</button>
+</div>
+<span class="text-xl font-black font-headline text-on-surface">$24.99</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low/50">
+<div class="flex justify-between mb-6">
+<span class="text-on-surface-variant font-medium">Estimated Total</span>
+<span class="text-2xl font-black font-headline">$24.99</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-lg font-headline font-extrabold text-lg shadow-lg shadow-primary/20 hover:bg-primary-dim transition-colors flex items-center justify-center gap-3">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart_checkout</span>
+</button>
+<p class="text-center text-xs font-label text-on-surface-variant mt-4 font-bold uppercase tracking-widest">Secure Checkout via CuratorPay</p>
+</div>
+</aside>
+</div>
+<!-- Order Confirmation Overlay (Success State) -->
+<!-- Note: Hidden by default, showing logic represented through absolute positioning if needed -->
+<div class="fixed inset-0 z-[70] flex items-center justify-center p-6 bg-surface/95 backdrop-blur-xl hidden">
+<div class="max-w-md w-full text-center space-y-8 animate-in fade-in zoom-in duration-500">
+<div class="relative inline-block">
+<div class="absolute inset-0 bg-primary-container rounded-full blur-2xl opacity-40"></div>
+<div class="relative w-24 h-24 bg-primary text-on-primary rounded-full flex items-center justify-center mx-auto shadow-xl">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div>
+<h2 class="text-4xl font-black font-headline tracking-tight mb-4">Order Confirmed!</h2>
+<p class="text-on-surface-variant text-lg px-6">Your curation journey has officially begun. Check your email for access instructions.</p>
+</div>
+<div class="bg-white rounded-xl p-6 shadow-sm border border-surface-container">
+<p class="text-sm font-label text-on-surface-variant font-bold uppercase tracking-widest mb-2">Order ID</p>
+<p class="text-xl font-bold font-headline">#CRE-8902-XP</p>
+</div>
+<button class="w-full bg-on-surface text-surface py-5 rounded-lg font-headline font-extrabold text-lg transition-transform active:scale-95">
+                Go to My Learning
+            </button>
+</div>
+</div>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-end px-6 pb-6 pt-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl shadow-[0_-8px_30px_rgb(0,0,0,0.04)] rounded-t-[32px]">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2">
+<span class="material-symbols-outlined">home</span>
+<span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2">
+<span class="material-symbols-outlined">search</span>
+<span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 p-2">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Social</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-violet-600 text-white rounded-full p-3 mb-2 transform -translate-y-2 shadow-lg shadow-violet-500/40">
+<span class="material-symbols-outlined">book</span>
+<span class="font-manrope text-[10px] uppercase tracking-wider mt-1">Books</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CuratorEdu | Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6a1cf6",
+                        "primary-container": "#ac8eff",
+                        background: "#f8fafc",
+                        surface: "#ffffff",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#64748b",
+                        outline: "#e2e8f0"
+                    },
+                    borderRadius: { DEFAULT: "1rem", lg: "1.5rem", xl: "2rem" },
+                    fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Manrope"] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .progress-bar {
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/student-nav.css">
+</head>
+<body class="bg-background text-on-surface min-h-screen relative overflow-x-hidden">
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-300/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+    <main class="pb-16">
+
+        <div class="px-4 pt-8 max-w-full sm:px-8">
+            <!-- Welcome Banner -->
+            <section class="bg-[#0f172a] relative overflow-hidden rounded-3xl shadow-xl mb-8 border border-white/5">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/25 via-transparent to-violet-900/20 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-dots opacity-[0.04] pointer-events-none"></div>
+                <div class="relative z-10 px-8 py-8 flex items-center gap-6">
+                    <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl flex-shrink-0 rotate-3">
+                        <img src="https://ui-avatars.com/api/?name=Alex+Rivers&background=6a1cf6&color=fff&size=128" alt="Alex Rivers" class="w-full h-full object-cover"/>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h1 class="text-2xl font-headline font-black tracking-tight text-white leading-tight">Welcome back, Alex 👋</h1>
+                        <p class="text-slate-400 text-sm font-medium mt-1">You have 2 courses in progress. Keep going!</p>
+                    </div>
+                    <div class="text-right hidden sm:block">
+                        <p class="font-label text-[10px] uppercase tracking-widest text-slate-500 font-bold" id="current-date"></p>
+                        <div class="mt-2 flex items-center justify-end gap-1 text-emerald-400">
+                            <span class="material-symbols-outlined text-sm">bolt</span>
+                            <span class="text-[10px] font-black uppercase tracking-wider">Active Today</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Courses Enrolled -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">school</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-headline font-black text-on-surface">5</p>
+                        <p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-0.5">Courses Enrolled</p>
+                    </div>
+                </div>
+                <!-- Quizzes Attempted -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-violet-600 text-xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-headline font-black text-on-surface">12</p>
+                        <p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-0.5">Quizzes Attempted</p>
+                    </div>
+                </div>
+                <!-- Completion % -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-emerald-600 text-xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-headline font-black text-on-surface">68%</p>
+                        <p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-0.5">Completion Rate</p>
+                    </div>
+                </div>
+                <!-- Badges -->
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-amber-500 text-xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-headline font-black text-on-surface">3</p>
+                        <p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mt-0.5">Badges Earned</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main 2-column layout -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+                <!-- Left: Enrolled Courses + Recent Activity -->
+                <div class="xl:col-span-2 space-y-8">
+
+                    <!-- Enrolled Courses -->
+                    <section>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">In Progress</p>
+                                <h2 class="text-xl font-headline font-black text-on-surface mt-0.5">Enrolled Courses</h2>
+                            </div>
+                            <a href="../course/my_courses.html" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                                View All
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+                            <!-- Course Card 1 — Web Technology -->
+                            <a href="../course/course_detail.html" class="group block bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                                <!-- Card Header -->
+                                <div class="relative h-44 bg-gradient-to-br from-[#6a1cf6] to-[#a855f7] overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)"></div>
+                                    <div class="absolute bottom-3 left-4 right-4">
+                                        <span class="font-label text-[9px] uppercase tracking-widest text-white/70 font-bold">Web Technology</span>
+                                        <h3 class="font-headline font-black text-white text-sm leading-tight mt-0.5">Introduction to Web Development</h3>
+                                    </div>
+                                    <!-- Lecturer avatar -->
+                                    <div class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 border-white/30 overflow-hidden bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                        <img src="https://ui-avatars.com/api/?name=James+Lee&background=ffffff&color=6a1cf6&size=64" alt="Dr. James Lee" class="w-full h-full object-cover"/>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="p-4">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed line-clamp-1 mb-2">
+                                        Learn HTML, CSS, and JavaScript fundamentals to build modern, responsive websites from scratch.
+                                    </p>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+                                        <span class="text-[11px] font-bold text-on-surface-variant">Dr. James Lee</span>
+                                        <span class="text-slate-300 text-xs mx-1">·</span>
+                                        <span class="text-[11px] text-on-surface-variant">4 modules</span>
+                                    </div>
+                                    <!-- Progress -->
+                                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-1.5">
+                                        <div class="progress-bar h-full bg-primary rounded-full" style="width: 70%"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] text-on-surface-variant">Last accessed today</span>
+                                        <span class="text-[10px] font-black text-primary">70%</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Course Card 2 — Database Systems -->
+                            <a href="../course/course_detail.html" class="group block bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                                <!-- Card Header -->
+                                <div class="relative h-44 bg-gradient-to-br from-[#0369a1] to-[#38bdf8] overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)"></div>
+                                    <div class="absolute bottom-3 left-4 right-4">
+                                        <span class="font-label text-[9px] uppercase tracking-widest text-white/70 font-bold">Database Systems</span>
+                                        <h3 class="font-headline font-black text-white text-sm leading-tight mt-0.5">Database Design & SQL</h3>
+                                    </div>
+                                    <div class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 border-white/30 overflow-hidden bg-white/20 backdrop-blur-sm">
+                                        <img src="https://ui-avatars.com/api/?name=Sarah+Tan&background=ffffff&color=0369a1&size=64" alt="Dr. Sarah Tan" class="w-full h-full object-cover"/>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="p-4">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed line-clamp-1 mb-2">
+                                        Master relational database design, normalisation, and SQL querying for real-world applications.
+                                    </p>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+                                        <span class="text-[11px] font-bold text-on-surface-variant">Dr. Sarah Tan</span>
+                                        <span class="text-slate-300 text-xs mx-1">·</span>
+                                        <span class="text-[11px] text-on-surface-variant">5 modules</span>
+                                    </div>
+                                    <!-- Progress -->
+                                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-1.5">
+                                        <div class="progress-bar h-full bg-[#0369a1] rounded-full" style="width: 45%"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] text-on-surface-variant">Last accessed yesterday</span>
+                                        <span class="text-[10px] font-black text-[#0369a1]">45%</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Course Card 3 — Software Engineering -->
+                            <a href="../course/course_detail.html" class="group block bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+                                <!-- Card Header -->
+                                <div class="relative h-44 bg-gradient-to-br from-[#047857] to-[#34d399] overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.4) 0%, transparent 60%)"></div>
+                                    <div class="absolute bottom-3 left-4 right-4">
+                                        <span class="font-label text-[9px] uppercase tracking-widest text-white/70 font-bold">Software Engineering</span>
+                                        <h3 class="font-headline font-black text-white text-sm leading-tight mt-0.5">Agile Development & Project Management</h3>
+                                    </div>
+                                    <div class="absolute top-3 right-3 w-8 h-8 rounded-full border-2 border-white/30 overflow-hidden bg-white/20 backdrop-blur-sm">
+                                        <img src="https://ui-avatars.com/api/?name=Raj+Kumar&background=ffffff&color=047857&size=64" alt="Prof. Raj Kumar" class="w-full h-full object-cover"/>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="p-4">
+                                    <p class="text-xs text-on-surface-variant font-medium leading-relaxed line-clamp-1 mb-2">
+                                        Understand Agile methodologies, sprint planning, and tools like Jira for effective team delivery.
+                                    </p>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+                                        <span class="text-[11px] font-bold text-on-surface-variant">Prof. Raj Kumar</span>
+                                        <span class="text-slate-300 text-xs mx-1">·</span>
+                                        <span class="text-[11px] text-on-surface-variant">6 modules</span>
+                                    </div>
+                                    <!-- Progress -->
+                                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-1.5">
+                                        <div class="progress-bar h-full bg-emerald-500 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] text-on-surface-variant">Last accessed Mon</span>
+                                        <span class="text-[10px] font-black text-emerald-600">90%</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </section>
+
+                    <!-- Recent Activity -->
+                    <section class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8">
+                        <div class="mb-6">
+                            <p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Feed</p>
+                            <h2 class="text-xl font-headline font-black text-on-surface mt-0.5">Recent Activity</h2>
+                        </div>
+                        <div class="space-y-0 divide-y divide-slate-50">
+                            <!-- Activity Row 1 -->
+                            <div class="flex items-start gap-4 py-4">
+                                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-on-surface">Resumed <span class="text-primary">Introduction to Web Development</span></p>
+                                    <p class="text-xs text-on-surface-variant mt-0.5">Module 3 — JavaScript Fundamentals</p>
+                                </div>
+                                <span class="text-[10px] font-bold text-on-surface-variant flex-shrink-0 mt-0.5">Today, 9:30 AM</span>
+                            </div>
+                            <!-- Activity Row 2 -->
+                            <div class="flex items-start gap-4 py-4">
+                                <div class="w-2 h-2 rounded-full bg-violet-400 mt-2 flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-on-surface">Replied to thread in <span class="text-primary">Discussion Forum</span></p>
+                                    <p class="text-xs text-on-surface-variant mt-0.5">"Best practices for SQL joins?" — General</p>
+                                </div>
+                                <span class="text-[10px] font-bold text-on-surface-variant flex-shrink-0 mt-0.5">Yesterday</span>
+                            </div>
+                            <!-- Activity Row 3 -->
+                            <div class="flex items-start gap-4 py-4">
+                                <div class="w-2 h-2 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-on-surface">Purchased <span class="text-primary">Clean Code</span> from Bookstore</p>
+                                    <p class="text-xs text-on-surface-variant mt-0.5">eBook — RM 12.00 after subsidy</p>
+                                </div>
+                                <span class="text-[10px] font-bold text-on-surface-variant flex-shrink-0 mt-0.5">Mon, 28 Apr</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Saved Resources Library -->
+                    <section class="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm">
+                        <div class="mb-6">
+                            <p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Library</p>
+                            <h2 class="text-xl font-headline font-black text-on-surface mt-0.5">Saved Resources</h2>
+                        </div>
+                        <div class="space-y-3" id="saved-resources-list">
+                            <!-- Resource Item -->
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 group" data-resource-id="1">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">picture_as_pdf</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm text-slate-800">Module 3 — Colour Theory Notes</p>
+                                        <a href="../course/unified_course_details.html" class="text-xs text-primary hover:underline">Motion Design Fundamentals</a>
+                                    </div>
+                                </div>
+                                <button onclick="removeResource(this)" class="text-slate-300 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">
+                                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 group" data-resource-id="2">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-blue-500 text-[20px]" style="font-variation-settings:'FILL' 1;">play_circle</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm text-slate-800">Intro to React Hooks — Video Tutorial</p>
+                                        <a href="../course/unified_course_details.html" class="text-xs text-primary hover:underline">Full-Stack Web Development</a>
+                                    </div>
+                                </div>
+                                <button onclick="removeResource(this)" class="text-slate-300 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">
+                                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 group" data-resource-id="3">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">picture_as_pdf</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm text-slate-800">Heuristic Evaluation Checklist</p>
+                                        <a href="../course/unified_course_details.html" class="text-xs text-primary hover:underline">UI/UX Design Principles</a>
+                                    </div>
+                                </div>
+                                <button onclick="removeResource(this)" class="text-slate-300 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">
+                                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <p id="saved-empty" class="hidden text-sm text-slate-400 text-center py-6">No saved resources yet. Bookmark lecture notes and videos from your courses.</p>
+                    </section>
+
+                </div>
+
+                <!-- Right: Progress Overview + Quick Links -->
+                <div class="space-y-6">
+
+                    <!-- Progress Overview -->
+                    <section class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8">
+                        <div class="mb-6">
+                            <p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Overview</p>
+                            <h2 class="text-xl font-headline font-black text-on-surface mt-0.5">Progress</h2>
+                        </div>
+
+                        <!-- Overall Completion Ring -->
+                        <div class="flex items-center gap-6 mb-8">
+                            <div class="relative flex-shrink-0">
+                                <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 80 80">
+                                    <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="7" fill="transparent" class="text-slate-100"/>
+                                    <circle cx="40" cy="40" r="32" stroke="currentColor" stroke-width="7" fill="transparent"
+                                        stroke-dasharray="201"
+                                        stroke-dashoffset="64"
+                                        stroke-linecap="round"
+                                        class="text-primary"/>
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="text-lg font-headline font-black text-on-surface leading-none">68%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-headline font-black text-on-surface text-base">Overall Completion</p>
+                                <p class="text-xs text-on-surface-variant mt-1">Across all enrolled courses</p>
+                            </div>
+                        </div>
+
+                        <!-- Quizzes Stat -->
+                        <div class="space-y-4">
+                            <div class="p-4 bg-slate-50 rounded-2xl flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-violet-500 text-xl" style="font-variation-settings: 'FILL' 1;">quiz</span>
+                                    <div>
+                                        <p class="text-sm font-bold text-on-surface">Quizzes</p>
+                                        <p class="text-xs text-on-surface-variant">Attempted vs Total</p>
+                                    </div>
+                                </div>
+                                <span class="font-headline font-black text-on-surface">12 / 18</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-emerald-500 text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    <div>
+                                        <p class="text-sm font-bold text-on-surface">Courses Completed</p>
+                                        <p class="text-xs text-on-surface-variant">Out of enrolled</p>
+                                    </div>
+                                </div>
+                                <span class="font-headline font-black text-on-surface">2 / 5</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-amber-500 text-xl" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+                                    <div>
+                                        <p class="text-sm font-bold text-on-surface">Badges Earned</p>
+                                        <p class="text-xs text-on-surface-variant">Achievement milestones</p>
+                                    </div>
+                                </div>
+                                <span class="font-headline font-black text-on-surface">3</span>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Score History (Combined from Profile) -->
+                        <div class="mt-8">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Quiz Score History</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                    <div>
+                                        <p class="font-bold text-sm text-slate-800">Colour Theory Quiz</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">Motion Design · 12 Apr</p>
+                                    </div>
+                                    <span class="text-xs font-black text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-xl px-2 py-1">8/10</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                    <div>
+                                        <p class="font-bold text-sm text-slate-800">JS Fundamentals</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">Web Dev · 8 Apr</p>
+                                    </div>
+                                    <span class="text-xs font-black text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-2 py-1">6/10</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges List (Combined from Profile) -->
+                        <div class="mt-8">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Achievements</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-1.5" title="Course Completer">
+                                    <span class="material-symbols-outlined text-amber-500 text-[18px]" style="font-variation-settings:'FILL' 1;">emoji_events</span>
+                                    <span class="text-[10px] font-bold text-amber-700">Completer</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 bg-violet-50 border border-violet-200 rounded-xl px-3 py-1.5" title="Perfect Score">
+                                    <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1;">military_tech</span>
+                                    <span class="text-[10px] font-bold text-violet-700">Perfect</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 rounded-xl px-3 py-1.5" title="Fast Learner">
+                                    <span class="material-symbols-outlined text-blue-500 text-[18px]" style="font-variation-settings:'FILL' 1;">bolt</span>
+                                    <span class="text-[10px] font-bold text-blue-700">Fast</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateEl = document.getElementById('current-date');
+            if (dateEl) {
+                const now = new Date();
+                const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateEl.textContent = now.toLocaleDateString('en-MY', opts);
+            }
+        });
+
+        function removeResource(btn) {
+            const item = btn.closest('[data-resource-id]');
+            item.remove();
+            const list = document.getElementById('saved-resources-list');
+            if (!list.querySelector('[data-resource-id]')) {
+                document.getElementById('saved-empty').classList.remove('hidden');
+            }
+        }
+    </script>
+    <script src="../assets/js/student-nav.js"></script>
+</body>
+</html>

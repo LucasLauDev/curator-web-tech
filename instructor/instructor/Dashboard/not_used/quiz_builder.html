@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Builder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/instructor-nav.css" />
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+      .headline { font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif; }
+      .label { font-family: Manrope, Inter, system-ui, sans-serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen">
+    <div id="nav-mount"></div>
+    <script src="../assets/js/instructor-nav.js"></script>
+    <script src="../assets/js/instructor-interactions.js"></script>
+
+    <div class="flex min-h-screen">
+      <main class="flex-1 p-8 lg:p-12 pb-28 min-w-0">
+        <div class="max-w-5xl mx-auto mb-6 rounded-2xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-slate-700">
+          <strong class="text-violet-800">Integrated editor:</strong> this quiz is also available inside
+          <a href="course_module_editor.html#quiz" class="font-bold text-violet-700 underline hover:text-violet-900">Course Module Editor</a>
+          (Interactive Quiz tab — same page as your lesson).
+        </div>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <section class="lg:col-span-8 space-y-6">
+            <header>
+              <p class="label text-[10px] uppercase tracking-[0.22em] font-black text-violet-600">Assessment</p>
+              <h1 class="headline text-4xl font-black tracking-tight mt-2">Quiz Builder</h1>
+              <p class="mt-3 text-sm text-slate-600">Create, publish, and preview the interactive quiz.</p>
+            </header>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6 space-y-5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Quiz title</label>
+                  <input id="qb-title" class="mt-2 w-full rounded-xl border-slate-200" value="Final Assessment" />
+                </div>
+                <div>
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Visibility</label>
+                  <select id="qb-vis" class="mt-2 w-full rounded-xl border-slate-200">
+                    <option value="course">Course only</option>
+                    <option value="public">Public</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Question prompt</label>
+                <textarea id="qb-prompt" class="w-full rounded-xl border-slate-200 min-h-24" placeholder="Type a question...">Which interaction should trigger a haptic feedback on mobile?</textarea>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Option A</label>
+                  <input id="qb-a" class="w-full rounded-xl border-slate-200" value="Page load" />
+                </div>
+                <div class="space-y-2">
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Option B</label>
+                  <input id="qb-b" class="w-full rounded-xl border-slate-200" value="Successful form submit" />
+                </div>
+                <div class="space-y-2">
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Option C</label>
+                  <input id="qb-c" class="w-full rounded-xl border-slate-200" value="Background animation" />
+                </div>
+                <div class="space-y-2">
+                  <label class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Correct answer</label>
+                  <select id="qb-correct" class="w-full rounded-xl border-slate-200">
+                    <option value="0">A</option>
+                    <option value="1" selected>B</option>
+                    <option value="2">C</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-3 pt-2">
+                <button id="qb-save" class="px-5 py-3 rounded-xl bg-slate-900 text-white font-black hover:bg-black">Save</button>
+                <button id="qb-publish" class="px-5 py-3 rounded-xl bg-violet-600 text-white font-black hover:bg-violet-700">Publish</button>
+                <button id="qb-unpublish" class="px-5 py-3 rounded-xl bg-slate-100 text-slate-900 font-black hover:bg-slate-200">Unpublish</button>
+                <a href="student-quiz.html" class="px-5 py-3 rounded-xl bg-white border border-slate-200 font-black hover:bg-slate-50">Preview as Student</a>
+              </div>
+            </div>
+          </section>
+
+          <aside class="lg:col-span-4 space-y-6">
+            <div class="bg-white border border-slate-200 rounded-2xl p-6">
+              <div class="flex items-center justify-between">
+                <h2 class="headline text-lg font-black">Status</h2>
+                <span id="qb-status" class="label text-[10px] uppercase tracking-[0.2em] font-black text-slate-500">Unpublished</span>
+              </div>
+              <div class="mt-4 text-sm text-slate-600 leading-relaxed">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-slate-500">lock</span>
+                  <span>Unpublished quizzes are not answerable on the student page.</span>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                  <span class="material-symbols-outlined text-slate-500">task_alt</span>
+                  <span>Publishing makes the quiz answerable and records attempts locally.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-2xl p-6">
+              <h2 class="headline text-lg font-black">Quick links</h2>
+              <div class="mt-4 grid gap-2">
+                <a href="course_module_editor.html#quiz" class="px-4 py-3 rounded-xl bg-slate-100 font-black hover:bg-slate-200">Back to Module Editor</a>
+                <a href="draft_submit_publish.html" class="px-4 py-3 rounded-xl bg-slate-100 font-black hover:bg-slate-200">Back to Publishing Center</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
+

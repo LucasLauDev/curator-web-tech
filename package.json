@@ -1,0 +1,29 @@
+{
+  "name": "web-tech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "migrate": "node scripts/migrate-db.js",
+    "migrate:dry-run": "node scripts/migrate-db.js --dry-run",
+    "setup:db:new": "node scripts/setup-new-database.js",
+    "seed-users": "node scripts/seed-demo-users.js",
+    "seed-bookstore": "node scripts/seed-bookstore-data.js",
+    "seed-courses": "node scripts/seed-courses-data.js",
+    "seed": "node scripts/seed-demo-users.js && node scripts/seed-bookstore-data.js && node scripts/seed-courses-data.js",
+    "setup:db": "node scripts/migrate-db.js && npm run seed",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cookie": "^1.1.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0"
+  }
+}

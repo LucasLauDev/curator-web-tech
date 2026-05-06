@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../shared/responsive-base.css" />
+    <title>Curated Library | CuratorEdu</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;600&family=Manrope:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        }
+
+        .headline {
+            font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+        }
+
+        .label {
+            font-family: Manrope, Inter, system-ui, sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-primary-gradient {
+          background: linear-gradient(135deg, #6a1cf6 0%, #ac8eff 100%);
+        }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+  <nav
+    class="fixed top-0 w-full z-50 flex h-16 lg:h-20 justify-between items-center px-4 sm:px-6 bg-surface/80 backdrop-blur-xl bg-slate-100/50 shadow-[0_16px_32px_-4px_rgba(0,0,0,0.08)]">
+    <div class="flex items-center gap-4 md:gap-8 min-w-0">
+      <a href="index.html" class="text-2xl font-black tracking-tight text-violet-600 font-headline hover:opacity-90 transition-opacity">CuratorEdu</a>
+      <div class="hidden md:flex gap-6 items-center">
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="course_discovery.html">Courses</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="comunity_forum_nonuser.html">Forum</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="minimal_book_store.html">Bookstore</a>
+        <a class="font-headline text-sm font-medium text-slate-500 hover:text-violet-500 transition-colors"
+          href="help.html">Help</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="login.html" class="font-headline text-sm font-bold text-slate-700 hover:text-violet-600 transition-colors">Sign In</a>
+      <a href="role_base_registration.html"
+        class="px-6 py-2.5 text-sm font-bold text-white bg-primary-gradient rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all font-label">Get
+        Started</a>
+    </div>
+  </nav>
+
+    <main class="pt-20 lg:pt-24 pb-16 lg:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="headline text-4xl md:text-5xl font-black tracking-tight mb-4">Curated Library</h1>
+            <p class="text-slate-600 text-lg max-w-2xl mx-auto">Essential reads for the modern creator and digital curator. Hand-picked to help you level up.</p>
+        </div>
+
+        <div id="landing-book-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+
+        <div class="mt-20 text-center">
+            <a href="role_base_registration.html" class="bg-primary-gradient text-white px-10 py-5 rounded-xl font-headline font-extrabold text-lg shadow-xl shadow-primary/30 hover:scale-[1.02] transition-all active:scale-95 inline-block">
+                Join to Access Full Library
+            </a>
+        </div>
+    </main>
+    <script src="/assets/js/bookstore-catalog.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.mountCuratorLandingBooks?.('#landing-book-grid', 4);
+      });
+    </script>
+</body>
+
+</html>

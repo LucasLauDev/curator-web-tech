@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .label-text {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .glass-fab {
+            background: rgba(245, 246, 247, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#6a1cf6",
+                        "surface-container-high": "#e0e3e4",
+                        "surface-container-low": "#eff1f2",
+                        "surface-dim": "#d1d5d7",
+                        "on-error-container": "#510017",
+                        "on-surface-variant": "#595c5d",
+                        "inverse-on-surface": "#9b9d9e",
+                        "surface-container": "#e6e8ea",
+                        "background": "#f5f6f7",
+                        "tertiary-fixed-dim": "#ff6ad8",
+                        "primary-container": "#ac8eff",
+                        "on-primary": "#f7f0ff",
+                        "on-error": "#ffefef",
+                        "secondary-fixed": "#80deff",
+                        "error": "#b41340",
+                        "on-background": "#2c2f30",
+                        "outline": "#757778",
+                        "surface": "#f5f6f7",
+                        "primary-dim": "#5d00e3",
+                        "secondary-dim": "#00576c",
+                        "tertiary-container": "#ff87db",
+                        "tertiary-dim": "#96007d",
+                        "surface-bright": "#f5f6f7",
+                        "primary-fixed-dim": "#a07dff",
+                        "on-surface": "#2c2f30",
+                        "on-primary-container": "#2a0070",
+                        "secondary": "#00647b",
+                        "error-container": "#f74b6d",
+                        "on-tertiary": "#ffeef5",
+                        "surface-variant": "#dadddf",
+                        "on-tertiary-fixed": "#34002a",
+                        "error-dim": "#a70138",
+                        "primary-fixed": "#ac8eff",
+                        "on-primary-fixed-variant": "#350088",
+                        "on-secondary": "#e2f6ff",
+                        "on-tertiary-fixed-variant": "#6f005c",
+                        "inverse-primary": "#9d79ff",
+                        "tertiary": "#aa008e",
+                        "on-tertiary-container": "#5f004f",
+                        "tertiary-fixed": "#ff87db",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#37d4ff",
+                        "on-secondary-fixed": "#003a48",
+                        "on-secondary-container": "#004e61",
+                        "secondary-container": "#80deff",
+                        "surface-container-highest": "#dadddf",
+                        "outline-variant": "#abadae",
+                        "on-primary-fixed": "#000000",
+                        "surface-tint": "#6a1cf6",
+                        "on-secondary-fixed-variant": "#00586d",
+                        "inverse-surface": "#0c0f10"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="../../assets/css/instructor-nav.css">
+</head>
+
+<body class="bg-background text-on-background min-h-screen">
+
+    <div id="nav-mount"></div>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- Content Canvas -->
+        <div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+            <!-- Page Header + Search/Filter Bar -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-black font-headline tracking-tight text-on-surface mb-1">My eBooks</h1>
+                <p class="text-on-surface-variant font-medium mb-5">Your personal book library — read online or download
+                    as PDF.</p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative flex-1">
+                        <input id="library-search" type="text" placeholder="Search purchased books…"
+                            class="w-full bg-surface-container-lowest border border-surface-container rounded-2xl pl-10 pr-4 py-3.5 text-sm font-body text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" />
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+                        </div>
+                    </div>
+                    <select id="library-sort"
+                        class="bg-surface-container-lowest border border-surface-container rounded-2xl px-4 py-3.5 text-sm font-label font-bold text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
+                        <option value="all">All Books</option>
+                        <option value="recent">Recently Added</option>
+                        <option value="digital">Books Only</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Recently Read - Asymmetric Layout -->
+            <section class="mb-12">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h2 class="text-3xl font-black tracking-tight headline text-on-surface">Continue Reading</h2>
+                        <p class="text-on-surface-variant font-medium">Pick up right where you left off</p>
+                    </div>
+                    <button id="view-all-history-btn" type="button"
+                        class="text-primary font-bold label-text flex items-center gap-1 hover:underline">
+                        View All History <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+                <div id="ebooks-continue-strip" class="flex gap-6 overflow-x-auto pb-4 no-scrollbar"></div>
+            </section>
+            <!-- Library Grid -->
+            <section>
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                    <h2 class="text-3xl font-black tracking-tight headline text-on-surface">Purchased Books</h2>
+                </div>
+                <div id="ebooks-library-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            </section>
+        </div>
+        <!-- Glassmorphic FAB (Mobile Only Search) -->
+        <button id="mobile-search-btn" type="button"
+            class="md:hidden fixed bottom-6 right-6 w-16 h-16 rounded-2xl glass-fab flex items-center justify-center text-primary shadow-2xl border border-white/20 z-50">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+        </button>
+    </main>
+    <div id="reader-modal" class="fixed inset-0 z-[120] hidden" role="dialog" aria-modal="true"
+        aria-labelledby="reader-title">
+        <div id="reader-backdrop" class="absolute inset-0 bg-slate-950/60 backdrop-blur-md"></div>
+        <div class="relative z-10 min-h-screen flex items-center justify-center p-4 md:p-8">
+            <div
+                class="w-full max-w-6xl h-[88vh] bg-white rounded-[2rem] shadow-[0_32px_80px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col">
+                <div
+                    class="flex items-start justify-between gap-4 px-6 md:px-8 py-5 border-b border-surface-container bg-gradient-to-r from-surface-container-lowest to-surface-container-low">
+                    <div>
+                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Reader</p>
+                        <h3 id="reader-title"
+                            class="font-headline text-2xl md:text-3xl font-black text-on-surface mt-1">Book Title</h3>
+                        <p id="reader-author" class="text-sm text-on-surface-variant mt-1">Author Name</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="reader-minimize-btn" type="button"
+                            class="px-4 py-2 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-bold hover:bg-surface-container-high transition-colors">Minimize</button>
+                        <button id="reader-close-btn" type="button"
+                            class="w-10 h-10 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center justify-center">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr] gap-0 flex-1 min-h-0">
+                    <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar bg-surface/40">
+                        <div class="max-w-3xl space-y-6">
+                            <div
+                                class="flex flex-wrap items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                                <span id="reader-tag"
+                                    class="px-3 py-1 rounded-full bg-primary/10 text-primary">Book</span>
+                                <span id="reader-readtime"
+                                    class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant">12
+                                    min read</span>
+                            </div>
+                            <div class="space-y-3">
+                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Chapters</p>
+                                <div id="reader-chapter-tabs" class="flex flex-wrap gap-2"></div>
+                            </div>
+                            <article id="reader-content"
+                                class="space-y-5 text-[15px] md:text-lg leading-8 text-on-surface-variant"></article>
+                        </div>
+                    </div>
+                    <aside
+                        class="p-6 md:p-8 border-t lg:border-t-0 lg:border-l border-surface-container bg-surface-container-lowest overflow-y-auto custom-scrollbar">
+                        <div class="rounded-[1.5rem] bg-gradient-to-br from-primary/10 to-tertiary/10 p-5 mb-5">
+                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-primary mb-2">Reading
+                                Overview</p>
+                            <p id="reader-summary" class="text-sm text-on-surface-variant leading-relaxed">Summary</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="rounded-2xl bg-surface-container-low p-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400 mb-1">
+                                    Current Chapter</p>
+                                <p id="reader-current-chapter" class="text-2xl font-black text-on-surface">Chapter 1 / 5
+                                </p>
+                            </div>
+                            <div class="rounded-2xl bg-surface-container-low p-4">
+                                <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400 mb-1">Notes
+                                </p>
+                                <p class="text-sm text-on-surface-variant leading-relaxed">Use this full-screen reader
+                                    to focus on one book at a time. You can close it anytime and return to your library.
+                                </p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+      window.curatorMyEbooksSelectors = {
+        historyHref: '/student/student/dashboard/order_history_download.html'
+      };
+    </script>
+    <script src="/assets/js/my-ebooks-library.js"></script>
+
+    <script src="../../assets/js/instructor-nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order History &amp; Downloads | CURATOR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#6f005c",
+                      "error-container": "#f74b6d",
+                      "tertiary-fixed": "#ff87db",
+                      "on-primary-fixed": "#000000",
+                      "on-surface-variant": "#595c5d",
+                      "on-surface": "#2c2f30",
+                      "secondary-dim": "#00576c",
+                      "secondary-container": "#80deff",
+                      "on-background": "#2c2f30",
+                      "background": "#f5f6f7",
+                      "inverse-surface": "#0c0f10",
+                      "on-primary-fixed-variant": "#350088",
+                      "on-secondary-fixed-variant": "#00586d",
+                      "on-secondary-container": "#004e61",
+                      "on-secondary": "#e2f6ff",
+                      "outline": "#757778",
+                      "on-primary-container": "#2a0070",
+                      "tertiary-container": "#ff87db",
+                      "surface-bright": "#f5f6f7",
+                      "on-tertiary": "#ffeef5",
+                      "secondary": "#00647b",
+                      "tertiary": "#aa008e",
+                      "inverse-primary": "#9d79ff",
+                      "secondary-fixed": "#80deff",
+                      "on-primary": "#f7f0ff",
+                      "surface": "#f5f6f7",
+                      "surface-container-high": "#e0e3e4",
+                      "primary": "#6a1cf6",
+                      "error-dim": "#a70138",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#ac8eff",
+                      "surface-dim": "#d1d5d7",
+                      "on-secondary-fixed": "#003a48",
+                      "primary-dim": "#5d00e3",
+                      "surface-container-highest": "#dadddf",
+                      "tertiary-dim": "#96007d",
+                      "outline-variant": "#abadae",
+                      "inverse-on-surface": "#9b9d9e",
+                      "error": "#b41340",
+                      "on-tertiary-fixed": "#34002a",
+                      "on-tertiary-container": "#5f004f",
+                      "surface-tint": "#6a1cf6",
+                      "surface-container-low": "#eff1f2",
+                      "on-error-container": "#510017",
+                      "on-error": "#ffefef",
+                      "tertiary-fixed-dim": "#ff6ad8",
+                      "secondary-fixed-dim": "#37d4ff",
+                      "surface-container": "#e6e8ea",
+                      "primary-container": "#ac8eff",
+                      "surface-variant": "#dadddf",
+                      "primary-fixed-dim": "#a07dff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-label { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-dots {
+            background-image: radial-gradient(#6a1cf6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+    <link rel="stylesheet" href="../../assets/css/instructor-nav.css">
+</head>
+<body class="bg-background text-on-surface selection:bg-primary/20 relative min-h-screen overflow-x-hidden">
+    <!-- Background Elements -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-dots opacity-[0.03]"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-tertiary/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div id="nav-mount"></div>
+
+    <!-- Slide-in Sidebar (styled like My eBooks aside) -->
+    <div id="page-slidebar" class="fixed right-0 top-0 h-full w-80 transform translate-x-full transition-transform duration-300 z-[450]">
+        <div class="p-6 md:p-8 border-t lg:border-t-0 lg:border-l border-surface-container bg-surface-container-lowest overflow-y-auto custom-scrollbar rounded-l-[1.5rem] h-full">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="font-headline font-bold">Refine Orders</h4>
+                <button id="slidebar-close" class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="space-y-4 overflow-y-auto">
+                <div>
+                    <label class="text-xs text-on-surface-variant">Type</label>
+                    <div class="mt-2 flex gap-2">
+                        <button data-filter-type="all" class="filter-type px-3 py-2 rounded-xl bg-surface-container-low">All</button>
+                        <button data-filter-type="digital" class="filter-type px-3 py-2 rounded-xl">Digital</button>
+                        <button data-filter-type="physical" class="filter-type px-3 py-2 rounded-xl">Physical</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs text-on-surface-variant">Date Range</label>
+                    <div class="mt-2 flex flex-col gap-2">
+                        <input id="slide-from" type="date" class="p-2 rounded-lg border" />
+                        <input id="slide-to" type="date" class="p-2 rounded-lg border" />
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs text-on-surface-variant">Quick Actions</label>
+                    <div class="mt-2 flex flex-col gap-2">
+                        <button id="slide-apply" class="py-2 px-4 bg-primary text-on-primary rounded-xl">Apply Filters</button>
+                        <button id="slide-reset" class="py-2 px-4 bg-surface-container-low rounded-xl">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- slidebar toggle removed per request -->
+
+    <div id="slidebar-overlay" class="fixed inset-0 bg-black/30 opacity-0 pointer-events-none transition-opacity duration-300 z-[440]"></div>
+
+<main class="flex-1 p-4 md:p-12 overflow-x-hidden transition-[margin] duration-300">
+<div class="max-w-6xl mx-auto">
+<header class="mb-10 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<h1 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface tracking-tight mb-2">Reading History</h1>
+<p class="text-on-surface-variant font-body max-w-2xl">Manage your ebook purchases, downloads, and reading history in one polished library view.</p>
+</div>
+</header>
+<!-- Search & Filter Bar -->
+<section class="bg-white/80 backdrop-blur-xl border border-white/70 shadow-lg shadow-primary/5 p-4 rounded-[1.5rem] mb-10 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[240px]">
+<div class="relative">
+<input id="order-search" class="w-full bg-surface-container-lowest border-none rounded-2xl py-4 pl-14 pr-4 shadow-sm focus:ring-2 focus:ring-primary/20 font-label" placeholder="Search orders, books, or ISBN..." type="text"/>
+<span class="material-symbols-outlined absolute left-0 inset-y-0 w-12 flex items-center justify-center text-primary">search</span>
+</div>
+</div>
+<div id="filter-tabs" class="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+<button data-filter="recent" class="filter-tab px-6 py-3 bg-primary text-on-primary rounded-full font-label text-sm font-bold whitespace-nowrap shadow-md transition-all">Last 30 Days</button>
+</div>
+</section>
+<!-- Order List -->
+<div id="order-container" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 justify-items-stretch">
+                    
+                    <div data-state="progress" data-type="digital"
+                        data-id="#ORD-1001" data-title="Algorithmic Zen" data-isbn="978-1-2345-6789" data-date="2024-10-24" data-price="32" class="order-card bg-surface-container-lowest rounded-[1.5rem] p-3.5 flex flex-col group hover:shadow-2xl hover:shadow-primary/10 transition-all border border-surface-container">
+                        <div class="relative w-full aspect-[4/5] rounded-[1.4rem] overflow-hidden mb-4 shadow-lg shadow-slate-300/30 ring-1 ring-white/40 bg-gradient-to-br from-[#8f9bd0] to-[#6f78ab]">
+                            <img alt="Ebook front cover"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="modern ebook cover with abstract blue and violet light panels"
+                                src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80" />
+                            <div class="absolute top-2 left-2">
+                                <span class="px-2 py-0.5 bg-white/85 backdrop-blur-sm text-primary rounded-full text-[8px] font-black font-label uppercase tracking-[0.18em] shadow-sm border border-white/80">
+                                   
+                                </span>
+                            </div>
+                        </div>
+                        <h4 class="text-base font-bold headline leading-snug">Algorithmic Zen</h4>
+                        <p class="text-on-surface-variant text-xs font-medium mb-4">Satoshi Nakamoto</p>
+                        <div class="mt-auto flex flex-col gap-2">
+                            <button type="button" data-action="read-now"
+                                class="w-full py-2.5 bg-primary text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all text-sm">
+                                <span>Read Now</span>
+                            </button>
+                            <button type="button" data-action="download-pdf" data-filename="Algorithmic-Zen.pdf"
+                                class="w-full py-2.5 bg-surface-container-low text-on-surface-variant rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-surface-container-high transition-all text-sm">
+                                <span class="material-symbols-outlined text-lg">cloud_download</span>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+<!-- Empty State -->
+<section id="empty-state" class="hidden flex flex-col items-center justify-center py-20 text-center col-span-full">
+<div class="w-64 h-64 mb-8">
+<div class="w-full h-full bg-gradient-to-br from-primary-container to-secondary-container rounded-full flex items-center justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-8xl text-white opacity-40">library_books</span>
+<div class="absolute inset-0 backdrop-blur-xl"></div>
+<span class="material-symbols-outlined text-8xl text-white relative z-10">auto_stories</span>
+</div>
+</div>
+<h2 class="text-3xl font-headline font-extrabold mb-4">No results found</h2>
+<p class="text-on-surface-variant max-w-md mx-auto mb-10 font-body">Try adjusting your search or filters to find what you're looking for.</p>
+<button onclick="window.location.reload()" class="px-12 py-5 bg-primary text-on-primary rounded-full font-headline font-bold text-lg shadow-xl shadow-primary/30 hover:scale-105 transition-transform">
+                        Reset Filters
+                    </button>
+</section>
+</div>
+<!-- Footer Action -->
+<footer class="mt-20 pt-10 border-t border-surface-container-high flex flex-col md:flex-row justify-between items-center gap-6">
+<p id="showing-text" class="text-on-surface-variant text-sm font-label">Showing 2 of 2 orders</p>
+<div id="pagination" class="flex items-center gap-2">
+<button class="page-prev w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:pointer-events-none" disabled>
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="page-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-primary text-white font-headline font-bold" data-page="1">1</button>
+<button class="page-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all" data-page="2">2</button>
+<button class="page-btn w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all" data-page="3">3</button>
+<button class="page-next w-12 h-12 flex items-center justify-center rounded-2xl bg-surface-container-low text-on-surface-variant hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</footer>
+</div>
+</main>
+</div>
+
+<!-- Toast System -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] bg-on-surface text-surface px-6 py-3 rounded-xl shadow-2xl font-headline font-bold text-sm transform translate-y-20 opacity-0 transition-all duration-500 pointer-events-none">
+    Feedback message goes here
+</div>
+
+<!-- Order Detail Modal -->
+<div id="order-modal" class="fixed inset-0 z-[300] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm modal-overlay"></div>
+    <div class="bg-surface-container-lowest w-full max-w-lg rounded-3xl shadow-2xl relative z-10 overflow-hidden transform scale-95 transition-transform duration-300">
+        <!-- Modal Header -->
+        <div class="p-6 border-b border-surface-container flex justify-between items-center bg-surface-container-low">
+            <div>
+                <h2 class="text-xl font-headline font-extrabold text-on-surface">Order Details</h2>
+                <p id="modal-order-id" class="text-xs font-label text-primary font-bold">#10045</p>
+            </div>
+            <button class="modal-close w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="p-8 space-y-8 max-h-[70vh] overflow-y-auto">
+            <!-- Item Info -->
+            <div class="flex gap-6">
+                <div id="modal-image-container" class="w-24 h-24 bg-surface-container rounded-2xl overflow-hidden shadow-inner flex-shrink-0">
+                    <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <h3 id="modal-title" class="text-lg font-headline font-bold text-on-surface leading-tight">Advanced Typography</h3>
+                    <p id="modal-isbn" class="text-sm text-on-surface-variant font-label mt-1">ISBN: 978-3-16...10-0</p>
+                    <div id="modal-tags" class="flex gap-2 mt-2">
+                        <!-- Dynamic Tags -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Summary -->
+            <div class="grid grid-cols-2 gap-6 bg-surface-container-low p-6 rounded-2xl border border-surface-container">
+                <div class="space-y-1">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">Purchase Date</p>
+                    <p id="modal-date" class="text-sm font-headline font-bold">October 24, 2024</p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">Order Total</p>
+                    <p id="modal-price" class="text-sm font-headline font-bold">$124.00</p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">Payment Method</p>
+                    <p class="text-sm font-headline font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">credit_card</span>
+                        Visa •••• 4242
+                    </p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-[10px] uppercase tracking-wider font-bold text-on-surface-variant">Status</p>
+                    <p id="modal-status" class="text-sm font-headline font-bold text-secondary">Completed</p>
+                </div>
+            </div>
+
+            <!-- Timeline/Action -->
+            <div class="space-y-4">
+                <h4 class="text-sm font-headline font-bold text-on-surface">Order Timeline</h4>
+                <div class="space-y-4 relative before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container">
+                    <div class="flex gap-4 relative">
+                        <div class="w-4 h-4 rounded-full bg-primary border-4 border-white shadow-sm shrink-0 z-10"></div>
+                        <div>
+                            <p class="text-xs font-headline font-bold">Order Confirmed</p>
+                            <p class="text-[10px] text-on-surface-variant">Oct 24, 2024 • 10:42 AM</p>
+                        </div>
+                    </div>
+
+                        <!-- Reader Modal (in-page) -->
+                        <div id="reader-modal" class="fixed inset-0 z-[400] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+                            <div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm reader-overlay"></div>
+                            <div class="bg-surface-container-lowest w-full max-w-4xl rounded-3xl shadow-2xl relative z-10 overflow-hidden transform scale-95 transition-transform duration-300">
+                                <div class="p-4 border-b border-surface-container flex items-center justify-between gap-4">
+                                    <div class="flex items-center gap-4">
+                                        <div id="reader-cover" class="w-16 h-20 rounded-lg overflow-hidden bg-surface-container">
+                                            <img id="reader-cover-img" src="" alt="cover" class="w-full h-full object-cover" />
+                                        </div>
+                                        <div>
+                                            <h3 id="reader-title" class="text-lg font-headline font-bold">Title</h3>
+                                            <p id="reader-author" class="text-sm text-on-surface-variant">Author</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button id="reader-close" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+                                            <span class="material-symbols-outlined">close</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-6">
+                                    <div id="reader-chapter-tabs" class="flex gap-2 overflow-x-auto mb-4"></div>
+                                    <div id="reader-content" class="bg-white p-6 rounded-2xl border border-surface-container min-h-[220px]"></div>
+                                    <div class="mt-4 flex justify-between items-center">
+                                        <div class="flex gap-2">
+                                            <button id="reader-prev" class="py-2 px-4 bg-surface-container-low rounded-xl">Prev</button>
+                                            <button id="reader-next" class="py-2 px-4 bg-primary text-on-primary rounded-xl">Next</button>
+                                        </div>
+                                        <div id="reader-pos" class="text-sm text-on-surface-variant"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="flex gap-4 relative">
+                        <div class="w-4 h-4 rounded-full bg-surface-container-highest shrink-0 z-10"></div>
+                        <div>
+                            <p class="text-xs font-headline font-bold text-on-surface-variant">Processing Payment</p>
+                            <p class="text-[10px] text-on-surface-variant italic">System verified</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-6 bg-surface-container-low flex gap-3">
+            <button class="flex-1 py-4 bg-primary text-on-primary rounded-2xl font-headline font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                Download Invoice
+            </button>
+            <button class="modal-close flex-1 py-4 bg-white text-on-surface-variant border border-surface-container rounded-2xl font-headline font-bold hover:bg-surface-container-low transition-colors">
+                Dismiss
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('order-search');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const orderCards = document.querySelectorAll('.order-card');
+        const emptyState = document.getElementById('empty-state');
+        const showingText = document.getElementById('showing-text');
+        const toast = document.getElementById('toast');
+        const pagination = document.getElementById('pagination');
+        const pageBtns = document.querySelectorAll('.page-btn');
+        const prevBtn = document.querySelector('.page-prev');
+        const nextBtn = document.querySelector('.page-next');
+        
+        // Modal Elements
+        const modal = document.getElementById('order-modal');
+        const modalContent = modal.querySelector('.bg-surface-container-lowest');
+
+        let currentFilter = 'recent';
+        let searchQuery = '';
+        let currentPage = 1;
+
+        // Toast Helper
+        const showToast = (message, duration = 3000) => {
+            toast.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, duration);
+        };
+
+        // Modal Helpers
+        const openModal = (card) => {
+            const data = card.dataset;
+            const img = card.querySelector('img').src;
+            const tags = Array.from(card.querySelectorAll('.flex-wrap span')).map(s => s.textContent);
+
+            document.getElementById('modal-order-id').textContent = data.id;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-isbn').textContent = `ISBN: ${data.isbn}`;
+            document.getElementById('modal-image').src = img;
+            document.getElementById('modal-date').textContent = data.date;
+            document.getElementById('modal-price').textContent = card.querySelector('.text-on-surface.font-black').textContent + ".00";
+            document.getElementById('modal-status').textContent = data.type === 'digital' ? 'Completed' : 'Shipped';
+            
+            const tagContainer = document.getElementById('modal-tags');
+            tagContainer.innerHTML = tags.map(tag => `
+                <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded uppercase tracking-tighter">${tag}</span>
+            `).join('');
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        };
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        };
+
+        // Filter Logic
+        const applyFilters = () => {
+            let visibleCount = 0;
+            orderCards.forEach(card => {
+                const type = card.dataset.type;
+                const title = card.dataset.title.toLowerCase();
+                const id = card.dataset.id.toLowerCase();
+                const isbn = card.dataset.isbn.toLowerCase();
+                const date = new Date(card.dataset.date);
+                const now = new Date();
+                const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
+                
+                let matchesFilter = false;
+                if (currentFilter === 'recent') {
+                    matchesFilter = date >= thirtyDaysAgo;
+                } else if (currentFilter === 'year') {
+                    matchesFilter = date.getFullYear() === 2024;
+                } else if (currentFilter === 'physical') {
+                    matchesFilter = type === 'physical';
+                } else if (currentFilter === 'digital') {
+                    matchesFilter = type === 'digital';
+                }
+
+                const matchesSearch = title.includes(searchQuery) || 
+                                    id.includes(searchQuery) || 
+                                    isbn.includes(searchQuery);
+
+                if (matchesFilter && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            emptyState.classList.toggle('hidden', visibleCount > 0);
+            showingText.textContent = `Showing ${visibleCount} of ${orderCards.length} orders`;
+        };
+
+        // Pagination Handler
+        const goToPage = (page) => {
+            if (page < 1 || page > 3) return;
+            
+            currentPage = page;
+            showToast(`Loading page ${page}...`);
+            
+            // Update UI
+            pageBtns.forEach(btn => {
+                const isCurrent = parseInt(btn.dataset.page) === page;
+                btn.classList.toggle('bg-primary', isCurrent);
+                btn.classList.toggle('text-white', isCurrent);
+                btn.classList.toggle('bg-surface-container-low', !isCurrent);
+                btn.classList.toggle('text-on-surface-variant', !isCurrent);
+            });
+
+            prevBtn.disabled = page === 1;
+            nextBtn.disabled = page === 3;
+            
+            const orderContainer = document.getElementById('order-container');
+            orderContainer.style.opacity = '0.3';
+            setTimeout(() => {
+                orderContainer.style.opacity = '1';
+                applyFilters();
+            }, 400);
+        };
+
+        // Search Input Event
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            applyFilters();
+        });
+
+        // Filter Tab Events
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => {
+                    t.classList.remove('bg-primary', 'text-on-primary', 'shadow-md', 'font-bold');
+                    t.classList.add('bg-surface-container-lowest', 'text-on-surface-variant', 'font-medium');
+                });
+                tab.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant', 'font-medium');
+                tab.classList.add('bg-primary', 'text-on-primary', 'shadow-md', 'font-bold');
+
+                currentFilter = tab.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        // Pagination Events
+        pagination.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+
+            if (btn.classList.contains('page-btn')) {
+                goToPage(parseInt(btn.dataset.page));
+            } else if (btn.classList.contains('page-prev')) {
+                goToPage(currentPage - 1);
+            } else if (btn.classList.contains('page-next')) {
+                goToPage(currentPage + 1);
+            }
+        });
+
+        // Modal Events
+        modal.querySelectorAll('.modal-close, .modal-overlay').forEach(el => {
+            el.addEventListener('click', closeModal);
+        });
+
+        // Button Actions (Event Delegation)
+        document.getElementById('order-container').addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+            const card = btn.closest('.order-card') || btn.closest('[data-type]');
+            const title = card?.dataset.title || 'Resource';
+
+            // data-action handlers
+            const action = btn.getAttribute('data-action');
+            if (action === 'read-now') {
+                // Open in-page reader modal (preserve content across pagination)
+                if (typeof openReaderForCard === 'function') {
+                    openReaderForCard(card, { start: 0 });
+                } else {
+                    // fallback: navigate to myebook
+                    window.location.href = '../Dashboard/main page/instructor_myebook.html';
+                }
+                return;
+            }
+            if (action === 'download-pdf') {
+                const filename = btn.getAttribute('data-filename') || 'download.pdf';
+                const content = `Order Download\nTitle: ${title}\nFile: ${filename}`;
+                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename.replace('.pdf', '.txt');
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                URL.revokeObjectURL(url);
+                showToast(`${title} download started`);
+                return;
+            }
+
+            if (btn.classList.contains('action-get')) {
+                showToast(`Downloading ${title}...`);
+                btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[14px]">sync</span> Fetching`;
+                setTimeout(() => {
+                    btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">check</span> Ready`;
+                    showToast(`${title} downloaded successfully!`);
+                }, 1500);
+            } else if (btn.classList.contains('action-details')) {
+                openModal(card);
+            } else if (btn.classList.contains('action-track')) {
+                showToast(`Locating your package for ${title}...`);
+            } else if (btn.classList.contains('action-return')) {
+                if (confirm(`Are you sure you want to request a return for ${title}?`)) {
+                    showToast('Return request submitted. Check your email for instructions.');
+                }
+            } else if (btn.classList.contains('action-receipt')) {
+                showToast('Generating invoice PDF...');
+            }
+        });
+    });
+</script>
+<script>
+// Reader modal logic (separate from order modal)
+(() => {
+    const readerModal = document.getElementById('reader-modal');
+    if (!readerModal) return;
+    const overlay = readerModal.querySelector('.reader-overlay');
+    const closeBtn = document.getElementById('reader-close');
+    const titleEl = document.getElementById('reader-title');
+    const authorEl = document.getElementById('reader-author');
+    const coverImg = document.getElementById('reader-cover-img');
+    const tabs = document.getElementById('reader-chapter-tabs');
+    const content = document.getElementById('reader-content');
+    const prevBtn = document.getElementById('reader-prev');
+    const nextBtn = document.getElementById('reader-next');
+    const pos = document.getElementById('reader-pos');
+
+    let readerMap = [];
+    let activeIndex = 0;
+
+    const showReader = () => {
+        readerModal.classList.remove('opacity-0', 'pointer-events-none');
+        readerModal.querySelector('.relative')?.classList?.remove('scale-95');
+        readerModal.querySelector('.relative')?.classList?.add('scale-100');
+    };
+    const hideReader = () => {
+        readerModal.classList.add('opacity-0', 'pointer-events-none');
+    };
+
+    const renderTabs = () => {
+        tabs.innerHTML = readerMap.map((ch, i) => `
+            <button class="chapter-tab py-2 px-4 rounded-xl bg-surface-container-low text-on-surface-variant" data-index="${i}">${ch.title}</button>
+        `).join('');
+        tabs.querySelectorAll('.chapter-tab').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = parseInt(btn.dataset.index);
+                setActive(idx);
+            });
+        });
+    };
+
+    const setActive = (i) => {
+        if (i < 0) i = 0;
+        if (i >= readerMap.length) i = readerMap.length - 1;
+        activeIndex = i;
+        const ch = readerMap[i];
+        content.innerHTML = `<h4 class=\"font-headline font-bold mb-2\">${ch.title}</h4><div class=\"text-sm text-on-surface-variant\">${ch.body}</div>`;
+        tabs.querySelectorAll('.chapter-tab').forEach((b, idx) => {
+            b.classList.toggle('bg-primary', idx === i);
+            b.classList.toggle('text-on-primary', idx === i);
+            b.classList.toggle('text-on-surface-variant', idx !== i);
+            b.classList.toggle('bg-surface-container-low', idx !== i);
+        });
+        pos.textContent = `Chapter ${i+1} of ${readerMap.length}`;
+    };
+
+    prevBtn.addEventListener('click', () => setActive(activeIndex - 1));
+    nextBtn.addEventListener('click', () => setActive(activeIndex + 1));
+    overlay.addEventListener('click', hideReader);
+    closeBtn.addEventListener('click', hideReader);
+
+    // Expose to page
+    window.openReaderForCard = (card, opts = {}) => {
+        const data = card?.dataset || {};
+        const img = card?.querySelector('img')?.src || '';
+        const title = data.title || 'Book';
+        const author = card?.querySelector('p')?.textContent || data.author || 'Unknown';
+
+        // sample 5 chapters (could be replaced by real content)
+        readerMap = Array.from({length:5}).map((_, i) => ({
+            title: `Chapter ${i+1}`,
+            body: `This is the content for ${title} — Chapter ${i+1}.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.`
+        }));
+
+        titleEl.textContent = title;
+        authorEl.textContent = author;
+        coverImg.src = img;
+
+        renderTabs();
+        const start = (opts && Number.isInteger(opts.start)) ? opts.start : 0;
+        setActive(start);
+        showReader();
+    };
+})();
+</script>
+<script src="../../assets/js/instructor-nav.js"></script>
+<script>
+// Slidebar behavior
+(function(){
+    const toggle = document.getElementById('slidebar-toggle');
+    const bar = document.getElementById('page-slidebar');
+    const closeBtn = document.getElementById('slidebar-close');
+    const overlay = document.getElementById('slidebar-overlay');
+    const applyBtn = document.getElementById('slide-apply');
+    const resetBtn = document.getElementById('slide-reset');
+    const filterButtons = document.querySelectorAll('.filter-type');
+
+    function openBar(){
+        bar.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0','pointer-events-none');
+        overlay.classList.add('opacity-100');
+        // shift main content to make room (match My eBooks layout)
+        const main = document.querySelector('main');
+        if (main) main.style.marginRight = '20rem';
+    }
+    function closeBar(){
+        bar.classList.add('translate-x-full');
+        overlay.classList.add('opacity-0');
+        overlay.classList.add('pointer-events-none');
+        const main = document.querySelector('main');
+        if (main) main.style.marginRight = '';
+    }
+
+    toggle?.addEventListener('click', openBar);
+    closeBtn?.addEventListener('click', closeBar);
+    overlay?.addEventListener('click', closeBar);
+
+    // simple filter wiring: toggle active state
+    filterButtons.forEach(b => b.addEventListener('click', () => {
+        filterButtons.forEach(x => x.classList.remove('bg-primary','text-on-primary'));
+        b.classList.add('bg-primary','text-on-primary');
+    }));
+
+    applyBtn?.addEventListener('click', () => {
+        // Read selected type and date range, then apply existing filters
+        const typeBtn = document.querySelector('.filter-type.bg-primary');
+        const type = typeBtn?.dataset.filterType || 'all';
+        const from = document.getElementById('slide-from').value;
+        const to = document.getElementById('slide-to').value;
+        // Basic behavior: set search input to include type and trigger applyFilters if available
+        const search = document.getElementById('order-search');
+        if (search) search.value = `${type !== 'all' ? type : ''}`.trim();
+        if (typeof applyFilters === 'function') applyFilters();
+        closeBar();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+        document.getElementById('slide-from').value = '';
+        document.getElementById('slide-to').value = '';
+        document.querySelectorAll('.filter-type').forEach(x => x.classList.remove('bg-primary','text-on-primary'));
+        if (typeof applyFilters === 'function') applyFilters();
+    });
+
+    // Close with ESC
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBar(); });
+})();
+</script>
+</body></html>
