@@ -60,6 +60,15 @@ async function existsConflictRegister (pool, emailLower, studentIdUpper) {
   return !!rows?.length;
 }
 
+/** Email-only conflict check (e.g. instructor signup with no student_id). */
+async function existsConflictEmail (pool, emailLower) {
+  const { rows } = await pool.query(
+    `SELECT id FROM public.users WHERE lower(trim(email)) = lower(trim($1::text)) LIMIT 1`,
+    [emailLower]
+  );
+  return !!rows?.length;
+}
+
 async function insertRegisteredStudent (
   pool,
   { email, password, studentIdUpper, firstName, lastName, year, faculty }
@@ -87,6 +96,40 @@ async function insertRegisteredStudent (
     lastName,
     year,
     faculty
+  ]);
+  return stripSecret(rows[0]) || null;
+}
+
+async function insertRegisteredInstructor (
+  pool,
+  { email, password, firstName, lastName, faculty, instructorTitle, bio }
+) {
+  const sql = `
+    INSERT INTO public.users (
+      email, student_id, password_hash, role,
+      first_name, last_name, year_of_study, faculty, bio, instructor_title
+    )
+    VALUES (
+      lower(trim($1::text)),
+      NULL,
+      crypt($2::text, gen_salt('bf')),
+      'instructor',
+      $3, $4,
+      NULL,
+      trim($5::text),
+      NULLIF(trim($6::text), ''),
+      NULLIF(trim($7::text), '')
+    )
+    RETURNING ${USER_PUBLIC_SELECT}`;
+
+  const { rows } = await pool.query(sql, [
+    email,
+    password,
+    firstName,
+    lastName,
+    faculty,
+    bio || '',
+    instructorTitle
   ]);
   return stripSecret(rows[0]) || null;
 }
@@ -489,7 +532,9 @@ module.exports = {
   selectUserByEmailOrStudentIdCredentials,
   selectUserPublicById,
   existsConflictRegister,
+  existsConflictEmail,
   insertRegisteredStudent,
+  insertRegisteredInstructor,
   updateUserPatch,
   changePassword,
   upsertSeedUser,

@@ -37,6 +37,15 @@
     h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-label { font-family: 'Manrope', sans-serif; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    button.role-tab[data-active="true"] {
+        background-color: #ffffff;
+        color: #6a1cf6;
+        box-shadow: 0 1px 2px rgba(44, 47, 48, 0.06);
+    }
+    button.role-tab[data-active="false"] {
+        background-color: transparent;
+        color: #595c5d;
+    }
 </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col">
@@ -61,12 +70,25 @@
 
         <!-- Registration Card -->
         <div id="registration-card" class="bg-surface-container-lowest rounded-xl shadow-[0_16px_32px_rgba(106,28,246,0.06)] p-10 md:p-12 border border-outline-variant/10">
-            <header class="mb-10 text-center">
+            <header class="mb-8 text-center">
                 <h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-3">Create Your Account</h1>
-                <p class="text-on-surface-variant font-medium">Student registration — UTS university email required.</p>
+                <p id="registration-subtitle" class="text-on-surface-variant font-medium">Choose your role, then complete the form below.</p>
             </header>
 
-            <form id="registration-form" novalidate class="space-y-6">
+            <!-- Role tabs -->
+            <div class="flex p-1.5 mb-10 bg-surface-container rounded-xl border border-outline-variant/15 shadow-inner" role="tablist" aria-label="Account type">
+                <button type="button" role="tab" id="tab-student" aria-selected="true" aria-controls="registration-form-student"
+                    class="role-tab flex-1 font-label font-bold text-sm py-3.5 rounded-lg transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary/40 text-on-surface-variant data-[active=true]:bg-surface-container-lowest data-[active=true]:text-primary data-[active=true]:shadow-sm">
+                    Student
+                </button>
+                <button type="button" role="tab" id="tab-instructor" aria-selected="false" aria-controls="registration-form-instructor"
+                    class="role-tab flex-1 font-label font-bold text-sm py-3.5 rounded-lg transition-all outline-none focus-visible:ring-2 focus-visible:ring-primary/40 text-on-surface-variant data-[active=true]:bg-surface-container-lowest data-[active=true]:text-primary data-[active=true]:shadow-sm">
+                    Instructor
+                </button>
+            </div>
+
+            <!-- Student -->
+            <form id="registration-form-student" novalidate class="registration-panel space-y-6" role="tabpanel" aria-labelledby="tab-student">
                 <!-- Full Name -->
                 <div class="space-y-2">
                     <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="full-name">Full Name</label>
@@ -185,19 +207,134 @@
                 </div>
             </form>
 
-            <div class="mt-10 flex items-center gap-4">
+            <!-- Instructor -->
+            <form id="registration-form-instructor" novalidate class="registration-panel space-y-6 hidden" role="tabpanel" aria-labelledby="tab-instructor">
+                <div class="space-y-2">
+                    <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-full-name">Full Name</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">person</span>
+                        <input id="ins-full-name" name="ins-full-name" type="text" autocomplete="name"
+                            class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant/60"
+                            placeholder="Dr. Mei Chen"/>
+                        <p id="ins-full-name-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-title">Academic title</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">workspace_premium</span>
+                            <select id="ins-title" name="ins-title"
+                                class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-10 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all appearance-none text-on-surface">
+                                <option value="" disabled selected>Select title</option>
+                                <option value="Dr">Dr</option>
+                                <option value="Prof">Prof</option>
+                                <option value="Assoc. Prof">Assoc. Prof</option>
+                                <option value="Asst. Prof">Asst. Prof</option>
+                                <option value="Lecturer">Lecturer</option>
+                                <option value="Sr. Lecturer">Sr. Lecturer</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+                            <p id="ins-title-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 md:col-span-1">
+                        <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-faculty">School / Department</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">account_balance</span>
+                            <select id="ins-faculty" name="ins-faculty"
+                                class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-10 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all appearance-none text-on-surface">
+                                <option value="" disabled selected>Select your school</option>
+                                <option value="computing">School of Computing &amp; Creative Media</option>
+                                <option value="engineering">School of Engineering and Technology</option>
+                                <option value="business">School of Business and Management</option>
+                                <option value="built">School of Built Environment</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+                            <p id="ins-faculty-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-email">Staff email</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">mail</span>
+                        <input id="ins-email" name="ins-email" type="email" autocomplete="email"
+                            class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant/60"
+                            placeholder="mei.chen@uts.edu.my"/>
+                        <p id="ins-email-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-bio">Short bio <span class="font-normal text-outline-variant">(optional)</span></label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-3 text-outline-variant text-xl">notes</span>
+                        <textarea id="ins-bio" name="ins-bio" rows="3" maxlength="2000"
+                            class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant/60 resize-y min-h-[5.5rem]"
+                            placeholder="Research interests, courses you teach, etc."></textarea>
+                        <p id="ins-bio-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-password">Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">lock</span>
+                            <input id="ins-password" name="ins-password" type="password" autocomplete="new-password"
+                                class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant/60"
+                                placeholder="Min. 8 characters"/>
+                            <p id="ins-password-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block font-label text-sm font-bold text-on-surface-variant ml-1" for="ins-confirm-password">Confirm Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant text-xl">verified_user</span>
+                            <input id="ins-confirm-password" name="ins-confirm-password" type="password" autocomplete="new-password"
+                                class="w-full bg-surface-container-low border-none rounded-lg py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all placeholder:text-outline-variant/60"
+                                placeholder="••••••••"/>
+                            <p id="ins-confirm-password-error" class="text-error text-xs font-label mt-1 hidden"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="ins-terms" name="ins-terms"
+                        class="mt-1 w-4 h-4 rounded accent-primary cursor-pointer shrink-0"/>
+                    <label for="ins-terms" class="font-label text-sm text-on-surface-variant cursor-pointer leading-relaxed">
+                        I agree to the <a href="#" class="text-primary font-bold hover:underline">Terms &amp; Conditions</a> and <a href="#" class="text-primary font-bold hover:underline">Privacy Policy</a>
+                    </label>
+                </div>
+                <p id="ins-terms-error" class="text-error text-xs font-label -mt-4 hidden"></p>
+
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-primary to-primary-container text-white font-headline font-bold py-5 rounded-lg shadow-[0_8px_24px_rgba(106,28,246,0.25)] hover:shadow-[0_12px_32px_rgba(106,28,246,0.35)] transition-all active:scale-[0.98] text-lg">
+                    Create Instructor Account
+                </button>
+
+                <div class="flex items-center justify-center gap-2 text-on-surface-variant font-medium">
+                    <span>Already have an account?</span>
+                    <a class="text-primary font-bold hover:underline" href="login.html">Log in instead</a>
+                </div>
+            </form>
+
+            <div id="registration-trust-row" class="mt-10 flex items-center gap-4">
                 <div class="h-[1px] flex-grow bg-outline-variant/20"></div>
                 <span class="font-label text-xs uppercase tracking-widest text-outline-variant font-bold">Secure Access</span>
                 <div class="h-[1px] flex-grow bg-outline-variant/20"></div>
             </div>
-            <div class="mt-6 flex justify-center gap-6">
+            <div class="mt-6 flex justify-center gap-6" id="registration-trust-badges">
                 <div class="flex items-center gap-2 text-on-surface-variant/60">
                     <span class="material-symbols-outlined text-sm">verified</span>
                     <span class="text-xs font-bold font-label">SSL Encrypted</span>
                 </div>
-                <div class="flex items-center gap-2 text-on-surface-variant/60">
+                <div class="trust-badge-role flex items-center gap-2 text-on-surface-variant/60">
                     <span class="material-symbols-outlined text-sm">shield</span>
-                    <span class="text-xs font-bold font-label">UTS Email Required</span>
+                    <span class="text-xs font-bold font-label trust-badge-text">@student.uts.edu.my required</span>
                 </div>
             </div>
         </div>
@@ -236,7 +373,37 @@
 </footer>
 
 <script>
-    const fields = {
+    const subtitleEl = document.getElementById('registration-subtitle');
+    const trustBadgeText = document.querySelector('.trust-badge-text');
+    const tabStudent = document.getElementById('tab-student');
+    const tabInstructor = document.getElementById('tab-instructor');
+    const formStudent = document.getElementById('registration-form-student');
+    const formInstructor = document.getElementById('registration-form-instructor');
+
+    const SUBTITLE = {
+        student: 'Students: use your UTS student ID and @student.uts.edu.my email.',
+        instructor: 'Instructors: use your UTS staff email (e.g. name@uts.edu.my).'
+    };
+
+    function setActiveRole(role) {
+        const isStudent = role === 'student';
+        tabStudent.dataset.active = isStudent ? 'true' : 'false';
+        tabInstructor.dataset.active = !isStudent ? 'true' : 'false';
+        tabStudent.setAttribute('aria-selected', isStudent);
+        tabInstructor.setAttribute('aria-selected', !isStudent);
+        formStudent.classList.toggle('hidden', !isStudent);
+        formInstructor.classList.toggle('hidden', isStudent);
+        subtitleEl.textContent = isStudent ? SUBTITLE.student : SUBTITLE.instructor;
+        if (trustBadgeText) {
+            trustBadgeText.textContent = isStudent ? '@student.uts.edu.my required' : 'Staff @uts.edu.my email';
+        }
+    }
+
+    tabStudent.addEventListener('click', () => setActiveRole('student'));
+    tabInstructor.addEventListener('click', () => setActiveRole('instructor'));
+    setActiveRole('student');
+
+    const studentFields = {
         'full-name': {
             el: document.getElementById('full-name'),
             err: document.getElementById('full-name-error'),
@@ -256,9 +423,9 @@
             el: document.getElementById('email'),
             err: document.getElementById('email-error'),
             validate: v => {
-                const e = v.trim().toLowerCase();
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return 'Enter a valid email address.';
-                if (!e.endsWith('@student.uts.edu.my')) return 'Registration requires a @student.uts.edu.my email.';
+                const em = v.trim().toLowerCase();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return 'Enter a valid email address.';
+                if (!em.endsWith('@student.uts.edu.my')) return 'Registration requires a @student.uts.edu.my email.';
                 return '';
             }
         },
@@ -280,31 +447,82 @@
         'terms': {
             el: document.getElementById('terms'),
             err: document.getElementById('terms-error'),
-            validate: v => document.getElementById('terms').checked ? '' : 'You must agree to the Terms & Conditions.'
+            validate: () => document.getElementById('terms').checked ? '' : 'You must agree to the Terms & Conditions.'
         }
     };
 
-    // Real-time validation
-    Object.values(fields).forEach(({ el, err, validate }) => {
-        if (!el) return;
-        const event = el.type === 'checkbox' ? 'change' : 'input';
-        el.addEventListener(event, () => {
-            const msg = validate(el.value);
-            err.textContent = msg;
-            err.classList.toggle('hidden', !msg);
-            el.classList.toggle('ring-2', !!msg);
-            el.classList.toggle('ring-error/20', !!msg);
-        });
-    });
+    const instructorFields = {
+        'ins-full-name': {
+            el: document.getElementById('ins-full-name'),
+            err: document.getElementById('ins-full-name-error'),
+            validate: v => v.trim().length >= 2 ? '' : 'Full name must be at least 2 characters.'
+        },
+        'ins-title': {
+            el: document.getElementById('ins-title'),
+            err: document.getElementById('ins-title-error'),
+            validate: v => v ? '' : 'Please select your academic title.'
+        },
+        'ins-faculty': {
+            el: document.getElementById('ins-faculty'),
+            err: document.getElementById('ins-faculty-error'),
+            validate: v => v ? '' : 'Please select your school or department.'
+        },
+        'ins-email': {
+            el: document.getElementById('ins-email'),
+            err: document.getElementById('ins-email-error'),
+            validate: v => {
+                const em = v.trim().toLowerCase();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return 'Enter a valid email address.';
+                if (!em.endsWith('@uts.edu.my') || em.endsWith('@student.uts.edu.my')) {
+                    return 'Use a UTS staff address (e.g. name@uts.edu.my), not a student email.';
+                }
+                return '';
+            }
+        },
+        'ins-bio': {
+            el: document.getElementById('ins-bio'),
+            err: document.getElementById('ins-bio-error'),
+            validate: v => v.length <= 2000 ? '' : 'Bio must be 2000 characters or less.'
+        },
+        'ins-password': {
+            el: document.getElementById('ins-password'),
+            err: document.getElementById('ins-password-error'),
+            validate: v => v.length >= 8 ? '' : 'Password must be at least 8 characters.'
+        },
+        'ins-confirm-password': {
+            el: document.getElementById('ins-confirm-password'),
+            err: document.getElementById('ins-confirm-password-error'),
+            validate: v => v === document.getElementById('ins-password').value ? '' : 'Passwords do not match.'
+        },
+        'ins-terms': {
+            el: document.getElementById('ins-terms'),
+            err: document.getElementById('ins-terms-error'),
+            validate: () => document.getElementById('ins-terms').checked ? '' : 'You must agree to the Terms & Conditions.'
+        }
+    };
 
-    document.getElementById('registration-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
+    function bindRealtime(fieldMap) {
+        Object.values(fieldMap).forEach(({ el, err, validate }) => {
+            if (!el) return;
+            const event = el.type === 'checkbox' ? 'change' : 'input';
+            el.addEventListener(event, () => {
+                const msg = el.type === 'checkbox' ? validate() : validate(el.value);
+                err.textContent = msg;
+                err.classList.toggle('hidden', !msg);
+                el.classList.toggle('ring-2', !!msg);
+                el.classList.toggle('ring-error/20', !!msg);
+            });
+        });
+    }
+    bindRealtime(studentFields);
+    bindRealtime(instructorFields);
+
+    function validateAll(fieldMap) {
         let valid = true;
         let firstInvalid = null;
-
-        Object.values(fields).forEach(({ el, err, validate }) => {
+        Object.values(fieldMap).forEach(({ el, err, validate }) => {
             if (!el) return;
-            const msg = validate(el.value);
+            const msg = el.type === 'checkbox' ? validate() : validate(el.value);
             err.textContent = msg;
             err.classList.toggle('hidden', !msg);
             el.classList.toggle('ring-2', !!msg);
@@ -312,36 +530,25 @@
             if (msg && !firstInvalid) firstInvalid = el;
             if (msg) valid = false;
         });
+        if (!valid && firstInvalid) firstInvalid.focus();
+        return valid;
+    }
 
-        if (!valid) { firstInvalid.focus(); return; }
-
-        const fullRaw = fields['full-name'].el.value.trim();
-        const nameParts = fullRaw.split(/\s+/);
+    function splitFullName(fullRaw) {
+        const nameParts = fullRaw.trim().split(/\s+/);
         const firstName = nameParts[0];
         const lastName = nameParts.slice(1).join(' ') || firstName;
-        const studentId = fields['student-id'].el.value.trim();
-        const yearOfStudy = fields['year'].el.value;
-        const faculty = fields['faculty'].el.value;
-        const emailAddr = fields['email'].el.value.trim().toLowerCase();
-        const passwordVal = fields['password'].el.value;
+        return { firstName, lastName };
+    }
 
-        const submitBtn = this.querySelector('button[type="submit"]');
+    async function postRegister(body, submitBtn) {
         if (submitBtn) submitBtn.disabled = true;
-
         try {
             const res = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'same-origin',
-                body: JSON.stringify({
-                    email: emailAddr,
-                    password: passwordVal,
-                    firstName,
-                    lastName,
-                    studentId,
-                    yearOfStudy: Number(yearOfStudy),
-                    faculty
-                })
+                body: JSON.stringify(body)
             });
             const data = await res.json().catch(() => ({}));
             if (!res.ok) {
@@ -359,6 +566,42 @@
         } finally {
             if (submitBtn) submitBtn.disabled = false;
         }
+    }
+
+    formStudent.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!validateAll(studentFields)) return;
+
+        const { firstName, lastName } = splitFullName(studentFields['full-name'].el.value);
+        const submitBtn = this.querySelector('button[type="submit"]');
+        await postRegister({
+            role: 'student',
+            email: studentFields.email.el.value.trim().toLowerCase(),
+            password: studentFields.password.el.value,
+            firstName,
+            lastName,
+            studentId: studentFields['student-id'].el.value.trim(),
+            yearOfStudy: Number(studentFields.year.el.value),
+            faculty: studentFields.faculty.el.value
+        }, submitBtn);
+    });
+
+    formInstructor.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!validateAll(instructorFields)) return;
+
+        const { firstName, lastName } = splitFullName(instructorFields['ins-full-name'].el.value);
+        const submitBtn = this.querySelector('button[type="submit"]');
+        await postRegister({
+            role: 'instructor',
+            email: instructorFields['ins-email'].el.value.trim().toLowerCase(),
+            password: instructorFields['ins-password'].el.value,
+            firstName,
+            lastName,
+            faculty: instructorFields['ins-faculty'].el.value,
+            instructorTitle: instructorFields['ins-title'].el.value,
+            bio: instructorFields['ins-bio'].el.value.trim()
+        }, submitBtn);
     });
 
     document.getElementById('resend-link').addEventListener('click', function(e) {

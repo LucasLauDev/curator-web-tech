@@ -9,9 +9,11 @@ const {
   selectUserByEmailOrStudentIdCredentials,
   selectUserPublicById,
   insertRegisteredStudent,
+  insertRegisteredInstructor,
   updateUserPatch,
   changePassword,
   existsConflictRegister,
+  existsConflictEmail,
   selectBookstoreBooks,
   selectBookstoreBookById,
   checkoutBookstoreLines,
@@ -83,6 +85,13 @@ function dashboardForRole (role) {
 function isAllowedLoginEmail (email) {
   const e = String(email || '').toLowerCase();
   return e.endsWith('@student.uts.edu.my') || e.endsWith('@uts.edu.my');
+}
+
+/** Staff signup: plain @uts.edu.my, excluding student subdomain. */
+function isStaffRegistrationEmail (email) {
+  const e = String(email || '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return false;
+  return e.endsWith('@uts.edu.my') && !e.endsWith('@student.uts.edu.my');
 }
 
 function dbReady () {
@@ -313,6 +322,8 @@ app.post('/api/auth/register', async (req, res) => {
   if (!dbReady()) {
     return res.status(500).json({ error: 'Server missing DATABASE_URL' });
   }
+  const body = req.body || {};
+  const role = String(body.role || 'student').toLowerCase() === 'instructor' ? 'instructor' : 'student';
   const {
     email,
     password,
@@ -320,19 +331,80 @@ app.post('/api/auth/register', async (req, res) => {
     lastName,
     studentId,
     yearOfStudy,
-    faculty
-  } = req.body || {};
+    faculty,
+    instructorTitle,
+    bio
+  } = body;
 
   const e = String(email || '').trim().toLowerCase();
+  if (!password || String(password).length < 8) {
+    return res.status(400).json({ error: 'Password must be at least 8 characters' });
+  }
+  const fn = String(firstName || '').trim();
+  const ln = String(lastName || '').trim();
+  if (fn.length < 1 || ln.length < 1) {
+    return res.status(400).json({ error: 'First and last name are required' });
+  }
+
+  if (role === 'instructor') {
+    if (!isStaffRegistrationEmail(e)) {
+      return res.status(400).json({
+        error: 'Instructor registration requires a valid UTS staff email (e.g. name@uts.edu.my, not @student.uts.edu.my)'
+      });
+    }
+    if (!faculty || typeof faculty !== 'string') {
+      return res.status(400).json({ error: 'School / department is required' });
+    }
+    const title = String(instructorTitle || '').trim();
+    if (title.length < 1) {
+      return res.status(400).json({ error: 'Academic title is required' });
+    }
+    const bioTrim = String(bio || '').trim();
+    if (bioTrim.length > 2000) {
+      return res.status(400).json({ error: 'Bio is too long' });
+    }
+
+    try {
+      if (await existsConflictEmail(pool, e)) {
+        return res.status(409).json({ error: 'This email is already registered' });
+      }
+
+      const created = await insertRegisteredInstructor(pool, {
+        email: e,
+        password: String(password),
+        firstName: fn,
+        lastName: ln,
+        faculty: String(faculty).trim(),
+        instructorTitle: title,
+        bio: bioTrim
+      });
+      if (!created) {
+        return res.status(500).json({ error: 'Could not create account' });
+      }
+
+      const token = signPayload(created.id);
+      setSessionCookie(res, token);
+
+      return res.json({
+        ok: true,
+        session: true,
+        redirect: dashboardForRole(created.role || 'instructor')
+      });
+    } catch (err) {
+      if (err.code === '23505') {
+        return res.status(409).json({ error: 'This email is already registered' });
+      }
+      console.error(err);
+      return res.status(500).json({ error: String(err.message || err) });
+    }
+  }
+
   if (
     !e ||
     !e.endsWith('@student.uts.edu.my') ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)
   ) {
     return res.status(400).json({ error: 'Registration requires a valid @student.uts.edu.my email' });
-  }
-  if (!password || String(password).length < 8) {
-    return res.status(400).json({ error: 'Password must be at least 8 characters' });
   }
   const sid = String(studentId || '').replace(/\s+/g, '').toUpperCase();
   if (!/^[A-Z]{3}\d{8}$/.test(sid)) {
@@ -344,11 +416,6 @@ app.post('/api/auth/register', async (req, res) => {
   }
   if (!faculty || typeof faculty !== 'string') {
     return res.status(400).json({ error: 'Faculty is required' });
-  }
-  const fn = String(firstName || '').trim();
-  const ln = String(lastName || '').trim();
-  if (fn.length < 1 || ln.length < 1) {
-    return res.status(400).json({ error: 'First and last name are required' });
   }
 
   try {
