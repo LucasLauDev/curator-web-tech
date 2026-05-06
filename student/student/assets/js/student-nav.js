@@ -35,6 +35,11 @@
     }
 }());
 
+const CURATOR_PORTAL_NAV_SCRIPT_URL =
+    typeof document !== 'undefined' && document.currentScript && document.currentScript.src
+        ? document.currentScript.src
+        : '';
+
 /**
  * Student Navigation Module
  * Standardizes the Top Navbar and Sidebar Drawer across all student pages.
@@ -42,10 +47,47 @@
 const studentNav = {
     init() {
         this.render();
+        this.mountPortalFooter();
         this.bindEvents();
         this.applyShellSpacing();
         this.setActiveLink();
         this.hydrateSessionUi();
+    },
+
+    ensurePortalFooterModule(callback) {
+        if (typeof window.mountCuratorPortalFooter === 'function') {
+            callback();
+            return;
+        }
+        const cur = CURATOR_PORTAL_NAV_SCRIPT_URL;
+        if (!cur) {
+            callback();
+            return;
+        }
+        let src;
+        try {
+            src = new URL('../../../../shared/curator-portal-footer.js', new URL(cur)).href;
+        } catch (_) {
+            callback();
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => callback();
+        s.onerror = () => callback();
+        document.head.appendChild(s);
+    },
+
+    mountPortalFooter() {
+        const mountPoint = document.getElementById('nav-mount');
+        if (!mountPoint) return;
+        const { base } = this.getPathInfo();
+        const landing = `${base}../../landing/landing/`;
+        this.ensurePortalFooterModule(() => {
+            if (typeof window.mountCuratorPortalFooter === 'function') {
+                window.mountCuratorPortalFooter(landing);
+            }
+        });
     },
 
     hydrateSessionUi() {

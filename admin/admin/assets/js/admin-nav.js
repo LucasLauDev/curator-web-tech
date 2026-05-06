@@ -39,6 +39,11 @@
     }
 }());
 
+const CURATOR_PORTAL_NAV_SCRIPT_URL =
+    typeof document !== 'undefined' && document.currentScript && document.currentScript.src
+        ? document.currentScript.src
+        : '';
+
 /**
  * Admin Navigation Module
  * Standardizes the Top Navbar and Sidebar Drawer across all admin pages.
@@ -47,10 +52,60 @@
 const adminNav = {
     init() {
         this.render();
+        this.mountPortalFooter();
         this.bindEvents();
         this.applyShellSpacing();
         this.setActiveLink();
         this.hydrateSessionUi();
+    },
+
+    ensurePortalFooterModule(callback) {
+        if (typeof window.mountCuratorPortalFooter === 'function') {
+            callback();
+            return;
+        }
+        const cur = CURATOR_PORTAL_NAV_SCRIPT_URL;
+        if (!cur) {
+            callback();
+            return;
+        }
+        let src;
+        try {
+            src = new URL('../../../../shared/curator-portal-footer.js', new URL(cur)).href;
+        } catch (_) {
+            callback();
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = () => callback();
+        s.onerror = () => callback();
+        document.head.appendChild(s);
+    },
+
+    mountPortalFooter() {
+        const mountPoint = document.getElementById('nav-mount');
+        if (!mountPoint) return;
+        const { root } = this.getPathInfo();
+        const landing = `${root}landing/landing/`;
+        this.ensurePortalFooterModule(() => {
+            if (typeof window.mountCuratorPortalFooter === 'function') {
+                window.mountCuratorPortalFooter(landing);
+            }
+        });
+    },
+
+    getPathInfo() {
+        const isDashboard = window.location.pathname.includes('/Dashboard/');
+        const isSubdir = window.location.pathname.includes('/bookstore/') ||
+            window.location.pathname.includes('/community/') ||
+            window.location.pathname.includes('/vibe_academy/');
+        const segments = window.location.pathname.split('/').filter(Boolean);
+        const adminIndex = segments.lastIndexOf('admin'); // inner ".../admin/admin/..."
+        const depth = adminIndex === -1 ? 0 : Math.max(segments.length - adminIndex - 2, 0);
+        const root = '../'.repeat(depth + 2);
+        const base = isSubdir ? '../Dashboard/' : '';
+        return { base, root, isDashboard, isSubdir };
     },
 
     /**
@@ -126,20 +181,7 @@ const adminNav = {
         const mountPoint = document.getElementById('nav-mount');
         if (!mountPoint) return;
 
-        // Determine base path for links (handles nested directories)
-        const isDashboard = window.location.pathname.includes('/Dashboard/');
-        const isSubdir = window.location.pathname.includes('/bookstore/') ||
-                         window.location.pathname.includes('/community/') ||
-                         window.location.pathname.includes('/vibe_academy/');
-
-        // Compute correct "root to Web-Tech/" even when opened via file://
-        // Path is typically .../Web-Tech/admin/admin/<section>/<page>.html
-        const segments = window.location.pathname.split('/').filter(Boolean);
-        const adminIndex = segments.lastIndexOf('admin'); // the inner ".../admin/admin/..."
-        const depth = adminIndex === -1 ? 0 : Math.max(segments.length - adminIndex - 2, 0); // folders after inner admin
-        const root = '../'.repeat(depth + 2); // from inner admin -> Web-Tech (../..), plus depth
-
-        const base = isSubdir ? '../Dashboard/' : '';
+        const { isDashboard, isSubdir, root, base } = this.getPathInfo();
         const up = (isDashboard || isSubdir) ? '../' : '';
         const communityForumHref = isDashboard || isSubdir
             ? '../community/community_forum.html'
