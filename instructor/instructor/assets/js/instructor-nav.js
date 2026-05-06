@@ -58,18 +58,30 @@ const instructorNav = {
                 const nameBit = `${p.first_name || ''} ${p.last_name || ''}`.trim()
                     || (data.user && data.user.email)
                     || 'Instructor';
+                const subtext = [p.instructor_title, p.faculty].filter(Boolean).join(', ')
+                    || '';
                 const navBar = document.getElementById('curator-instructor-chip');
                 if (navBar) {
                     const ps = navBar.querySelectorAll('p');
                     if (ps[0]) ps[0].textContent = nameBit;
-                    const subtext = p.instructor_title || p.faculty || '';
-                    if (ps[1] && subtext) ps[1].textContent = subtext;
+                    if (ps[1]) ps[1].textContent = subtext;
                 }
+                const avatarSrc =
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(nameBit)}&background=6a1cf6&color=fff`;
                 const imgEl = document.querySelector('nav a[href*="instructor_profile.html"] img');
                 if (imgEl) {
-                    imgEl.src =
-                        `https://ui-avatars.com/api/?name=${encodeURIComponent(nameBit)}&background=6a1cf6&color=fff`;
+                    imgEl.src = avatarSrc;
+                    imgEl.alt = `${nameBit} Profile`;
                 }
+                const profileAvatar = document.getElementById('instructor-profile-avatar');
+                if (profileAvatar) {
+                    profileAvatar.src = `${avatarSrc}&size=256`;
+                    profileAvatar.alt = nameBit;
+                }
+                const profileNameEl = document.getElementById('instructor-profile-name');
+                if (profileNameEl) profileNameEl.textContent = nameBit;
+                const profileSubEl = document.getElementById('instructor-profile-subtitle');
+                if (profileSubEl) profileSubEl.textContent = subtext;
             })
             .catch(() => {});
     },

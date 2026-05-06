@@ -106,10 +106,17 @@ const adminNav = {
                 const nameBit = `${p.first_name || ''} ${p.last_name || ''}`.trim()
                     || (data.user && data.user.email)
                     || 'Admin';
+                const avatarSrc =
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(nameBit)}&background=6a1cf6&color=fff`;
                 const imgEl = document.querySelector('nav a[href*="admin_profile.html"] img');
                 if (imgEl) {
-                    imgEl.src =
-                        `https://ui-avatars.com/api/?name=${encodeURIComponent(nameBit)}&background=6a1cf6&color=fff`;
+                    imgEl.src = avatarSrc;
+                    imgEl.alt = `${nameBit} Profile`;
+                }
+                const profileAvatar = document.getElementById('admin-avatar');
+                if (profileAvatar) {
+                    profileAvatar.src = `${avatarSrc}&size=256`;
+                    profileAvatar.alt = nameBit;
                 }
             })
             .catch(() => {});
