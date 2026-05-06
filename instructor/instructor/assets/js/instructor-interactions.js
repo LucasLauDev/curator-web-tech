@@ -10,6 +10,23 @@
 (function () {
   "use strict";
 
+  (function clearForumDemoSessionOnReload() {
+    try {
+      const nav = performance.getEntriesByType?.("navigation")?.[0];
+      if (nav && nav.type === "reload") {
+        const prefix = "ce_forum_demo_";
+        const keys = [];
+        for (let i = 0; i < sessionStorage.length; i++) {
+          const k = sessionStorage.key(i);
+          if (k && k.startsWith(prefix)) keys.push(k);
+        }
+        keys.forEach((k) => sessionStorage.removeItem(k));
+      }
+    } catch {
+      /* ignore */
+    }
+  })();
+
   // Global Toast System
   window.showToast = function (message, type = "info") {
     const toast = document.createElement("div");
@@ -3841,17 +3858,32 @@
     );
   }
 
-  /** Thread-scoped replies persisted in localStorage. Inline panel when `postEl` is provided. */
+  /** Thread-scoped replies in sessionStorage for this browser tab. */
   function openThreadComments(threadKey, postEl) {
-    const storeKey = "instructor_thread_comments_v1";
+    const storeKey = "ce_forum_demo_thread_comments_v1";
+    function loadAll() {
+      try {
+        const s = sessionStorage.getItem(storeKey);
+        return s ? JSON.parse(s) : {};
+      } catch {
+        return {};
+      }
+    }
+    function saveAll(all) {
+      try {
+        sessionStorage.setItem(storeKey, JSON.stringify(all));
+      } catch {
+        /* ignore */
+      }
+    }
     function load() {
-      const all = storage.get(storeKey, {});
+      const all = loadAll();
       return Array.isArray(all[threadKey]) ? all[threadKey] : [];
     }
     function save(items) {
-      const all = storage.get(storeKey, {});
+      const all = loadAll();
       all[threadKey] = items;
-      storage.set(storeKey, all);
+      saveAll(all);
     }
     function listHtml(arr) {
       if (!arr.length) {
@@ -3908,7 +3940,6 @@
       panel.className =
         "forum-inline-comments mt-4 pt-4 border-t border-surface-container";
       panel.innerHTML = `
-        <p class="text-xs text-on-surface-variant mb-3">Comments are saved in this browser for this thread.</p>
         <div data-fc-list class="space-y-3 max-h-72 overflow-y-auto overscroll-contain pr-1">${listHtml(load())}</div>
         <div class="flex items-end gap-2.5 mt-3">
           <div class="w-9 h-9 shrink-0 rounded-full bg-primary/15 text-primary flex items-center justify-center text-xs font-black ring-2 ring-white" title="You">In</div>
@@ -3938,7 +3969,6 @@
       primaryText: "Post reply",
       secondaryText: "Close",
       bodyHtml: `
-        <p class="text-xs text-slate-500 mb-3">Replies are saved in this browser for this thread.</p>
         <div id="fc-list" class="max-h-52 overflow-y-auto space-y-2 mb-4">${listHtml(items)}</div>
         <label class="block text-xs font-bold text-slate-600">Your reply</label>
         <textarea id="fc-input" class="mt-1 w-full rounded-xl border border-slate-200 p-3 text-sm min-h-[88px]" placeholder="Write a reply…"></textarea>`,
@@ -4159,15 +4189,23 @@
     }
 
     function sortPosts(posts) {
+      function withNewFirst(a, b, rest) {
+        const an = a.getAttribute("data-ce-new-post") === "1";
+        const bn = b.getAttribute("data-ce-new-post") === "1";
+        if (an !== bn) return an ? -1 : 1;
+        return rest(a, b);
+      }
       if (activeTab === "trending")
-        return [...posts].sort(
-          (a, b) => getCommentCount(b) - getCommentCount(a),
+        return [...posts].sort((a, b) =>
+          withNewFirst(a, b, (x, y) => getCommentCount(y) - getCommentCount(x)),
         );
       if (activeTab === "latest")
-        return [...posts].sort(
-          (a, b) => getPostAgeMinutes(a) - getPostAgeMinutes(b),
+        return [...posts].sort((a, b) =>
+          withNewFirst(a, b, (x, y) => getPostAgeMinutes(x) - getPostAgeMinutes(y)),
         );
-      return [...posts].sort((a, b) => getLikeCount(b) - getLikeCount(a));
+      return [...posts].sort((a, b) =>
+        withNewFirst(a, b, (x, y) => getLikeCount(y) - getLikeCount(x)),
+      );
     }
 
     function ensurePager() {
@@ -4439,6 +4477,7 @@
             post.className =
               "bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden border border-surface-container hover:shadow-md transition-all duration-200";
             post.setAttribute("data-community-post", "1");
+            post.setAttribute("data-ce-new-post", "1");
             post.innerHTML = `
             <div class="flex gap-4">
               <div class="relative z-10 flex flex-col items-center">
@@ -4493,13 +4532,23 @@
           const form = btn.closest("form");
           const title =
             form?.querySelector("input, textarea")?.value?.trim() || "";
-          const k = "instructor_forum_drafts_v1";
-          const cur = storage.get(k, { items: [] });
+          const k = "ce_forum_demo_instructor_drafts_v1";
+          let cur;
+          try {
+            cur = JSON.parse(sessionStorage.getItem(k) || "") || { items: [] };
+          } catch {
+            cur = { items: [] };
+          }
+          if (!Array.isArray(cur.items)) cur.items = [];
           cur.items.unshift({
             ts: Date.now(),
             title: title.slice(0, 80) || "Untitled draft",
           });
-          storage.set(k, cur);
+          try {
+            sessionStorage.setItem(k, JSON.stringify(cur));
+          } catch {
+            /* ignore */
+          }
           toast("Draft saved");
           return;
         }
@@ -4529,7 +4578,8 @@
                 : Math.max(0, n - 1),
             );
           }
-          toast("Updated");
+          const on = btn.classList.contains("text-primary");
+          toast(on ? "Upvoted" : "Removed your vote");
           return;
         }
 
@@ -4982,6 +5032,8 @@
               : String(Math.round(next));
             btn.innerHTML = btn.innerHTML.replace(m[0], nextText);
           }
+          const on = btn.classList.contains("text-primary");
+          toast(on ? "Upvoted" : "Removed your vote");
           return;
         }
         if (icon === "chat_bubble" || icon === "forum") {

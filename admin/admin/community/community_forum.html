@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="../assets/css/admin-nav.css">
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+<body class="bg-slate-50 text-slate-900 min-h-screen" data-forum-reply-label="Moderator" data-forum-post-author="CuratorEdu">
 <div id="nav-mount"></div>
 <script src="../assets/js/admin-nav.js"></script>
 <div class="flex min-h-screen pt-20">
@@ -32,7 +32,7 @@ Community Group
 </div>
 </div>
 <!-- Feed Content -->
-<div class="space-y-6">
+<div id="forum-feed" class="space-y-6">
 
 <!-- Reddit Style Post -->
 <div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden border border-surface-container hover:border-[#ff4500]/30 hover:shadow-md transition-all duration-200">
@@ -650,8 +650,9 @@ Community Group
 </form>
 </div>
 </div>
-<!-- Instructions to show modal for demonstration -->
 <!-- Add href="#create-post" to the FAB above if linking was allowed, but keeping it static/clean as per instructions -->
+<script src="../../../shared/forum-demo-mock.js"></script>
+<script src="../../../student/student/assets/js/community-forum-comments.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const ACTION_CONFIG = {
@@ -734,7 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'standard';
     };
 
-    const feedContainer = document.querySelector('section .space-y-6');
+    const feedContainer = document.getElementById('forum-feed');
     const postCards = feedContainer ? Array.from(feedContainer.children).filter((el) => el.classList.contains('bg-surface-container-lowest')) : [];
     const postMeta = postCards.map((card, index) => {
         const firstCounter = card.querySelector('span.text-xs.font-label')?.textContent || '0';
@@ -768,6 +769,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const sorted = [...filtered].sort((a, b) => {
+            const an = a.card.getAttribute('data-ce-new-post') === '1';
+            const bn = b.card.getAttribute('data-ce-new-post') === '1';
+            if (an !== bn) return an ? -1 : 1;
             if (activeSort === 'latest') return a.ageHours - b.ageHours;
             if (activeSort === 'top') return b.score - a.score;
             return a.originalIndex - b.originalIndex;
@@ -897,6 +901,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    window.ceForumAppendManagedPost = function (card) {
+        if (!feedContainer || !card) return;
+        feedContainer.prepend(card);
+        postMeta.forEach((item) => {
+            item.originalIndex += 1;
+        });
+        const firstCounter = card.querySelector('span.text-xs.font-label')?.textContent || '0';
+        const ageNode = card.querySelector('h3 span.text-xs');
+        const searchable = [
+            card.querySelector('h2')?.textContent || '',
+            card.querySelector('p.text-on-surface-variant')?.textContent || ''
+        ].join(' ').toLowerCase();
+        postMeta.unshift({
+            card,
+            originalIndex: 0,
+            score: parseScore(firstCounter),
+            ageHours: parseAgeHours(ageNode?.textContent || ''),
+            source: getPostSource(card),
+            searchable
+        });
+        applyFeedState();
+    };
+
     applyFeedState();
 
     const actionBars = document.querySelectorAll('div.flex.gap-4.text-on-surface-variant');
@@ -907,17 +934,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!iconEl) return;
 
             const icon = iconEl.textContent.trim();
-
-            if (icon === 'chat_bubble' || icon === 'forum') {
-                button.addEventListener('click', () => {
-                    const card = button.closest('.rounded-xl, .rounded-2xl, .rounded-3xl') || button.closest('div[class*="rounded"]');
-                    if (card) {
-                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                    showToast('Comment section coming soon.');
-                });
-                return;
-            }
 
             if (icon === 'ios_share') {
                 button.addEventListener('click', async () => {

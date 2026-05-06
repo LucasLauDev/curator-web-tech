@@ -80,6 +80,17 @@
     return post.getAttribute('data-ce-course-hidden') !== '1';
   }
 
+  function isPinnedNewPost(post) {
+    return post.getAttribute('data-ce-new-post') === '1';
+  }
+
+  function sortWithNewFirst(a, b, compareRest) {
+    var an = isPinnedNewPost(a);
+    var bn = isPinnedNewPost(b);
+    if (an !== bn) return an ? -1 : 1;
+    return compareRest(a, b);
+  }
+
   function wire() {
     var postScope = document.getElementById('forum-feed');
     if (!postScope) return;
@@ -101,9 +112,25 @@
     var page = 1;
 
     function sortPosts(posts) {
-      if (activeTab === 'trending') return posts.slice().sort(function (a, b) { return getCommentCount(b) - getCommentCount(a); });
-      if (activeTab === 'latest') return posts.slice().sort(function (a, b) { return getPostAgeMinutes(a) - getPostAgeMinutes(b); });
-      return posts.slice().sort(function (a, b) { return getLikeCount(b) - getLikeCount(a); });
+      if (activeTab === 'trending') {
+        return posts.slice().sort(function (a, b) {
+          return sortWithNewFirst(a, b, function (x, y) {
+            return getCommentCount(y) - getCommentCount(x);
+          });
+        });
+      }
+      if (activeTab === 'latest') {
+        return posts.slice().sort(function (a, b) {
+          return sortWithNewFirst(a, b, function (x, y) {
+            return getPostAgeMinutes(x) - getPostAgeMinutes(y);
+          });
+        });
+      }
+      return posts.slice().sort(function (a, b) {
+        return sortWithNewFirst(a, b, function (x, y) {
+          return getLikeCount(y) - getLikeCount(x);
+        });
+      });
     }
 
     function ensurePager() {

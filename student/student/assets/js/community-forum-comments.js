@@ -1,11 +1,11 @@
 /**
- * Student community forum — inline comments per thread (localStorage).
+ * Community forum — inline thread comments (browser session storage).
  * Uses capture on document so it runs before the page's legacy bubble handlers (e.g. alert stubs).
  */
 (function () {
   'use strict';
 
-  var STORE = 'ce_student_forum_thread_comments_v1';
+  var STORE = 'ce_forum_demo_thread_comments_v1';
 
   function toast(msg) {
     var el = document.getElementById('ce-student-forum-toast');
@@ -26,7 +26,7 @@
 
   function storageGet(key, def) {
     try {
-      var v = localStorage.getItem(key);
+      var v = sessionStorage.getItem(key);
       return v ? JSON.parse(v) : def;
     } catch (_e) {
       return def;
@@ -35,7 +35,7 @@
 
   function storageSet(key, val) {
     try {
-      localStorage.setItem(key, JSON.stringify(val));
+      sessionStorage.setItem(key, JSON.stringify(val));
     } catch (_e) {}
   }
 
@@ -50,6 +50,19 @@
       }
     }
     return btn.closest('.forum-post, [data-community-post], article, .bg-surface-container-lowest.rounded-xl') || btn.parentElement;
+  }
+
+  function replyLabel() {
+    var raw = (document.body && document.body.getAttribute('data-forum-reply-label')) || '';
+    var s = String(raw).trim();
+    return s || 'Student';
+  }
+
+  function replyInitial() {
+    var L = replyLabel();
+    if (L === 'Student') return 'St';
+    if (!L.length) return 'Me';
+    return L.length === 1 ? L.toUpperCase() : L.slice(0, 2).toUpperCase();
   }
 
   function openThreadComments(threadKey, postEl) {
@@ -75,10 +88,14 @@
           var when = new Date(c.ts).toLocaleString();
           return (
             '<div class="flex gap-2.5">' +
-            '<div class="w-8 h-8 shrink-0 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[10px] font-black ring-2 ring-white">St</div>' +
+            '<div class="w-8 h-8 shrink-0 rounded-full bg-primary/15 text-primary flex items-center justify-center text-[10px] font-black ring-2 ring-white">' +
+            replyInitial() +
+            '</div>' +
             '<div class="min-w-0 flex-1">' +
             '<div class="inline-block max-w-full rounded-2xl bg-surface-container-low px-3.5 py-2 border border-surface-container">' +
-            '<span class="text-xs font-bold text-on-background">Student</span>' +
+            '<span class="text-xs font-bold text-on-background">' +
+            replyLabel() +
+            '</span>' +
             '<p class="text-sm text-on-surface mt-0.5 whitespace-pre-wrap break-words">' +
             body +
             '</p></div>' +
@@ -102,7 +119,7 @@
       var listEl = panel.querySelector('[data-fc-list]');
       if (listEl) listEl.innerHTML = listHtml(items);
       if (input) input.value = '';
-      toast('Reply posted');
+      toast('Posted — reply added to this thread');
     }
 
     if (!postEl || typeof postEl.querySelector !== 'function') return;
@@ -121,12 +138,13 @@
     panel.setAttribute('data-thread-comments-panel', '1');
     panel.className = 'forum-inline-comments mt-4 pt-4 border-t border-surface-container';
     panel.innerHTML =
-      '<p class="text-xs text-on-surface-variant mb-3">Comments are saved in this browser for this thread.</p>' +
       '<div data-fc-list class="space-y-3 max-h-72 overflow-y-auto overscroll-contain pr-1">' +
       listHtml(load()) +
       '</div>' +
       '<div class="flex items-end gap-2.5 mt-3">' +
-      '<div class="w-9 h-9 shrink-0 rounded-full bg-primary/15 text-primary flex items-center justify-center text-xs font-black ring-2 ring-white" title="You">St</div>' +
+      '<div class="w-9 h-9 shrink-0 rounded-full bg-primary/15 text-primary flex items-center justify-center text-xs font-black ring-2 ring-white" title="You">' +
+      replyInitial() +
+      '</div>' +
       '<div class="flex-1 min-w-0 rounded-2xl bg-surface-container-low border border-outline-variant shadow-sm focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15 transition-shadow">' +
       '<textarea data-fc-input rows="1" class="w-full bg-transparent border-0 rounded-2xl px-4 py-2.5 text-sm text-on-surface placeholder:text-on-surface-variant focus:ring-0 resize-none max-h-36 leading-snug" placeholder="Write a comment…"></textarea></div>' +
       '<button type="button" data-fc-post class="shrink-0 px-4 py-2 rounded-full bg-primary text-white text-sm font-bold hover:opacity-95 active:scale-[0.98] transition-transform">Post</button></div>';
@@ -162,7 +180,7 @@
       course = new URLSearchParams(window.location.search).get('course') || '';
       if (course) course = decodeURIComponent(course.replace(/\+/g, ' ')).trim().toLowerCase();
     } catch (_e) {}
-    return 'student:' + (course ? course + ':' : '') + raw;
+    return 'ce_forum:' + (course ? course + ':' : '') + raw;
   }
 
   document.addEventListener(

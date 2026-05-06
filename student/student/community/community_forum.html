@@ -104,7 +104,7 @@
     </style>
     <link rel="stylesheet" href="../assets/css/student-nav.css">
 </head>
-<body class="bg-surface text-on-background min-h-screen">
+<body class="bg-surface text-on-background min-h-screen" data-forum-post-author="Student">
 
     <div id="nav-mount"></div>
 
@@ -142,7 +142,7 @@
 </button>
 </div>
 <div id="forum-course-empty" class="hidden mb-4 rounded-xl border border-dashed border-outline-variant bg-surface-container-low px-4 py-6 text-center">
-<p class="text-sm text-on-surface-variant font-body">No threads match this course in the demo feed. Remove <span class="font-mono text-xs text-on-background">?course=</span> from the URL to see all posts.</p>
+<p class="text-sm text-on-surface-variant font-body">No threads match this course. Remove <span class="font-mono text-xs text-on-background">?course=</span> from the URL to see all posts.</p>
 <p class="mt-3"><a class="text-primary font-bold text-sm hover:underline font-headline" href="community_forum.html">All forums</a></p>
 </div>
 <!-- Feed Content -->
@@ -730,8 +730,8 @@
 </form>
 </div>
 </div>
-<!-- Instructions to show modal for demonstration -->
 <!-- Add href="#create-post" to the FAB above if linking was allowed, but keeping it static/clean as per instructions -->
+    <script src="../../../shared/forum-demo-mock.js"></script>
     <script src="../assets/js/forum-course-filter.js"></script>
     <script src="../assets/js/student-forum-feed.js"></script>
     <script src="../assets/js/community-forum-comments.js"></script>
@@ -785,67 +785,11 @@
             }
 
             const filterButton = document.querySelector('button[title="Filter"]');
-            const createPostForm = document.querySelector('#create-post form');
-            const topicInput = createPostForm?.querySelector('input[type="text"]');
-            const contentInput = createPostForm?.querySelector('textarea');
-            const saveDraftBtn = createPostForm?.querySelector('button[type="button"]');
-            const postThreadBtn = createPostForm?.querySelector('button[type="submit"]');
             const addTagBtn = Array.from(document.querySelectorAll('#create-post span')).find((el) => el.textContent.trim() === '+ Add Tag');
 
             filterButton?.addEventListener('click', () => {
-                alert('Filter panel coming soon. Showing all categories for now.');
-            });
-
-            document.querySelectorAll('button').forEach((button) => {
-                const iconEl = button.querySelector('.material-symbols-outlined');
-                if (!iconEl) return;
-
-                const icon = iconEl.textContent.trim();
-                const countEl = button.querySelector('.text-xs.font-label');
-
-                if (['arrow_upward', 'thumb_up', 'favorite'].includes(icon)) {
-                    button.addEventListener('click', () => {
-                        const isActive = button.dataset.active === 'true';
-                        const baseCount = Number.parseFloat((button.dataset.baseCount || countEl?.textContent || '0').replace(/[^\d.]/g, '')) || 0;
-                        if (!button.dataset.baseCount) {
-                            button.dataset.baseCount = String(baseCount);
-                        }
-                        const nextCount = isActive ? baseCount : baseCount + 1;
-
-                        if (countEl) {
-                            if (countEl.textContent.includes('k')) {
-                                countEl.textContent = `${nextCount.toFixed(1)}k`;
-                            } else {
-                                countEl.textContent = String(Math.round(nextCount));
-                            }
-                        }
-
-                        button.dataset.active = String(!isActive);
-                        button.classList.toggle('text-primary', !isActive);
-                        button.classList.toggle('text-[#ff4500]', !isActive && icon === 'arrow_upward');
-                    });
-                } else if (icon === 'ios_share') {
-                    button.addEventListener('click', async () => {
-                        const threadTitle = button.closest('.flex-1')?.querySelector('h2')?.textContent?.trim() || 'Forum thread';
-                        const shareText = `${threadTitle} - CuratorEdu Forum`;
-                        try {
-                            if (navigator.share) {
-                                await navigator.share({ title: threadTitle, text: shareText, url: window.location.href });
-                            } else if (navigator.clipboard?.writeText) {
-                                await navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
-                                alert('Thread link copied to clipboard.');
-                            }
-                        } catch (_error) {
-                            // Ignore canceled share action.
-                        }
-                    });
-                } else if (['bookmark', 'star'].includes(icon)) {
-                    button.addEventListener('click', () => {
-                        const isSaved = button.dataset.saved === 'true';
-                        button.dataset.saved = String(!isSaved);
-                        iconEl.style.fontVariationSettings = !isSaved ? "'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24" : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
-                        button.classList.toggle('text-primary', !isSaved);
-                    });
+                if (window.ceForumDemoToast) {
+                    window.ceForumDemoToast('Showing all categories', 'info');
                 }
             });
 
@@ -871,39 +815,6 @@
                 addTagBtn.parentElement?.insertBefore(tagEl, addTagBtn);
             });
 
-            saveDraftBtn?.addEventListener('click', () => {
-                const draft = {
-                    title: topicInput?.value?.trim() || '',
-                    content: contentInput?.value?.trim() || ''
-                };
-                localStorage.setItem('communityForumDraft', JSON.stringify(draft));
-                alert('Draft saved.');
-            });
-
-            const savedDraft = localStorage.getItem('communityForumDraft');
-            if (savedDraft) {
-                try {
-                    const draft = JSON.parse(savedDraft);
-                    if (topicInput && !topicInput.value) topicInput.value = draft.title || '';
-                    if (contentInput && !contentInput.value) contentInput.value = draft.content || '';
-                } catch (_error) {
-                    // Ignore malformed draft data.
-                }
-            }
-
-            createPostForm?.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const title = topicInput?.value?.trim();
-                const content = contentInput?.value?.trim();
-                if (!title || !content) {
-                    alert('Please fill in both title and content before posting.');
-                    return;
-                }
-                localStorage.removeItem('communityForumDraft');
-                alert('Thread posted successfully.');
-                window.location.hash = '';
-                createPostForm.reset();
-            });
         });
     </script>
     <script src="../assets/js/student-nav.js"></script>

@@ -1,11 +1,11 @@
 /**
  * Instructor forum: create thread (FAB + #create-post), aligned with student community_forum.html.
- * Draft in localStorage, prepend to #forum-feed, then refresh pager via window.ceForumFeedInvalidate.
+ * Draft in sessionStorage, prepend to #forum-feed, then refresh pager via window.ceForumFeedInvalidate.
  */
 (function () {
   'use strict';
 
-  var DRAFT_KEY = 'instructorForumDraft';
+  var DRAFT_KEY = 'ce_forum_demo_instructor_composer_draft';
 
   function esc(s) {
     return String(s || '')
@@ -46,7 +46,7 @@
         '</p>'
       : '';
     return (
-      '<div class="forum-post bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/20 hover:shadow-md transition-all duration-200" data-community-post="1">' +
+      '<div class="forum-post bg-surface-container-lowest rounded-xl p-6 border border-surface-container hover:border-primary/20 hover:shadow-md transition-all duration-200" data-community-post="1" data-ce-new-post="1">' +
       '<div class="flex gap-4">' +
       '<div class="flex flex-col items-center gap-2">' +
       '<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline font-black text-xs ring-2 ring-white">CE</div>' +
@@ -137,7 +137,7 @@
       if (e.target === shell) closeCreatePostModal();
     });
 
-    var saved = localStorage.getItem(DRAFT_KEY);
+    var saved = sessionStorage.getItem(DRAFT_KEY);
     if (saved) {
       try {
         var draft = JSON.parse(saved);
@@ -162,8 +162,12 @@
         title: (topicInput && topicInput.value ? topicInput.value : '').trim(),
         content: (contentInput && contentInput.value ? contentInput.value : '').trim(),
       };
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-      window.alert('Draft saved.');
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+      if (typeof window.instructorToast === 'function') {
+        window.instructorToast('Draft saved');
+      } else {
+        window.alert('Draft saved');
+      }
     });
 
     form.addEventListener('submit', function (event) {
@@ -171,10 +175,14 @@
       var title = (topicInput && topicInput.value ? topicInput.value : '').trim();
       var content = (contentInput && contentInput.value ? contentInput.value : '').trim();
       if (!title || !content) {
-        window.alert('Please fill in both title and content before posting.');
+        if (typeof window.instructorToast === 'function') {
+          window.instructorToast('Please add a title and content');
+        } else {
+          window.alert('Please fill in both title and content before posting.');
+        }
         return;
       }
-      localStorage.removeItem(DRAFT_KEY);
+      sessionStorage.removeItem(DRAFT_KEY);
       var tags = collectTags(tagWrap);
       var wrap = document.createElement('div');
       wrap.innerHTML = buildPostCard(title, content, tags).trim();
@@ -184,7 +192,11 @@
       form.reset();
       closeCreatePostModal();
       if (typeof window.ceForumFeedInvalidate === 'function') window.ceForumFeedInvalidate();
-      window.alert('Thread posted successfully.');
+      if (typeof window.instructorToast === 'function') {
+        window.instructorToast('Thread posted successfully');
+      } else {
+        window.alert('Thread posted successfully.');
+      }
     });
   }
 
