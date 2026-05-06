@@ -109,13 +109,8 @@
 <div class="flex min-h-screen">
 <!-- Main Canvas -->
 <main class="flex-1 p-4 sm:p-8 lg:p-12 pb-32 overflow-x-hidden min-w-0">
-<header class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-10">
+<header class="mb-10">
     <h1 class="text-3xl font-headline font-black text-on-surface tracking-tighter">Instructor Profile</h1>
-    <a href="/api/auth/logout"
-       class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-error/25 bg-white px-4 py-2.5 text-sm font-bold text-error transition-colors hover:bg-red-50">
-        <span class="material-symbols-outlined text-base">logout</span>
-        Log out
-    </a>
 </header>
 
 <!-- Bento Layout Profile -->
@@ -172,6 +167,19 @@
 <span class="text-xs font-label uppercase opacity-80 mt-1">Completion Rate</span>
 </div>
 </div>
+</div>
+<!-- Session / Sign out -->
+<div class="bg-surface-container-lowest rounded-xl p-6 sm:p-8 shadow-sm border border-outline-variant/20" aria-label="Sign out">
+<h4 class="mb-3 flex items-center gap-2 text-xl font-bold font-headline text-on-background">
+<span class="material-symbols-outlined text-on-surface-variant">logout</span>
+Session
+</h4>
+<p class="mb-4 text-xs text-on-surface-variant font-medium">You will need to sign in again to access your dashboard.</p>
+<a href="/api/auth/logout"
+   class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-5 py-2.5 text-sm font-bold text-red-700 transition-colors hover:bg-red-100">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">logout</span>
+Log out
+</a>
 </div>
 </div>
 <!-- Right Column: Courses & Publications -->
