@@ -59,9 +59,17 @@ const studentNav = {
                 const li = ((p.last_name || '')[0] || '').toUpperCase();
                 const initials = fi + li || 'S';
                 const nameBit = `${p.first_name || ''} ${p.last_name || ''}`.trim();
+                const displayLabel = nameBit || initials;
+                const avatarSrc = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayLabel)}&background=6a1cf6&color=fff`;
                 const imgHref = document.querySelector('a[href*="dashboard/profile.html"] img');
                 if (imgHref) {
-                    imgHref.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nameBit || initials)}&background=6a1cf6&color=fff`;
+                    imgHref.src = avatarSrc;
+                    imgHref.alt = displayLabel;
+                }
+                const profileHero = document.getElementById('profile-avatar-img');
+                if (profileHero) {
+                    profileHero.src = `${avatarSrc}&size=256`;
+                    profileHero.alt = displayLabel;
                 }
             })
             .catch(() => {});
@@ -685,5 +693,8 @@ const studentNav = {
         true
     );
 })();
+
+/** Call after profile PATCH so header + profile hero avatars match session (e.g. from profile.html). */
+window.curatorRefreshStudentSessionAvatars = () => studentNav.hydrateSessionUi();
 
 document.addEventListener('DOMContentLoaded', () => studentNav.init());
