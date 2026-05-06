@@ -270,6 +270,7 @@ const instructorNav = {
                 cartOverlay.classList.add('opacity-100');
                 cartOverlay.classList.add('pointer-events-auto');
             } else {
+                const wasOpen = cartAside.classList.contains('translate-x-0');
                 cartAside.classList.remove('translate-x-0');
                 cartAside.classList.add('translate-x-full');
                 cartOverlay.classList.remove('opacity-100');
@@ -278,6 +279,13 @@ const instructorNav = {
                 setTimeout(() => {
                     cartSlider.classList.add('pointer-events-none');
                 }, 500);
+                if (wasOpen) {
+                    setTimeout(() => {
+                        if (typeof window.instructorToast === 'function') {
+                            window.instructorToast('Saved');
+                        }
+                    }, 50);
+                }
             }
         };
 

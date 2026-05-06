@@ -40,6 +40,9 @@
     }, 3000);
   };
 
+  /** Auto-dismiss timer for #instructor-toast (must not use undefined `state`). */
+  const instructorToastControl = { hideTimer: null };
+
   /** Created courses demo store (see wireCourseEditorCreateFlow). */
   const CREATED_COURSES_KEY = "instructor_created_courses_v1";
 
@@ -164,9 +167,10 @@
     el = document.createElement("div");
     el.id = "instructor-toast";
     el.className =
-      "fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] hidden " +
+      "fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] " +
       "px-4 py-3 rounded-xl border border-slate-200 bg-white/90 backdrop-blur " +
       "shadow-2xl text-sm font-semibold text-slate-800 max-w-[90vw]";
+    el.hidden = true;
     document.body.appendChild(el);
     return el;
   }
@@ -175,9 +179,14 @@
     const el = ensureToast();
     el.textContent = message;
     el.classList.remove("hidden");
-    clearTimeout(state.toastTimer);
-    state.toastTimer = setTimeout(() => el.classList.add("hidden"), 2600);
+    el.hidden = false;
+    clearTimeout(instructorToastControl.hideTimer);
+    instructorToastControl.hideTimer = setTimeout(() => {
+      el.hidden = true;
+      el.classList.add("hidden");
+    }, 3000);
   }
+  window.instructorToast = toast;
 
   function modal({
     title,
@@ -4939,6 +4948,8 @@
         if (btn.closest("#create-post")) return;
         if (btn.closest(".ce-module-editor-card")) return;
         if (btn.getAttribute("data-global-skip") === "1") return;
+        // Cart drawer (instructor-nav.js): close/qty/remove are not global "action center" targets.
+        if (btn.closest("#cart-slider")) return;
         if (btn.classList.contains("faq-filter")) return;
         if (btn.classList.contains("pageNum") || btn.getAttribute("data-page"))
           return;
