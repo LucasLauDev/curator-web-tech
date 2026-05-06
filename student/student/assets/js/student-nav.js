@@ -124,8 +124,8 @@ const studentNav = {
                         <span class="material-symbols-outlined">notifications</span>
                         <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                     </button>
-                    <a href="${base}dashboard/profile.html" class="h-10 w-10 rounded-full bg-slate-100 overflow-hidden border-2 border-violet-100 hover:border-violet-500 transition-colors" aria-label="Open profile">
-                        <img class="h-full w-full object-cover" src="https://ui-avatars.com/api/?name=Student&background=6a1cf6&color=fff" alt="Student Profile" />
+                    <a href="${base}dashboard/profile.html" class="nav-header-avatar inline-flex flex-shrink-0 items-center justify-center h-11 w-11 md:h-10 md:w-10 rounded-full bg-slate-100 overflow-hidden border-2 border-violet-100 hover:border-violet-500 transition-colors" aria-label="Open profile">
+                        <img class="h-full w-full object-cover" src="https://ui-avatars.com/api/?name=Student&background=6a1cf6&color=fff" alt="Student Profile" width="44" height="44" decoding="async" />
                     </a>
                 </div>
             </nav>
