@@ -135,6 +135,24 @@ The course materials options are in the /assets/sample-files
 
 ---
 
+## Screenshots
+
+Preview the app screenshots directly from the repository on GitHub:
+
+| View | Screenshot |
+|------|------------|
+| [Landing home](screenshots/curator-edu.up.railway.app_landing_landing_index.html.png) | `screenshots/curator-edu.up.railway.app_landing_landing_index.html.png` |
+| [Registration](screenshots/curator-edu.up.railway.app_landing_landing_role_base_registration.html.png) | `screenshots/curator-edu.up.railway.app_landing_landing_role_base_registration.html.png` |
+| [Student dashboard](screenshots/curator-edu.up.railway.app_student_student_dashboard_student_dashboard_new.html.png) | `screenshots/curator-edu.up.railway.app_student_student_dashboard_student_dashboard_new.html.png` |
+| [Student profile](screenshots/curator-edu.up.railway.app_student_student_dashboard_profile.html.png) | `screenshots/curator-edu.up.railway.app_student_student_dashboard_profile.html.png` |
+| [Student help](screenshots/curator-edu.up.railway.app_student_student_dashboard_help.html.png) | `screenshots/curator-edu.up.railway.app_student_student_dashboard_help.html.png` |
+| [Bookstore](screenshots/curator-edu.up.railway.app_student_student_dashboard_bookstore.html.png) | `screenshots/curator-edu.up.railway.app_student_student_dashboard_bookstore.html.png` |
+| [My courses](screenshots/curator-edu.up.railway.app_student_student_course_my_courses.html.png) | `screenshots/curator-edu.up.railway.app_student_student_course_my_courses.html.png` |
+| [Community forum](screenshots/curator-edu.up.railway.app_student_student_community_discussion_forum_courses.html.png) | `screenshots/curator-edu.up.railway.app_student_student_community_discussion_forum_courses.html.png` |
+| [Community forum detail](screenshots/curator-edu.up.railway.app_student_student_community_community_forum.html_course=Human20Interaction.png) | `screenshots/curator-edu.up.railway.app_student_student_community_community_forum.html_course=Human20Interaction.png` |
+
+---
+
 ## Project layout (high level)
 
 ```
